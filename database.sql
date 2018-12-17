@@ -16,7 +16,7 @@ CREATE TABLE "person" (
 
 
 
-CREATE TABLE "types_of_cacner" (
+CREATE TABLE "types_of_cancer" (
 	"id" serial NOT NULL,
 	"name" varchar NOT NULL,
 	"abbreviation" varchar NOT NULL,
@@ -30,6 +30,7 @@ CREATE TABLE "types_of_cacner" (
 CREATE TABLE "patients" (
 	"id" serial NOT NULL,
 	"toc_id" integer,
+	"user_id" integer,
 	"patient_no" varchar,
 	"dob" DATE,
 	"gender" varchar,
@@ -238,13 +239,13 @@ CREATE TABLE "reoccurence" (
 
 
 
-CREATE TABLE "Events" (
+CREATE TABLE "events" (
 	"id" serial NOT NULL,
 	"postop_id" integer NOT NULL,
 	"name" varchar,
 	"clavian_score" integer,
 	"sae_grade" integer,
-	CONSTRAINT Events_pk PRIMARY KEY ("id")
+	CONSTRAINT events_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
@@ -333,6 +334,7 @@ ALTER TABLE "person" ADD CONSTRAINT "person_fk0" FOREIGN KEY ("type_of_cancer") 
 
 
 ALTER TABLE "patients" ADD CONSTRAINT "patients_fk0" FOREIGN KEY ("toc_id") REFERENCES "types_of_cacner"("id");
+ALTER TABLE "patients" ADD CONSTRAINT "patients_fk1" FOREIGN KEY ("user_id") REFERENCES "person"("id");
 
 ALTER TABLE "primary_tumor" ADD CONSTRAINT "primary_tumor_fk0" FOREIGN KEY ("patient_id") REFERENCES "patients"("id");
 
@@ -348,7 +350,7 @@ ALTER TABLE "follow_up" ADD CONSTRAINT "follow_up_fk0" FOREIGN KEY ("patient_id"
 
 ALTER TABLE "reoccurence" ADD CONSTRAINT "reoccurence_fk0" FOREIGN KEY ("followup_id") REFERENCES "follow_up"("id");
 
-ALTER TABLE "Events" ADD CONSTRAINT "Events_fk0" FOREIGN KEY ("postop_id") REFERENCES "postop"("id");
+ALTER TABLE "events" ADD CONSTRAINT "events_fk0" FOREIGN KEY ("postop_id") REFERENCES "postop"("id");
 
 ALTER TABLE "other_info" ADD CONSTRAINT "other_info_fk0" FOREIGN KEY ("patient_id") REFERENCES "patients"("id");
 
