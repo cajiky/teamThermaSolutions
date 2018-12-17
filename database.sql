@@ -330,10 +330,10 @@ CREATE TABLE "resections" (
 
 
 
-ALTER TABLE "person" ADD CONSTRAINT "person_fk0" FOREIGN KEY ("type_of_cancer") REFERENCES "types_of_cacner"("id");
+ALTER TABLE "person" ADD CONSTRAINT "person_fk0" FOREIGN KEY ("type_of_cancer") REFERENCES "types_of_cancer"("id");
 
 
-ALTER TABLE "patients" ADD CONSTRAINT "patients_fk0" FOREIGN KEY ("toc_id") REFERENCES "types_of_cacner"("id");
+ALTER TABLE "patients" ADD CONSTRAINT "patients_fk0" FOREIGN KEY ("toc_id") REFERENCES "types_of_cancer"("id");
 ALTER TABLE "patients" ADD CONSTRAINT "patients_fk1" FOREIGN KEY ("user_id") REFERENCES "person"("id");
 
 ALTER TABLE "primary_tumor" ADD CONSTRAINT "primary_tumor_fk0" FOREIGN KEY ("patient_id") REFERENCES "patients"("id");
