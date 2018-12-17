@@ -1,4 +1,4 @@
-# Prime Project
+# ThermaSolutions HIPEC Patient Tracking System for Surgeons and Cancer Researchers
 This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
 
 We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
@@ -97,5 +97,3 @@ This code is also heavily commented. We recommend reading through the comments, 
 ## Update Documentation
 
 Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
-# teamThermaSolutions
-# teamThermaSolutions
