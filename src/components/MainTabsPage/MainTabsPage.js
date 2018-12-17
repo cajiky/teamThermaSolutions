@@ -23,6 +23,7 @@ class MainTabsPage extends Component {
             <div>
                 <h1>Main Tabs Page</h1>
                 <h3>This Page houses all the Tab Components</h3>
+                
                 <PatientProfileSearchPage />
                 <TreatmentFormPatientData />
                 <PrimaryTumorPage />
