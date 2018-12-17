@@ -17,7 +17,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import Switch from '@material-ui/core/Switch';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 
 const styles = theme => ({
@@ -57,7 +57,6 @@ const styles = theme => ({
 class ManageUsersPage extends Component {
     state = {
         userId:'',
-        open: false,
         title: '',
         firstName: '',
         lastName: '',
@@ -66,6 +65,8 @@ class ManageUsersPage extends Component {
         password: '',
         maxWidth: 'lg',
         fullWidth: true,
+        labelWidth: 30,
+        open: false,
 
     }
 
@@ -79,7 +80,7 @@ class ManageUsersPage extends Component {
     }
 
     searchForm = event => {
-        console.log('in submit form', this.state);
+        console.log('in submit form', this.state.userId);
         event.preventDefault();
         // this.props.dispatch({ type: 'FIND_USER', 
         // payload: {
@@ -104,11 +105,10 @@ class ManageUsersPage extends Component {
     handleNewUserSubmit = event => {
         console.log('in handleNewUserSubmit form', this.state);
         event.preventDefault();
-        // this.props.dispatch({ type: 'FIND_USER', 
-        // payload: {
-        //     userID: this.state.userId
+        this.props.dispatch({ type: 'ADD_NEW_USER', 
+        payload: this.state
 
-        //  })
+         })
         
     }
 
@@ -118,8 +118,8 @@ class ManageUsersPage extends Component {
         return(
             <div>
                 <h1>Manage Users or Add New User</h1>
-                <br/>
-                <form  noValidate autoComplete="off" onSubmit={this.searchForm}>
+                {/* <br/>
+                <form  noValidate autoComplete="off" /> */}
                     <TextField
                     id="outlined-name"
                     label="User ID"
@@ -130,7 +130,7 @@ class ManageUsersPage extends Component {
                     margin="normal"
                     variant="outlined"
                     />
-                    <Button variant="contained" color="primary" className={classes.button} type="submit">
+                    <Button variant="contained" color="primary" className={classes.button} type="submit" onClick={this.searchForm}>
                         Search
                         <SearchIcon className={classes.rightIcon} />
                     </Button>
@@ -140,7 +140,7 @@ class ManageUsersPage extends Component {
                         {/* This Button uses a Font Icon, see the installation instructions in the docs. */}
                         <AddIcon />
                     </Button>
-                </form>
+                {/* </form> */}
                 <Dialog
                     fullWidth={this.state.fullWidth}
                     maxWidth={this.state.maxWidth}
@@ -153,22 +153,35 @@ class ManageUsersPage extends Component {
                         <DialogContentText>
                         Please complete all input fields
                         </DialogContentText>
-                        <form className={classes.form} noValidate>
+                        {/* <form className={classes.form} noValidate> */}
 
-                        <FormControl className={classes.formControl}>
-                            <InputLabel htmlFor="max-width">Title</InputLabel>
-                            <Select
-                            value={this.state.title}
-                            name="title"
-                            onChange={this.handleChange}
+                        <FormControl variant="outlined" margin="normal" className={classes.formControl}>
+                            <InputLabel
+                                ref={ref => {
+                                this.InputLabelRef = ref;
+                                }}
+                                htmlFor="outlined-age-native-simple"
                             >
-                                <MenuItem value="None">None</MenuItem>
-                                <MenuItem value="Dr.">Dr.</MenuItem>
-                                <MenuItem value="Mr.">Mr.</MenuItem>
-                                <MenuItem value="Mrs.">Mrs.</MenuItem>
-                                <MenuItem value="Miss">Miss</MenuItem>
-                            </Select>
-                        </FormControl>
+                                Title
+                            </InputLabel>
+                                <Select
+                                    value={this.state.title}
+                                    onChange={this.handleChange}
+                                    input={
+                                    <OutlinedInput
+                                        name="title"
+                                        labelWidth={this.state.labelWidth}
+                                        id="outlined-age-native-simple"
+                                    />
+                                    }
+                                >
+                                    <MenuItem value="None">None</MenuItem>
+                                    <MenuItem value="Dr.">Dr.</MenuItem>
+                                    <MenuItem value="Mr.">Mr.</MenuItem>
+                                    <MenuItem value="Mrs.">Mrs.</MenuItem>
+                                    <MenuItem value="Miss">Miss</MenuItem>
+                                </Select>
+                            </FormControl>
 
                         <FormControl className={classes.formControl}>
                             <TextField
@@ -207,37 +220,33 @@ class ManageUsersPage extends Component {
                                 variant="outlined"
                                 />
                         </FormControl>
-                    
-                        <FormControl className={classes.formControl}>
-                            <InputLabel htmlFor="max-width">User Role</InputLabel>
-                            <Select
-                            value={this.state.accessLevel}
-                            name="accessLevel"
-                            onChange={this.handleChange}
+
+                        <FormControl variant="outlined" margin="normal" className={classes.formControl}>
+                            <InputLabel
+                                ref={ref => {
+                                this.InputLabelRef = ref;
+                                }}
+                                htmlFor="outlined-age-native-simple"
                             >
-                                <MenuItem value="Admin">Admin</MenuItem>
-                                <MenuItem value="Surgeon">Surgeon</MenuItem>
-                                <MenuItem value="Researcher">Researcher</MenuItem>
-                            </Select>
-                        </FormControl>
-                        <FormControl className={classes.formControl}>
-
-                            <FormControlLabel
-                                className={classes.formControlLabel}
-                                control={
-                                <Switch
-                                    checked={this.state.active}
-                                    onChange={this.handleActiveUserChange}
-                                    value="active"
-                                    name="active"
-                                />
-                                }
-                                label="Active User?"
-                            />
-                        </FormControl>
-
+                                User Role
+                            </InputLabel>
+                                <Select
+                                    value={this.state.accessLevel}
+                                    onChange={this.handleChange}
+                                    input={
+                                    <OutlinedInput
+                                        name="accessLevel"
+                                        labelWidth={this.state.labelWidth}
+                                        id="outlined-age-native-simple"
+                                    />
+                                    }
+                                >
+                                    <MenuItem value="Admin">Admin</MenuItem>
+                                    <MenuItem value="Surgeon">Surgeon</MenuItem>
+                                    <MenuItem value="Researcher">Researcher</MenuItem>
+                                </Select>
+                        </FormControl> 
                         
-                        </form>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} color="primary">
