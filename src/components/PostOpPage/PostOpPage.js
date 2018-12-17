@@ -14,6 +14,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import ReOperation from './ReoperationSelector';
 
 
 const styles = theme => ({
@@ -146,27 +147,9 @@ class PostOpPage extends Component {
             </ExpansionPanel>
             <Grid container spacing={24}>
                 <Grid item xs={3}>
-
-    
-                
+                    <ReOperation />
                 </Grid>
                 <Grid item xs>
-                <TextField
-                id="outlined-notes"
-                label="Notes"
-                className={classes.textField}
-                // value={this.state.type}
-                multiline
-                rows="5"
-                fullWidth
-                // onChange={this.handleChange('name')}
-                margin="normal"
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                variant="outlined"
-                />      
-                
                 </Grid>
                 {/* <Grid item xs>
                 
