@@ -15,6 +15,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import ReOperation from './ReoperationSelector';
+import Mortality from './MortalitySelector'
+import DischargeStatus from './DischargeStatus';
 
 
 const styles = theme => ({
@@ -138,22 +140,42 @@ class PostOpPage extends Component {
                                 <FormControlLabel value="5" control={<Radio />} label="5" />
                             </RadioGroup>
                         </FormControl>
-                        <Button>Add New Event</Button>
                         </Grid>
                         <Grid>
+                            Events
+                        <Button>Add New Event</Button>
                         </Grid>
                     </Grid>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
             <Grid container spacing={24}>
-                <Grid item xs={3}>
+                <Grid item xs={2}>
                     <ReOperation />
                 </Grid>
-                <Grid item xs>
+                <Grid item xs={2}>
+                    <Mortality />
                 </Grid>
-                {/* <Grid item xs>
+                <Grid item xs={2}>
+                    <DischargeStatus />
+                </Grid>                
+                <Grid item xs>
+                <TextField
+                id="outlined-discharge-notes"
+                label="Discharge Notes"
+                className={classes.textField}
+                // value={this.state.type}
+                multiline
+                rows="2"
+                fullWidth
+                // onChange={this.handleChange('name')}
+                margin="normal"
+                InputLabelProps={{
+                    shrink: true,
+                }}
+                variant="outlined"
+                />      
                 
-                </Grid> */}
+            </Grid>
             </Grid>
                 {/* <h1>PostOp Page</h1>
                 <h3>This is the PostOpPage and includes the following inputs and drowdowns</h3>

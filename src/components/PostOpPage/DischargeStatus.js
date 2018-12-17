@@ -8,10 +8,11 @@ import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 const myOptions = [
-  {id: 1, status: 'Yes'},
-  {id: 2, status: 'No'},
-  {id: 3, status: 'Unknown'}
-]
+  {id: 1, status: 'Death of Disease'},
+  {id: 2, status: 'Alive with Disease'},
+  {id: 3, status: 'No Evidence of Disease'},
+  {id: 4, status: 'Treatment Related Death'}
+];
 
 const styles = theme => ({
   formControl: {
@@ -20,7 +21,7 @@ const styles = theme => ({
   },
 });
 
-class ReoperationSelector extends Component {
+class DischargeStatus extends Component {
 
   state= { 
       ReopState: '',
@@ -44,15 +45,15 @@ class ReoperationSelector extends Component {
 
     return (
       <FormControl fullWidth="true" variant="outlined">
-          <InputLabel htmlFor="reoperation_id">Reoperation</InputLabel>
+          <InputLabel htmlFor="reoperation_id">Discharge Status</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
-            value={this.state.reoperation}
+            value={this.state.dischargeStatus}
             input={
               <OutlinedInput
                   value={this.state.reoperation}
-                  name="reoperation"
-                  id="reoperation"
+                  name="dischargeStatus"
+                  id="dischargeStatus"
               />
               }
             // onChange={this.props.handleChange}
@@ -68,4 +69,4 @@ const mapReduxStateToProps = (reduxState) => ({
   reduxState
 });
 
-export default connect(mapReduxStateToProps)(withStyles(styles)(ReoperationSelector));
+export default connect(mapReduxStateToProps)(withStyles(styles)(DischargeStatus));

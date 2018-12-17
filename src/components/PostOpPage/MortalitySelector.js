@@ -16,11 +16,11 @@ const myOptions = [
 const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit,
-    // minWidth: 120,
+    // fullWidth: true,
   },
 });
 
-class ReoperationSelector extends Component {
+class MortalitySelector extends Component {
 
   state= { 
       ReopState: '',
@@ -43,16 +43,16 @@ class ReoperationSelector extends Component {
     const { classes } = this.props;
 
     return (
-      <FormControl fullWidth="true" variant="outlined">
-          <InputLabel htmlFor="reoperation_id">Reoperation</InputLabel>
+      <FormControl variant="outlined" fullWidth="true" className={classes.formControl}>
+          <InputLabel htmlFor="mortality_id">Hospital Mortality</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
-            value={this.state.reoperation}
+            value={this.state.primaryLocation}
             input={
               <OutlinedInput
-                  value={this.state.reoperation}
-                  name="reoperation"
-                  id="reoperation"
+                  value={this.state.primaryLocation}
+                  name="primaryLocation"
+                  id="primary-location"
               />
               }
             // onChange={this.props.handleChange}
@@ -68,4 +68,4 @@ const mapReduxStateToProps = (reduxState) => ({
   reduxState
 });
 
-export default connect(mapReduxStateToProps)(withStyles(styles)(ReoperationSelector));
+export default connect(mapReduxStateToProps)(withStyles(styles)(MortalitySelector));
