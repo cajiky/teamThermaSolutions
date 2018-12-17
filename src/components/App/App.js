@@ -17,6 +17,9 @@ import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 
+import MainTabsPage from '../MainTabsPage/MainTabsPage';
+
+
 import './App.css';
 
 class App extends Component {
@@ -55,6 +58,10 @@ class App extends Component {
               path="/info"
               component={InfoPage}
             />
+            
+            <ProtectedRoute path="/MainTabsPage" component={MainTabsPage} />
+
+
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
