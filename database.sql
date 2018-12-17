@@ -20,7 +20,7 @@ CREATE TABLE "types_of_cancer" (
 	"id" serial NOT NULL,
 	"name" varchar NOT NULL,
 	"abbreviation" varchar NOT NULL,
-	CONSTRAINT types_of_cacner_pk PRIMARY KEY ("id")
+	CONSTRAINT types_of_cancer_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
