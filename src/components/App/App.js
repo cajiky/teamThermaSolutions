@@ -19,6 +19,8 @@ import InfoPage from '../InfoPage/InfoPage';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import MainTabsPage from '../MainTabsPage/MainTabsPage';
 import appTheme from './AppTheme';
+import ManageUsersPage from '../ManageUsersPage/ManageUsersPage';
+import PatientProfileSearchPage from '../PatientProfileSearchPage/PatientProfileSearchPage';
 
 import './App.css';
 
@@ -61,6 +63,8 @@ class App extends Component {
             />
             
             <ProtectedRoute path="/MainTabsPage" component={MainTabsPage} />
+            <ProtectedRoute path="/ManageUsersPage" component={ManageUsersPage} />
+            <ProtectedRoute path="/PatientProfileSearchPage" component={PatientProfileSearchPage} />
 
 
             {/* If none of the other routes matched, we will show a 404. */}
