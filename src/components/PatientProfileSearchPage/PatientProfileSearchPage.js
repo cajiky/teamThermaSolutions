@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -17,12 +18,31 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
+import Select from '@material-ui/core/Select';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+
+const styles = theme => ({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    formControl: {
+      margin: theme.spacing.unit,
+      minWidth: 120,
+    },
+    selectEmpty: {
+      marginTop: theme.spacing.unit * 2,
+    },
+  });
 
 class PatientProfileSearchPage extends Component {
     state = {
         open: false,
         age: '',
         hipec: '',
+        labelWidth: 0,
       };
     
       handleChange = (name) => (event) => {
@@ -79,7 +99,7 @@ class PatientProfileSearchPage extends Component {
                             onClose={this.handleClose}>
                             <DialogContent>
                     <FormControl>
-                        <p>Patient ID:<TextField
+                        <TextField
                         required
                         id="outlined-required"
                         label="Patient ID"
@@ -89,8 +109,9 @@ class PatientProfileSearchPage extends Component {
                         placeholder="Patient ID e.x. 1234567890"
                         margin="normal"
                         variant="outlined"
-                        /></p></FormControl><FormControl>
-                        <p>Date of Birth:<TextField
+                        fullWidth="true"
+                        /></FormControl><FormControl>
+                        <TextField
                         required
                         id="outlined-required"
                         label="Date of Birth"
@@ -100,8 +121,9 @@ class PatientProfileSearchPage extends Component {
                         margin="normal"
                         type="date"
                         variant="outlined"
+                        fullWidth="true"
                         onChange={this.handleChange('dob')}
-                        /></p></FormControl>
+                        /></FormControl>
                         <FormControl>
                         <p>Age:<TextField
                         required
@@ -113,23 +135,35 @@ class PatientProfileSearchPage extends Component {
                         margin="normal"
                         type="number"
                         variant="outlined"
-                        onChange={this.handleChange('dob')}
+                        onChange={this.handleChange('age', (Date.now() - this.state.dob))}
                         /></p>
-                        <p>Gender:<TextField
-                        // required
-                        id="outlined-required"
-                        label="Gender"
-                        InputLabelProps={{
-                            shrink: true,
-                          }}
-                        margin="normal"
-                        select
-                        variant="outlined"
-                        onChange={this.handleChange('gender')}
-                        ><MenuItem value="Female" primarytext="Female" />
-                        <MenuItem value="Male" primarytext="Male" />
-                        <MenuItem value="Other" primarytext="Other" />
-                        </TextField></p>
+                        <FormControl variant="outlined">
+                            <InputLabel
+                                ref={ref => {
+                                this.InputLabelRef = ref;
+                                }}
+                                htmlFor="outlined-gender-simple"                                
+                            >
+                                {/* Gender */}
+                            </InputLabel>
+                            <Select
+                                value={this.state.gender}
+                                onChange={this.handleChange('gender', 'value')}
+                                input={
+                                <OutlinedInput
+                                    // label="gender"
+                                    // placeholder="gender"
+                                    // name="gender"
+                                    id="outlined-gender-simple"
+                                    labelWidth={this.state.labelWidth}
+                                />
+                                }
+                            >
+                                <MenuItem value='Female'>Female</MenuItem>
+                                <MenuItem value='Male'>Male</MenuItem>
+                                <MenuItem value='Other'>Other</MenuItem>
+                            </Select>
+                        </FormControl>
                         </FormControl>
                         <FormControl component="fieldset">
                             <FormLabel component="legend">HIPEC</FormLabel>
@@ -143,13 +177,81 @@ class PatientProfileSearchPage extends Component {
                                 <FormControlLabel value="no" control={<Radio />} label="No" />
                             </RadioGroup>
                         </FormControl>
+                        {this.state.hipec === 'yes' ? (<><FormControl>
+                        <p>Date of HIPEC:<TextField
+                        required
+                        id="outlined-required"
+                        label="Date of HIPEC"
+                        InputLabelProps={{
+                            shrink: true,
+                          }}
+                        margin="normal"
+                        type="date"
+                        variant="outlined"
+                        onChange={this.handleChange('date-of-hipec')}
+                        /></p></FormControl>
+                        <FormControl>
+                        <p>Date of Referral:<TextField
+                        required
+                        id="outlined-required"
+                        label="Date of Referral"
+                        InputLabelProps={{
+                            shrink: true,
+                          }}
+                        margin="normal"
+                        type="date"
+                        variant="outlined"
+                        onChange={this.handleChange('date-of-referral')}
+                        /></p></FormControl>
+                        <FormControl variant="outlined">
+                            <InputLabel
+                                ref={ref => {
+                                this.InputLabelRef = ref;
+                                }}
+                                htmlFor="outlined-toc-simple"                                
+                            >
+                                {/* Gender */}
+                            </InputLabel>
+                            <Select
+                                value={this.state.toc}
+                                onChange={this.handleChange('toc', 'value')}
+                                input={
+                                <OutlinedInput
+                                    // label="gender"
+                                    // placeholder="gender"
+                                    // name="gender"
+                                    id="outlined-gender-simple"
+                                    labelWidth={this.state.labelWidth}
+                                />
+                                }
+                            >
+                                <MenuItem value='Female'>Female</MenuItem>
+                                <MenuItem value='Male'>Male</MenuItem>
+                                <MenuItem value='Other'>Other</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <FormControl>
+                        <p>Diagnosis Date:<TextField
+                        required
+                        id="outlined-required"
+                        label="Diagnosis Date"
+                        InputLabelProps={{
+                            shrink: true,
+                          }}
+                        margin="normal"
+                        type="date"
+                        variant="outlined"
+                        onChange={this.handleChange('diagnosis-date')}
+                        /></p></FormControl>
+                        </>
+                        ) : (<></>)}
                     </DialogContent>
                                             <DialogActions>
                                 <Button onClick={this.handleClose} color="primary">
                                 Cancel
                                 </Button>
                                 <Button onClick={this.handleClose} color="primary">
-                                Ok
+                                Add Patient
                                 </Button>
                             </DialogActions>
                         </Dialog>
@@ -173,4 +275,4 @@ const mapStateToProps = reduxState => ({
 });
 
 
-export default connect(mapStateToProps)(PatientProfileSearchPage);
+export default withStyles(styles)(connect(mapStateToProps)(PatientProfileSearchPage));
