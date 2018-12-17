@@ -11,6 +11,10 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 
@@ -18,10 +22,12 @@ class PatientProfileSearchPage extends Component {
     state = {
         open: false,
         age: '',
+        hipec: '',
       };
     
-      handleChange = name => event => {
-        this.setState({ [name]: Number(event.target.value) });
+      handleChange = (name) => (event) => {
+          console.log(this.state);
+        this.setState({ [name]: (event.target.value) });
       };
     
       handleClickOpen = () => {
@@ -94,6 +100,7 @@ class PatientProfileSearchPage extends Component {
                         margin="normal"
                         type="date"
                         variant="outlined"
+                        onChange={this.handleChange('dob')}
                         /></p></FormControl>
                         <FormControl>
                         <p>Age:<TextField
@@ -106,6 +113,7 @@ class PatientProfileSearchPage extends Component {
                         margin="normal"
                         type="number"
                         variant="outlined"
+                        onChange={this.handleChange('dob')}
                         /></p>
                         <p>Gender:<TextField
                         // required
@@ -123,15 +131,27 @@ class PatientProfileSearchPage extends Component {
                         <MenuItem value="Other" primarytext="Other" />
                         </TextField></p>
                         </FormControl>
-                        </DialogContent>
-                        <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={this.handleClose} color="primary">
-              Ok
-            </Button>
-          </DialogActions>
+                        <FormControl component="fieldset">
+                            <FormLabel component="legend">HIPEC</FormLabel>
+                            <RadioGroup
+                                aria-label="HIPEC"
+                                name="hipec"
+                                value={this.state.hipec}
+                                onChange={this.handleChange('hipec', 'value')}
+                            >
+                                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                                <FormControlLabel value="no" control={<Radio />} label="No" />
+                            </RadioGroup>
+                        </FormControl>
+                    </DialogContent>
+                                            <DialogActions>
+                                <Button onClick={this.handleClose} color="primary">
+                                Cancel
+                                </Button>
+                                <Button onClick={this.handleClose} color="primary">
+                                Ok
+                                </Button>
+                            </DialogActions>
                         </Dialog>
                     </Grid>
                     <Grid item xs={3}>
