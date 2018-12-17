@@ -12,14 +12,14 @@ const appTheme = createMuiTheme({
       main: '#789dfa',
     },
     background: {
-      paper: "#F7F2F9",
-      default: "#F7F2F9"
+      paper: "#fff",
+      default: "#fff"
     },
     // error: will use the default color
   },
   typography: {
     useNextVariants: true,
-    fontSize: 14,
+    fontSize: 16,
   },
 });
 
