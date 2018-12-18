@@ -13,7 +13,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
@@ -81,13 +81,13 @@ class ManageUsersPage extends Component {
         });
     }
 
-    searchForm = event => {
+    searchForm = (event) => {
         console.log('in submit form', this.state.userId);
         event.preventDefault();
         // this.props.dispatch({ type: 'FIND_USER', 
         // payload: {
         //     userID: this.state.userId
-
+        //     }
         //  })
         
     }
