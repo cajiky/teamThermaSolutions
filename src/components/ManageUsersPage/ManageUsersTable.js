@@ -13,13 +13,25 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
+// import Checkbox from '@material-ui/core/Checkbox';
+// import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
+// import DeleteIcon from '@material-ui/icons/Delete';
+// import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
+import swal from 'sweetalert';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import FormControl from '@material-ui/core/FormControl';
 
 let counter = 0;
 function createData(name, calories, fat, carbs, protein) {
@@ -223,6 +235,16 @@ class EnhancedTable extends React.Component {
     ],
     page: 0,
     rowsPerPage: 5,
+    open: false,
+    userId: '',
+    title: '',
+    firstName:'',
+    lastName: '', 
+    accessLevel: '',
+    active: '',
+    username: '', 
+    password: '',
+    
   };
 
   componentDidMount(){
@@ -279,6 +301,49 @@ class EnhancedTable extends React.Component {
 
   isSelected = id => this.state.selected.indexOf(id) !== -1;
 
+  handleClickOpen = (n) => {
+    console.log('in handleClickOpen profile', n);
+    this.setState({
+        userId: n.id,
+        title: n.title,
+        firstName: n.first_name,
+        lastName: n.last_name, 
+        accessLevel: n.access_level,
+        active: n.active,
+        username: n.username, 
+        password: n.password,
+        open: true,
+    })
+  };
+
+  editProfile = () => {
+    this.setState({ open: false });
+    this.props.dispatch({
+      type: 'EDIT_INDIVIDUAL_USER', payload: {
+        userId: this.state.userId,  
+        title: this.state.title,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName, 
+        accessLevel: this.state.accessLevel,
+        active: this.state.active,
+        username: this.state.username, 
+        password: this.state.password,
+      }
+    })
+    swal("You are Awesome!", "Profile Successfully Updated!", "success");
+  }
+
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  handleClose = () => {
+    this.setState({ open: false });
+  
+  };
+
   render() {
     const { classes } = this.props;
     const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
@@ -315,15 +380,15 @@ class EnhancedTable extends React.Component {
                       </TableCell>
                       <TableCell align="right">{n.first_name}</TableCell>
                       <TableCell align="right">{n.last_name}</TableCell>
-                      {n.active == true ? (
-                          <TableCell align="right"><p>True</p></TableCell>
+                      {n.active === true ? (
+                          <TableCell align="right"><p>Active</p></TableCell>
                       ):(
-                        <TableCell align="right"><p>False</p></TableCell>
+                        <TableCell align="right"><p>Inactive</p></TableCell>
                       )
                       }
                       
                       <TableCell align="right">{n.access_level}</TableCell>
-                      <TableCell><Button>Edit</Button></TableCell>
+                      <TableCell><Button onClick={() => this.handleClickOpen(n)}>Edit</Button></TableCell>
                     </TableRow>
                   );
                 })}
@@ -350,6 +415,165 @@ class EnhancedTable extends React.Component {
           onChangePage={this.handleChangePage}
           onChangeRowsPerPage={this.handleChangeRowsPerPage}
         />
+{/* // Conditionally rendered form */}
+        <div>
+          <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Edit User Profile</DialogTitle>
+          <DialogContent>
+                <FormControl variant="outlined" margin="normal" className={classes.formControl}>
+                            <InputLabel
+                                ref={ref => {
+                                this.InputLabelRef = ref;
+                                }}
+                                htmlFor="outlined-age-native-simple"
+                            >
+                                Title
+                            </InputLabel>
+                                <Select
+                                    value={this.state.title}
+                                    onChange={this.handleChange}
+                                    input={
+                                    <OutlinedInput
+                                        name="title"
+                                        labelWidth={this.state.labelWidth}
+                                        id="outlined-age-native-simple"
+                                    />
+                                    }
+                                >
+                                    <MenuItem value="None">None</MenuItem>
+                                    <MenuItem value="Dr.">Dr.</MenuItem>
+                                    <MenuItem value="Mr.">Mr.</MenuItem>
+                                    <MenuItem value="Mrs.">Mrs.</MenuItem>
+                                    <MenuItem value="Miss">Miss</MenuItem>
+                                </Select>
+                            </FormControl>
+          </DialogContent>
+          <DialogContent>
+            <TextField
+              onChange={this.handleChange}
+              value={this.state.firstName}
+              name="firstName"
+              autoFocus
+              margin="dense"
+              id="firstName"
+              label="Update First Name"
+              type="text"
+              fullWidth
+              variant="outlined"
+            />
+          </DialogContent>
+          <DialogContent>
+            <TextField
+              onChange={this.handleChange}
+              value={this.state.lastName}
+              name="lastName"
+              autoFocus
+              margin="dense"
+              id="lastName"
+              label="Update Last Name"
+              type="text"
+              fullWidth
+              variant="outlined"
+            />
+          </DialogContent>
+          <DialogContent>
+          <FormControl variant="outlined" margin="normal" className={classes.formControl}>
+                            <InputLabel
+                                ref={ref => {
+                                this.InputLabelRef = ref;
+                                }}
+                                htmlFor="outlined-age-native-simple"
+                            >
+                                User Role
+                            </InputLabel>
+                                <Select
+                                    value={this.state.accessLevel}
+                                    onChange={this.handleChange}
+                                    input={
+                                    <OutlinedInput
+                                        name="accessLevel"
+                                        labelWidth={this.state.labelWidth}
+                                        id="outlined-age-native-simple"
+                                    />
+                                    }
+                                >
+                                    <MenuItem value="3">Admin</MenuItem>
+                                    <MenuItem value="2">Surgeon</MenuItem>
+                                    <MenuItem value="1">Researcher</MenuItem>
+                                </Select>
+                        </FormControl> 
+          
+          </DialogContent>
+          <DialogContent>
+          <FormControl variant="outlined" margin="normal" className={classes.formControl}>
+                            <InputLabel
+                                ref={ref => {
+                                this.InputLabelRef = ref;
+                                }}
+                                htmlFor="outlined-age-native-simple"
+                            >
+                                Active User?
+                            </InputLabel>
+                                <Select
+                                    value={this.state.active}
+                                    onChange={this.handleChange}
+                                    input={
+                                    <OutlinedInput
+                                        name="active"
+                                        labelWidth={this.state.labelWidth}
+                                        id="outlined-age-native-simple"
+                                    />
+                                    }
+                                >
+                                    <MenuItem value={true}>True</MenuItem>
+                                    <MenuItem value={false}>False</MenuItem>
+                                </Select>
+                        </FormControl>
+          </DialogContent>
+          <DialogContent>
+            <TextField
+              onChange={this.handleChange}
+              value={this.state.username}
+              name="username"
+              autoFocus
+              margin="dense"
+              id="username"
+              label="Update Username"
+              type="text"
+              fullWidth
+              variant="outlined"
+            />
+          </DialogContent>
+          <DialogContent>
+            <TextField
+              onChange={this.handleChange}
+              value={this.state.password}
+              name="password"
+              autoFocus
+              margin="dense"
+              id="password"
+              label="Update Password"
+              type="text"
+              fullWidth
+              variant="outlined"
+            />
+          </DialogContent>
+
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={() => this.editProfile()} color="primary" >
+              Complete
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+   
       </Paper>
     );
   }
