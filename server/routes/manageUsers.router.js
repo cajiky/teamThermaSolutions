@@ -1,39 +1,39 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const encryptLib = require('../modules/encryption');
 
 /**
  * GET route template
  */
 router.get('/', (req, res) => {
+    console.log('GET req.params.id', req.params.id);
     
-});
+    let reqId = req.params.id;
+    const queryText = `SELECT * FROM person`;
+    pool.query(queryText)
+      .then((result) => { res.send(result.rows); })
+      .catch((err) => {
+        console.log('Error completing SELECT tasks query', err);
+        res.sendStatus(500);
+      });
+  });
 
 
-router.post('/', (req, res) => {
-    // const queryText1 = `INSERT INTO "student_info" 
-    //                     ("name", "student_pic", "note")
-    //                    VALUES ($1, $2, $3) RETURNING id;`;
-                    
-    // const queryText2 = `INSERT INTO "user_student" 
-    //                    ("user_id", "student_id")
-    //                    VALUES ($1, $2);`;
-    // pool.query(queryText1, [req.body.name, req.body.student_pic, req.body.note])
-    //     .then((results) => {
-    //         console.log('pool results', results.rows);
-            
-    //         pool.query(queryText2, [req.body.user_id, results.rows[0].id])
-    //         .then((results) => {
-    //             res.sendStatus(201);
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //             res.sendStatus(500);
-    //         })
-    //     }).catch((error) => {
-    //         console.log(error);
-    //         res.sendStatus(500);
-    //     });
-});
+router.post('/', (req, res, next) => {  
+    console.log('New User POST req.body', req.body);
+    const title = req.body.title;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const username = req.body.username;
+    const password = encryptLib.encryptPassword(req.body.password);
+    const access_level = req.body.accessLevel;
+  
+    const queryText = 'INSERT INTO person (title, first_name, last_name, username, password, access_level) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id';
+    pool.query(queryText, [title, firstName, lastName, username, password, access_level])
+      .then(() => { res.sendStatus(201); })
+      .catch((err) => { next(err); });
+  });
+
 
 module.exports = router;

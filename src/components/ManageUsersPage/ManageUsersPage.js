@@ -18,6 +18,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
+import EnhancedTableHead from './ManageUsersTable'
 
 
 const styles = theme => ({
@@ -62,6 +63,7 @@ class ManageUsersPage extends Component {
         lastName: '',
         accessLevel: '',
         active: true,
+        username: '',
         password: '',
         maxWidth: 'lg',
         fullWidth: true,
@@ -107,9 +109,9 @@ class ManageUsersPage extends Component {
         event.preventDefault();
         this.props.dispatch({ type: 'ADD_NEW_USER', 
         payload: this.state
-
          })
-        
+         /// set some sort of alert
+         this.setState({ open: false });
     }
 
     render() {
@@ -118,8 +120,7 @@ class ManageUsersPage extends Component {
         return(
             <div>
                 <h1>Manage Users or Add New User</h1>
-                {/* <br/>
-                <form  noValidate autoComplete="off" /> */}
+                
                     <TextField
                     id="outlined-name"
                     label="User ID"
@@ -137,10 +138,9 @@ class ManageUsersPage extends Component {
 
                     <Button variant="contained" color="primary" className={classes.button} onClick={this.handleClickOpen}>
                         Add New User
-                        {/* This Button uses a Font Icon, see the installation instructions in the docs. */}
+                    
                         <AddIcon />
                     </Button>
-                {/* </form> */}
                 <Dialog
                     fullWidth={this.state.fullWidth}
                     maxWidth={this.state.maxWidth}
@@ -153,7 +153,6 @@ class ManageUsersPage extends Component {
                         <DialogContentText>
                         Please complete all input fields
                         </DialogContentText>
-                        {/* <form className={classes.form} noValidate> */}
 
                         <FormControl variant="outlined" margin="normal" className={classes.formControl}>
                             <InputLabel
@@ -211,6 +210,20 @@ class ManageUsersPage extends Component {
                         <FormControl className={classes.formControl}>
                             <TextField
                                 id="outlined-name"
+                                label="New Username"
+                                className={classes.textField}
+                                value={this.state.username}
+                                onChange={this.handleChange}
+                                name="username"
+                                margin="normal"
+                                variant="outlined"
+                                />
+                        </FormControl>
+
+
+                        <FormControl className={classes.formControl}>
+                            <TextField
+                                id="outlined-name"
                                 label="New Password"
                                 className={classes.textField}
                                 value={this.state.password}
@@ -241,9 +254,9 @@ class ManageUsersPage extends Component {
                                     />
                                     }
                                 >
-                                    <MenuItem value="Admin">Admin</MenuItem>
-                                    <MenuItem value="Surgeon">Surgeon</MenuItem>
-                                    <MenuItem value="Researcher">Researcher</MenuItem>
+                                    <MenuItem value="3">Admin</MenuItem>
+                                    <MenuItem value="2">Surgeon</MenuItem>
+                                    <MenuItem value="1">Researcher</MenuItem>
                                 </Select>
                         </FormControl> 
                         
@@ -259,7 +272,8 @@ class ManageUsersPage extends Component {
                         </Button>
                     </DialogActions>
                 </Dialog>
-                
+                <EnhancedTableHead/>
+
             </div>
 
         )
