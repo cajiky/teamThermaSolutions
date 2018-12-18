@@ -59,7 +59,7 @@ class PatientProfileSearchPage extends Component {
         labelWidth: 0,
         },
         patient: {
-
+            dob: 2018
         },
         
       };
@@ -68,6 +68,12 @@ class PatientProfileSearchPage extends Component {
         this.setState({patient: {...this.state.patient, [name]: (event.target.value)} });
         console.log(this.state);
       };
+
+      calculateAge = (dob) => {
+         let birth = dob.getFullYear;
+         console.log(birth);
+        };
+      
 
       handleSearchChange = (name) => (event) => {
         this.setState({ [name]: (event.target.value) });
@@ -151,7 +157,7 @@ class PatientProfileSearchPage extends Component {
                         margin="normal"
                         variant="outlined"
                         fullWidth="true"
-                        onChange={this.handleNewPatientChange('patient-id')}
+                        onChange={this.handleNewPatientChange('patientId', 'value')}
                         /></FormControl><FormControl className={classes.formControl}>
                         <TextField
                         required
@@ -164,7 +170,7 @@ class PatientProfileSearchPage extends Component {
                         type="date"
                         variant="outlined"
                         fullWidth="true"
-                        onChange={this.handleNewPatientChange('dob')}
+                        onChange={this.handleNewPatientChange('dob') && this.calculateAge('dob')}
                         /></FormControl>
                         <FormControl className={classes.formControlAge}>
                         <TextField
@@ -174,10 +180,10 @@ class PatientProfileSearchPage extends Component {
                         InputLabelProps={{
                             shrink: true,
                           }}
+                          value={this.state.patient.age}
                         margin="normal"
                         type="number"
                         variant="outlined"
-                        onChange={this.handleNewPatientChange('age', (Date.now() - this.state.dob))}
                         /></FormControl>
                         <FormControl  className={classes.formControlSub} variant="outlined">
                             <InputLabel
@@ -230,7 +236,7 @@ class PatientProfileSearchPage extends Component {
                         margin="normal"
                         type="date"
                         variant="outlined"
-                        onChange={this.handleNewPatientChange('date-of-hipec')}
+                        onChange={this.handleNewPatientChange('dateOfHipec', 'value')}
                         /></FormControl>
                         <FormControl className={classes.formControl}>
                         <TextField
@@ -243,7 +249,7 @@ class PatientProfileSearchPage extends Component {
                         margin="normal"
                         type="date"
                         variant="outlined"
-                        onChange={this.handleNewPatientChange('date-of-referral')}
+                        onChange={this.handleNewPatientChange('dateOfReferral', 'value')}
                         /></FormControl>
                         <FormControl variant="outlined">
                             <InputLabel
@@ -267,11 +273,11 @@ class PatientProfileSearchPage extends Component {
                                 />
                                 }
                             >
-                                <MenuItem value='CRC'>CRC</MenuItem>
-                                <MenuItem value='Appendiceal'>Appendiceal</MenuItem>
-                                <MenuItem value='Gastric'>Gastric</MenuItem>
-                                <MenuItem value='Ovarian'>Ovarian</MenuItem>
-                                <MenuItem value='Other'>Other</MenuItem>
+                                <MenuItem value={1}>CRC</MenuItem>
+                                <MenuItem value={2}>Appendiceal</MenuItem>
+                                <MenuItem value={3}>Gastric</MenuItem>
+                                <MenuItem value={4}>Ovarian</MenuItem>
+                                <MenuItem value={5}>Other</MenuItem>
                             </Select>
                         </FormControl>
                         <FormControl className={classes.formControl}>
@@ -285,7 +291,7 @@ class PatientProfileSearchPage extends Component {
                         margin="normal"
                         type="date"
                         variant="outlined"
-                        onChange={this.handleNewPatientChange('diagnosis-date')}
+                        onChange={this.handleNewPatientChange('diagnosisDate', 'value')}
                         /></FormControl>
                         </>
                         ) : (<></>)}
