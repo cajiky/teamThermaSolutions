@@ -26,6 +26,7 @@ app.use(passport.session());
 /* Routes */
 app.use('/api/user', userRouter);
 app.use('/addNewUser', manageUsersRouter)
+app.use('/getAllUsers', manageUsersRouter)
 
 // Serve static files
 app.use(express.static('build'));
