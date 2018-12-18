@@ -22,11 +22,7 @@ const styles = theme => ({
 
 class ReoperationSelector extends Component {
 
-  // state= { 
-  //     ReopState: '',
-  // };
-
-  renderTagOptions() {
+  renderOptions() {
     // 
     return myOptions.map((option, i) => {
       return (
@@ -37,7 +33,7 @@ class ReoperationSelector extends Component {
         </MenuItem>
       ); // end return
     }); // end map
-  } // end renderTagOptions
+  } // end renderOptions
 
   render(){
     const { classes } = this.props;
@@ -58,7 +54,7 @@ class ReoperationSelector extends Component {
               }
             onChange={this.props.handleChange}
           >
-            {this.renderTagOptions()}
+            {this.renderOptions()}
           </Select> 
       </FormControl>
     )

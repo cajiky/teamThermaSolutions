@@ -8,9 +8,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 const myOptions = [
-  {id: 1, status: 'Yes'},
-  {id: 2, status: 'No'},
-  {id: 3, status: 'Unknown'}
+  {id: 1, val: true, status: 'Yes'},
+  {id: 2, val: false, status: 'No'},
+  {id: 3, val: null, status: 'Unknown'}
 ]
 
 const styles = theme => ({
@@ -22,17 +22,13 @@ const styles = theme => ({
 
 class MortalitySelector extends Component {
 
-  state= { 
-      ReopState: '',
-  };
-
-  renderTagOptions() {
+  renderOptions() {
     // 
     return myOptions.map((option, i) => {
       return (
         <MenuItem
           key={i}
-          value={option.id}>
+          value={option.val}>
           {option.status}
         </MenuItem>
       ); // end return
@@ -43,23 +39,42 @@ class MortalitySelector extends Component {
     const { classes } = this.props;
 
     return (
-      <FormControl variant="outlined" fullWidth="true" className={classes.formControl}>
-          <InputLabel htmlFor="mortality_id">Hospital Mortality</InputLabel>
+      <FormControl variant="outlined" fullWidth="true">
+          <InputLabel htmlFor="hospital_mortality">Hospital Mortality</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
-            value={this.state.primaryLocation}
+            value={this.props.hospital_mortality}
             input={
               <OutlinedInput
-                  value={this.state.primaryLocation}
-                  name="primaryLocation"
-                  id="primary-location"
+                  value={this.props.hospital_mortality}
+                  name="hospital_mortality"
+                  id="hospital_mortality"
               />
               }
-            // onChange={this.props.handleChange}
+            onChange={this.props.handleChange}
           >
-            {this.renderTagOptions()}
+            {this.renderOptions()}
           </Select> 
       </FormControl>
+
+      // <FormControl fullWidth="true" variant="outlined">
+      // <InputLabel htmlFor="status_at_discharge">Discharge Status</InputLabel>
+      // <Select fullWidth={true}
+      //   variant="outlined" 
+      //   value={this.props.status_at_discharge}
+      //   input={
+      //     <OutlinedInput
+      //         value={this.props.status_at_discharge}
+      //         name="status_at_discharge"
+      //         id="status_at_discharge"
+      //     />
+      //     }
+      //   onChange={this.props.handleChange}
+      // >
+      //   {this.renderOptions()}
+      // </Select> 
+      // </FormControl>
+
     )
   } // end return
 } // end class TagSelector

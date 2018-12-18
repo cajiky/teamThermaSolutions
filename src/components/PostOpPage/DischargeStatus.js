@@ -23,11 +23,7 @@ const styles = theme => ({
 
 class DischargeStatus extends Component {
 
-  state= { 
-      ReopState: '',
-  };
-
-  renderTagOptions() {
+  renderOptions() {
     // 
     return myOptions.map((option, i) => {
       return (
@@ -45,20 +41,20 @@ class DischargeStatus extends Component {
 
     return (
       <FormControl fullWidth="true" variant="outlined">
-          <InputLabel htmlFor="reoperation_id">Discharge Status</InputLabel>
+          <InputLabel htmlFor="status_at_discharge">Discharge Status</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
-            value={this.state.dischargeStatus}
+            value={this.props.status_at_discharge}
             input={
               <OutlinedInput
-                  value={this.state.reoperation}
-                  name="dischargeStatus"
-                  id="dischargeStatus"
+                  value={this.props.status_at_discharge}
+                  name="status_at_discharge"
+                  id="status_at_discharge"
               />
               }
-            // onChange={this.props.handleChange}
+            onChange={this.props.handleChange}
           >
-            {this.renderTagOptions()}
+            {this.renderOptions()}
           </Select> 
       </FormControl>
     )

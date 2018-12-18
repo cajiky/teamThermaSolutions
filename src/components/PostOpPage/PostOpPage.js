@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 // import FormHelperText from '@material-ui/core/FormHelperText';
+import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -146,19 +147,21 @@ class PostOpPage extends Component {
                 
                 </Grid> */}
             </Grid>
+            <FormGroup row>
+                        <FormControlLabel
+                        control={
+                            <Checkbox
+                            name="serious_advese_event"
+                            checked={this.state.serious_advese_event}
+                            onChange={this.handleChange}
+                            // value={true}
+                            />
+                        }
+                        label="Serious Adverse Event"
+                        />
+            </FormGroup>
             <ExpansionPanel >
                 <ExpansionPanelSummary >
-                    <FormControlLabel
-                    control={
-                        <Checkbox
-                        name="serious_advese_event"
-                        checked={this.state.serious_advese_event}
-                        onChange={this.handleChange}
-                        value="checked"
-                        />
-                    }
-                    label="Serious Adverse Event"
-                    />
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Grid container spacing={24}>
@@ -193,10 +196,10 @@ class PostOpPage extends Component {
                     <ReOperation reoperation={this.state.reoperation} handleChange={this.handleChange}/>
                 </Grid>
                 <Grid item xs={2}>
-                    <Mortality />
+                    <Mortality hospital_mortality={this.state.hospital_mortality} handleChange={this.handleChange}/>
                 </Grid>
                 <Grid item xs={2}>
-                    <DischargeStatus />
+                    <DischargeStatus status_at_discharge={this.state.status_at_discharge} handleChange={this.handleChange}/>
                 </Grid>                
                 <Grid item xs>
                 <TextField
