@@ -54,24 +54,46 @@ const styles = theme => ({
 
 class PatientProfileSearchPage extends Component {
     state = {
+        variables: {
         open: false,
-        age: '',
-        hipec: '',
         labelWidth: 0,
+        },
+        patient: {
+
+        },
+        
       };
     
-      handleChange = (name) => (event) => {
-          console.log(this.state);
+      handleNewPatientChange = (name) => (event) => {
+        this.setState({patient: {...this.state.patient, [name]: (event.target.value)} });
+        console.log(this.state);
+      };
+
+      handleSearchChange = (name) => (event) => {
         this.setState({ [name]: (event.target.value) });
+        console.log(this.state);
       };
     
       handleClickOpen = () => {
-        this.setState({ open: true });
+        this.setState({ variables: {open: true} });
       };
     
       handleClose = () => {
-        this.setState({ open: false });
+        this.setState({ variables: {open: false} });
       };
+
+      addPatient = () => {
+          this.props.dispatch({type: 'ADD_PATIENT', payload: this.state.patient});
+          this.setState({ variables: {open: false}, patient: {} });
+      }
+
+      searchPatient = () => {
+          if(this.state.patientSearch){
+          this.setState({ patientSearch: '' });
+          this.props.dispatch({type: 'FIND_PATIENT', payload: this.state.patientSearch});} else {
+              alert('Please enter a Patient ID Number!');
+          }
+    }
 
     render() {
         const { classes } = this.props;
@@ -90,8 +112,10 @@ class PatientProfileSearchPage extends Component {
                         placeholder="Patient ID e.x. 1234567890"
                         margin="normal"
                         variant="outlined"
+                        value={this.state.patientSearch}
+                        onChange={this.handleSearchChange('patientSearch')}
                         />
-                        <Button className={classes.button} variant="contained" color="primary">
+                        <Button  onClick={this.searchPatient} className={classes.button} variant="contained" color="primary">
                         Search <SearchIcon/>
                         </Button>
                     </Grid>
@@ -112,7 +136,7 @@ class PatientProfileSearchPage extends Component {
                         <Dialog
                             disableBackdropClick
                             disableEscapeKeyDown
-                            open={this.state.open}
+                            open={this.state.variables.open}
                             onClose={this.handleClose}>
                             <DialogContent>
                     <FormControl className={classes.formControl}>
@@ -127,6 +151,7 @@ class PatientProfileSearchPage extends Component {
                         margin="normal"
                         variant="outlined"
                         fullWidth="true"
+                        onChange={this.handleNewPatientChange('patient-id')}
                         /></FormControl><FormControl className={classes.formControl}>
                         <TextField
                         required
@@ -139,7 +164,7 @@ class PatientProfileSearchPage extends Component {
                         type="date"
                         variant="outlined"
                         fullWidth="true"
-                        onChange={this.handleChange('dob')}
+                        onChange={this.handleNewPatientChange('dob')}
                         /></FormControl>
                         <FormControl className={classes.formControlAge}>
                         <TextField
@@ -152,7 +177,7 @@ class PatientProfileSearchPage extends Component {
                         margin="normal"
                         type="number"
                         variant="outlined"
-                        onChange={this.handleChange('age', (Date.now() - this.state.dob))}
+                        onChange={this.handleNewPatientChange('age', (Date.now() - this.state.dob))}
                         /></FormControl>
                         <FormControl  className={classes.formControlSub} variant="outlined">
                             <InputLabel
@@ -164,8 +189,8 @@ class PatientProfileSearchPage extends Component {
                                 {/* Gender */}
                             </InputLabel>
                             <Select
-                                value={this.state.gender}
-                                onChange={this.handleChange('gender', 'value')}
+                                value={this.state.patient.gender}
+                                onChange={this.handleNewPatientChange('gender', 'value')}
                                 input={
                                 <OutlinedInput
                                     // label="gender"
@@ -186,15 +211,15 @@ class PatientProfileSearchPage extends Component {
                             <RadioGroup
                                 aria-label="HIPEC"
                                 name="hipec"
-                                value={this.state.hipec}
-                                onChange={this.handleChange('hipec', 'value')}
+                                value={this.state.patient.hipec}
+                                onChange={this.handleNewPatientChange('hipec', 'value')}
                                 style={{display: 'flex', flexDirection: 'row'}}
                             >
                                 <FormControlLabel value="yes" control={<Radio className={classes.radio}/>} label="Yes" />
                                 <FormControlLabel value="no" control={<Radio className={classes.radio}/>} label="No" />
                             </RadioGroup>
                         </FormControl>
-                        {this.state.hipec === 'yes' ? (<><FormControl className={classes.formControl}>
+                        {this.state.patient.hipec === 'yes' ? (<><FormControl className={classes.formControl}>
                         <TextField
                         required
                         id="outlined-required"
@@ -205,7 +230,7 @@ class PatientProfileSearchPage extends Component {
                         margin="normal"
                         type="date"
                         variant="outlined"
-                        onChange={this.handleChange('date-of-hipec')}
+                        onChange={this.handleNewPatientChange('date-of-hipec')}
                         /></FormControl>
                         <FormControl className={classes.formControl}>
                         <TextField
@@ -218,7 +243,7 @@ class PatientProfileSearchPage extends Component {
                         margin="normal"
                         type="date"
                         variant="outlined"
-                        onChange={this.handleChange('date-of-referral')}
+                        onChange={this.handleNewPatientChange('date-of-referral')}
                         /></FormControl>
                         <FormControl variant="outlined">
                             <InputLabel
@@ -230,8 +255,8 @@ class PatientProfileSearchPage extends Component {
                                 {/* Gender */}
                             </InputLabel>
                             <Select
-                                value={this.state.toc}
-                                onChange={this.handleChange('toc', 'value')}
+                                value={this.state.patient.toc}
+                                onChange={this.handleNewPatientChange('toc', 'value')}
                                 input={
                                 <OutlinedInput
                                     label="Type of Cancer"
@@ -260,7 +285,7 @@ class PatientProfileSearchPage extends Component {
                         margin="normal"
                         type="date"
                         variant="outlined"
-                        onChange={this.handleChange('diagnosis-date')}
+                        onChange={this.handleNewPatientChange('diagnosis-date')}
                         /></FormControl>
                         </>
                         ) : (<></>)}
@@ -269,7 +294,7 @@ class PatientProfileSearchPage extends Component {
                                 <Button onClick={this.handleClose} color="primary">
                                 Cancel
                                 </Button>
-                                <Button onClick={this.handleClose} color="primary">
+                                <Button onClick={this.addPatient} color="primary">
                                 Add Patient
                                 </Button>
                             </DialogActions>
