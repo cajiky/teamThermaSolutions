@@ -1,19 +1,19 @@
 import axios from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-// worker SAGA: will be fired on 'ADD_ITEM' actions
-// user entered a new item
-// function* addItem(action) {
-//   try {
-//       // axios asynch call to add item on database
-//       yield call(axios.post, '/api/item', action.payload);
-//       // will need to make a call to update the list of item
-//       yield put( { type: 'FETCH_ITEMS' } );
-//   }
-//   catch (error) {
-//       console.log('error with add item post request');
-//   }
-// }
+// worker SAGA: will be fired on 'ADD_POST_OP' action
+// user entered a new patient .. will add a blank row for patient
+function* addPostOp(action) {
+  try {
+      // axios asynch call to add item on database
+      yield call(axios.post, '/api/post_op', action.payload);
+      // will need to make a call to update the list of item
+      // yield put( { type: 'FETCH_ITEMS' } );
+  }
+  catch (error) {
+      console.log('error with add post op post request');
+  }
+}
 
 // worker Saga: will be fired on "FETCH_POST_OP" actions
 function* fetchPostOp(action) {
@@ -45,7 +45,7 @@ function* fetchPostOp(action) {
 // }
 
 function* itemSaga() {
-  yield takeLatest('ADD_POST_OP', addItem);
+  yield takeLatest('ADD_POST_OP', addPostOp);
   yield takeLatest('FETCH_POST_OP', fetchPostOp);
   // yield takeLatest('DELETE_ITEM', deleteItem);
 }
