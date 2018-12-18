@@ -9,7 +9,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -22,6 +21,8 @@ import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
+import PropTypes from 'prop-types';
+
 
 const styles = theme => ({
     root: {
@@ -30,11 +31,25 @@ const styles = theme => ({
     },
     formControl: {
       margin: theme.spacing.unit,
-      minWidth: 120,
+      minWidth: 500,
+    },
+    formControlSub: {
+        minWidth: 100,
+        margin: theme.spacing.unit,
+        marginTop: theme.spacing.unit * 2,
     },
     selectEmpty: {
       marginTop: theme.spacing.unit * 2,
     },
+    radio: {
+        display: 'inline-block',
+    },
+    formLabel: {
+        diaplay: 'none',
+    },
+    button: {
+        verticalAlign: 'bottom',
+    }
   });
 
 class PatientProfileSearchPage extends Component {
@@ -59,6 +74,7 @@ class PatientProfileSearchPage extends Component {
       };
 
     render() {
+        const { classes } = this.props;
         return(
             <div>
                 <h1>Patient Profile/Search Page</h1>
@@ -67,6 +83,7 @@ class PatientProfileSearchPage extends Component {
                     </Grid>
                     <Grid item xs={6}>
                         <TextField
+                        className={classes.formControl}
                         required
                         id="outlined-required"
                         label="Search for a Patient"
@@ -74,8 +91,8 @@ class PatientProfileSearchPage extends Component {
                         margin="normal"
                         variant="outlined"
                         />
-                        <Button variant="contained" color="primary">
-                        Search<SearchIcon/>
+                        <Button className={classes.button} variant="contained" color="primary">
+                        Search <SearchIcon/>
                         </Button>
                     </Grid>
                     <Grid item xs={3}>
@@ -83,7 +100,7 @@ class PatientProfileSearchPage extends Component {
                     <Grid item xs={3}>
                     </Grid>
                     <Grid item xs={6}>
-                        <Button  onClick={this.handleClickOpen} variant="contained" color="primary">
+                        <Button className={classes.formControl} onClick={this.handleClickOpen} variant="contained" color="primary">
                         Add New Patient<AddIcon/>
                         </Button>
                     </Grid>
@@ -98,7 +115,7 @@ class PatientProfileSearchPage extends Component {
                             open={this.state.open}
                             onClose={this.handleClose}>
                             <DialogContent>
-                    <FormControl>
+                    <FormControl className={classes.formControl}>
                         <TextField
                         required
                         id="outlined-required"
@@ -110,7 +127,7 @@ class PatientProfileSearchPage extends Component {
                         margin="normal"
                         variant="outlined"
                         fullWidth="true"
-                        /></FormControl><FormControl>
+                        /></FormControl><FormControl className={classes.formControl}>
                         <TextField
                         required
                         id="outlined-required"
@@ -124,8 +141,8 @@ class PatientProfileSearchPage extends Component {
                         fullWidth="true"
                         onChange={this.handleChange('dob')}
                         /></FormControl>
-                        <FormControl>
-                        <p>Age:<TextField
+                        <FormControl className={classes.formControlAge}>
+                        <TextField
                         required
                         id="outlined-required"
                         label="Age"
@@ -136,8 +153,8 @@ class PatientProfileSearchPage extends Component {
                         type="number"
                         variant="outlined"
                         onChange={this.handleChange('age', (Date.now() - this.state.dob))}
-                        /></p>
-                        <FormControl variant="outlined">
+                        /></FormControl>
+                        <FormControl  className={classes.formControlSub} variant="outlined">
                             <InputLabel
                                 ref={ref => {
                                 this.InputLabelRef = ref;
@@ -164,21 +181,21 @@ class PatientProfileSearchPage extends Component {
                                 <MenuItem value='Other'>Other</MenuItem>
                             </Select>
                         </FormControl>
-                        </FormControl>
-                        <FormControl component="fieldset">
-                            <FormLabel component="legend">HIPEC</FormLabel>
+                        <FormControl component="fieldset" className={classes.formControlSub}>
+                            <FormLabel component="legend" style={{display: 'inline-block'}}>HIPEC</FormLabel>
                             <RadioGroup
                                 aria-label="HIPEC"
                                 name="hipec"
                                 value={this.state.hipec}
                                 onChange={this.handleChange('hipec', 'value')}
+                                style={{display: 'flex', flexDirection: 'row'}}
                             >
-                                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                                <FormControlLabel value="no" control={<Radio />} label="No" />
+                                <FormControlLabel value="yes" control={<Radio className={classes.radio}/>} label="Yes" />
+                                <FormControlLabel value="no" control={<Radio className={classes.radio}/>} label="No" />
                             </RadioGroup>
                         </FormControl>
-                        {this.state.hipec === 'yes' ? (<><FormControl>
-                        <p>Date of HIPEC:<TextField
+                        {this.state.hipec === 'yes' ? (<><FormControl className={classes.formControl}>
+                        <TextField
                         required
                         id="outlined-required"
                         label="Date of HIPEC"
@@ -189,9 +206,9 @@ class PatientProfileSearchPage extends Component {
                         type="date"
                         variant="outlined"
                         onChange={this.handleChange('date-of-hipec')}
-                        /></p></FormControl>
-                        <FormControl>
-                        <p>Date of Referral:<TextField
+                        /></FormControl>
+                        <FormControl className={classes.formControl}>
+                        <TextField
                         required
                         id="outlined-required"
                         label="Date of Referral"
@@ -202,7 +219,7 @@ class PatientProfileSearchPage extends Component {
                         type="date"
                         variant="outlined"
                         onChange={this.handleChange('date-of-referral')}
-                        /></p></FormControl>
+                        /></FormControl>
                         <FormControl variant="outlined">
                             <InputLabel
                                 ref={ref => {
@@ -217,21 +234,23 @@ class PatientProfileSearchPage extends Component {
                                 onChange={this.handleChange('toc', 'value')}
                                 input={
                                 <OutlinedInput
-                                    // label="gender"
+                                    label="Type of Cancer"
                                     // placeholder="gender"
-                                    // name="gender"
-                                    id="outlined-gender-simple"
+                                    name="Type of Cancer"
+                                    id="outlined-toc-simple"
                                     labelWidth={this.state.labelWidth}
                                 />
                                 }
                             >
-                                <MenuItem value='Female'>Female</MenuItem>
-                                <MenuItem value='Male'>Male</MenuItem>
+                                <MenuItem value='CRC'>CRC</MenuItem>
+                                <MenuItem value='Appendiceal'>Appendiceal</MenuItem>
+                                <MenuItem value='Gastric'>Gastric</MenuItem>
+                                <MenuItem value='Ovarian'>Ovarian</MenuItem>
                                 <MenuItem value='Other'>Other</MenuItem>
                             </Select>
                         </FormControl>
-                        <FormControl>
-                        <p>Diagnosis Date:<TextField
+                        <FormControl className={classes.formControl}>
+                        <TextField
                         required
                         id="outlined-required"
                         label="Diagnosis Date"
@@ -242,7 +261,7 @@ class PatientProfileSearchPage extends Component {
                         type="date"
                         variant="outlined"
                         onChange={this.handleChange('diagnosis-date')}
-                        /></p></FormControl>
+                        /></FormControl>
                         </>
                         ) : (<></>)}
                     </DialogContent>
@@ -269,6 +288,10 @@ class PatientProfileSearchPage extends Component {
     }
   
 };
+
+PatientProfileSearchPage.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
 
 const mapStateToProps = reduxState => ({
     reduxState,
