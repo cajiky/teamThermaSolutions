@@ -37,7 +37,6 @@ function TabContainer(props) {
     root: {
       flexGrow: 1,
       width: '100%',
-      backgroundColor: theme.palette.background.paper,
     },
   });
 class MainTabsPage extends Component {

@@ -36,8 +36,7 @@ const styles = theme => ({
 
 class PrimaryTumorPage extends Component {
     state = {
-        primaryLocation: '',
-        mucinous: '',
+
         // labelWidth: 105,
     }
 
@@ -275,8 +274,8 @@ class PrimaryTumorPage extends Component {
                                         value={this.state.mucinous}
                                         onChange={this.handleChange}
                                     >
-                                        <FormControlLabel value='1' control={<Radio />} label="Yes" />
-                                        <FormControlLabel value='0' control={<Radio />} label="No" />
+                                        <FormControlLabel value='true' control={<Radio />} label="Yes" />
+                                        <FormControlLabel value='false' control={<Radio />} label="No" />
                                         <FormControlLabel value='null' control={<Radio />} label="Unknown" />
 
                                     </RadioGroup>
@@ -468,6 +467,19 @@ class PrimaryTumorPage extends Component {
                                         ))} 
                                     </Select>
                                 </FormControl>
+                            </Grid>
+                            <Grid item xs={12} className={classes.gridItem}>
+                                <TextField
+                                    fullWidth="true"
+                                    className={classes.treatmentPrimeTumorNotes}
+                                    onChange={this.handleChange}
+                                    value={this.state.treatmentPrimeTumorNotes}
+                                    name='treatmentPrimeTumorNotes'
+                                    multiline
+                                    rows="5"
+                                    variant="outlined"
+                                    label="Notes"
+                                />
                             </Grid>
                         </Grid>
                     </Grid>
