@@ -22,11 +22,12 @@ import appTheme from './AppTheme';
 import ManageUsersPage from '../ManageUsersPage/ManageUsersPage';
 import PatientProfileSearchPage from '../PatientProfileSearchPage/PatientProfileSearchPage';
 
-import './App.css';
+// import './App.css';
 
 class App extends Component {
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_USER'})
+    this.props.dispatch({type:'GET_DROPDOWN_OPTIONS'})
   }
 
   render() {
