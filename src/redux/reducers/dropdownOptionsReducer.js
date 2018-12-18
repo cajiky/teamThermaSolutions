@@ -188,6 +188,34 @@ recTreatmentOptions: [
   {id: 6, status: 'Radiotherapy'},
   {id: 7, status: 'Combination Treatment'},
 ],
+
+t: [
+  {id: 1, status: 0, name: 'x'},
+  {id: 2, status: 1, name: '0'},
+  {id: 3, status: 2, name: '1'},
+  {id: 4, status: 3, name: '2'},
+  {id: 5, status: 4, name: '3'},
+  {id: 6, status: 5, name: '4'},
+  {id: 7, status: 6, name: 'No Input'}
+
+],
+
+m: [
+  {id: 1, status: 0, name: 'x'},
+  {id: 2, status: 1, name: '0'},
+  {id: 3, status: 2, name: '1'},
+  {id: 4, status: 3, name: '2'},
+  {id: 5, status: 6, name: 'No Input'}
+
+],
+
+n: [
+  {id: 1, status: 0, name: 'x'},
+  {id: 2, status: 1, name: '0'},
+  {id: 3, status: 2, name: '1'},
+  {id: 5, status: 6, name: 'No Input'}
+
+],
 }
 
 // user will be on the redux state at:
