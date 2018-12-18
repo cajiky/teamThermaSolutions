@@ -70,6 +70,7 @@ class PrimaryTumorPage extends Component {
                     direction="row"
                     justify="flex-start"
                     alignItems="center"
+                    style={{marginBottom: 30}}
                     >
                         <Grid item xs={12} className={classes.gridItem}>
                             <Typography variant="h4">Prime Tumor</Typography>
@@ -118,7 +119,7 @@ class PrimaryTumorPage extends Component {
                                     </Select>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={12} className={classes.gridItem}>
                                 <Grid
                                 container
                                 direction="row"
@@ -150,7 +151,7 @@ class PrimaryTumorPage extends Component {
                                 alignItems="center"
                                 className={classes.gridItem}
                                 > 
-                                    <Grid item xs={3} >
+                                    <Grid item xs={3} className={classes.gridItem}>
                                         <FormControl variant="outlined" fullWidth="true">
                                         <Select
                                             value={this.state.t}
@@ -169,7 +170,7 @@ class PrimaryTumorPage extends Component {
                                             </Select>
                                         </FormControl>
                                     </Grid>
-                                    <Grid item xs={3}>
+                                    <Grid item xs={3} className={classes.gridItem}>
                                     <FormControl variant="outlined" fullWidth="true">
                                     {/* <InputLabel ref={ref => {this.InputLabelRef = ref;}} htmlFor="m-input">Input Required</InputLabel> */}
 
@@ -191,7 +192,7 @@ class PrimaryTumorPage extends Component {
                                             </Select>
                                         </FormControl>
                                     </Grid>
-                                    <Grid item xs={3}>
+                                    <Grid item xs={3} className={classes.gridItem}>
                                     <FormControl variant="outlined" fullWidth="true">
                                     {/* <InputLabel ref={ref => {this.InputLabelRef = ref;}} htmlFor="primary-location">Input Required</InputLabel> */}
                                         <Select
@@ -364,7 +365,7 @@ class PrimaryTumorPage extends Component {
                                         <MenuItem value="">
                                             <em>None</em>
                                         </MenuItem>
-                                        {this.props.reduxState.dropdownOptions.interventionTypeOptions.map(set => (
+                                        {this.props.reduxState.dropdownOptions.settingOptions.map(set => (
                                             <MenuItem key={set.id} value={set.id}>{set.status}</MenuItem> 
                                         ))} 
                                     </Select>
@@ -397,7 +398,7 @@ class PrimaryTumorPage extends Component {
                                     </Select>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={12} className={classes.gridItem}>
+                            <Grid item xs={12}>
                                 <FormControl component="fieldset" className={classes.formControl}>
                                 <FormLabel component="legend">Adj Chemotherapy</FormLabel>
                                     <RadioGroup
@@ -414,12 +415,12 @@ class PrimaryTumorPage extends Component {
                                     </RadioGroup>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={6} className={classes.gridItem} align="center">
+                            <Grid item xs={6} align="center">
                                 <Typography variant="overline">
                                     Type
                                 </Typography>
                             </Grid>
-                            <Grid item xs={6} className={classes.gridItem} align="center">
+                            <Grid item xs={6} align="center">
                                 <Typography variant="overline">
                                     Biological
                                 </Typography>
