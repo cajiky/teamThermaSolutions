@@ -84,11 +84,11 @@ class ManageUsersPage extends Component {
     searchForm = (event) => {
         console.log('in submit form', this.state.userId);
         event.preventDefault();
-        // this.props.dispatch({ type: 'FIND_USER', 
-        // payload: {
-        //     userID: this.state.userId
-        //     }
-        //  })
+        this.props.dispatch({ type: 'FIND_USER_PROFILE', 
+        payload: {
+            userID: this.state.userId
+            }
+         })
         
     }
 

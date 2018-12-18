@@ -19,6 +19,19 @@ router.get('/', (req, res) => {
       });
   });
 
+  router.get('/:id', (req, res) => {
+    console.log('GET req.params.id', req.params.id);
+    
+    let reqId = req.params.id;
+    const queryText = `SELECT * FROM person WHERE id=${reqId}`;
+    pool.query(queryText)
+      .then((result) => { res.send(result.rows); })
+      .catch((err) => {
+        console.log('Error completing SELECT tasks query', err);
+        res.sendStatus(500);
+      });
+  });
+
 
 router.post('/', (req, res, next) => {  
     console.log('New User POST req.body', req.body);
