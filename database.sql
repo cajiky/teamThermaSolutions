@@ -9,6 +9,9 @@ CREATE TABLE "person" (
 	"access_level" integer,
 	"type_of_cancer" integer,
 	"active" BOOLEAN DEFAULT 't',
+	"first_name" varchar,
+	"last_name" varchar,
+	"title" varchar,
 	CONSTRAINT person_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
