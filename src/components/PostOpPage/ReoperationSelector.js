@@ -8,9 +8,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 const myOptions = [
-  {id: 1, status: 'Yes'},
-  {id: 2, status: 'No'},
-  {id: 3, status: 'Unknown'}
+  {id: 1, val: true, status: 'Yes'},
+  {id: 2, val: false, status: 'No'},
+  {id: 3, val: null, status: 'Unknown'}
 ]
 
 const styles = theme => ({
@@ -22,9 +22,9 @@ const styles = theme => ({
 
 class ReoperationSelector extends Component {
 
-  state= { 
-      ReopState: '',
-  };
+  // state= { 
+  //     ReopState: '',
+  // };
 
   renderTagOptions() {
     // 
@@ -32,7 +32,7 @@ class ReoperationSelector extends Component {
       return (
         <MenuItem
           key={i}
-          value={option.id}>
+          value={option.val}>
           {option.status}
         </MenuItem>
       ); // end return
@@ -47,16 +47,16 @@ class ReoperationSelector extends Component {
           <InputLabel htmlFor="reoperation_id">Reoperation</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
-            value={this.state.reoperation}
+            value={this.props.reoperation}
             input={
               <OutlinedInput
-                  labelWidth={100}
-                  value={this.state.reoperation}
+                  // labelWidth=100
+                  value={this.props.reoperation}
                   name="reoperation"
                   id="reoperation"
               />
               }
-            // onChange={this.props.handleChange}
+            onChange={this.props.handleChange}
           >
             {this.renderTagOptions()}
           </Select> 

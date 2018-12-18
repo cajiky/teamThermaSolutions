@@ -43,46 +43,79 @@ const styles = theme => ({
     group: {
         flexDirection: 'row',
     }
-  });
+});
+
+
 
 class PostOpPage extends Component {
 
+    state = {
+        id: 0,
+        icu_stays: 0,
+        mcu_stays: 0,
+        hospital_stays: 0,
+        notes: '',
+        serious_advese_event: null,
+        score: '',
+        reoperation: null,
+        hospital_mortality: null,
+        status_at_discharge: 0,
+        discharge_notes: ''
+    };
+
     componentDidMount () {
         // console.log('in component mount post op');
-        this.props.dispatch({type: 'FETCH_POST_OP'});
+        // this.props.dispatch({type: 'FETCH_POST_OP'});
+        this.setState({
+            id: this.props.reduxState.postOp.id,
+            icu_stays: this.props.reduxState.postOp.icu_stays,
+            mcu_stays: this.props.reduxState.postOp.mcu_stays,
+            hospital_stays: this.props.reduxState.postOp.hospital_stays,
+            notes: this.props.reduxState.postOp.notes,
+            serious_advese_event: this.props.reduxState.postOp.serious_advese_event,
+            score: this.props.reduxState.postOp.score,
+            reoperation: this.props.reduxState.postOp.reoperation,
+            hospital_mortality: this.props.reduxState.postOp.hospital_mortality,
+            status_at_discharge: this.props.reduxState.postOp.status_at_discharge,
+            discharge_notes: this.props.reduxState.postOp.discharge_notes
+        })
     }
     
-    // state = {name: '', type: ''};
+    // Called when the input field changes
+    handleChange = (event) => {
+        this.setState({
+            ...this.state,
+            [event.target.name]: event.target.value,
+        });
+    }
 
     render() {
-
         const { classes } = this.props;
-        // console.log('redux state', this.props.reduxState.postOp);
         
         return(
             <div>
             <Grid container spacing={24}>
                 <Grid item xs={3}>
                 <TextField
-                id="outlined-name"
+                name="icu_stays"
                 label="ICU Stay (days)"
                 className={classes.textField}
-                value={this.props.reduxState.postOp.icu_stays}
+                value={this.state.icu_stays}
                 fullWidth
                 InputLabelProps={{
                     shrink: true,
                 }}
-                // onChange={this.handleChange('name')}
+                onChange={this.handleChange}
                 margin="normal"
                 variant="outlined"
                 />
                 <TextField
-                id="outlined-type"
+                name="hospital_stays"
                 label="Hospital Stay (days)"
                 className={classes.textField}
-                value={this.props.reduxState.postOp.hospital_stays}
+                value={this.state.hospital_stays}
                 fullWidth
-                // onChange={this.handleChange('name')}
+                onChange={this.handleChange}
                 margin="normal"
                 InputLabelProps={{
                     shrink: true,
@@ -93,14 +126,14 @@ class PostOpPage extends Component {
                 </Grid>
                 <Grid item xs>
                 <TextField
-                id="outlined-notes"
+                name="notes"
                 label="Notes"
                 className={classes.textField}
-                value={this.props.reduxState.postOp.notes}
+                value={this.state.notes}
                 multiline
                 rows="5"
                 fullWidth
-                // onChange={this.handleChange('name')}
+                onChange={this.handleChange}
                 margin="normal"
                 InputLabelProps={{
                     shrink: true,
@@ -118,8 +151,9 @@ class PostOpPage extends Component {
                     <FormControlLabel
                     control={
                         <Checkbox
-                        checked={this.props.reduxState.postOp.serious_advese_event}
-                        // onChange={this.handleChange('checkedA')}
+                        name="serious_advese_event"
+                        checked={this.state.serious_advese_event}
+                        onChange={this.handleChange}
                         value="checked"
                         />
                     }
@@ -133,9 +167,9 @@ class PostOpPage extends Component {
                             <FormLabel component="legend">Score</FormLabel>
                             <RadioGroup 
                                 aria-label="Serious Adverse Event Score"
-                                name="saeGrade"
+                                name="score"
                                 className={classes.group}
-                                // value={this.state.value}
+                                value={this.state.score}
                                 // onChange={this.handleChange}
                             >
                                 <FormControlLabel value="0" control={<Radio />} label="0" />
@@ -156,7 +190,7 @@ class PostOpPage extends Component {
             </ExpansionPanel>
             <Grid container spacing={24}>
                 <Grid item xs={2}>
-                    <ReOperation />
+                    <ReOperation reoperation={this.state.reoperation} handleChange={this.handleChange}/>
                 </Grid>
                 <Grid item xs={2}>
                     <Mortality />
@@ -166,14 +200,14 @@ class PostOpPage extends Component {
                 </Grid>                
                 <Grid item xs>
                 <TextField
-                id="outlined-discharge-notes"
+                name="discharge_notes"
                 label="Discharge Notes"
                 className={classes.textField}
-                value={this.props.reduxState.postOp.discharge_notes}
+                value={this.state.discharge_notes}
                 multiline
                 rows="2"
                 fullWidth
-                // onChange={this.handleChange('name')}
+                onChange={this.handleChange}
                 margin="normal"
                 InputLabelProps={{
                     shrink: true,
