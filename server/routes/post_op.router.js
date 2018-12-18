@@ -9,7 +9,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
   // console.log('query.id', req.query.id);
   const queryText = 'SELECT * FROM postop WHERE patient_id=$1';
   pool.query(queryText, [req.params.id])      
-      .then(results => res.send(results.rows))
+      .then(results => res.send(results.rows[0]))
       .catch(error => {
           console.log('Error making SELECT for post op:', error);
           res.sendStatus(500);

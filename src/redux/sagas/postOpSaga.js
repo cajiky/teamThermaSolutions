@@ -18,9 +18,8 @@ function* addPostOp(action) {
 // worker Saga: will be fired on "FETCH_POST_OP" actions
 function* fetchPostOp(action) {
   console.log('in fetch post op Saga', action.payload);
-  
   try {
-    const response = yield axios.get('api/post_op');
+    const response = yield axios.get('api/post_op/1');
     console.log('response from post op:', response);
     
     // set state

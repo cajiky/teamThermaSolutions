@@ -43,13 +43,14 @@ class ReoperationSelector extends Component {
     const { classes } = this.props;
 
     return (
-      <FormControl fullWidth="true" variant="outlined">
+      <FormControl fullWidth={true} variant="outlined">
           <InputLabel htmlFor="reoperation_id">Reoperation</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
             value={this.state.reoperation}
             input={
               <OutlinedInput
+                  labelWidth={100}
                   value={this.state.reoperation}
                   name="reoperation"
                   id="reoperation"

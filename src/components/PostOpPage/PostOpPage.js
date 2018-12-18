@@ -47,12 +47,18 @@ const styles = theme => ({
 
 class PostOpPage extends Component {
 
-    state = {name: '', type: ''};
+    componentDidMount () {
+        // console.log('in component mount post op');
+        this.props.dispatch({type: 'FETCH_POST_OP'});
+    }
+    
+    // state = {name: '', type: ''};
 
     render() {
 
         const { classes } = this.props;
-
+        // console.log('redux state', this.props.reduxState.postOp);
+        
         return(
             <div>
             <Grid container spacing={24}>
@@ -61,7 +67,7 @@ class PostOpPage extends Component {
                 id="outlined-name"
                 label="ICU Stay (days)"
                 className={classes.textField}
-                value={this.state.name}
+                value={this.props.reduxState.postOp.icu_stays}
                 fullWidth
                 InputLabelProps={{
                     shrink: true,
@@ -74,7 +80,7 @@ class PostOpPage extends Component {
                 id="outlined-type"
                 label="Hospital Stay (days)"
                 className={classes.textField}
-                value={this.state.type}
+                value={this.props.reduxState.postOp.hospital_stays}
                 fullWidth
                 // onChange={this.handleChange('name')}
                 margin="normal"
@@ -90,7 +96,7 @@ class PostOpPage extends Component {
                 id="outlined-notes"
                 label="Notes"
                 className={classes.textField}
-                // value={this.state.type}
+                value={this.props.reduxState.postOp.notes}
                 multiline
                 rows="5"
                 fullWidth
@@ -112,9 +118,9 @@ class PostOpPage extends Component {
                     <FormControlLabel
                     control={
                         <Checkbox
-                        checked={false}
+                        checked={this.props.reduxState.postOp.serious_advese_event}
                         // onChange={this.handleChange('checkedA')}
-                        // value="checkedA"
+                        value="checked"
                         />
                     }
                     label="Serious Adverse Event"
@@ -163,7 +169,7 @@ class PostOpPage extends Component {
                 id="outlined-discharge-notes"
                 label="Discharge Notes"
                 className={classes.textField}
-                // value={this.state.type}
+                value={this.props.reduxState.postOp.discharge_notes}
                 multiline
                 rows="2"
                 fullWidth
