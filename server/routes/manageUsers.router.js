@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
     pool.query(queryText)
       .then((result) => { res.send(result.rows); })
       .catch((err) => {
-        console.log('Error completing SELECT tasks query', err);
+        console.log('Error completing SELECT user query', err);
         res.sendStatus(500);
       });
   });
@@ -58,7 +58,7 @@ router.post('/', (req, res, next) => {
     const accessLevel = req.body.accessLevel;
     const active = req.body.active;
     const userName = req.body.username;
-    const password = req.body.password;
+    const password = encryptLib.encryptPassword(req.body.password);
     const queryText = `UPDATE person 
     SET ("title", "first_name", "last_name", "access_level", "active", "username", "password") 
     = ($1, $2, $3, $4, $5, $6, $7)

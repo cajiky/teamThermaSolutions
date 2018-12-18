@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
-// import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
@@ -13,7 +12,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import FormControl from '@material-ui/core/FormControl';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
