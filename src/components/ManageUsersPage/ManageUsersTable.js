@@ -157,18 +157,12 @@ let EnhancedTableToolbar = props => {
       })}
     >
       <div className={classes.title}>
-        {numSelected > 0 ? (
-          <Typography color="inherit" variant="subtitle1">
-            {numSelected} selected
-          </Typography>
-        ) : (
           <Typography variant="h6" id="tableTitle">
             Current Users
           </Typography>
-        )}
       </div>
       <div className={classes.spacer} />
-      <div className={classes.actions}>
+      {/* <div className={classes.actions}>
         {numSelected > 0 ? (
           <Tooltip title="Delete">
             <IconButton aria-label="Delete">
@@ -182,7 +176,7 @@ let EnhancedTableToolbar = props => {
             </IconButton>
           </Tooltip>
         )}
-      </div>
+      </div> */}
     </Toolbar>
   );
 };
@@ -321,7 +315,13 @@ class EnhancedTable extends React.Component {
                       </TableCell>
                       <TableCell align="right">{n.first_name}</TableCell>
                       <TableCell align="right">{n.last_name}</TableCell>
-                      <TableCell align="right">{n.active}</TableCell>
+                      {n.active == true ? (
+                          <TableCell align="right"><p>True</p></TableCell>
+                      ):(
+                        <TableCell align="right"><p>False</p></TableCell>
+                      )
+                      }
+                      
                       <TableCell align="right">{n.access_level}</TableCell>
                       <TableCell><Button>Edit</Button></TableCell>
                     </TableRow>
