@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import GridItem from '@material-ui/core/Grid';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -17,6 +18,10 @@ import TableRow from '@material-ui/core/TableRow';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
+import DialogContent from '@material-ui/core/DialogContent';
+import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
 
 const styles = theme => ({
     root: {
@@ -69,11 +74,11 @@ const styles = theme => ({
       <div className={classes.root}>
         <ExpansionPanel>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>Peritonial Cancer Index (PCI)</Typography>
+            <Typography className={classes.heading}>Peritoneal Cancer Index (PCI)</Typography>
             <Typography className={classes.heading}>PCI: 36</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Grid item xs={5}>
+            <Grid container spacing={24} >
                 <Paper>
                     <Table>
                         <TableHead>
@@ -94,7 +99,7 @@ const styles = theme => ({
                                             {region.regionName}
                                         </TableCell>
                                         <TableCell>
-                                            <Select
+                                            <Select fullWidth
                                                 // value={this.state.title}
                                                 // onChange={this.handleChange}
                                                 input={
@@ -107,7 +112,7 @@ const styles = theme => ({
                                             >
                                                 {lesionSizeScore.map( score => {
                                                     return(
-                                                        <MenuItem value={score.score}>{score.option}</MenuItem>
+                                                        <MenuItem value={score.score} >{score.option}</MenuItem>
                                                     )
                                                 })}
                                                 
@@ -121,24 +126,162 @@ const styles = theme => ({
                     </Table>
                 </Paper>
             </Grid>
+            <Grid  container spacing={24}>
+                <Paper className={classes.paper}>
+                    <img height="650" width="750" src="images/bodyImage.png"/>
+                </Paper>
+                    <GridItem item xs={4} sm={4}>
+                        <Paper>
+                            <DialogContent >
+                                <TextField
+                                // onChange={this.handleChange}
+                                // value={this.state.firstName}
+                                name="firstName"
+                                autoFocus
+                                margin="dense"
+                                id="surgeonOne"
+                                label="Surgeon 1"
+                                type="text"
+                                variant="outlined"
+                                />
+                            </DialogContent>
+                        </Paper>
+                    </GridItem>
+                    <GridItem item xs={4} sm={4}>
+                        <Paper>
+                            <DialogContent >
+                                <TextField
+                                // onChange={this.handleChange}
+                                // value={this.state.firstName}
+                                name="firstName"
+                                autoFocus
+                                margin="dense"
+                                id="surgeonTwo"
+                                label="Surgeon 2"
+                                type="text"
+                                
+                                variant="outlined"
+                                />
+                            </DialogContent>
+                        </Paper>
+                    </GridItem>
+                    <GridItem item xs={4} sm={4}>
+                        <Paper>
+                            <DialogContent >
+                                <TextField
+                                // onChange={this.handleChange}
+                                // value={this.state.firstName}
+                                name="firstName"
+                                autoFocus
+                                margin="dense"
+                                id="surgeonThree"
+                                label="Surgeon 3"
+                                type="text"
+                                variant="outlined"
+                                />
+                            </DialogContent>
+                        </Paper>
+                    </GridItem>
+                    <GridItem item xs={4} sm={4}>
+                        <Paper>
+                            <DialogContent >
+                                <TextField
+                                // onChange={this.handleChange}
+                                // value={this.state.firstName}
+                                name="nrHipec"
+                                autoFocus
+                                margin="dense"
+                                id="nrHipec"
+                                label="Nr HIPEC"
+                                type="text"
+                                variant="outlined"
+                                />
+                            </DialogContent>
+                        </Paper>
+                    </GridItem>
+                    <GridItem item xs={4} sm={4}>
+                        <Paper>
+                            <DialogContent >
+                            <FormControl fullWidth variant="outlined" margin="dense" className={classes.formControl}>
+                                    <InputLabel
+                                        // ref={ref => {
+                                        // this.InputLabelRef = ref;
+                                        // }}
+                                        htmlFor="outlined-age-native-simple"
+                                    >
+                                        HIPEC Type
+                                    </InputLabel>
+                                <Select
+                                        // value={this.state.title}
+                                        // onChange={this.handleChange}
+                                        input={
+                                        <OutlinedInput
+                                            name="title"
+                                            id="outlined-age-native-simple"
+                                        />
+                                        }
+                                    >
+                                        <MenuItem value="None">None</MenuItem>
+                                        <MenuItem value="Dr.">Dr.</MenuItem>
+                                        <MenuItem value="Mr.">Mr.</MenuItem>
+                                        <MenuItem value="Mrs.">Mrs.</MenuItem>
+                                        <MenuItem value="Miss">Miss</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </DialogContent>
+                        </Paper>
+                    </GridItem>
+                    <GridItem item xs={4} sm={4}>
+                        <Paper>
+                            <DialogContent >
+                                <FormControl fullWidth variant="outlined" margin="dense" className={classes.formControl}>
+                                    <InputLabel
+                                        // ref={ref => {
+                                        // this.InputLabelRef = ref;
+                                        // }}
+                                        htmlFor="outlined-age-native-simple"
+                                    >
+                                        Reason O/C
+                                    </InputLabel>
+                                    <Select
+                                        
+                                        // value={this.state.title}
+                                        // onChange={this.handleChange}
+                                        input={
+                                        <OutlinedInput
+                                            name="title"
+                                            fullWidth
+                                            id="outlined-age-native-simple"
+                                        />
+                                        }
+                                    >
+                                        <MenuItem value="None">None</MenuItem>
+                                        <MenuItem value="Dr.">Dr.</MenuItem>
+                                        <MenuItem value="Mr.">Mr.</MenuItem>
+                                        <MenuItem value="Mrs.">Mrs.</MenuItem>
+                                        <MenuItem value="Miss">Miss</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </DialogContent>
+                        </Paper>
+                    </GridItem>
+            </Grid>
+
+            
+                                
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>Expansion Panel 2</Typography>
+            <Typography className={classes.heading}>Resection</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-              sit amet blandit leo lobortis eget.
+              Building this out tomorrow!
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>
-        <ExpansionPanel disabled>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>Disabled Expansion Panel</Typography>
-          </ExpansionPanelSummary>
-        </ExpansionPanel>
+        
       </div>
     );
   }
