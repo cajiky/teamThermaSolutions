@@ -44,6 +44,10 @@ class MainTabsPage extends Component {
 state = {
     value: 0,
   };
+  componentDidMount () {
+    this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'})
+    this.props.dispatch({type: 'FETCH_POST_OP'});
+  }
 
   handleTabChange = (event, value) => {
     this.setState({ value });
