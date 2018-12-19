@@ -7,7 +7,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 // import FormHelperText from '@material-ui/core/FormHelperText';
@@ -18,6 +18,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import ReOperation from './ReoperationSelector';
 import Mortality from './MortalitySelector'
 import DischargeStatus from './DischargeStatus';
+import SeriousAdverseEvents from './SeriousAdverseEvents';
 
 
 const styles = theme => ({
@@ -61,7 +62,8 @@ class PostOpPage extends Component {
         reoperation: null,
         hospital_mortality: null,
         status_at_discharge: 0,
-        discharge_notes: ''
+        discharge_notes: '',
+        adverse_events: [],
     };
 
     componentDidMount () {
@@ -78,7 +80,8 @@ class PostOpPage extends Component {
             reoperation: this.props.reduxState.postOp.reoperation,
             hospital_mortality: this.props.reduxState.postOp.hospital_mortality,
             status_at_discharge: this.props.reduxState.postOp.status_at_discharge,
-            discharge_notes: this.props.reduxState.postOp.discharge_notes
+            discharge_notes: this.props.reduxState.postOp.discharge_notes,
+            adverse_events: this.props.reduxState.postOp,
         })
     }
     
@@ -170,33 +173,27 @@ class PostOpPage extends Component {
             </FormGroup>
             <ExpansionPanel expanded={this.state.serious_advese_event}>
                 <ExpansionPanelSummary >
-                    Serious Adverse Event
+                <FormControl component="fieldset" className={classes.formControl}>
+                    <FormLabel component="legend">Score</FormLabel>
+                        <RadioGroup 
+                            aria-label="Serious Adverse Event Score"
+                            name="score"
+                            className={classes.group}
+                            value={this.state.score}
+                            onChange={this.handleChange}
+                        >
+                            <FormControlLabel value="0" control={<Radio />} label="0" />
+                            <FormControlLabel value="1" control={<Radio />} label="1" />
+                            <FormControlLabel value="2" control={<Radio />} label="2" />
+                            <FormControlLabel value="3" control={<Radio />} label="3" />
+                            <FormControlLabel value="4" control={<Radio />} label="4" />
+                            <FormControlLabel value="5" control={<Radio />} label="5" />
+                        </RadioGroup>
+                    </FormControl>                    
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Grid container spacing={24}>
-                        <Grid item xs={4}>
-                        <FormControl component="fieldset" className={classes.formControl}>
-                            <FormLabel component="legend">Score</FormLabel>
-                            <RadioGroup 
-                                aria-label="Serious Adverse Event Score"
-                                name="score"
-                                className={classes.group}
-                                value={this.state.score}
-                                onChange={this.handleChange}
-                            >
-                                <FormControlLabel value="0" control={<Radio />} label="0" />
-                                <FormControlLabel value="1" control={<Radio />} label="1" />
-                                <FormControlLabel value="2" control={<Radio />} label="2" />
-                                <FormControlLabel value="3" control={<Radio />} label="3" />
-                                <FormControlLabel value="4" control={<Radio />} label="4" />
-                                <FormControlLabel value="5" control={<Radio />} label="5" />
-                            </RadioGroup>
-                        </FormControl>
-                        </Grid>
-                        <Grid>
-                            Events
-                        <Button>Add New Event</Button>
-                        </Grid>
+                        <SeriousAdverseEvents />
                     </Grid>
                 </ExpansionPanelDetails>
             </ExpansionPanel>

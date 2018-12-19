@@ -217,22 +217,33 @@ n: [
 
 ],
 
-serious_adverse_events: [
-  {id: 1, sae_type: 'Anastomotic Leakage'},
-  {id: 2, sae_type: 'Bleeding'},
-  {id: 3, sae_type: 'Abcess'},
-  {id: 4, sae_type: 'Wound Infection'},
-  {id: 5, sae_type: 'Ileus'},
-  {id: 6, sae_type: 'Fistula'},
-  {id: 7, sae_type: 'Pulmonary Embolism'},
-  {id: 8, sae_type: 'Cardiac'},
-  {id: 9, sae_type: 'Urinoma'},
-  {id: 10, sae_type: 'Uninary Tract Infection'},
+seriousAdverseEvents: [
+  {id: 1, sae_type: 'Abcess'},
+  {id: 2, sae_type: 'Anastomotic Leakage'},
+  {id: 3, sae_type: 'Anemia'},
+  {id: 4, sae_type: 'Bleeding'},
+  {id: 5, sae_type: 'Cardiac'},
+  {id: 6, sae_type: 'Electrolyte Disorder'},
+  {id: 7, sae_type: 'Fistula'},
+  {id: 8, sae_type: 'Gastroparesis'},
+  {id: 9, sae_type: 'Ileus'},
+  {id: 10, sae_type: 'Other Infection'},
   {id: 11, sae_type: 'Pneumonia'},
-  {id: 12, sae_type: 'Other Infection'},
-  {id: 13, sae_type: 'Gastroparesis'},
-  {id: 14, sae_type: 'Electrolyte Disorder'},
-  {id: 15, sae_type: 'Anemia'}
+  {id: 12, sae_type: 'Pulmonary Embolism'},
+  {id: 13, sae_type: 'Urinoma'},
+  {id: 14, sae_type: 'Uninary Tract Infection'},
+  {id: 15, sae_type: 'Wound Dehiscense'},
+  {id: 16, sae_type: 'Wound Infection'},
+  {id: 17, sae_type: 'Other Event'},
+],
+clavienScore: [
+  {id: 1, score: '1'},
+  {id: 2, score: '2'},
+  {id: 3, score: '3A'},
+  {id: 4, score: '3B'},
+  {id: 5, score: '4A'},
+  {id: 6, score: '4B'},
+  {id: 7, score: '5'},
 ]
 }
 

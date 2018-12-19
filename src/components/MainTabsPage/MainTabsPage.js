@@ -45,6 +45,7 @@ state = {
     value: 0,
   };
   componentDidMount () {
+    this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'})
     this.props.dispatch({type: 'FETCH_POST_OP'});
   }
 
