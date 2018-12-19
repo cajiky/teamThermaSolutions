@@ -56,7 +56,7 @@ class PostOpPage extends Component {
         mcu_stays: 0,
         hospital_stays: 0,
         notes: '',
-        serious_advese_event: null,
+        serious_advese_event: false,
         score: '',
         reoperation: null,
         hospital_mortality: null,
@@ -65,7 +65,7 @@ class PostOpPage extends Component {
     };
 
     componentDidMount () {
-        // console.log('in component mount post op');
+        console.log('in component mount post op', this.props.reduxState.postOp.serious_advese_event);
         // this.props.dispatch({type: 'FETCH_POST_OP'});
         this.setState({
             id: this.props.reduxState.postOp.id,
@@ -90,6 +90,14 @@ class PostOpPage extends Component {
         });
     }
 
+    // Called when the input field changes
+    handleChangeCheckbox = (event) => {
+        this.setState({
+            ...this.state,
+            [event.target.name]: event.target.checked,
+        });
+    }
+    
     render() {
         const { classes } = this.props;
         
@@ -153,15 +161,16 @@ class PostOpPage extends Component {
                             <Checkbox
                             name="serious_advese_event"
                             checked={this.state.serious_advese_event}
-                            onChange={this.handleChange}
-                            // value={true}
+                            onChange={this.handleChangeCheckbox}
+                            value={this.state.serious_advese_event}
                             />
                         }
                         label="Serious Adverse Event"
                         />
             </FormGroup>
-            <ExpansionPanel >
+            <ExpansionPanel expanded={this.state.serious_advese_event}>
                 <ExpansionPanelSummary >
+                    Serious Adverse Event
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Grid container spacing={24}>
@@ -173,7 +182,7 @@ class PostOpPage extends Component {
                                 name="score"
                                 className={classes.group}
                                 value={this.state.score}
-                                // onChange={this.handleChange}
+                                onChange={this.handleChange}
                             >
                                 <FormControlLabel value="0" control={<Radio />} label="0" />
                                 <FormControlLabel value="1" control={<Radio />} label="1" />

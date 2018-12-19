@@ -216,6 +216,24 @@ n: [
   {id: 5, status: 6, name: 'No Input'}
 
 ],
+
+serious_adverse_events: [
+  {id: 1, sae_type: 'Anastomotic Leakage'},
+  {id: 2, sae_type: 'Bleeding'},
+  {id: 3, sae_type: 'Abcess'},
+  {id: 4, sae_type: 'Wound Infection'},
+  {id: 5, sae_type: 'Ileus'},
+  {id: 6, sae_type: 'Fistula'},
+  {id: 7, sae_type: 'Pulmonary Embolism'},
+  {id: 8, sae_type: 'Cardiac'},
+  {id: 9, sae_type: 'Urinoma'},
+  {id: 10, sae_type: 'Uninary Tract Infection'},
+  {id: 11, sae_type: 'Pneumonia'},
+  {id: 12, sae_type: 'Other Infection'},
+  {id: 13, sae_type: 'Gastroparesis'},
+  {id: 14, sae_type: 'Electrolyte Disorder'},
+  {id: 15, sae_type: 'Anemia'}
+]
 }
 
 // user will be on the redux state at:
