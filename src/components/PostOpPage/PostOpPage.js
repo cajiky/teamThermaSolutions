@@ -63,7 +63,6 @@ class PostOpPage extends Component {
         hospital_mortality: null,
         status_at_discharge: 0,
         discharge_notes: '',
-        adverse_events: [],
     };
 
     componentDidMount () {
@@ -81,7 +80,6 @@ class PostOpPage extends Component {
             hospital_mortality: this.props.reduxState.postOp.hospital_mortality,
             status_at_discharge: this.props.reduxState.postOp.status_at_discharge,
             discharge_notes: this.props.reduxState.postOp.discharge_notes,
-            adverse_events: this.props.reduxState.postOp,
         })
     }
     
@@ -193,7 +191,7 @@ class PostOpPage extends Component {
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Grid container spacing={24}>
-                        <SeriousAdverseEvents />
+                        <SeriousAdverseEvents handleChangeCheckbox={this.handleChangeCheckbox}/>
                     </Grid>
                 </ExpansionPanelDetails>
             </ExpansionPanel>

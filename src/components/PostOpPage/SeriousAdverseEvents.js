@@ -17,6 +17,20 @@ const styles = theme => ({
 
 class SeriousAdverseEvent extends Component {
 
+  state = [
+    {id: null,
+    clavianScore: null}
+  ];
+
+  // Called when the input field changes
+  handleChangeCheckbox = (event) => {
+    this.setState({
+        ...this.state,
+        [event.target.name]: event.target.checked,
+    });
+  }
+
+
   render(){
 
     const myOptions = this.props.reduxState.dropdownOptions.seriousAdverseEvents;
@@ -30,10 +44,10 @@ class SeriousAdverseEvent extends Component {
               <FormControlLabel
               control={
                   <Checkbox
-                  name={option.sae_type}
-                  checked={false}
+                  name={option.name}
+                  checked={option.id == 3}
                   onChange={this.handleChangeCheckbox}
-                  value={false}
+                  value={option.id}
                   />
               }
               label={option.sae_type}
