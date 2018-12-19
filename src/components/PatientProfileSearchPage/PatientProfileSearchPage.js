@@ -53,13 +53,20 @@ const styles = theme => ({
   });
 
 class PatientProfileSearchPage extends Component {
+
+    setLabel() {
+        this.setState({
+          labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+        });
+      }
+
     state = {
         variables: {
         open: false,
         labelWidth: 0,
         },
         patient: {
-            dob: 2018
+            
         },
         
       };
@@ -69,15 +76,16 @@ class PatientProfileSearchPage extends Component {
         console.log(this.state);
       };
 
-      calculateAge = (dob) => {
-         let birth = dob.getFullYear;
-         console.log(birth);
+      calculateAge = (dob) => (event) => {
+        let age = Math.floor((new Date() - new Date(event.target.value).getTime()) / 3.15576e+10);
+        this.setState({patient: {...this.state.patient, age: age} });
+        console.log(age);
         };
       
 
       handleSearchChange = (name) => (event) => {
         this.setState({ [name]: (event.target.value) });
-        console.log(this.state);
+        console.log(this.state.patient);
       };
     
       handleClickOpen = () => {
@@ -170,19 +178,24 @@ class PatientProfileSearchPage extends Component {
                         type="date"
                         variant="outlined"
                         fullWidth="true"
-                        onChange={this.handleNewPatientChange('dob') && this.calculateAge('dob')}
+                        onChange={this.handleNewPatientChange('dob')}
+                        onBlur={this.calculateAge('age', this.state.patient.dob)}
                         /></FormControl>
                         <FormControl className={classes.formControlAge}>
                         <TextField
-                        required
+                        // disabled
                         id="outlined-required"
                         label="Age"
                         InputLabelProps={{
                             shrink: true,
                           }}
+                          InputProps={{
+                            readOnly: true,
+                          }}
                           value={this.state.patient.age}
+                        //   placeholder={this.state.patient.age}
                         margin="normal"
-                        type="number"
+                        // type="number"
                         variant="outlined"
                         /></FormControl>
                         <FormControl  className={classes.formControlSub} variant="outlined">
@@ -258,7 +271,7 @@ class PatientProfileSearchPage extends Component {
                                 }}
                                 htmlFor="outlined-toc-simple"                                
                             >
-                                {/* Gender */}
+                                Type of Cancer
                             </InputLabel>
                             <Select
                                 value={this.state.patient.toc}
@@ -266,7 +279,7 @@ class PatientProfileSearchPage extends Component {
                                 input={
                                 <OutlinedInput
                                     label="Type of Cancer"
-                                    // placeholder="gender"
+                                    placeholder="Type of Cancer"
                                     name="Type of Cancer"
                                     id="outlined-toc-simple"
                                     labelWidth={this.state.labelWidth}
