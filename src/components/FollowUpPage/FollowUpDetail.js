@@ -46,7 +46,7 @@ const styles = theme => ({
 
 
 
-class Recurrence extends Component {
+class FollowUpDetail extends Component {
 
     state = {
         adjuvant_chemo: false,
@@ -88,12 +88,25 @@ class Recurrence extends Component {
             <div>
             <ExpansionPanel expanded={true}>
                 <ExpansionPanelSummary >
-                    Follow-Up
+                    Follow Up 2017/1/1
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Grid container spacing={24}>
-                        
-                        
+                      <Grid item xs={3}>
+                      <TextField
+                        name="follow_up_date"
+                        label="Date"
+                        className={classes.textField}
+                        value={this.state.follow_up_date}
+                        fullWidth
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        onChange={this.handleChange}
+                        margin="normal"
+                        variant="outlined"
+                        />
+                      </Grid>
                     </Grid>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
@@ -109,4 +122,4 @@ const mapStateToProps = reduxState => ({
 });
 
 
-export default connect(mapStateToProps) (withStyles(styles)(Recurrence));
+export default connect(mapStateToProps) (withStyles(styles)(FollowUpDetail));

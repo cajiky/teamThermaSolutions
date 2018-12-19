@@ -8,6 +8,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import TreatmentPlan from './TreatmentPlan';
+import FollowUpDetail from './FollowUpDetail';
 import ChemotherapyType from './ChemotherapyType';
 // import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
@@ -86,61 +87,10 @@ class FollowUpPage extends Component {
         
         return(
             <div>
-                <h3>Treatment Plan</h3>
+                <h3>Follow Up Treatment Plan</h3>
             <TreatmentPlan />
 
             <Grid container spacing={24}>
-            
-                <Grid item xs={3}>
-                <TextField
-                name="last_contact"
-                label="Last Contact Date"
-                className={classes.textField}
-                value={this.state.last_contact}
-                fullWidth
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                onChange={this.handleChange}
-                margin="normal"
-                variant="outlined"
-                />
-                <TextField
-                name="date_of_death"
-                label="Date Of Death"
-                className={classes.textField}
-                value={this.state.date_of_death}
-                fullWidth
-                onChange={this.handleChange}
-                margin="normal"
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                variant="outlined"
-                />      
-                
-                </Grid>
-                <Grid item xs>
-                <TextField
-                name="notes"
-                label="Notes"
-                className={classes.textField}
-                value={this.state.notes}
-                multiline
-                rows="5"
-                fullWidth
-                onChange={this.handleChange}
-                margin="normal"
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                variant="outlined"
-                />      
-                
-                </Grid>
-                {/* <Grid item xs>
-                
-                </Grid> */}
             </Grid>
             <ExpansionPanel expanded={true}>
                 <ExpansionPanelSummary >
