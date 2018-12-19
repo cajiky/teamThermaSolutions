@@ -1,4 +1,4 @@
-const newPatientReducer = (state = [], action) => {
+const patientReducer = (state = [], action) => {
     switch (action.type) {
       case 'FIND_PATIENT':
         return {patientSearch: action.payload};
@@ -13,5 +13,5 @@ const newPatientReducer = (state = [], action) => {
   
   // user will be on the redux state at:
   // state.user
-  export default newPatientReducer;
+  export default patientReducer;
   

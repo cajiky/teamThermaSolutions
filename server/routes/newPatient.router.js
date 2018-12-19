@@ -5,8 +5,20 @@ const router = express.Router();
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
-    
+router.get(`/:key`, (req, res) => {
+    console.log(req.params);
+    const patientId = req.params.key;
+    console.log('THIS IS THE PATIENT ID', patientId);
+    const sqlText = `SELECT * FROM patients WHERE patients.patient_no = $1;`;
+    pool.query(sqlText, [patientId]).then( rows => {
+        patient = rows.rows
+        result = {patient: patient}
+    res.send(result);
+})
+.catch((error) => {
+    console.log('GET error from the server', error);
+    res.sendStatus(500); // A good server always responds!
+})
 });
 
 /**

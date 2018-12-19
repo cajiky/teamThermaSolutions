@@ -85,7 +85,7 @@ class PatientProfileSearchPage extends Component {
 
       handleSearchChange = (name) => (event) => {
         this.setState({ [name]: (event.target.value) });
-        console.log(this.state.patient);
+        console.log(this.state.patientSearch);
       };
     
       handleClickOpen = () => {
