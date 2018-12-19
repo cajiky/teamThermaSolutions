@@ -7,8 +7,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import TreatmentPlan from './TreatmentPlan';
-import ChemotherapyType from './ChemotherapyType';
 // import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -17,6 +15,9 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import AdjuvantChemotherapy from './AdjuvantChemotherapy';
+import ChemotherapyType from './ChemotherapyType';
+import Biological from './Biological';
 
 const styles = theme => ({
     container: {
@@ -46,7 +47,7 @@ const styles = theme => ({
 
 
 
-class FollowUpPage extends Component {
+class TreatmentPlan extends Component {
 
     state = {
         adjuvant_chemo: false,
@@ -85,76 +86,17 @@ class FollowUpPage extends Component {
         const { classes } = this.props;
         
         return(
-            <div>
-                <h3>Treatment Plan</h3>
-            <TreatmentPlan />
-
             <Grid container spacing={24}>
-            
-                <Grid item xs={3}>
-                <TextField
-                name="last_contact"
-                label="Last Contact Date"
-                className={classes.textField}
-                value={this.state.last_contact}
-                fullWidth
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                onChange={this.handleChange}
-                margin="normal"
-                variant="outlined"
-                />
-                <TextField
-                name="date_of_death"
-                label="Date Of Death"
-                className={classes.textField}
-                value={this.state.date_of_death}
-                fullWidth
-                onChange={this.handleChange}
-                margin="normal"
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                variant="outlined"
-                />      
-                
+                <Grid item xs={4}>
+                  <AdjuvantChemotherapy />
                 </Grid>
-                <Grid item xs>
-                <TextField
-                name="notes"
-                label="Notes"
-                className={classes.textField}
-                value={this.state.notes}
-                multiline
-                rows="5"
-                fullWidth
-                onChange={this.handleChange}
-                margin="normal"
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                variant="outlined"
-                />      
-                
+                <Grid item xs={4}>
+                  <ChemotherapyType />
                 </Grid>
-                {/* <Grid item xs>
-                
-                </Grid> */}
+                <Grid item xs={4}>
+                  <Biological />
+                </Grid>
             </Grid>
-            <ExpansionPanel expanded={true}>
-                <ExpansionPanelSummary >
-                    Follow-Up
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <Grid container spacing={24}>
-                        {/* <SeriousAdverseEvents handleChangeCheckbox={this.handleChangeCheckbox}/> */}
-                    </Grid>
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-            
-            </div>
-
         )
     }
   
@@ -165,4 +107,4 @@ const mapStateToProps = reduxState => ({
 });
 
 
-export default connect(mapStateToProps) (withStyles(styles)(FollowUpPage));
+export default connect(mapStateToProps) (withStyles(styles)(TreatmentPlan));
