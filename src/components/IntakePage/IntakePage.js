@@ -34,7 +34,7 @@ const styles = theme => ({
 
 class IntakePage extends Component {
     state = {
-        bmi: '',
+        bmi: '(auto)',
         length: '',
         patientWeight: '',
     }
@@ -57,7 +57,7 @@ class IntakePage extends Component {
         this.setState ({
             [event.target.name]: event.target.value,
         }, this.calculateBMI)
-        // console.log(this.state);
+        console.log(this.state);
     }
     
     // componentDidUpdate(prevState){
