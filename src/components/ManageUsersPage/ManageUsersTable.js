@@ -523,7 +523,7 @@ class EnhancedTable extends React.Component {
               margin="dense"
               id="password"
               label="Update Password"
-              type="text"
+              type="password"
               fullWidth
               variant="outlined"
             />
