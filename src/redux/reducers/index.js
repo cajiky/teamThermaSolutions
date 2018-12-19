@@ -5,6 +5,7 @@ import user from './userReducer';
 import dropdownOptions from './dropdownOptionsReducer';
 import postOp from './postOpReducer';
 import allUsersReducer from './allUsersReducer';
+import individualUserReducer from './individualUserReducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   dropdownOptions,
   postOp, // will contain post op information for patient_id
   allUsersReducer,
+  individualUserReducer,
 });
 
 export default rootReducer;

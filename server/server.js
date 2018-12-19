@@ -30,6 +30,10 @@ app.use('/api/post_op', postOpRouter);
 app.use('/addNewUser', manageUsersRouter)
 app.use('/getAllUsers', manageUsersRouter) 
 app.use('/editUserProfile', manageUsersRouter)
+app.use('/addNewUser', manageUsersRouter);
+app.use('/getAllUsers', manageUsersRouter); 
+app.use('/editUserProfile', manageUsersRouter);
+app.use('/getIndividualProfile', manageUsersRouter)
 
 // Serve static files
 app.use(express.static('build'));

@@ -6,6 +6,7 @@ import postOpSaga from './postOpSaga';
 import addNewUserSaga from './addNewUserSaga';
 import allUsersSaga from './allUsersSaga';
 import editIndividualUserSaga from './editIndividualProfileSaga';
+import findUserProfileSaga from './getIndividualUserSaga'
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     addNewUserSaga(),
     allUsersSaga(),
     editIndividualUserSaga(),
+    findUserProfileSaga(),
   ]);
 }
