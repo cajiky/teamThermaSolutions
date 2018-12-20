@@ -113,7 +113,6 @@ class PatientProfileSearchPage extends Component {
         const { classes } = this.props;
         return(
             <div>
-                <h1>Patient Profile/Search Page</h1>
                 <Grid container spacing={24}>
                     <Grid item xs={3}>
                     </Grid>
@@ -329,10 +328,6 @@ class PatientProfileSearchPage extends Component {
                     <Grid item xs={3}>
                     </Grid>
                 </Grid>
-                <h3>Here you will have a search field</h3>
-                <h3>This page will show patient profile information by id</h3>
-                <h3>You can also add a new patient by clicking "add patient" and filing out the information in the popup box</h3>
-                
             </div>
 
         )
