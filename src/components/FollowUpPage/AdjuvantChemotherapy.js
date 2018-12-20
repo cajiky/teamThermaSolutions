@@ -40,7 +40,7 @@ class AdjuvantChemotherapy extends Component {
 
     return (
       <FormControl fullWidth="true" variant="outlined">
-          <InputLabel htmlFor="adjuvant_chemo">Adjuvant Chemotherapy</InputLabel>
+          <InputLabel shrink htmlFor="adjuvant_chemo">Adjuvant Chemotherapy</InputLabel>
           <Select fullWidth={true}
             name="adjuvant_chemo"
             // variant="outlined" 

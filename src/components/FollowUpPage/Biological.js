@@ -35,7 +35,7 @@ class Biological extends Component {
 
     return (
       <FormControl fullWidth="true" variant="outlined">
-          <InputLabel htmlFor="biological">Biological</InputLabel>
+          <InputLabel shrink htmlFor="biological">Biological</InputLabel>
           <Select fullWidth={true}
             // variant="outlined" 
             // value={this.props.biological}

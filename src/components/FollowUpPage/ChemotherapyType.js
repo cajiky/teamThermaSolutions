@@ -32,14 +32,12 @@ class ChemotherapyType extends Component {
   } // end renderTagOptions
 
   render(){
-    const { classes } = this.props;
+    // const { classes } = this.props;
 
     return (
       <FormControl fullWidth="true">
-          <InputLabel htmlFor="adjuvant_chemo_type">Chemotherapy Type</InputLabel>
+          <InputLabel shrink htmlFor="adjuvant_chemo_type">Chemotherapy Type</InputLabel>
           <Select fullWidth={true}
-            // variant="outlined" 
-            // value={this.props.chemo_type}
             name="adjuvant_chemo_type"
             input={
               <Input
