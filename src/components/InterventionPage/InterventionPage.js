@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import ResectionDropdown from '../InterventionPage/ResectionDropdown';
+import AdditionalPageInfo from '../InterventionPage/AdditionalPageInfo';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -68,11 +70,13 @@ const styles = theme => ({
       { regionNumber: 12, regionName: 'Lower Ilium', },
   ]
 
-  function InterventionPage(props) {
-    const { classes } = props;
+  class InterventionPage extends Component {
+    
+    render() {
+    const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <ExpansionPanel>
+        <ExpansionPanel expanded={true}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>Peritoneal Cancer Index (PCI)</Typography>
             <Typography className={classes.heading}>PCI: 36</Typography>
@@ -221,11 +225,14 @@ const styles = theme => ({
                                         />
                                         }
                                     >
-                                        <MenuItem value="None">None</MenuItem>
-                                        <MenuItem value="Dr.">Dr.</MenuItem>
-                                        <MenuItem value="Mr.">Mr.</MenuItem>
-                                        <MenuItem value="Mrs.">Mrs.</MenuItem>
-                                        <MenuItem value="Miss">Miss</MenuItem>
+
+                                        {this.props.reduxState.dropdownOptions.hipecTypeOptions.map( option => {
+                                            return(
+                                                <MenuItem value={option.id}>{option.status}</MenuItem>
+                                            )
+                                            
+                                        })}
+                                        
                                     </Select>
                                 </FormControl>
                             </DialogContent>
@@ -255,11 +262,14 @@ const styles = theme => ({
                                         />
                                         }
                                     >
-                                        <MenuItem value="None">None</MenuItem>
-                                        <MenuItem value="Dr.">Dr.</MenuItem>
-                                        <MenuItem value="Mr.">Mr.</MenuItem>
-                                        <MenuItem value="Mrs.">Mrs.</MenuItem>
-                                        <MenuItem value="Miss">Miss</MenuItem>
+                                    {this.props.reduxState.dropdownOptions.reasonOpenCloseOption.map( option => {
+                                            return(
+                                                <MenuItem value={option.id}>{option.status}</MenuItem>
+                                            )
+                                            
+                                        })}
+
+                                        
                                     </Select>
                                 </FormControl>
                             </DialogContent>
@@ -271,19 +281,11 @@ const styles = theme => ({
                                 
           </ExpansionPanelDetails>
         </ExpansionPanel>
-        <ExpansionPanel>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>Resection</Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Typography>
-              Building this out tomorrow!
-            </Typography>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-        
+
+        <ResectionDropdown/>
+        <AdditionalPageInfo/>
       </div>
-    );
+    )};
   }
   
 
