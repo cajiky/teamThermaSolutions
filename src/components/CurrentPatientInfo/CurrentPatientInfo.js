@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Grid from '@material-ui/core/Grid';
 import red from '@material-ui/core/colors/red';
+import moment from 'moment';
 
 
 const styles = theme => ({
@@ -37,6 +38,11 @@ const styles = theme => ({
         fontWeight: '900',
         // useNextVariants: true,
     },
+    superCool: {
+        backgroundColor: '#FFFFFF',
+        border: 'none',
+        boxShadow: 'none',
+    }
   });
 
 class CurrentPatientInfo extends Component {
@@ -45,7 +51,7 @@ class CurrentPatientInfo extends Component {
         const { classes } = this.props;
         return (
             <div>
-                <ExpansionPanel>
+                <ExpansionPanel className={classes.superCool}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>
             <Grid container spacing={24}>
@@ -53,7 +59,7 @@ class CurrentPatientInfo extends Component {
                 <span className={classes.redBold}>Patient ID: </span>{this.props.patient.patient_no}
                 </Grid>
                 <Grid item xs={2.5}>
-                <span className={classes.redBold}>Date of Birth: </span>{this.props.patient.dob}
+                <span className={classes.redBold}>Date of Birth: </span>{moment(this.props.patient.dob).format('MM-DD-YYYY')}
                 </Grid>
                 <Grid item xs={2.5}>
                 <span className={classes.redBold}>Age: </span>{Math.floor((new Date() - new Date(this.props.patient.dob).getTime()) / 3.15576e+10)}
@@ -63,13 +69,13 @@ class CurrentPatientInfo extends Component {
                 <span className={classes.redBold}>Gender: </span>{this.props.patient.gender}
                 </Grid>
                 {this.props.patient.hipec_date ? (<Grid item xs={2.5}><span className={classes.redBold}>HIPEC: </span>YES</Grid>) : (<></>)}
-                {this.props.patient.hipec_date ? (<Grid item xs={2.5}><span className={classes.redBold}>Date of HIPEC: </span>{this.props.patient.hipec_date}</Grid>) : (<></>)}
+                {this.props.patient.hipec_date ? (<Grid item xs={2.5}><span className={classes.redBold}>Date of HIPEC: </span>{moment(this.props.patient.hipec_date).format('MM-DD-YYYY')}</Grid>) : (<></>)}
             </Grid>
             </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography>
-              Building this out tomorrow
+              <span className={classes.redBold}>Additional patient data will live here</span>
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>
