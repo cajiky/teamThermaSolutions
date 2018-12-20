@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ReactFragment from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
 import PatientProfileSearchPage from '../PatientProfileSearchPage/PatientProfileSearchPage';
 import TreatmentFormPatientData from '../TreatmentFormPatientData/TreatmentFormPatientData';
@@ -33,58 +33,66 @@ function TabContainer(props) {
     children: PropTypes.node.isRequired,
   };
 
-const styles = theme => ({
+
+  const styles = theme => ({
     root: {
       flexGrow: 1,
       width: '100%',
-      backgroundColor: theme.palette.background.paper,
     },
   });
-
 class MainTabsPage extends Component {
-    state = {
-        value: 0,
-    }
+state = {
+    value: 0,
+  };
+  componentDidMount () {
+    this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'})
+    this.props.dispatch({type: 'FETCH_POST_OP'});
+  }
 
-    handleTabChange = (event, value) => {
-        this.setState({ value });
-    }
+  handleTabChange = (event, value) => {
+    this.setState({ value });
+  };
 
     render() {
-    const { classes } = this.props;
-    const { value } = this.state;
+        const { classes } = this.props;
+        const { value } = this.state;
         return(
-            <div>
-
+            <div className={classes.root}>
+                <h1>Main Tabs Page</h1>
+                <h3>This Page houses all the Tab Components</h3>
                 <AppBar position="static" color="default">
                     <Tabs
                     value={value}
-                    onChange={this.handleChange}
+                    onChange={this.handleTabChange}
                     indicatorColor="primary"
                     textColor="primary"
                     scrollable
                     scrollButtons="auto"
                     >
+                    <Tab label="Primary Tumor" />
+                    <Tab label="Intake" />
+                    <Tab label="PSDSS" />
+                    <Tab label="Intervention" />
+                    <Tab label="Pathology" />
+                    <Tab label="Operative Notes" />
+                    <Tab label="Post-Op" />
+                    <Tab label="Follow Up" />
+                    <Tab label="Additional Data" />
                     </Tabs>
                 </AppBar>
-                <h1>Main Tabs Page</h1>
-                <h3>This Page houses all the Tab Components</h3>
-                <PatientProfileSearchPage />
-                <TreatmentFormPatientData />
-                <PrimaryTumorPage />
-                <IntakePage />
-                <PSDSSPage />
-                <InterventionPage />
-                <PathologyNotesPage />
-                <OperativeNotesPage />
-                <PostOpPage />
-                <FollowUpPage />
-                <AdditionalDataPage />
-                <ManageUsersPage />
+                {value === 0 && <TabContainer><PrimaryTumorPage /></TabContainer>}
+                {value === 1 && <TabContainer><IntakePage /></TabContainer>}
+                {value === 2 && <TabContainer><PSDSSPage /></TabContainer>}
+                {value === 3 && <TabContainer><InterventionPage /></TabContainer>}
+                {value === 4 && <TabContainer><PathologyNotesPage /></TabContainer>}
+                {value === 5 && <TabContainer><OperativeNotesPage /></TabContainer>}
+                {value === 6 && <TabContainer><PostOpPage /></TabContainer>}
+                {value === 7 && <TabContainer><FollowUpPage /></TabContainer>}
+                {value === 8 && <TabContainer><AdditionalDataPage /></TabContainer>}
 
-
-
-
+                {/* <PatientProfileSearchPage />
+                <TreatmentFormPatientData /> */}
+                {/* <ManageUsersPage /> */}
             </div>
 
         )
@@ -92,9 +100,13 @@ class MainTabsPage extends Component {
   
 };
 
+// ScrollableTabsButtonAuto.propTypes = {
+//     classes: PropTypes.object.isRequired,
+//   };
+
 const mapStateToProps = reduxState => ({
     reduxState,
 });
 
 
-export default connect(mapStateToProps) (MainTabsPage)
+export default connect(mapStateToProps) (withStyles(styles)(MainTabsPage))
