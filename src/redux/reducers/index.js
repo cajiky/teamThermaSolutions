@@ -5,6 +5,7 @@ import user from './userReducer';
 import dropdownOptions from './dropdownOptionsReducer';
 import patientReducer from './patientReducer';
 import postOp from './postOpReducer';
+import followUp from './followUpReducer';
 import allUsersReducer from './allUsersReducer';
 import individualUserReducer from './individualUserReducer'
 
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   dropdownOptions,
   patientReducer,
   postOp, // will contain post op information for patient_id
+  followUp, // will contain follow up information for patient_id
   allUsersReducer,
   individualUserReducer,
 });
