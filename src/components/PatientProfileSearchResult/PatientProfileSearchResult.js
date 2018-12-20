@@ -45,7 +45,7 @@ class PatientProfileSearchResult extends Component {
 
     selectPatient = () => {
     this.props.dispatch({type: 'SET_PATIENT_RESULT', payload: this.props.patientSearch});
-    this.props.history.push(`/info`);
+    this.props.history.push(`/MainTabsPage`);
     }
 
     render() {
