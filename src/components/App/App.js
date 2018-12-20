@@ -16,21 +16,25 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import MainTabsPage from '../MainTabsPage/MainTabsPage';
+import appTheme from './AppTheme';
+import ManageUsersPage from '../ManageUsersPage/ManageUsersPage';
+import PatientProfileSearchPage from '../PatientProfileSearchPage/PatientProfileSearchPage';
 
-
-import './App.css';
+// import './App.css';
 
 class App extends Component {
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_USER'})
+    this.props.dispatch({type:'GET_DROPDOWN_OPTIONS'})
   }
 
   render() {
     return (
       <Router>
         <div>
+        <MuiThemeProvider theme={appTheme}>
           <Nav />
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -60,12 +64,15 @@ class App extends Component {
             />
             
             <ProtectedRoute path="/MainTabsPage" component={MainTabsPage} />
+            <ProtectedRoute path="/ManageUsersPage" component={ManageUsersPage} />
+            <ProtectedRoute path="/PatientProfileSearchPage" component={PatientProfileSearchPage} />
 
 
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
           <Footer />
+          </MuiThemeProvider>
         </div>
       </Router>
   )}

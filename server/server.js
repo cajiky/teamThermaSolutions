@@ -11,6 +11,8 @@ const passport = require('./strategies/user.strategy');
 // Route includes
 const userRouter = require('./routes/user.router');
 const patientRouter = require('./routes/newPatient.router');
+const postOpRouter = require('./routes/post_op.router');
+const manageUsersRouter = require('./routes/manageUsers.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -27,6 +29,15 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/add-a-patient', patientRouter);
 app.use('/api/find-a-patient', patientRouter);
+app.use('/api/post_op', postOpRouter);
+app.use('/addNewUser', manageUsersRouter)
+app.use('/getAllUsers', manageUsersRouter) 
+app.use('/editUserProfile', manageUsersRouter)
+app.use('/addNewUser', manageUsersRouter);
+app.use('/getAllUsers', manageUsersRouter); 
+app.use('/editUserProfile', manageUsersRouter);
+app.use('/getIndividualProfile', manageUsersRouter)
+
 
 // Serve static files
 app.use(express.static('build'));
