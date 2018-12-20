@@ -5,7 +5,8 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Input from '@material-ui/core/Input'; 
+// import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 const myOptions = [
   {id: 1, val: true, status: 'Yes'},
@@ -35,17 +36,17 @@ class AdjuvantChemotherapy extends Component {
   } // end renderTagOptions
 
   render(){
-    const { classes } = this.props;
+    // const { classes } = this.props;
 
     return (
       <FormControl fullWidth="true" variant="outlined">
           <InputLabel htmlFor="adjuvant_chemo">Adjuvant Chemotherapy</InputLabel>
           <Select fullWidth={true}
             name="adjuvant_chemo"
-            variant="outlined" 
+            // variant="outlined" 
             // value={this.props.chemo}
             input={
-              <OutlinedInput
+              <Input
                   value={this.props.chemo}
                   name="adjuvant_chemo"
                   id="adjuvant_chemo"

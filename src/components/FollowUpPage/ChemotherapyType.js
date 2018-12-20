@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Input from '@material-ui/core/Input';
 
 // const myOptions = {this.props.reduxState.adjChemoTypeOptions}
 
@@ -34,13 +35,14 @@ class ChemotherapyType extends Component {
     const { classes } = this.props;
 
     return (
-      <FormControl fullWidth="true" variant="outlined">
+      <FormControl fullWidth="true">
           <InputLabel htmlFor="adjuvant_chemo_type">Chemotherapy Type</InputLabel>
           <Select fullWidth={true}
-            variant="outlined" 
-            value={this.props.chemo_type}
+            // variant="outlined" 
+            // value={this.props.chemo_type}
+            name="adjuvant_chemo_type"
             input={
-              <OutlinedInput
+              <Input
                   value={this.props.chemo_type}
                   name="adjuvant_chemo_type"
                   id="adjuvant_chemo_type"

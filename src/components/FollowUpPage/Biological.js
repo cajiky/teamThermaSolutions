@@ -5,7 +5,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Input from '@material-ui/core/Input';
 
 // const myOptions = {this.props.reduxState.adjChemoTypeOptions}
 
@@ -31,16 +31,16 @@ class Biological extends Component {
   } // end renderTagOptions
 
   render(){
-    const { classes } = this.props;
+    // const { classes } = this.props;
 
     return (
       <FormControl fullWidth="true" variant="outlined">
           <InputLabel htmlFor="biological">Biological</InputLabel>
           <Select fullWidth={true}
-            variant="outlined" 
-            value={this.props.biological}
+            // variant="outlined" 
+            // value={this.props.biological}
             input={
-              <OutlinedInput
+              <Input
                   value={this.props.biological}
                   name="biological"
                   id="biological"
