@@ -17,6 +17,11 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import Modality from './Modality';
+import Location from './Location';
+import SystemicLocation from './SystemicLocation';
+import RecurrenceTreatment from './RecurrenceTreatment';
+import Status from './Status';
 
 const styles = theme => ({
     container: {
@@ -86,7 +91,8 @@ class Recurrence extends Component {
         return(
           <Grid container spacing={24}>
             <Grid item xs={3}>
-              <FormGroup row>
+              Recurrence Information
+              {/* <FormGroup row>
                   <FormControlLabel
                   control={
                       <Checkbox
@@ -98,11 +104,12 @@ class Recurrence extends Component {
                   }
                   label="Recurrence"
                   />
-              </FormGroup>
+              </FormGroup> */}
             </Grid>
             <Grid item xs={3}>
               <TextField 
                 variant="outlined"
+                label="Date of Recurrence"
                 type="date"
                 fullWidth="true"
                 onChange={this.handleChange}
@@ -111,6 +118,48 @@ class Recurrence extends Component {
               />
             </Grid>
             <Grid item xs={3}>
+            <TextField
+                name="cea"
+                label="CEA"
+                className={classes.textField}
+                value={this.state.cea}
+                // fullWidth
+                onChange={this.handleChange}
+                margin="normal"
+                InputLabelProps={{
+                    shrink: true,
+                }}
+                variant="outlined"
+                />
+            </Grid>
+            <Grid item xs={3}>
+              <Modality />
+            </Grid>
+            <Grid item xs={3}>
+                Treatment
+            </Grid>
+            <Grid item xs={3}>
+              <TextField 
+                  label="Treatment Date"
+                  variant="outlined"
+                  type="date"
+                  fullWidth="true"
+                  onChange={this.handleChange}
+                  name="date"
+                  value={this.state.date}
+                />
+            </Grid>
+            <Grid item xs={3}>
+              <Location />
+            </Grid>
+            <Grid item xs={3}>
+              <SystemicLocation />
+            </Grid>
+            <Grid item xs={3}>
+              <RecurrenceTreatment />
+            </Grid>
+            <Grid item xs={3}>
+              <Status />
             </Grid>
           </Grid>
         )
@@ -121,6 +170,5 @@ class Recurrence extends Component {
 const mapStateToProps = reduxState => ({
     reduxState,
 });
-
 
 export default connect(mapStateToProps) (withStyles(styles)(Recurrence));

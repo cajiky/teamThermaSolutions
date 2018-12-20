@@ -45,25 +45,29 @@ const styles = theme => ({
     }
 });
 
-
-
+const emptyFollowUp = {
+    adjuvant_chemo: false,
+    adjuvant_chemo_type: null,
+    biological: null,
+    evidence_of_disease: false,
+    last_contact: null,
+    date_of_death: null
+}
 class FollowUpPage extends Component {
 
-    state = {
-        adjuvant_chemo: false,
-        adjuvant_chemo_type: null,
-        biological: null,
-        evidence_of_disease: false,
-        last_contact: '',
-        date_of_death: ''
-    };
+    state = emptyFollowUp;
 
     componentDidMount () {
         // console.log('in component mount follow up', this.props.reduxState.postOp.serious_advese_event);
         // this.props.dispatch({type: 'FETCH_POST_OP'});
         this.setState({
-            // id: this.props.reduxState.postOp.id,
-        })
+            id: this.props.reduxState.postOp.id,
+            adjuvant_chemo: this.props.reduxState.follow_up,
+            adjuvant_chemo_type: null,
+            biological: null,
+            evidence_of_disease: false,
+            last_contact: null,
+            date_of_death: null        })
     }
     
     // Called when the input field changes
@@ -91,15 +95,12 @@ class FollowUpPage extends Component {
             <TreatmentPlan />
             <FollowUpDetail />
             </div>
-
         )
     }
-  
 };
 
 const mapStateToProps = reduxState => ({
     reduxState,
 });
-
 
 export default connect(mapStateToProps) (withStyles(styles)(FollowUpPage));
