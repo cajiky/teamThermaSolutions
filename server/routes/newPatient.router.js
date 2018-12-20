@@ -11,9 +11,17 @@ router.get(`/:key`, (req, res) => {
     console.log('THIS IS THE PATIENT ID', patientId);
     const sqlText = `SELECT * FROM patients WHERE patients.patient_no = $1;`;
     pool.query(sqlText, [patientId]).then( rows => {
-        patient = rows.rows
-        result = {patient: patient}
-    res.send(result);
+        patientSearch = rows.rows[0]
+        result = {patientSearch: patientSearch}
+        // console.log(result.patientSearch);
+        // console.log(Object.keys(result))
+        if(result.patientSearch !== undefined
+        ){
+        res.send(result);
+    } else {
+        result = {patientSearch: 'patient not found'}
+        res.send(result);
+    }
 })
 .catch((error) => {
     console.log('GET error from the server', error);
