@@ -138,13 +138,11 @@ class PatientProfileSearchPage extends Component {
                     </Grid>
                     <Grid item xs={3}>
                     </Grid>
-                    <Grid item xs={3}>
-                    </Grid>
-                    <Grid item xs={6}>
+                    
+                    <Grid item xs={12}>
                         {this.props.reduxState.patientReducer.patientSearch ? (<PatientProfileSearchResult/>) : (<></>)}
                     </Grid>
-                    <Grid item xs={3}>
-                    </Grid>
+                    
                     <Grid item xs={3}>
                     </Grid>
                     <Grid item xs={6}>

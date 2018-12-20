@@ -56,7 +56,6 @@ class PatientProfileSearchResult extends Component {
                 {/* {JSON.stringify(this.props.patientSearch)} */}
                 {this.props.patientSearch !== "patient not found" ?
                 (<>
-                <Paper className={classes.root} elevation={1}>
                 <Typography><>
                 {(this.props.patientSearch.patient_no) ? (<><h3>Patient ID:</h3> {this.props.patientSearch.patient_no}</>) : (<></>)}
                 {(this.props.patientSearch.dob) ? (<><h3>Date of Birth:</h3> {this.props.patientSearch.dob}</>) : (<></>)}
@@ -77,7 +76,6 @@ class PatientProfileSearchResult extends Component {
                 {(this.props.patientSearch.alive_on_date) ? (<><h3>Alive on Date:</h3> {this.props.patientSearch.alive_on_date}</>) : (<></>)}
                 </>
                 </Typography>
-                </Paper>
                 <Button onClick={this.selectPatient} className={classes.button} variant="contained" color="primary">Select this patient</Button></>) : (<><h3>Patient Not Found</h3></>)}
             </div>
         );
