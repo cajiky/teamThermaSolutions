@@ -139,6 +139,35 @@ reasonOpenCloseOption: [
   {id: 5, status: 'No PC'},
 ],
 
+resections: [
+  {id: 1, name: 'Ovaries', status: false},
+  {id: 2, name: 'Uterus', status: false},
+  {id: 3, name: 'Omentum', status: false},
+  {id: 4, name: 'Rectum', status: false},
+  {id: 5, name: 'Sigmoid', status: false},
+  {id: 6, name: 'Left Colon', status: false},
+  {id: 7, name: 'Transverse Colon', status: false},
+  {id: 8, name: 'Right Colon', status: false},
+  {id: 9, name: 'Ileocaecal', status: false},
+  {id: 10, name: 'Appendix', status: false},
+  {id: 11, name: 'Duodenum', status: false},
+  {id: 12, name: 'Jejunum', status: false},
+  {id: 13, name: 'Ileum', status: false},
+  {id: 14, name: 'Gallbladder', status: false},
+  {id: 15, name: 'Stomach', status: false},
+  {id: 16, name: 'Spleen', status: false},
+  {id: 17, name: 'Diagphram L', status: false},
+  {id: 18, name: 'Diagphram R', status: false},
+  {id: 19, name: 'Pancreas', status: false},
+  {id: 20, name: 'Bladder', status: false},
+  {id: 21, name: 'Urether', status: false},
+  {id: 22, name: 'Lymphnodes', status: false},
+  {id: 23, name: 'Left Peritoneum', status: false},
+  {id: 24, name: 'Right Peritoneum', status: false},
+  {id: 25, name: 'Peritoneum', status: false},
+  {id: 26, name: 'Pelvis', status: false},
+],
+
 stomaTypeOptions: [
   {id: 1, status: 'Double Barrel Ileostomy'},
   {id: 2, status: 'Ileostomy'},
@@ -152,6 +181,13 @@ hipecRegimentOptions: [
   {id: 3, status: 'Cisplatin'},
   {id: 4, status: 'Other'},
 ],
+
+duration: [
+  {id: 1, status: "30 Minutes", value: 30},
+  {id: 1, status: "60 Minutes", value: 60},
+  {id: 1, status: "90 Minutes", value: 90},
+  {id: 1, status: "120 Minutes", value: 120},
+ ],
 
 rScoreOptions: [
   {id: 1, status: 'R1 - No Macroscopic Tumor'},
