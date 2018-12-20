@@ -113,7 +113,11 @@ class PatientProfileSearchPage extends Component {
         const { classes } = this.props;
         return(
             <div>
-                <Grid container spacing={24}>
+                <Grid container spacing={24}
+                        direction="column"
+                        alignItems="center"
+                        justify="center"
+                        style={{ minHeight: '100vh' }}>
                     <Grid item xs={3}>
                     </Grid>
                     <Grid item xs={6}>
@@ -153,7 +157,7 @@ class PatientProfileSearchPage extends Component {
                     <Grid item xs={3}>
                     </Grid>
                     <Grid item xs={6}>
-                        <Dialog
+                            <Dialog
                             disableBackdropClick
                             disableEscapeKeyDown
                             open={this.state.variables.open}
