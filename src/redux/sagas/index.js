@@ -3,6 +3,7 @@ import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
 import postOpSaga from './postOpSaga';
+import followUpSaga from './followUpSaga';
 import addNewUserSaga from './addNewUserSaga';
 import allUsersSaga from './allUsersSaga';
 import editIndividualUserSaga from './editIndividualProfileSaga';
@@ -21,6 +22,7 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     postOpSaga(),
+    followUpSaga(),
     addNewUserSaga(),
     allUsersSaga(),
     editIndividualUserSaga(),
