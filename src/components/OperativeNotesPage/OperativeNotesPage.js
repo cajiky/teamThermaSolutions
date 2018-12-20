@@ -38,7 +38,7 @@ class OperativeNotesPage extends Component {
         const { classes } = this.props;
         return(
             <div>
-                <h1>Pathology Notes </h1>
+                <h1>Operative Notes </h1>
                 <Grid container spacing={24} >
                 <GridItem item xs={12}>
                     <Paper>
