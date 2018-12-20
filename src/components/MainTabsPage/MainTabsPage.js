@@ -48,7 +48,7 @@ state = {
   componentDidMount () {
     this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'})
     this.props.dispatch({type: 'FETCH_POST_OP'});
-    this.props.dispatch({type: 'TEST_PATIENT'});
+    // this.props.dispatch({type: 'TEST_PATIENT'});
   }
 
   handleTabChange = (event, value) => {
