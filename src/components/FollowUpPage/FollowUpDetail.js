@@ -7,7 +7,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import TreatmentPlan from './TreatmentPlan';
+import Recurrence from './Recurrence';
 import ChemotherapyType from './ChemotherapyType';
 // import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
@@ -44,8 +44,6 @@ const styles = theme => ({
     }
 });
 
-
-
 class FollowUpDetail extends Component {
 
     state = {
@@ -54,7 +52,8 @@ class FollowUpDetail extends Component {
         biological: null,
         evidence_of_disease: false,
         last_contact: '',
-        date_of_death: ''
+        date_of_death: '',
+        evidence_of_disease: null
     };
 
     componentDidMount () {
@@ -88,25 +87,53 @@ class FollowUpDetail extends Component {
             <div>
             <ExpansionPanel expanded={true}>
                 <ExpansionPanelSummary >
-                    Follow Up 2017/1/1
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <Grid container spacing={24}>
-                      <Grid item xs={3}>
-                      <TextField
+                    <TextField
                         name="follow_up_date"
-                        label="Date"
+                        label="Follow Up Date"
                         className={classes.textField}
                         value={this.state.follow_up_date}
-                        fullWidth
+                        // fullWidth
                         InputLabelProps={{
                             shrink: true,
                         }}
                         onChange={this.handleChange}
                         margin="normal"
                         variant="outlined"
-                        />
-                      </Grid>
+                    />
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                    <Grid container spacing={24}>
+                        <Grid item xs={3}>
+                            <FormGroup row>
+                                <FormControlLabel
+                                control={
+                                    <Checkbox
+                                    name="evidence_of_disease"
+                                    checked={this.state.evidence_of_disease}
+                                    onChange={this.handleChangeCheckbox}
+                                    value={this.state.evidence_of_disease}
+                                    />
+                                }
+                                label="Evidence of Disease"
+                                />
+                            </FormGroup>
+                        </Grid>
+                        <Grid item xs={9}>
+                            <TextField
+                            name="follow_up_notes"
+                            label="Notes"
+                            className={classes.textField}
+                            value={this.state.notes}
+                            fullWidth
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            onChange={this.handleChange}
+                            margin="normal"
+                            variant="outlined"
+                            />
+                        </Grid>
+                        <Recurrence />
                     </Grid>
                 </ExpansionPanelDetails>
             </ExpansionPanel>

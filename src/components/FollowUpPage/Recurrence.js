@@ -8,7 +8,6 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import TreatmentPlan from './TreatmentPlan';
-import FollowUpDetail from './FollowUpDetail';
 import ChemotherapyType from './ChemotherapyType';
 // import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
@@ -45,9 +44,7 @@ const styles = theme => ({
     }
 });
 
-
-
-class FollowUpPage extends Component {
+class Recurrence extends Component {
 
     state = {
         adjuvant_chemo: false,
@@ -55,7 +52,8 @@ class FollowUpPage extends Component {
         biological: null,
         evidence_of_disease: false,
         last_contact: '',
-        date_of_death: ''
+        date_of_death: '',
+        date: '10/10/1989'
     };
 
     componentDidMount () {
@@ -86,12 +84,35 @@ class FollowUpPage extends Component {
         const { classes } = this.props;
         
         return(
-            <div>
-                <h3>Follow Up Treatment Plan</h3>
-            <TreatmentPlan />
-            <FollowUpDetail />
-            </div>
-
+          <Grid container spacing={24}>
+            <Grid item xs={3}>
+              <FormGroup row>
+                  <FormControlLabel
+                  control={
+                      <Checkbox
+                      name="recurrence"
+                      checked={this.state.recurrence}
+                      onChange={this.handleChangeCheckbox}
+                      value={this.state.recurrence}
+                      />
+                  }
+                  label="Recurrence"
+                  />
+              </FormGroup>
+            </Grid>
+            <Grid item xs={3}>
+              <TextField 
+                variant="outlined"
+                type="date"
+                fullWidth="true"
+                onChange={this.handleChange}
+                name="date"
+                value={this.state.date}
+              />
+            </Grid>
+            <Grid item xs={3}>
+            </Grid>
+          </Grid>
         )
     }
   
@@ -102,4 +123,4 @@ const mapStateToProps = reduxState => ({
 });
 
 
-export default connect(mapStateToProps) (withStyles(styles)(FollowUpPage));
+export default connect(mapStateToProps) (withStyles(styles)(Recurrence));
