@@ -38,10 +38,10 @@ class ChemotherapyType extends Component {
           <InputLabel htmlFor="adjuvant_chemo_type">Chemotherapy Type</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
-            value={'Yes'}
+            value={this.props.chemo_type}
             input={
               <OutlinedInput
-                  value={this.props.status_at_discharge}
+                  value={this.props.chemo_type}
                   name="adjuvant_chemo_type"
                   id="adjuvant_chemo_type"
               />

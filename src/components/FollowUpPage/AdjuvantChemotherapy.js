@@ -27,7 +27,7 @@ class AdjuvantChemotherapy extends Component {
       return (
         <MenuItem
           key={i}
-          value={option.id}>
+          value={option.val}>
           {option.status}
         </MenuItem>
       ); // end return
@@ -39,15 +39,16 @@ class AdjuvantChemotherapy extends Component {
 
     return (
       <FormControl fullWidth="true" variant="outlined">
-          <InputLabel htmlFor="adjuvant_chemotherapy">Adjuvant Chemotherapy</InputLabel>
+          <InputLabel htmlFor="adjuvant_chemo">Adjuvant Chemotherapy</InputLabel>
           <Select fullWidth={true}
+            name="adjuvant_chemo"
             variant="outlined" 
-            value={'Yes'}
+            // value={this.props.chemo}
             input={
               <OutlinedInput
-                  value={this.props.status_at_discharge}
-                  name="adjuvant_chemotherapy"
-                  id="adjuvant_chemotherapy"
+                  value={this.props.chemo}
+                  name="adjuvant_chemo"
+                  id="adjuvant_chemo"
               />
               }
             onChange={this.props.handleChange}

@@ -46,39 +46,39 @@ const styles = theme => ({
 
 class FollowUpDetail extends Component {
 
-    state = {
-        adjuvant_chemo: false,
-        adjuvant_chemo_type: null,
-        biological: null,
-        evidence_of_disease: false,
-        last_contact: '',
-        date_of_death: '',
-        evidence_of_disease: null
-    };
+    // state = {
+    //     adjuvant_chemo: null,
+    //     adjuvant_chemo_type: null,
+    //     biological: null,
+    //     evidence_of_disease: false,
+    //     last_contact: '',
+    //     date_of_death: '',
+    //     evidence_of_disease: null
+    // };
 
-    componentDidMount () {
-        // console.log('in component mount follow up', this.props.reduxState.postOp.serious_advese_event);
-        // this.props.dispatch({type: 'FETCH_POST_OP'});
-        this.setState({
-            // id: this.props.reduxState.postOp.id,
-        })
-    }
+    // componentDidMount () {
+    //     // console.log('in component mount follow up', this.props.reduxState.postOp.serious_advese_event);
+    //     // this.props.dispatch({type: 'FETCH_POST_OP'});
+    //     this.setState({
+    //         // id: this.props.reduxState.postOp.id,
+    //     })
+    // }
     
     // Called when the input field changes
-    handleChange = (event) => {
-        this.setState({
-            ...this.state,
-            [event.target.name]: event.target.value,
-        });
-    }
+    // handleChange = (event) => {
+    //     this.setState({
+    //         ...this.state,
+    //         [event.target.name]: event.target.value,
+    //     });
+    // }
 
-    // Called when the input field changes
-    handleChangeCheckbox = (event) => {
-        this.setState({
-            ...this.state,
-            [event.target.name]: event.target.checked,
-        });
-    }
+    // // Called when the input field changes
+    // handleChangeCheckbox = (event) => {
+    //     this.setState({
+    //         ...this.state,
+    //         [event.target.name]: event.target.checked,
+    //     });
+    // }
     
     render() {
         const { classes } = this.props;
@@ -91,12 +91,12 @@ class FollowUpDetail extends Component {
                         name="follow_up_date"
                         label="Follow Up Date"
                         className={classes.textField}
-                        value={this.state.follow_up_date}
+                        value={this.props.last_contact}
                         // fullWidth
                         InputLabelProps={{
                             shrink: true,
                         }}
-                        onChange={this.handleChange}
+                        onChange={this.props.handleChange}
                         margin="normal"
                         variant="outlined"
                     />
@@ -109,9 +109,9 @@ class FollowUpDetail extends Component {
                                 control={
                                     <Checkbox
                                     name="evidence_of_disease"
-                                    checked={this.state.evidence_of_disease}
-                                    onChange={this.handleChangeCheckbox}
-                                    value={this.state.evidence_of_disease}
+                                    checked={this.props.evidence_of_disease}
+                                    onChange={this.props.handleChangeCheckbox}
+                                    value={this.props.evidence_of_disease}
                                     />
                                 }
                                 label="Evidence of Disease"
@@ -123,12 +123,12 @@ class FollowUpDetail extends Component {
                             name="follow_up_notes"
                             label="Notes"
                             className={classes.textField}
-                            value={this.state.notes}
+                            value={this.props.notes}
                             fullWidth
                             InputLabelProps={{
                                 shrink: true,
                             }}
-                            onChange={this.handleChange}
+                            onChange={this.props.handleChange}
                             margin="normal"
                             variant="outlined"
                             />

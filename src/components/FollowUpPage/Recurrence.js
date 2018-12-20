@@ -7,7 +7,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import TreatmentPlan from './TreatmentPlan';
 import ChemotherapyType from './ChemotherapyType';
 // import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
@@ -51,39 +50,39 @@ const styles = theme => ({
 
 class Recurrence extends Component {
 
-    state = {
-        adjuvant_chemo: false,
-        adjuvant_chemo_type: null,
-        biological: null,
-        evidence_of_disease: false,
-        last_contact: '',
-        date_of_death: '',
-        date: '10/10/1989'
-    };
+    // state = {
+    //     adjuvant_chemo: false,
+    //     adjuvant_chemo_type: null,
+    //     biological: null,
+    //     evidence_of_disease: false,
+    //     last_contact: '',
+    //     date_of_death: '',
+    //     date: '10/10/1989'
+    // };
 
-    componentDidMount () {
-        // console.log('in component mount follow up', this.props.reduxState.postOp.serious_advese_event);
-        // this.props.dispatch({type: 'FETCH_POST_OP'});
-        this.setState({
-            // id: this.props.reduxState.postOp.id,
-        })
-    }
+    // componentDidMount () {
+    //     // console.log('in component mount follow up', this.props.reduxState.postOp.serious_advese_event);
+    //     // this.props.dispatch({type: 'FETCH_POST_OP'});
+    //     this.setState({
+    //         // id: this.props.reduxState.postOp.id,
+    //     })
+    // }
     
     // Called when the input field changes
-    handleChange = (event) => {
-        this.setState({
-            ...this.state,
-            [event.target.name]: event.target.value,
-        });
-    }
+    // handleChange = (event) => {
+    //     this.setState({
+    //         ...this.state,
+    //         [event.target.name]: event.target.value,
+    //     });
+    // }
 
     // Called when the input field changes
-    handleChangeCheckbox = (event) => {
-        this.setState({
-            ...this.state,
-            [event.target.name]: event.target.checked,
-        });
-    }
+    // handleChangeCheckbox = (event) => {
+    //     this.setState({
+    //         ...this.state,
+    //         [event.target.name]: event.target.checked,
+    //     });
+    // }
     
     render() {
         const { classes } = this.props;
@@ -112,9 +111,9 @@ class Recurrence extends Component {
                 label="Date of Recurrence"
                 type="date"
                 fullWidth="true"
-                onChange={this.handleChange}
-                name="date"
-                value={this.state.date}
+                onChange={this.props.handleChange}
+                name="recurrence_date"
+                value={this.props.recurrence_date}
               />
             </Grid>
             <Grid item xs={3}>
@@ -122,9 +121,9 @@ class Recurrence extends Component {
                 name="cea"
                 label="CEA"
                 className={classes.textField}
-                value={this.state.cea}
+                value={this.props.cea}
                 // fullWidth
-                onChange={this.handleChange}
+                onChange={this.props.handleChange}
                 margin="normal"
                 InputLabelProps={{
                     shrink: true,
@@ -144,9 +143,9 @@ class Recurrence extends Component {
                   variant="outlined"
                   type="date"
                   fullWidth="true"
-                  onChange={this.handleChange}
-                  name="date"
-                  value={this.state.date}
+                  onChange={this.props.handleChange}
+                  name="treatment_date"
+                  value={this.props.treatment_date}
                 />
             </Grid>
             <Grid item xs={3}>

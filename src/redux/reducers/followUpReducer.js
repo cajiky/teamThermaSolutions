@@ -1,7 +1,7 @@
 const followUpReducer = (state = {}, action) => {
   // console.log('in post op reducer');
   switch (action.type) {
-    case 'SET_POST_OP':
+    case 'SET_FOLLOW_UP':
       return action.payload;
     default:
       return state;

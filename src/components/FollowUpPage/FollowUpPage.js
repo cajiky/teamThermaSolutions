@@ -2,22 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Checkbox from '@material-ui/core/Checkbox';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import TreatmentPlan from './TreatmentPlan';
 import FollowUpDetail from './FollowUpDetail';
 import ChemotherapyType from './ChemotherapyType';
-// import Button from '@material-ui/core/Button';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-// import FormHelperText from '@material-ui/core/FormHelperText';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
+import AdjuvantChemotherapy from './AdjuvantChemotherapy';
+import Biological from './Biological';
 
 const styles = theme => ({
     container: {
@@ -45,29 +33,30 @@ const styles = theme => ({
     }
 });
 
-const emptyFollowUp = {
-    adjuvant_chemo: false,
-    adjuvant_chemo_type: null,
-    biological: null,
-    evidence_of_disease: false,
-    last_contact: null,
-    date_of_death: null
-}
 class FollowUpPage extends Component {
 
-    state = emptyFollowUp;
+    state = {
+        adjuvant_chemo: false,
+        adjuvant_chemo_type: null,
+        biological: null,
+        evidence_of_disease: false,
+        last_contact: null,
+        date_of_death: null
+    };
 
     componentDidMount () {
-        // console.log('in component mount follow up', this.props.reduxState.postOp.serious_advese_event);
-        // this.props.dispatch({type: 'FETCH_POST_OP'});
+        // this.props.dispatch({type: 'FETCH_FOLLOW_UP'});
+        // const followUp = this.props.reduxState.follow_up;
+        // console.log('in component mount follow up', followUp);
+        console.log('in component mount follow up', this.props.reduxState.followUp);
         this.setState({
-            id: this.props.reduxState.postOp.id,
-            adjuvant_chemo: this.props.reduxState.follow_up,
-            adjuvant_chemo_type: null,
-            biological: null,
-            evidence_of_disease: false,
-            last_contact: null,
-            date_of_death: null        })
+            adjuvant_chemo: this.props.reduxState.followUp.adjuvant_chemo,
+            adjuvant_chemo_type: this.props.reduxState.followUp.adjuvant_chemo_type,
+            biological: this.props.reduxState.followUp.biological,
+            evidence_of_disease: true,
+            last_contact: this.props.reduxState.followUp.last_contact,
+            date_of_death: this.props.reduxState.followUp.date_of_death        
+        })
     }
     
     // Called when the input field changes
@@ -92,7 +81,18 @@ class FollowUpPage extends Component {
         return(
             <div>
                 <h3>Follow Up Treatment Plan</h3>
-            <TreatmentPlan />
+                <Grid container spacing={24}>
+                    <Grid item xs={4}>
+                    <AdjuvantChemotherapy chemo={this.state.adjuvant_chemo} handleChange={this.handleChange} />
+                    </Grid>
+                    <Grid item xs={4}>
+                    <ChemotherapyType chemo_type={this.state.adjuvant_chemo_type} handleChange={this.handleChange} />
+                    </Grid>
+                    <Grid item xs={4}>
+                    <Biological biological={this.state.biological} handleChange={this.handleChange} />
+                    </Grid>
+                </Grid>
+            {/* //Will have more than one -- will be mapped */}
             <FollowUpDetail />
             </div>
         )

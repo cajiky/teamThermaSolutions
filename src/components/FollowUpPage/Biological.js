@@ -38,10 +38,10 @@ class Biological extends Component {
           <InputLabel htmlFor="biological">Biological</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
-            value={'Yes'}
+            value={this.props.biological}
             input={
               <OutlinedInput
-                  value={this.props.status_at_discharge}
+                  value={this.props.biological}
                   name="biological"
                   id="biological"
               />
