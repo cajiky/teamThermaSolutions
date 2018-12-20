@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { withRouter } from 'react-router-dom';
 
 const styles = theme => ({
     root: {
@@ -42,6 +43,11 @@ class PatientProfileSearchResult extends Component {
         this.props.dispatch({type: 'DROP_PATIENT_RESULT'});
       }
 
+    selectPatient = () => {
+    this.props.dispatch({type: 'SET_PATIENT_RESULT', payload: this.props.patientSearch});
+    this.props.history.push(`/info`);
+    }
+
     render() {
         const { classes } = this.props;
         return (
@@ -71,7 +77,7 @@ class PatientProfileSearchResult extends Component {
                 {(this.props.patientSearch.alive_on_date) ? (<><h3>Alive on Date:</h3> {this.props.patientSearch.alive_on_date}</>) : (<></>)}
                 </Typography>
                 </Paper>
-                <Button className={classes.button} variant="contained" color="primary">Select this patient</Button></>) : (<><h3>Patient Not Found</h3></>)}
+                <Button onClick={this.selectPatient} className={classes.button} variant="contained" color="primary">Select this patient</Button></>) : (<><h3>Patient Not Found</h3></>)}
             </div>
         );
     }
@@ -81,4 +87,4 @@ const mapStateToProps = reduxState => ({
 });
 
 
-export default withStyles(styles)(connect(mapStateToProps)(PatientProfileSearchResult));
+export default withRouter(withStyles(styles)(connect(mapStateToProps)(PatientProfileSearchResult)));

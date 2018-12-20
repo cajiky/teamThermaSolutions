@@ -4,6 +4,8 @@ const patientReducer = (state = [], action) => {
         return {patientSearch: action.payload};
       case 'DROP_PATIENT_RESULT':
         return {patientSearch: ''};
+      case 'SET_PATIENT_RESULT':
+        return {patient: action.payload};
       case 'ADD_PATIENT':
         return {patient: action.payload};
       case 'SET_PATIENT':
