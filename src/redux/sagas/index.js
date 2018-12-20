@@ -2,6 +2,7 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
+import patientSaga from './patientSaga';
 import postOpSaga from './postOpSaga';
 import addNewUserSaga from './addNewUserSaga';
 import allUsersSaga from './allUsersSaga';
@@ -20,6 +21,7 @@ export default function* rootSaga() {
     loginSaga(),
     registrationSaga(),
     userSaga(),
+    patientSaga(),
     postOpSaga(),
     addNewUserSaga(),
     allUsersSaga(),
