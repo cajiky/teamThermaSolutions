@@ -183,8 +183,11 @@ hipecRegimentOptions: [
 ],
 
 duration: [
-
-],
+  {id: 1, status: "30 Minutes", value: 30},
+  {id: 1, status: "60 Minutes", value: 60},
+  {id: 1, status: "90 Minutes", value: 90},
+  {id: 1, status: "120 Minutes", value: 120},
+ ],
 
 rScoreOptions: [
   {id: 1, status: 'R1 - No Macroscopic Tumor'},

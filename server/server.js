@@ -12,6 +12,7 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const patientRouter = require('./routes/newPatient.router');
 const postOpRouter = require('./routes/post_op.router');
+const followUpRouter = require('./routes/follow_up.router');
 const manageUsersRouter = require('./routes/manageUsers.router');
 
 // Body parser middleware
@@ -30,6 +31,7 @@ app.use('/api/user', userRouter);
 app.use('/api/add-a-patient', patientRouter);
 app.use('/api/find-a-patient', patientRouter);
 app.use('/api/post_op', postOpRouter);
+app.use('/api/follow_up', followUpRouter);
 app.use('/addNewUser', manageUsersRouter)
 app.use('/getAllUsers', manageUsersRouter) 
 app.use('/editUserProfile', manageUsersRouter)

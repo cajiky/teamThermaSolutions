@@ -195,6 +195,7 @@ const styles = theme => ({
             </Grid>
             </FormGroup>
             <hr/>
+            <Paper>
             <FormGroup row>
             <Grid container spacing={24} >
                 <GridItem item xs={4}>
@@ -251,9 +252,9 @@ const styles = theme => ({
                                         }
                                     >
 
-                                        {this.props.reduxState.dropdownOptions.hipecRegimentOptions.map( option => {
+                                        {this.props.reduxState.dropdownOptions.duration.map( option => {
                                             return(
-                                                <MenuItem value={option.id}>need info</MenuItem>
+                                                <MenuItem value={option.value}>{option.status}</MenuItem>
                                             )
                                             
                                         })}
@@ -330,7 +331,7 @@ const styles = theme => ({
                 </GridItem>
             </Grid>
             </FormGroup>
-        
+            </Paper>
 
       </div>
     )};

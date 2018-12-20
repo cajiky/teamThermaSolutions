@@ -1,31 +1,29 @@
 import axios from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-// worker SAGA: will be fired on 'ADD_POST_OP' action
+// worker SAGA: will be fired on 'ADD_FOLLOW_UP' action
 // user entered a new patient .. will add a blank row for patient
-function* addPostOp(action) {
+function* addFollowUp(action) {
   try {
       // axios asynch call to add item on database
-      yield call(axios.post, '/api/post_op', action.payload);
-      // will need to make a call to update the list of item
-      // yield put( { type: 'FETCH_ITEMS' } );
+      yield call(axios.post, '/api/follow_up', action.payload);
   }
   catch (error) {
-      console.log('error with add post op post request');
+      console.log('error with add follow up post request');
   }
 }
 
-// worker Saga: will be fired on "FETCH_POST_OP" actions
-function* fetchPostOp(action) {
-  console.log('in fetch post op Saga', action.payload);
+// worker Saga: will be fired on "FETCH_FOLLOW_UP" actions
+function* fetchFollowUp(action) {
+  console.log('in fetch follow up Saga', action.payload);
   try {
-    const response = yield axios.get('api/post_op/1');
-    console.log('response from post op:', response);
+    const response = yield axios.get('api/follow_up/1');
+    console.log('response from follow up:', response);
     
     // set state
-    yield put({ type: 'SET_POST_OP', payload: response.data });
+    yield put({ type: 'SET_FOLLOW_UP', payload: response.data });
   } catch (error) {
-    console.log('Post op get request failed', error);
+    console.log('follow up get request failed', error);
   }
 }
 
@@ -43,10 +41,10 @@ function* fetchPostOp(action) {
 //   } 
 // }
 
-function* postOpSaga() {
-  yield takeLatest('ADD_POST_OP', addPostOp);
-  yield takeLatest('FETCH_POST_OP', fetchPostOp);
+function* itemSaga() {
+  yield takeLatest('ADD_FOLLOW_UP', addFollowUp);
+  yield takeLatest('FETCH_FOLLOW_UP', fetchFollowUp);
   // yield takeLatest('DELETE_ITEM', deleteItem);
 }
 
-export default postOpSaga;
+export default itemSaga;

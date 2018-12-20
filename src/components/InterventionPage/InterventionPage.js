@@ -71,7 +71,23 @@ const styles = theme => ({
   ]
 
   class InterventionPage extends Component {
-    
+    state = [
+        {Center: '',
+        RightUpper: '',
+        lesionSizeScore: '',
+
+        }
+
+    ];
+
+    handleChange = (event) => {
+        this.setState({
+            ...this.state,
+            [event.target.name]: event.target.value,
+        });
+      }
+
+
     render() {
     const { classes } = this.props;
     return (
@@ -104,11 +120,12 @@ const styles = theme => ({
                                         </TableCell>
                                         <TableCell>
                                             <Select fullWidth
-                                                // value={this.state.title}
-                                                // onChange={this.handleChange}
+                                                // value={this.state.lesionSizeScore}
+                                                name={region.regionName}
+                                                onChange={this.handleChange}
                                                 input={
                                                 <OutlinedInput
-                                                    name="title"
+                                                    
                                                     // labelWidth={this.state.labelWidth}
                                                     id="outlined-age-native-simple"
                                                 />
@@ -116,7 +133,7 @@ const styles = theme => ({
                                             >
                                                 {lesionSizeScore.map( score => {
                                                     return(
-                                                        <MenuItem value={score.score} >{score.option}</MenuItem>
+                                                        <MenuItem key={score.index} onChange={this.handleChange} value={score.score} >{score.option}</MenuItem>
                                                     )
                                                 })}
                                                 
