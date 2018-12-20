@@ -22,6 +22,7 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import PropTypes from 'prop-types';
+import PatientProfileSearchResult from '../PatientProfileSearchResult/PatientProfileSearchResult';
 
 
 const styles = theme => ({
@@ -90,6 +91,7 @@ class PatientProfileSearchPage extends Component {
     
       handleClickOpen = () => {
         this.setState({ variables: {open: true} });
+        this.props.dispatch({type: 'DROP_PATIENT_RESULT'});
       };
     
       handleClose = () => {
@@ -132,6 +134,13 @@ class PatientProfileSearchPage extends Component {
                         <Button  onClick={this.searchPatient} className={classes.button} variant="contained" color="primary">
                         Search <SearchIcon/>
                         </Button>
+                    </Grid>
+                    <Grid item xs={3}>
+                    </Grid>
+                    <Grid item xs={3}>
+                    </Grid>
+                    <Grid item xs={6}>
+                        {this.props.reduxState.patientReducer.patientSearch ? (<PatientProfileSearchResult/>) : (<></>)}
                     </Grid>
                     <Grid item xs={3}>
                     </Grid>

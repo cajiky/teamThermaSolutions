@@ -13,12 +13,14 @@ router.get(`/:key`, (req, res) => {
     pool.query(sqlText, [patientId]).then( rows => {
         patientSearch = rows.rows[0]
         result = {patientSearch: patientSearch}
-        // console.log(result.patientSearch);
-        // console.log(Object.keys(result))
+            // console.log(result.patientSearch);
+            // console.log(Object.keys(result))
+        // what does the result look like? if it isn't an empty object i.e. undefined
         if(result.patientSearch !== undefined
         ){
         res.send(result);
-    } else {
+        } else { // else, still send something that we can use to render.
+            // maybe not the best way to do this, but it does work.
         result = {patientSearch: 'patient not found'}
         res.send(result);
     }

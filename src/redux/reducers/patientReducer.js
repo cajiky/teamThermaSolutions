@@ -2,6 +2,8 @@ const patientReducer = (state = [], action) => {
     switch (action.type) {
       case 'FIND_PATIENT':
         return {patientSearch: action.payload};
+      case 'DROP_PATIENT_RESULT':
+        return {patientSearch: ''};
       case 'ADD_PATIENT':
         return {patient: action.payload};
       case 'SET_PATIENT':
