@@ -251,9 +251,9 @@ const styles = theme => ({
                                         }
                                     >
 
-                                        {this.props.reduxState.dropdownOptions.hipecRegimentOptions.map( option => {
+                                        {this.props.reduxState.dropdownOptions.duration.map( option => {
                                             return(
-                                                <MenuItem value={option.id}>need info</MenuItem>
+                                                <MenuItem value={option.value}>{option.status}</MenuItem>
                                             )
                                             
                                         })}
