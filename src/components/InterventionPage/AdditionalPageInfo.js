@@ -195,6 +195,7 @@ const styles = theme => ({
             </Grid>
             </FormGroup>
             <hr/>
+            <Paper>
             <FormGroup row>
             <Grid container spacing={24} >
                 <GridItem item xs={4}>
@@ -330,7 +331,7 @@ const styles = theme => ({
                 </GridItem>
             </Grid>
             </FormGroup>
-        
+            </Paper>
 
       </div>
     )};
