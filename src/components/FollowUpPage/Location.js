@@ -33,7 +33,7 @@ class Location extends Component {
 
     return (
       <FormControl fullWidth="true" variant="outlined">
-          <InputLabel htmlFor="location">Location</InputLabel>
+          <InputLabel shrink htmlFor="location">Location</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
             value={this.props.recurrence.location}

@@ -33,7 +33,7 @@ class Status extends Component {
 
     return (
       <FormControl fullWidth="true" variant="outlined">
-          <InputLabel htmlFor="status">Status</InputLabel>
+          <InputLabel shrink htmlFor="status">Status</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
             value={'Yes'}

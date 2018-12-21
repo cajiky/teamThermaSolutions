@@ -33,7 +33,7 @@ class Modality extends Component {
 
     return (
       <FormControl fullWidth="true" variant="outlined">
-          <InputLabel htmlFor="modality">Modality</InputLabel>
+          <InputLabel shrink htmlFor="modality">Modality</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
             value={this.props.recurrence.rec_modality}
