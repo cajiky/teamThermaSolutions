@@ -65,6 +65,7 @@ class PatientProfileSearchPage extends Component {
         variables: {
         open: false,
         labelWidth: 0,
+        name: 'nah',
         },
         patient: {
             
@@ -111,6 +112,12 @@ class PatientProfileSearchPage extends Component {
           }
     }
 
+    componentDidMount() {
+        this.setState({
+          labelWidth: ReactDOM.findDOMNode(this.InputLabelRef)
+        });
+      }
+
     render() {
         const { classes } = this.props;
         return(
@@ -153,10 +160,8 @@ class PatientProfileSearchPage extends Component {
                     </Grid>
                     <Grid item xs={3}>
                     </Grid>
-                    <Grid item xs={3}>
-                    </Grid>
-                    <Grid item xs={6}>
                         <Dialog
+                            fullScreen
                             disableBackdropClick
                             disableEscapeKeyDown
                             open={this.state.variables.open}
@@ -273,7 +278,7 @@ class PatientProfileSearchPage extends Component {
                         variant="outlined"
                         onChange={this.handleNewPatientChange('dateOfReferral', 'value')}
                         /></FormControl>
-                        <FormControl variant="outlined">
+                        <FormControl className={classes.formControlSub} variant="outlined">
                             <InputLabel
                                 ref={ref => {
                                 this.InputLabelRef = ref;
@@ -287,8 +292,6 @@ class PatientProfileSearchPage extends Component {
                                 onChange={this.handleNewPatientChange('toc', 'value')}
                                 input={
                                 <OutlinedInput
-                                    label="Type of Cancer"
-                                    placeholder="Type of Cancer"
                                     name="Type of Cancer"
                                     id="outlined-toc-simple"
                                     labelWidth={this.state.labelWidth}
@@ -327,9 +330,6 @@ class PatientProfileSearchPage extends Component {
                                 </Button>
                             </DialogActions>
                         </Dialog>
-                    </Grid>
-                    <Grid item xs={3}>
-                    </Grid>
                 </Grid>
                 <h3>Here you will have a search field</h3>
                 <h3>This page will show patient profile information by id</h3>
