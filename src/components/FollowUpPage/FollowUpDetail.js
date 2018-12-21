@@ -46,40 +46,6 @@ const styles = theme => ({
 
 class FollowUpDetail extends Component {
 
-    // state = {
-    //     adjuvant_chemo: null,
-    //     adjuvant_chemo_type: null,
-    //     biological: null,
-    //     evidence_of_disease: false,
-    //     last_contact: '',
-    //     date_of_death: '',
-    //     evidence_of_disease: null
-    // };
-
-    // componentDidMount () {
-    //     // console.log('in component mount follow up', this.props.reduxState.postOp.serious_advese_event);
-    //     // this.props.dispatch({type: 'FETCH_POST_OP'});
-    //     this.setState({
-    //         // id: this.props.reduxState.postOp.id,
-    //     })
-    // }
-    
-    // Called when the input field changes
-    // handleChange = (event) => {
-    //     this.setState({
-    //         ...this.state,
-    //         [event.target.name]: event.target.value,
-    //     });
-    // }
-
-    // // Called when the input field changes
-    // handleChangeCheckbox = (event) => {
-    //     this.setState({
-    //         ...this.state,
-    //         [event.target.name]: event.target.checked,
-    //     });
-    // }
-    
     render() {
         const { classes } = this.props;
         

@@ -92,6 +92,7 @@ class FollowUpPage extends Component {
                     <Biological biological={this.state.biological} handleChange={this.handleChange} />
                     </Grid>
                 </Grid>
+                <div>Add Follow Up</div>
             {/* //Will have more than one -- will be mapped */}
             <FollowUpDetail />
             </div>
