@@ -20,6 +20,7 @@ import PostOpPage from '../PostOpPage/PostOpPage';
 import FollowUpPage from '../FollowUpPage/FollowUpPage';
 import AdditionalDataPage from '../AdditionalDataPage/AdditionalDataPage';
 import ManageUsersPage from '../ManageUsersPage/ManageUsersPage';
+import CurrentPatientInfo from '../CurrentPatientInfo/CurrentPatientInfo';
 
 function TabContainer(props) {
     return (
@@ -49,6 +50,7 @@ state = {
     this.props.dispatch({type: 'FETCH_POST_OP'});
     this.props.dispatch({type: 'FETCH_FOLLOW_UP'});
     this.props.dispatch({type: 'FETCH_RECURRENCE'});
+    // this.props.dispatch({type: 'TEST_PATIENT'});
   }
 
   handleTabChange = (event, value) => {
@@ -60,8 +62,9 @@ state = {
         const { value } = this.state;
         return(
             <div className={classes.root}>
-                <h1>Main Tabs Page</h1>
-                <h3>This Page houses all the Tab Components</h3>
+                {/* <h1>Main Tabs Page</h1>
+                <h3>This Page houses all the Tab Components</h3> */}
+                {this.props.reduxState.patientReducer.patient ? (<CurrentPatientInfo/>) : (<></>)}
                 <AppBar position="static" color="default">
                     <Tabs
                     value={value}

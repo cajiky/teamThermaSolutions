@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
@@ -18,7 +17,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Select from '@material-ui/core/Select';
-import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import PropTypes from 'prop-types';
@@ -115,8 +113,11 @@ class PatientProfileSearchPage extends Component {
         const { classes } = this.props;
         return(
             <div>
-                <h1>Patient Profile/Search Page</h1>
-                <Grid container spacing={24}>
+                <Grid container spacing={24}
+                        direction="column"
+                        alignItems="center"
+                        justify="center"
+                        style={{ minHeight: '100vh' }}>
                     <Grid item xs={3}>
                     </Grid>
                     <Grid item xs={6}>
@@ -137,13 +138,11 @@ class PatientProfileSearchPage extends Component {
                     </Grid>
                     <Grid item xs={3}>
                     </Grid>
-                    <Grid item xs={3}>
-                    </Grid>
-                    <Grid item xs={6}>
+                    
+                    <Grid item xs={12}>
                         {this.props.reduxState.patientReducer.patientSearch ? (<PatientProfileSearchResult/>) : (<></>)}
                     </Grid>
-                    <Grid item xs={3}>
-                    </Grid>
+                    
                     <Grid item xs={3}>
                     </Grid>
                     <Grid item xs={6}>
@@ -156,7 +155,7 @@ class PatientProfileSearchPage extends Component {
                     <Grid item xs={3}>
                     </Grid>
                     <Grid item xs={6}>
-                        <Dialog
+                            <Dialog
                             disableBackdropClick
                             disableEscapeKeyDown
                             open={this.state.variables.open}
@@ -331,10 +330,6 @@ class PatientProfileSearchPage extends Component {
                     <Grid item xs={3}>
                     </Grid>
                 </Grid>
-                <h3>Here you will have a search field</h3>
-                <h3>This page will show patient profile information by id</h3>
-                <h3>You can also add a new patient by clicking "add patient" and filing out the information in the popup box</h3>
-                
             </div>
 
         )
