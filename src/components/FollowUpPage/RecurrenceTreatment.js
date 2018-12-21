@@ -33,15 +33,15 @@ class RecurrenceTreatment extends Component {
 
     return (
       <FormControl fullWidth="true" variant="outlined">
-          <InputLabel htmlFor="rec_treatment">Treatment</InputLabel>
+          <InputLabel shrink htmlFor="treatment">Treatment</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
             value={this.props.recurrence.treatment}
             input={
               <OutlinedInput
                   value={this.props.recurrence.treatment}
-                  name="rec_treatment"
-                  id="rec_treatment"
+                  name="treatment"
+                  id="treatment"
               />
               }
             onChange={this.props.handleChange}

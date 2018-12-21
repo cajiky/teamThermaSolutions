@@ -53,7 +53,7 @@ class FollowUpPage extends Component {
             adjuvant_chemo: this.props.reduxState.followUp.adjuvant_chemo,
             adjuvant_chemo_type: this.props.reduxState.followUp.adjuvant_chemo_type,
             biological: this.props.reduxState.followUp.biological,
-            evidence_of_disease: true,
+            evidence_of_disease: this.props.reduxState.followUp.evidence_of_disease,
             last_contact: this.props.reduxState.followUp.last_contact,
             date_of_death: this.props.reduxState.followUp.date_of_death        
         })
@@ -94,7 +94,8 @@ class FollowUpPage extends Component {
                 </Grid>
                 <div>Add Follow Up</div>
             {/* //Will have more than one -- will be mapped */}
-            <FollowUpDetail />
+            <FollowUpDetail evidence_of_disease={this.state.evidence_of_disease}
+                    handleChangeCheckbox={this.handleChangeCheckbox}/>
             </div>
         )
     }
