@@ -1,29 +1,29 @@
 import axios from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-// worker SAGA: will be fired on 'ADD_FOLLOW_UP' action
+// worker SAGA: will be fired on 'ADD_RECURRENCE' action
 // user entered a new patient .. will add a blank row for patient
-function* addFollowUp(action) {
+function* addRecurrence(action) {
   try {
       // axios asynch call to add item on database
-      yield call(axios.post, '/api/follow_up', action.payload);
+      yield call(axios.post, '/api/recurrence', action.payload);
   }
   catch (error) {
-      console.log('error with add follow up post request');
+      console.log('error with add recurrence post request');
   }
 }
 
-// worker Saga: will be fired on "FETCH_FOLLOW_UP" actions
-function* fetchFollowUp(action) {
-  console.log('in fetch follow up Saga', action.payload);
+// worker Saga: will be fired on "FETCH_RECURRENCE" actions
+function* fetchRecurrence(action) {
+  console.log('in fetch recurrence Saga', action.payload);
   try {
-    const response = yield axios.get('api/follow_up/1');
-    console.log('response from follow up:', response);
+    const response = yield axios.get('api/recurrence/1');
+    console.log('response from recurrence:', response);
     
     // set state
-    yield put({ type: 'SET_FOLLOW_UP', payload: response.data });
+    yield put({ type: 'SET_RECURRENCE', payload: response.data });
   } catch (error) {
-    console.log('follow up get request failed', error);
+    console.log('recurrence get request failed', error);
   }
 }
 
@@ -41,10 +41,10 @@ function* fetchFollowUp(action) {
 //   } 
 // }
 
-function* followUpSaga() {
-  yield takeLatest('ADD_FOLLOW_UP', addFollowUp);
-  yield takeLatest('FETCH_FOLLOW_UP', fetchFollowUp);
+function* recurrenceSaga() {
+  yield takeLatest('ADD_RECURRENCE', addRecurrence);
+  yield takeLatest('FETCH_RECURRENCE', fetchRecurrence);
   // yield takeLatest('DELETE_ITEM', deleteItem);
 }
 
-export default followUpSaga;
+export default recurrenceSaga;
