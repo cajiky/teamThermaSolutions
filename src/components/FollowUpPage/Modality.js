@@ -36,12 +36,12 @@ class Modality extends Component {
           <InputLabel htmlFor="modality">Modality</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
-            value={'Yes'}
+            value={this.props.recurrence.rec_modality}
             input={
               <OutlinedInput
-                  value={this.props.modality}
-                  name="modality"
-                  id="modality"
+                  value={this.props.recurrence.rec_modality}
+                  name="rec_modality"
+                  id="rec_modality"
               />
               }
             onChange={this.props.handleChange}

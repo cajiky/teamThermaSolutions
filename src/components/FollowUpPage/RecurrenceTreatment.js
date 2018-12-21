@@ -36,10 +36,10 @@ class RecurrenceTreatment extends Component {
           <InputLabel htmlFor="rec_treatment">Treatment</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
-            value={'Yes'}
+            value={this.props.recurrence.treatment}
             input={
               <OutlinedInput
-                  value={this.props.rec_treatment}
+                  value={this.props.recurrence.treatment}
                   name="rec_treatment"
                   id="rec_treatment"
               />

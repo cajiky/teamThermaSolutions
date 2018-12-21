@@ -46,7 +46,37 @@ const styles = theme => ({
 
 class FollowUpDetail extends Component {
 
+    state = {
+        date: null,
+        cea: null,
+        rec_modality: null,
+        syst_location: false,
+        last_contact: null,
+        treatment: null,
+        date_treatment: null,
+        status: null,
+        notes: null,
+        location: null
+    };
+
+    // Called when the input field changes
+    handleChange = (event) => {
+        this.setState({
+            ...this.state,
+            [event.target.name]: event.target.value,
+        });
+    };
+
+    // Called when the input field changes
+    handleChangeCheckbox = (event) => {
+        this.setState({
+            ...this.state,
+            [event.target.name]: event.target.checked,
+        });
+    };
+    
     render() {
+
         const { classes } = this.props;
         
         return(
@@ -57,12 +87,12 @@ class FollowUpDetail extends Component {
                         name="follow_up_date"
                         label="Follow Up Date"
                         className={classes.textField}
-                        value={this.props.last_contact}
+                        value={this.props.recurrence.date}
                         // fullWidth
                         InputLabelProps={{
                             shrink: true,
                         }}
-                        onChange={this.props.handleChange}
+                        onChange={this.handleChange}
                         margin="normal"
                         variant="outlined"
                     />
@@ -75,9 +105,9 @@ class FollowUpDetail extends Component {
                                 control={
                                     <Checkbox
                                     name="evidence_of_disease"
-                                    checked={this.props.evidence_of_disease}
-                                    onChange={this.props.handleChangeCheckbox}
-                                    value={this.props.evidence_of_disease}
+                                    checked={this.props.recurrence.evidence_of_disease}
+                                    onChange={this.handleChangeCheckbox}
+                                    value={this.props.recurrence.evidence_of_disease}
                                     />
                                 }
                                 label="Evidence of Disease"
@@ -94,12 +124,14 @@ class FollowUpDetail extends Component {
                             InputLabelProps={{
                                 shrink: true,
                             }}
-                            onChange={this.props.handleChange}
+                            onChange={this.handleChange}
                             margin="normal"
                             variant="outlined"
                             />
                         </Grid>
-                        <Recurrence />
+                        <Recurrence recurrence={this.props.recurrence} 
+                            handleChange={this.handleChange}
+                            handleChangeCheckbox={this.handleChangeCheckbox}/>
                     </Grid>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
@@ -111,7 +143,7 @@ class FollowUpDetail extends Component {
 };
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+    recurrence: reduxState.recurrenceReducer,
 });
 
 

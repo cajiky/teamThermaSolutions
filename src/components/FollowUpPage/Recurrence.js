@@ -112,8 +112,8 @@ class Recurrence extends Component {
                 type="date"
                 fullWidth="true"
                 onChange={this.props.handleChange}
-                name="recurrence_date"
-                value={this.props.recurrence_date}
+                name="date"
+                value={this.props.recurrence.date}
               />
             </Grid>
             <Grid item xs={3}>
@@ -121,7 +121,7 @@ class Recurrence extends Component {
                 name="cea"
                 label="CEA"
                 className={classes.textField}
-                value={this.props.cea}
+                value={this.props.recurrence.cea}
                 // fullWidth
                 onChange={this.props.handleChange}
                 margin="normal"
@@ -132,7 +132,9 @@ class Recurrence extends Component {
                 />
             </Grid>
             <Grid item xs={3}>
-              <Modality />
+              <Modality recurrence={this.props.recurrence} 
+                            handleChange={this.handleChange}
+                            handleChangeCheckbox={this.handleChangeCheckbox}/>
             </Grid>
             <Grid item xs={3}>
                 Treatment
@@ -145,17 +147,23 @@ class Recurrence extends Component {
                   fullWidth="true"
                   onChange={this.props.handleChange}
                   name="treatment_date"
-                  value={this.props.treatment_date}
+                  value={this.props.recurrence.treatment_date}
                 />
             </Grid>
             <Grid item xs={3}>
-              <Location />
+              <Location recurrence={this.props.recurrence} 
+                            handleChange={this.handleChange}
+                            handleChangeCheckbox={this.handleChangeCheckbox}/>
             </Grid>
             <Grid item xs={3}>
-              <SystemicLocation />
+              <SystemicLocation recurrence={this.props.recurrence} 
+                            handleChange={this.handleChange}
+                            handleChangeCheckbox={this.handleChangeCheckbox}/>
             </Grid>
             <Grid item xs={3}>
-              <RecurrenceTreatment />
+              <RecurrenceTreatment recurrence={this.props.recurrence} 
+                            handleChange={this.handleChange}
+                            handleChangeCheckbox={this.handleChangeCheckbox}/>
             </Grid>
             <Grid item xs={3}>
               <Status />

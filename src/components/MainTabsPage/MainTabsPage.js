@@ -48,6 +48,7 @@ state = {
     this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'})
     this.props.dispatch({type: 'FETCH_POST_OP'});
     this.props.dispatch({type: 'FETCH_FOLLOW_UP'});
+    this.props.dispatch({type: 'FETCH_RECURRENCE'});
   }
 
   handleTabChange = (event, value) => {
