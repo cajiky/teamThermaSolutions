@@ -64,6 +64,8 @@ class PatientProfileSearchPage extends Component {
         name: 'nah',
         },
         patient: {
+            currentStatus: 0,
+            gender: ''
             
         },
         
@@ -169,7 +171,7 @@ class PatientProfileSearchPage extends Component {
                             placeholder="Patient ID e.x. 1234567890"
                             margin="normal"
                             variant="outlined"
-                            fullWidth="true"
+                            fullWidth={true}
                             type="number"
                             onChange={this.handleNewPatientChange('patientId', 'value')}
                             />
@@ -185,7 +187,7 @@ class PatientProfileSearchPage extends Component {
                         margin="normal"
                         type="date"
                         variant="outlined"
-                        fullWidth="true"
+                        fullWidth={true}
                         onChange={this.handleNewPatientChange('dob')}
                         onBlur={this.calculateAge('age', this.state.patient.dob)}
                         /></FormControl>
@@ -265,10 +267,7 @@ class PatientProfileSearchPage extends Component {
                         onChange={this.handleNewPatientChange('dateOfReferral', 'value')}
                         /></FormControl>
                         <FormControl className={classes.formControl} variant="outlined">
-                            <InputLabel
-                                ref={ref => {
-                                this.InputLabelRef = ref;
-                                }}
+                            <InputLabel shrink
                                 htmlFor="outlined-toc-simple"                                
                             >
                                 Type of Cancer
@@ -347,7 +346,7 @@ class PatientProfileSearchPage extends Component {
                             placeholder="Hospital Telephone Number e.x. 555-555-5555"
                             margin="normal"
                             variant="outlined"
-                            fullWidth="true"
+                            fullWidth={true}
                             type="string"
                             onChange={this.handleNewPatientChange('hospitalTel', 'value')}
                             />
@@ -364,11 +363,39 @@ class PatientProfileSearchPage extends Component {
                             placeholder="Referring Doctor e.x. Dr. Claudio Gonzales"
                             margin="normal"
                             variant="outlined"
-                            fullWidth="true"
+                            fullWidth={true}
                             type="string"
                             onChange={this.handleNewPatientChange('refDoc', 'value')}
                             />
                         </FormControl>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                                    <InputLabel shrink
+                                        htmlFor="outlined-age-native-simple"
+                                    >
+                                        Current Status
+                                    </InputLabel>
+                                    <Select
+                                        
+                                        value={this.state.patient.currentStatus}
+                                        onChange={this.handleNewPatientChange('currentStatus', 'value')}
+                                        input={
+                                        <OutlinedInput
+                                            name="title"
+                                            fullWidth
+                                            id="outlined-age-native-simple"
+                                        />
+                                        }
+                                    >
+                                    {this.props.reduxState.dropdownOptions.currentStatusOptions.map( option => {
+                                            return(
+                                                <MenuItem key={option.id} value={option.id}>{option.status}</MenuItem>
+                                            )
+                                            
+                                        })}
+
+                                        
+                                    </Select>
+                                </FormControl>
                     </DialogContent>
                                             <DialogActions>
                                 <Button onClick={this.handleClose} color="primary">
