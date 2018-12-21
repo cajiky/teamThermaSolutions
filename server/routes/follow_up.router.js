@@ -40,20 +40,33 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 //     });
 // });
 
-// router.put('/', rejectUnauthenticated, (req, res) => {
-//     const queryText = `UPDATE followup 
-//         SET icu_stays=$2, mcu_stays=$3, hospital_stays=$4,
-//         notes=$5, serious_advese_event=$6, score=%7,
-//         reoperation=$8, hospital_mortality=$9,
-//         status_at_discharge=$10, discharge_notes=$11
-//         WHERE id=$1`;
-//     pool.query(queryText, [req.body.id, req.body])
-//       .then((result) => { res.send(result.rows); })
-//       .catch((err) => {
-//         console.log('Error completing UPDATE post op query', err);
-//         res.sendStatus(500);
-//       });            
-// });
+router.put('/', rejectUnauthenticated, (req, res) => {
+    console.log('in put:', req.body);
+
+    const id = req.body.id
+    const adjuvant_chemo = req.body.adjuvant_chemo
+    const adjuvant_chemo_type = req.body.adjuvant_chemo_type;
+    const biological = req.body.biological;
+    const evidence_of_disease = req.body.evidence_of_disease;
+    const last_contact = req.body.last_contact;
+    const date_of_death = req.body.date_of_death;
+    const notes = req.body.notes;
+
+    const queryText = `UPDATE follow_up 
+        SET adjuvant_chemo=$2, adjuvant_chemo_type=$3, biological=$4,
+        evidence_of_disease=$5, last_contact=$6, date_of_death=%7,
+        notes=$8 
+        WHERE id=$1`;
+        
+    pool.query(queryText, 
+        [id, adjuvant_chemo, adjuvant_chemo_type, biological,evidence_of_disease,
+        last_contact,date_of_death,notes])
+      .then((result) => { res.send(result.rows); })
+      .catch((err) => {
+        console.log('Error completing UPDATE follow up query', err);
+        res.sendStatus(500);
+      });            
+});
 
 // DELETE ROUTER FOR ITEM
 // router.delete('/', rejectUnauthenticated, (req, res) => {

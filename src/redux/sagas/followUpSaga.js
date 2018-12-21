@@ -27,6 +27,18 @@ function* fetchFollowUp(action) {
   }
 }
 
+function* updateFollowUp(action) {
+  console.log('in update follow up Saga', action.payload);
+  try {
+      yield call(axios.put, `/api/follow_up/${action.payload.id}`, action.payload);
+      // yield put({ type: 'RENDER_ALL_USERS', payload: action.payload.profileUserId } )
+
+  } catch (error) {
+      console.log(error);
+      alert('Unable to update follow up');
+  }
+}
+
 // Will we ever need this? Will they remove patients?
 // worker SAGA: will be fired on 'DELETE_ITEM' actions
 // function* deleteItem(action) {
@@ -44,6 +56,7 @@ function* fetchFollowUp(action) {
 function* followUpSaga() {
   yield takeLatest('ADD_FOLLOW_UP', addFollowUp);
   yield takeLatest('FETCH_FOLLOW_UP', fetchFollowUp);
+  yield takeLatest('UPDATE_FOLLOW_UP', updateFollowUp);
   // yield takeLatest('DELETE_ITEM', deleteItem);
 }
 
