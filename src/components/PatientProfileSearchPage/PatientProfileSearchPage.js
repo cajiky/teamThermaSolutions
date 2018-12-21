@@ -23,6 +23,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import PropTypes from 'prop-types';
 import PatientProfileSearchResult from '../PatientProfileSearchResult/PatientProfileSearchResult';
+import ReactPhoneInput from 'material-ui-phone-number';
 
 
 const styles = theme => ({
@@ -33,6 +34,7 @@ const styles = theme => ({
     formControl: {
       margin: theme.spacing.unit,
       minWidth: 500,
+      verticalAlign: 'unset',
     },
     formControlSub: {
         minWidth: 100,
@@ -54,12 +56,6 @@ const styles = theme => ({
   });
 
 class PatientProfileSearchPage extends Component {
-
-    setLabel() {
-        this.setState({
-          labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
-        });
-      }
 
     state = {
         variables: {
@@ -96,7 +92,7 @@ class PatientProfileSearchPage extends Component {
       };
     
       handleClose = () => {
-        this.setState({ variables: {open: false} });
+        this.setState({ variables: {open: false}, patient: {} });
       };
 
       addPatient = () => {
@@ -111,12 +107,6 @@ class PatientProfileSearchPage extends Component {
               alert('Please enter a Patient ID Number!');
           }
     }
-
-    componentDidMount() {
-        this.setState({
-          labelWidth: ReactDOM.findDOMNode(this.InputLabelRef)
-        });
-      }
 
     render() {
         const { classes } = this.props;
@@ -167,20 +157,24 @@ class PatientProfileSearchPage extends Component {
                             open={this.state.variables.open}
                             onClose={this.handleClose}>
                             <DialogContent>
-                    <FormControl className={classes.formControl}>
-                        <TextField
-                        required
-                        id="outlined-required"
-                        label="Patient ID"
-                        InputLabelProps={{
-                            shrink: true,
-                          }}
-                        placeholder="Patient ID e.x. 1234567890"
-                        margin="normal"
-                        variant="outlined"
-                        fullWidth="true"
-                        onChange={this.handleNewPatientChange('patientId', 'value')}
-                        /></FormControl><FormControl className={classes.formControl}>
+            {/* Patient ID Input */}
+                        <FormControl className={classes.formControl}>
+                            <TextField
+                            required
+                            id="outlined-required"
+                            label="Patient ID"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            placeholder="Patient ID e.x. 1234567890"
+                            margin="normal"
+                            variant="outlined"
+                            fullWidth="true"
+                            type="number"
+                            onChange={this.handleNewPatientChange('patientId', 'value')}
+                            />
+                        </FormControl>
+                        <FormControl className={classes.formControl}>
                         <TextField
                         required
                         id="outlined-required"
@@ -212,28 +206,20 @@ class PatientProfileSearchPage extends Component {
                         // type="number"
                         variant="outlined"
                         /></FormControl>
-                        <FormControl  className={classes.formControlSub} variant="outlined">
-                            <InputLabel
-                                ref={ref => {
-                                this.InputLabelRef = ref;
-                                }}
-                                htmlFor="outlined-gender-simple"                                
+                        <FormControl  className={classes.formControl}>
+                            <InputLabel shrink
+                                htmlFor="gender-label-placeholder"                                
                             >
-                                {/* Gender */}
+                                Gender
                             </InputLabel>
                             <Select
                                 value={this.state.patient.gender}
                                 onChange={this.handleNewPatientChange('gender', 'value')}
-                                input={
-                                <OutlinedInput
-                                    // label="gender"
-                                    // placeholder="gender"
-                                    // name="gender"
-                                    id="outlined-gender-simple"
-                                    labelWidth={this.state.labelWidth}
-                                />
-                                }
-                            >
+                                input={<Input name="gender" id="gender-label-placeholder"/>}
+                                displayEmpty
+                                name="gender"
+                                className={classes.selectEmpty}
+                                >
                                 <MenuItem value='Female'>Female</MenuItem>
                                 <MenuItem value='Male'>Male</MenuItem>
                                 <MenuItem value='Other'>Other</MenuItem>
@@ -278,7 +264,7 @@ class PatientProfileSearchPage extends Component {
                         variant="outlined"
                         onChange={this.handleNewPatientChange('dateOfReferral', 'value')}
                         /></FormControl>
-                        <FormControl className={classes.formControlSub} variant="outlined">
+                        <FormControl className={classes.formControl} variant="outlined">
                             <InputLabel
                                 ref={ref => {
                                 this.InputLabelRef = ref;
@@ -320,6 +306,69 @@ class PatientProfileSearchPage extends Component {
                         /></FormControl>
                         </>
                         ) : (<></>)}
+                {/* Alive on Date Input */}
+                        <FormControl className={classes.formControl}>
+                            <TextField
+                            required
+                            id="outlined-required"
+                            label="Alive on Date"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            margin="normal"
+                            type="date"
+                            variant="outlined"
+                            onChange={this.handleNewPatientChange('aliveOnDate', 'value')}
+                            />
+                        </FormControl>
+                {/* Sensor */}
+                        <FormControl component="fieldset" className={classes.formControlSub}>
+                            <FormLabel component="legend" style={{display: 'inline-block'}}>Sensor</FormLabel>
+                            <RadioGroup
+                                aria-label="sensor"
+                                name="sensor"
+                                value={this.state.patient.sensor}
+                                onChange={this.handleNewPatientChange('sensor', 'value')}
+                                style={{display: 'flex', flexDirection: 'row'}}
+                            >
+                                <FormControlLabel value="yes" control={<Radio className={classes.radio}/>} label="Yes" />
+                                <FormControlLabel value="no" control={<Radio className={classes.radio}/>} label="No" />
+                            </RadioGroup>
+                        </FormControl>
+                {/* Hospital Tel Input */}
+                        <FormControl className={classes.formControl}>
+                            <TextField
+                            required
+                            id="outlined-required"
+                            label="Hospital Telephone Number"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            placeholder="Hospital Telephone Number e.x. 555-555-5555"
+                            margin="normal"
+                            variant="outlined"
+                            fullWidth="true"
+                            type="string"
+                            onChange={this.handleNewPatientChange('hospitalTel', 'value')}
+                            />
+                        </FormControl>
+                {/* Referring Doctor Input */}
+                <FormControl className={classes.formControl}>
+                            <TextField
+                            required
+                            id="outlined-required"
+                            label="Referring Doctor"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            placeholder="Referring Doctor e.x. Dr. Claudio Gonzales"
+                            margin="normal"
+                            variant="outlined"
+                            fullWidth="true"
+                            type="string"
+                            onChange={this.handleNewPatientChange('refDoc', 'value')}
+                            />
+                        </FormControl>
                     </DialogContent>
                                             <DialogActions>
                                 <Button onClick={this.handleClose} color="primary">
