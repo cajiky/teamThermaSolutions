@@ -4,9 +4,11 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
+import Button from '@material-ui/core/Button';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import Recurrence from './Recurrence';
 // import Button from '@material-ui/core/Button';
 // import FormHelperText from '@material-ui/core/FormHelperText';
@@ -121,9 +123,9 @@ class FollowUpDetail extends Component {
                                 control={
                                     <Checkbox
                                     name="evidence_of_disease"
-                                    checked={this.props.evidence_of_disease}
+                                    checked={this.props.followup.evidence_of_disease}
                                     onChange={this.props.handleChangeCheckbox}
-                                    value={this.props.evidence_of_disease}
+                                    value={this.props.followup.evidence_of_disease}
                                     />
                                 }
                                 label="Evidence of Disease"
@@ -135,13 +137,13 @@ class FollowUpDetail extends Component {
                             name="follow_up_notes"
                             label="Notes"
                             className={classes.textField}
-                            value={this.state.notes}
+                            value={this.props.followup.notes}
                             rows={2}
                             fullWidth
                             InputLabelProps={{
                                 shrink: true,
                             }}
-                            onChange={this.handleChange}
+                            onChange={this.props.handleChange}
                             margin="normal"
                             variant="outlined"
                             />
@@ -151,6 +153,16 @@ class FollowUpDetail extends Component {
                             handleChangeCheckbox={this.handleChangeCheckbox}/>
                     </Grid>
                 </ExpansionPanelDetails>
+                <ExpansionPanelActions>
+                    <Button onClick={this.addFollowUp} className={classes.button}
+                            variant="contained" color="primary">
+                        Save Follow Up
+                    </Button>      
+                    <Button onClick={this.addFollowUp} className={classes.button}
+                            variant="contained" color="primary">
+                        New Follow Up
+                    </Button>                    
+                </ExpansionPanelActions>
             </ExpansionPanel>
             </div>
 

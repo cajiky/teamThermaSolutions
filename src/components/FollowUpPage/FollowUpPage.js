@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 import FollowUpDetail from './FollowUpDetail';
 import ChemotherapyType from './ChemotherapyType';
 import AdjuvantChemotherapy from './AdjuvantChemotherapy';
@@ -57,8 +58,12 @@ class FollowUpPage extends Component {
             last_contact: this.props.reduxState.followUp.last_contact,
             date_of_death: this.props.reduxState.followUp.date_of_death        
         })
-    }
+    };
     
+    addFollowUp = () => {
+        alert('Add new followup')
+    };
+
     // Called when the input field changes
     handleChange = (event) => {
         this.setState({
@@ -92,9 +97,8 @@ class FollowUpPage extends Component {
                     <Biological biological={this.state.biological} handleChange={this.handleChange} />
                     </Grid>
                 </Grid>
-                <div>Add Follow Up</div>
             {/* //Will have more than one -- will be mapped */}
-            <FollowUpDetail evidence_of_disease={this.state.evidence_of_disease}
+            <FollowUpDetail followup={this.state}
                     handleChangeCheckbox={this.handleChangeCheckbox}/>
             </div>
         )

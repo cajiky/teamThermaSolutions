@@ -90,8 +90,8 @@ class Recurrence extends Component {
             </Grid>
             <Grid item xs={3}>
               <Modality recurrence={this.props.recurrence} 
-                            handleChange={this.handleChange}
-                            handleChangeCheckbox={this.handleChangeCheckbox}/>
+                            handleChange={this.props.handleChange}
+                            handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
             <Grid item xs={3}>
                 Treatment
@@ -112,23 +112,23 @@ class Recurrence extends Component {
             </Grid>
             <Grid item xs={3}>
               <Location recurrence={this.props.recurrence} 
-                            handleChange={this.handleChange}
-                            handleChangeCheckbox={this.handleChangeCheckbox}/>
+                            handleChange={this.props.handleChange}
+                            handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
             <Grid item xs={3}>
               <SystemicLocation recurrence={this.props.recurrence} 
-                            handleChange={this.handleChange}
-                            handleChangeCheckbox={this.handleChangeCheckbox}/>
+                            handleChange={this.props.handleChange}
+                            handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
             <Grid item xs={3}>
               <RecurrenceTreatment recurrence={this.props.recurrence} 
-                            handleChange={this.handleChange}
-                            handleChangeCheckbox={this.handleChangeCheckbox}/>
+                            handleChange={this.props.handleChange}
+                            handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
             <Grid item xs={3}>
               <Status recurrence={this.props.recurrence} 
-                            handleChange={this.handleChange}
-                            handleChangeCheckbox={this.handleChangeCheckbox}/>
+                            handleChange={this.props.handleChange}
+                            handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
             <Grid item xs={6}>
                 <TextField

@@ -17,6 +17,7 @@ class Modality extends Component {
 
   renderOptions() {
     // 
+    console.log('this.props.recurrence', this.props.recurrence)
     return this.props.reduxState.dropdownOptions.recModalityOptions.map((option, i) => {
       return (
         <MenuItem
