@@ -44,7 +44,7 @@ const styles = theme => ({
         margin: `${theme.spacing.unit}px 0`,
       },
       table: {
-        width: 400,
+        maxWidth: 200,
         paddingBottom: 20,
       },
 });
