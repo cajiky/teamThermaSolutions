@@ -27,6 +27,18 @@ function* fetchRecurrence(action) {
   }
 }
 
+function* updateRecurrence(action) {
+  console.log('in update follow up Saga', action.payload);
+  try {
+      yield call(axios.put, `/api/follow_up`, action.payload);
+      // yield put({ type: 'RENDER_ALL_USERS', payload: action.payload.profileUserId } )
+
+  } catch (error) {
+      console.log(error);
+      alert('Unable to update follow up');
+  }
+}
+
 // Will we ever need this? Will they remove patients?
 // worker SAGA: will be fired on 'DELETE_ITEM' actions
 // function* deleteItem(action) {
@@ -44,6 +56,7 @@ function* fetchRecurrence(action) {
 function* recurrenceSaga() {
   yield takeLatest('ADD_RECURRENCE', addRecurrence);
   yield takeLatest('FETCH_RECURRENCE', fetchRecurrence);
+  yield takeLatest('UPDATE_RECURRENCE', updateRecurrence);
   // yield takeLatest('DELETE_ITEM', deleteItem);
 }
 

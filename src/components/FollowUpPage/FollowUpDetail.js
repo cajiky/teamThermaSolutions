@@ -63,13 +63,13 @@ class FollowUpDetail extends Component {
         // this.props.dispatch({type: 'FETCH_POST_OP'});
         this.setState({
             id: this.props.recurrenceReducer.id,
-            date: this.props.recurrenceReducer.date,
+            date: moment(this.props.recurrenceReducer.date).format('YYYY-MM-DD'),
             cea: this.props.recurrenceReducer.cea,
             rec_modality: this.props.recurrenceReducer.rec_modality,
             syst_location: this.props.recurrenceReducer.syst_location,
-            last_contact: this.props.recurrenceReducer.last_contact,
+            last_contact: moment(this.props.recurrenceReducer.last_contact).format('YYYY-MM-DD'),
             treatment: this.props.recurrenceReducer.treatment,
-            date_treatment: this.props.recurrenceReducer.date_treatment,
+            date_treatment: moment(this.props.recurrenceReducer.date_treatment).format('YYYY-MM-DD'),
             status: this.props.recurrenceReducer.status,
             notes: this.props.recurrenceReducer.notes,
             location: this.props.recurrenceReducer.location
@@ -91,6 +91,13 @@ class FollowUpDetail extends Component {
             [event.target.name]: event.target.checked,
         });
     };
+
+    // addFollowUp = () => {
+    //     // alert('Add new followup');
+    //     console.log('before update recurrence', this.state)
+    //     this.props.dispatch({ type: 'UPDATE_RECURRENCE', payload: this.state});
+    //     // this.props.addFollowUp();
+    // };
     
     render() {
 
@@ -154,11 +161,11 @@ class FollowUpDetail extends Component {
                     </Grid>
                 </ExpansionPanelDetails>
                 <ExpansionPanelActions>
-                    <Button onClick={this.addFollowUp} className={classes.button}
+                    <Button onClick={this.props.addFollowUp} className={classes.button}
                             variant="contained" color="primary">
                         Save Follow Up
                     </Button>      
-                    <Button onClick={this.addFollowUp} className={classes.button}
+                    <Button className={classes.button}
                             variant="contained" color="primary">
                         New Follow Up
                     </Button>                    

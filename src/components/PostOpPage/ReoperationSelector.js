@@ -43,6 +43,7 @@ class ReoperationSelector extends Component {
           <InputLabel htmlFor="reoperation_id">Reoperation</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
+            name="reoperation"
             value={this.props.reoperation}
             input={
               <OutlinedInput

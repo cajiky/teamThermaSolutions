@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import FollowUpDetail from './FollowUpDetail';
 import ChemotherapyType from './ChemotherapyType';
 import AdjuvantChemotherapy from './AdjuvantChemotherapy';
@@ -37,6 +36,7 @@ const styles = theme => ({
 class FollowUpPage extends Component {
 
     state = {
+        id: 0,
         adjuvant_chemo: false,
         adjuvant_chemo_type: null,
         biological: null,
@@ -46,11 +46,11 @@ class FollowUpPage extends Component {
     };
 
     componentDidMount () {
-        // this.props.dispatch({type: 'FETCH_FOLLOW_UP'});
-        // const followUp = this.props.reduxState.follow_up;
-        // console.log('in component mount follow up', followUp);
-        console.log('in component mount follow up', this.props.reduxState.followUp);
+        this.props.dispatch({type: 'FETCH_FOLLOW_UP'});
+        // this.props.dispatch({type: 'FETCH_RECURRENCE'});
+
         this.setState({
+            id: this.props.reduxState.followUp.id,
             adjuvant_chemo: this.props.reduxState.followUp.adjuvant_chemo,
             adjuvant_chemo_type: this.props.reduxState.followUp.adjuvant_chemo_type,
             biological: this.props.reduxState.followUp.biological,
@@ -61,7 +61,8 @@ class FollowUpPage extends Component {
     };
     
     addFollowUp = () => {
-        alert('Add new followup')
+        // alert('Add new followup');
+        this.props.dispatch({ type: 'UPDATE_FOLLOW_UP', payload: this.state})
     };
 
     // Called when the input field changes
@@ -98,7 +99,7 @@ class FollowUpPage extends Component {
                     </Grid>
                 </Grid>
             {/* //Will have more than one -- will be mapped */}
-            <FollowUpDetail followup={this.state}
+            <FollowUpDetail followup={this.state} addFollowUp={this.addFollowUp}
                     handleChangeCheckbox={this.handleChangeCheckbox}/>
             </div>
         )

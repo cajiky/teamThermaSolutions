@@ -30,7 +30,7 @@ function* fetchFollowUp(action) {
 function* updateFollowUp(action) {
   console.log('in update follow up Saga', action.payload);
   try {
-      yield call(axios.put, `/api/follow_up/${action.payload.id}`, action.payload);
+      yield call(axios.put, `/api/follow_up`, action.payload);
       // yield put({ type: 'RENDER_ALL_USERS', payload: action.payload.profileUserId } )
 
   } catch (error) {

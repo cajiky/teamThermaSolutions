@@ -65,21 +65,26 @@ class PostOpPage extends Component {
         discharge_notes: '',
     };
 
+    getPostOp = () => {
+        this.props.dispatch({type: 'FETCH_POST_OP'});
+        console.log('after FETCH', this.props.postOp);
+    }
+
     componentDidMount () {
-        console.log('in component mount post op', this.props.reduxState.postOp.serious_advese_event);
-        // this.props.dispatch({type: 'FETCH_POST_OP'});
+        // console.log('in component mount post op', this.props.reduxState.postOp.serious_advese_event);
+        this.getPostOp()
         this.setState({
-            id: this.props.reduxState.postOp.id,
-            icu_stays: this.props.reduxState.postOp.icu_stays,
-            mcu_stays: this.props.reduxState.postOp.mcu_stays,
-            hospital_stays: this.props.reduxState.postOp.hospital_stays,
-            notes: this.props.reduxState.postOp.notes,
-            serious_advese_event: this.props.reduxState.postOp.serious_advese_event,
-            score: this.props.reduxState.postOp.score,
-            reoperation: this.props.reduxState.postOp.reoperation,
-            hospital_mortality: this.props.reduxState.postOp.hospital_mortality,
-            status_at_discharge: this.props.reduxState.postOp.status_at_discharge,
-            discharge_notes: this.props.reduxState.postOp.discharge_notes,
+            id: this.props.postOp.id,
+            icu_stays: this.props.postOp.icu_stays,
+            mcu_stays: this.props.postOp.mcu_stays,
+            hospital_stays: this.props.postOp.hospital_stays,
+            notes: this.props.postOp.notes,
+            serious_advese_event: this.props.postOp.serious_advese_event,
+            score: this.props.postOp.score,
+            reoperation: this.props.postOp.reoperation,
+            hospital_mortality: this.props.postOp.hospital_mortality,
+            status_at_discharge: this.props.postOp.status_at_discharge,
+            discharge_notes: this.props.postOp.discharge_notes,
         })
     }
     
@@ -235,7 +240,8 @@ class PostOpPage extends Component {
 };
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+    postOp: reduxState.postOp,
+    // patientSearch: reduxState.patientReducer.patientSearch
 });
 
 

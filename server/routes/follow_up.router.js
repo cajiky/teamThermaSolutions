@@ -1,7 +1,6 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
-
 const router = express.Router();
 
 // GET ROUTER TO RETRIEVE POST OP FOR PATIENT
@@ -54,10 +53,9 @@ router.put('/', rejectUnauthenticated, (req, res) => {
 
     const queryText = `UPDATE follow_up 
         SET adjuvant_chemo=$2, adjuvant_chemo_type=$3, biological=$4,
-        evidence_of_disease=$5, last_contact=$6, date_of_death=%7,
-        notes=$8 
-        WHERE id=$1`;
-        
+        evidence_of_disease=$5, last_contact=$6, date_of_death=$7,
+        notes=$8 WHERE id=$1`;
+
     pool.query(queryText, 
         [id, adjuvant_chemo, adjuvant_chemo_type, biological,evidence_of_disease,
         last_contact,date_of_death,notes])
