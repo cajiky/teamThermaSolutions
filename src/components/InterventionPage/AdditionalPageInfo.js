@@ -3,19 +3,8 @@ import { connect } from 'react-redux';
 import ResectionDropdown from '../InterventionPage/ResectionDropdown';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import GridItem from '@material-ui/core/Grid';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
@@ -50,12 +39,17 @@ const styles = theme => ({
   });
 
   class AdditionalPageInfo extends Component {
-    state = [
-        {id: '',
-        name: '',
-        status: false,     
+    state = {  
+        AnastomosisNumber:'', 
+        stomaType:'',
+        bloodLoss:'',
+        volume: '',
+        hipecRegiment: '',
+        bloodLossTime: '',
+        concentration: '',
+        rScore: '',
+        duration: '',
         }
-      ];
 
     // Called when the input field changes
     handleChangeCheckbox = (event) => {
@@ -63,16 +57,24 @@ const styles = theme => ({
             ...this.state,
             [event.target.name]: event.target.checked,
         });
+        console.log('additional page state', this.state);
+        
       }
+
+      handleChange = (event) => {
+        this.setState ({
+            [event.target.name]: event.target.value,
+        })
+        console.log(this.state);
+    }
 
     render() {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
            <FormGroup row>
-            <Grid container spacing={24} >
-                <GridItem item xs={4} >
-                    <Paper>
+                <Grid container spacing={24} >
+                    <GridItem item xs={4} >
                         <FormControlLabel
                         control={
                             <Checkbox
@@ -84,29 +86,24 @@ const styles = theme => ({
                         }
                         label="Anastomosis"
                         />
-
                         <DialogContent >
                                 <TextField
-                                // onChange={this.handleChange}
-                                // value={this.state.firstName}
+                                onChange={this.handleChange}
+                                value={this.state.AnastomosisNumber}
                                 name="AnastomosisNumber"
-                                autoFocus
                                 margin="dense"
-                                id="Anastomosis"
+                                id="AnastomosisNumber"
                                 label="Anastomosis Number"
                                 type="text"
-                                
                                 variant="outlined"
                                 />
                             </DialogContent>
-                    </Paper>    
                 </GridItem>
                 <GridItem item xs={4} >
-                    <Paper>
                         <FormControlLabel
                         control={
                             <Checkbox
-                            name="Revision stoma"
+                            name="RevisionStoma"
                             checked={this.state.status}
                             onChange={this.handleChangeCheckbox}
                             value={this.state.status}
@@ -117,7 +114,7 @@ const styles = theme => ({
                         <FormControlLabel
                         control={
                             <Checkbox
-                            name="Stoma Post-HIPEC"
+                            name="StomaPost-HIPEC"
                             checked={this.state.status}
                             onChange={this.handleChangeCheckbox}
                             value={this.state.status}
@@ -126,96 +123,77 @@ const styles = theme => ({
                         label="Stoma Post-HIPEC"
                         />
                         <DialogContent >
-                            <FormControl fullWidth variant="outlined" margin="dense" className={classes.formControl}>
+                            <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl}>
                                     <InputLabel
-                                        // ref={ref => {
-                                        // this.InputLabelRef = ref;
-                                        // }}
                                         htmlFor="outlined-age-native-simple"
                                     >
                                         Stoma Type
                                     </InputLabel>
                                 <Select
-                                        // value={this.state.title}
-                                        // onChange={this.handleChange}
+                                        value={this.state.stomaType}
+                                        onChange={this.handleChange}
                                         input={
                                         <OutlinedInput
-                                            name="title"
+                                            name="stomaType"
                                             id="outlined-age-native-simple"
                                         />
                                         }
                                     >
-
                                         {this.props.reduxState.dropdownOptions.stomaTypeOptions.map( option => {
                                             return(
-                                                <MenuItem value={option.id}>{option.status}</MenuItem>
+                                                <MenuItem key={option.index} value={option.id}>{option.status}</MenuItem>
                                             )
                                             
                                         })}
-                                        
                                     </Select>
                                 </FormControl>
-                            </DialogContent>
-                    </Paper>    
+                            </DialogContent>   
                 </GridItem>
                 <GridItem item xs={4} >
-                    <Paper>
                         <DialogContent >
                             <TextField
-                                // onChange={this.handleChange}
-                                // value={this.state.firstName}
+                                onChange={this.handleChange}
+                                value={this.state.bloodLoss}
                                 name="bloodLoss"
-                                autoFocus
                                 margin="dense"
                                 id="bloodLoss"
                                 label="Bloodloss (ml)"
                                 type="text"
-                                
                                 variant="outlined"
                                 />
                         </DialogContent>
                         <DialogContent >
                             <TextField
-                                // onChange={this.handleChange}
-                                // value={this.state.firstName}
+                                onChange={this.handleChange}
+                                value={this.state.bloodLossTime}
                                 name="bloodLossTime"
-                                autoFocus
                                 margin="dense"
                                 id="bloodLossTime"
                                 label="Bloodloss Time (min)"
                                 type="text"
-                                
                                 variant="outlined"
                                 />
-                        </DialogContent>
-                    </Paper>    
+                        </DialogContent>  
                 </GridItem>
-               
-
             </Grid>
             </FormGroup>
             <hr/>
-            <Paper>
             <FormGroup row>
-            <Grid container spacing={24} >
-                <GridItem item xs={4}>
-                    <Paper>
+                <Grid container spacing={24} >
+                    <GridItem item xs={4}>
                         <DialogContent >
-                            <FormControl fullWidth variant="outlined" margin="dense" className={classes.formControl}>
+                            <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl}>
                                     <InputLabel
-                                        // ref={ref => {
-                                        // this.InputLabelRef = ref;
-                                        // }}
                                         htmlFor="outlined-age-native-simple"
                                     >
                                         HIPEC Regiment
                                     </InputLabel>
                                 <Select
-                                        // value={this.state.title}
-                                        // onChange={this.handleChange}
+                                        value={this.state.hipecRegiment}
+                                        onChange={this.handleChange}
                                         input={
                                         <OutlinedInput
-                                            name="title"
+                                            name="hipecRegiment"
                                             id="outlined-age-native-simple"
                                         />
                                         }
@@ -223,7 +201,7 @@ const styles = theme => ({
 
                                         {this.props.reduxState.dropdownOptions.hipecRegimentOptions.map( option => {
                                             return(
-                                                <MenuItem value={option.id}>{option.status}</MenuItem>
+                                                <MenuItem key={option.index} value={option.id}>{option.status}</MenuItem>
                                             )
                                             
                                         })}
@@ -232,29 +210,26 @@ const styles = theme => ({
                                 </FormControl>
                             </DialogContent>
                             <DialogContent >
-                            <FormControl fullWidth variant="outlined" margin="dense" className={classes.formControl}>
+                            <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl}>
                                     <InputLabel
-                                        // ref={ref => {
-                                        // this.InputLabelRef = ref;
-                                        // }}
                                         htmlFor="outlined-age-native-simple"
                                     >
                                         Duration
                                     </InputLabel>
                                 <Select
-                                        // value={this.state.title}
-                                        // onChange={this.handleChange}
+                                        value={this.state.duration}
+                                        onChange={this.handleChange}
                                         input={
                                         <OutlinedInput
-                                            name="title"
-                                            id="outlined-age-native-simple"
+                                            name="duration"
+                                            id="duration"
                                         />
                                         }
                                     >
 
                                         {this.props.reduxState.dropdownOptions.duration.map( option => {
                                             return(
-                                                <MenuItem value={option.value}>{option.status}</MenuItem>
+                                                <MenuItem key={option.index} value={option.value}>{option.status}</MenuItem>
                                             )
                                             
                                         })}
@@ -262,29 +237,25 @@ const styles = theme => ({
                                     </Select>
                                 </FormControl>
                             </DialogContent>
-                            </Paper>
-                            </GridItem>
-                            <GridItem item xs={4}>
-                            <Paper>
+                        </GridItem>
+                        <GridItem item xs={4}>
                             <DialogContent >
-                            <TextField
-                                // onChange={this.handleChange}
-                                // value={this.state.firstName}
-                                name="volume"
-                                autoFocus
-                                margin="dense"
-                                id="volume"
-                                label="Volume"
-                                type="text"
-                                variant="outlined"
-                                />
+                                <TextField
+                                    onChange={this.handleChange}
+                                    value={this.state.volume}
+                                    name="volume"
+                                    margin="dense"
+                                    id="volume"
+                                    label="Volume"
+                                    type="text"
+                                    variant="outlined"
+                                    />
                         </DialogContent>
                         <DialogContent >
                             <TextField
-                                // onChange={this.handleChange}
-                                // value={this.state.firstName}
+                                onChange={this.handleChange}
+                                value={this.state.concentration}
                                 name="concentration"
-                                autoFocus
                                 margin="dense"
                                 id="concentration"
                                 label="Concentration"
@@ -292,47 +263,38 @@ const styles = theme => ({
                                 variant="outlined"
                                 />
                         </DialogContent>
-                        </Paper>
-                        </GridItem>
-                        <GridItem item xs={4}>
-                        <Paper>
+                    </GridItem>
+                    <GridItem item xs={4}>
                         <DialogContent >
-                            <FormControl fullWidth variant="outlined" margin="dense" className={classes.formControl}>
+                            <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl}>
                                     <InputLabel
-                                        // ref={ref => {
-                                        // this.InputLabelRef = ref;
-                                        // }}
                                         htmlFor="outlined-age-native-simple"
                                     >
                                         R-Score
                                     </InputLabel>
                                 <Select
-                                        // value={this.state.title}
-                                        // onChange={this.handleChange}
+                                        value={this.state.rScore}
+                                        onChange={this.handleChange}
                                         input={
                                         <OutlinedInput
-                                            name="title"
-                                            id="outlined-age-native-simple"
+                                            name="rScore"
+                                            id="rScore"
                                         />
                                         }
                                     >
 
                                         {this.props.reduxState.dropdownOptions.rScoreOptions.map( option => {
                                             return(
-                                                <MenuItem value={option.id}>{option.status}</MenuItem>
+                                                <MenuItem key={option.index} value={option.id}>{option.status}</MenuItem>
                                             )
                                             
                                         })}
-                                        
                                     </Select>
                                 </FormControl>
-                            </DialogContent>
-                    </Paper>    
-                </GridItem>
-            </Grid>
+                        </DialogContent>   
+                    </GridItem>
+                </Grid>
             </FormGroup>
-            </Paper>
-
       </div>
     )};
   }
