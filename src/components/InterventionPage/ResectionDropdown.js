@@ -10,21 +10,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import GridItem from '@material-ui/core/Grid';
-// import Table from '@material-ui/core/Table';
-// import TableBody from '@material-ui/core/TableBody';
-// import TableCell from '@material-ui/core/TableCell';
-// import TableHead from '@material-ui/core/TableHead';
-// import TableRow from '@material-ui/core/TableRow';
-// import MenuItem from '@material-ui/core/MenuItem';
-// import Select from '@material-ui/core/Select';
-// import OutlinedInput from '@material-ui/core/OutlinedInput';
-// import DialogContent from '@material-ui/core/DialogContent';
-// import TextField from '@material-ui/core/TextField';
-// import FormControl from '@material-ui/core/FormControl';
-// import InputLabel from '@material-ui/core/InputLabel';
 
 const styles = theme => ({
     root: {
@@ -52,12 +39,9 @@ const styles = theme => ({
 
   class ResectionDropdown extends Component {
 
-    state = [
-        {id: '',
-        name: '',
-        status: false,     
-        }
-      ];
+    state = {
+
+    }
     
       // Called when the input field changes
       handleChangeCheckbox = (event) => {
@@ -65,6 +49,8 @@ const styles = theme => ({
             ...this.state,
             [event.target.name]: event.target.checked,
         });
+        console.log('checkbox state', this.state);
+        
       }
 
 
@@ -77,18 +63,19 @@ const styles = theme => ({
         <ExpansionPanel>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>Resection</Typography>
+            <Typography className={classes.heading}>(click to expand)</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <FormGroup row>
-            <Grid container spacing={24} >
-            {
-            myOptions.map((option, index) => (
+              <Grid container spacing={24} >
+              {
+              myOptions.map((option, index) => (
                 
                 <GridItem item xs={2} >
-                    <Paper>
                         <FormControlLabel
                         control={
                             <Checkbox
+                            key={option.index} 
                             name={option.name}
                             checked={this.state.status}
                             onChange={this.handleChangeCheckbox}
@@ -96,13 +83,11 @@ const styles = theme => ({
                             />
                         }
                         label={option.name}
-                        />
-                    </Paper>    
+                        />  
                 </GridItem>
-                
-            ))
-            }
-            </Grid>
+              ))
+              }
+              </Grid>
             </FormGroup>
           </ExpansionPanelDetails>
         </ExpansionPanel>
