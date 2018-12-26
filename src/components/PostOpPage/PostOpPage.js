@@ -17,7 +17,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import ReOperation from './ReoperationSelector';
 import Mortality from './MortalitySelector'
 import DischargeStatus from './DischargeStatus';
-// import SeriousAdverseEvents from './SeriousAdverseEvents';
+import SeriousAdverseEvents from './SeriousAdverseEvents';
 
 
 const styles = theme => ({
@@ -200,7 +200,7 @@ class PostOpPage extends Component {
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Grid container spacing={24}>
-                        {/* <SeriousAdverseEvents handleChangeCheckbox={this.handleChangeCheckbox}/> */}
+                        <SeriousAdverseEvents handleChangeCheckbox={this.handleChangeCheckbox}/>
                     </Grid>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
