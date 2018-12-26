@@ -274,10 +274,15 @@ CREATE TABLE "pathology_op_notes" (
 	"id" serial NOT NULL,
 	"patient_id" integer NOT NULL,
 	"pathology_report" varchar,
-	"operative_notes" varchar,
 	CONSTRAINT pathology_op_notes_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
+);
+
+CREATE TABLE "operative_op_notes" (
+    "id" SERIAL PRIMARY KEY,
+    "patient_id" integer NOT NULL REFERENCES patients(id),
+    "operative_notes" varchar
 );
 
 
