@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import GridItem from '@material-ui/core/Grid';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -33,7 +33,8 @@ const styles = theme => ({
 
 class OperativeNotesPage extends Component {
     state = {
-        OperativeNotes: '',
+        operativeNotes: '',
+        userId: '',
     }
 
     handleChange = (event) => {
@@ -43,20 +44,32 @@ class OperativeNotesPage extends Component {
         console.log(this.state);
     }
 
+    saveOperativeNotes = () => {
+        console.log('Operative Notes State', this.state);
+        this.props.dispatch({ type: 'UPDATE_OPERATIVE_NOTE', 
+        payload: {
+            operativeNotes: this.state.operativeNotes,
+            userId: this.props.reduxState.patientReducer.patient.id
+        }
+         })
+         
+    }
+
     render() {
         const { classes } = this.props;
         return(
             <div>
                 <h1>Operative Notes </h1>
+                <Button variant="outlined" onClick={this.saveOperativeNotes}>Save</Button>
                 <Grid container spacing={24} >
                     <GridItem item xs={12}>
                             <DialogContent >
                                 <TextField
                                     onChange={this.handleChange}
-                                    value={this.state.OperativeNotes}
-                                    name="OperativeNotes"
+                                    value={this.state.operativeNotes}
+                                    name="operativeNotes"
                                     margin="dense"
-                                    id="OperativeNotes"
+                                    id="operativeNotes"
                                     label="Operative Notes"
                                     type="text"
                                     fullWidth={true}

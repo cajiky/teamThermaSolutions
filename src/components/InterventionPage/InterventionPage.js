@@ -23,6 +23,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
     root: {
@@ -56,19 +57,19 @@ const styles = theme => ({
 
   class InterventionPage extends Component {
     state = {
-        central: '',
-        rightUpper:'',
-        Epigastrium:'',
-        leftUpper:'',
-        leftFlank:'',
-        leftLower:'',
-        pelvis:'',
-        rightLower:'',
-        rightFlank:'',
-        upperJejunum:'',
-        lowerJejunum:'',
-        upperIlium:'',
-        lowerIlium:'',
+        central: 0 ,
+        rightUpper: 0,
+        Epigastrium: 0,
+        leftUpper:0,
+        leftFlank:0,
+        leftLower:0,
+        pelvis:0,
+        rightLower:0,
+        rightFlank:0,
+        upperJejunum:0,
+        lowerJejunum:0,
+        upperIlium:0,
+        lowerIlium:0,
         surgeonOne: '',
         surgeonTwo:'',
         surgeonThree: '',
@@ -76,6 +77,50 @@ const styles = theme => ({
         hipecType:'',
         reasonOC:'',
         expanded: true,
+        ///additionalPageInfo from here down
+        checked: '',
+        anastomosis: false ,
+        AnastomosisNumber:'', 
+        revisionStoma: false,
+        stomaType:'',
+        bloodLoss:'',
+        volume: '',
+        hipecRegiment: '',
+        bloodLossTime: '',
+        concentration: '',
+        rScore: '',
+        duration: '',
+        stomaPostHIPEC: false, 
+        StomaPostHIPECType: '',
+        ///ResectionDropdown from here down
+        interventionId: '',
+        ovaries: false,
+        uterus: false,
+        omentum:false,
+        rectum:false,
+        sigmoid:false,
+        left_colon:false,
+        transverse_colon:false,
+        right_colon:false,
+        ileocaecal: false,
+        appendix:false,
+        duodenum:false,
+        jejunum: false,
+        ileum:false,
+        gallbladder: false,
+        stomach: false,
+        spleen:false,
+        diagphram_l:false,
+        diagphram_r:false,
+        pancreas:false,
+        bladder:false,
+        urether:false,
+        lymphnodes:false,
+        left_peritoneum:false,
+        right_peritoneum:false,
+        peritoneum:false,
+        pelvisResection:false,
+
     }
 
     componendDidMount(){
@@ -99,10 +144,31 @@ const styles = theme => ({
         })
     }
 
+    saveForm = () => {
+        console.log('Save Intervention State', this.state);
+        this.props.dispatch({ type: 'POST_INTERVENTION_PAGE', 
+        payload: {
+            interventionState: this.state,
+            userId: this.props.reduxState.patientReducer.patient.id
+        }
+         })
+         
+    }
+
+    handleChangeCheckbox = (event) => {
+        this.setState({
+            ...this.state,
+            [event.target.name]: event.target.checked,
+        });
+        console.log('checkbox state', this.state);
+        
+      }
+
     render() {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
+      <Button variant="outlined" onClick={this.saveForm}>Save</Button>
         <ExpansionPanel onclick={this.expansionPanel} >
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>Peritoneal Cancer Index (PCI)</Typography>
@@ -607,8 +673,8 @@ const styles = theme => ({
           </ExpansionPanelDetails>
         </ExpansionPanel>
 
-        <ResectionDropdown/>
-        <AdditionalPageInfo/>
+        <ResectionDropdown state={this.state} handleChange={this.handleChange} handleChangeCheckbox={this.handleChangeCheckbox}/>
+        <AdditionalPageInfo state={this.state} handleChange={this.handleChange} handleChangeCheckbox={this.handleChangeCheckbox}/>
       </div>
     )};
   }
