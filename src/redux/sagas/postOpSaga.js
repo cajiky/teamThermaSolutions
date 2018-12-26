@@ -17,15 +17,26 @@ function* addPostOp(action) {
 
 // worker Saga: will be fired on "FETCH_POST_OP" actions
 function* fetchPostOp(action) {
-  console.log('in fetch post op Saga', action.payload);
+  // console.log('in fetch post op Saga', action.payload);
   try {
     const response = yield axios.get('api/post_op/1');
-    console.log('response from post op:', response);
-    
+    console.log('response from post op call :', response);
     // set state
     yield put({ type: 'SET_POST_OP', payload: response.data });
+    console.log('after SET POST OP:', response.data);
   } catch (error) {
     console.log('Post op get request failed', error);
+  }
+}
+
+function* updatePostOp(action) {
+  console.log('in update follow up Saga', action.payload);
+  try {
+      yield call(axios.put, `/api/post_op`, action.payload);
+      yield put( { type: 'FETCH_POST_OP' } );
+  } catch (error) {
+      console.log(error);
+      alert('Unable to update post op');
   }
 }
 
@@ -46,6 +57,7 @@ function* fetchPostOp(action) {
 function* postOpSaga() {
   yield takeLatest('ADD_POST_OP', addPostOp);
   yield takeLatest('FETCH_POST_OP', fetchPostOp);
+  yield takeLatest('UPDATE_POST_OP', updatePostOp);
   // yield takeLatest('DELETE_ITEM', deleteItem);
 }
 

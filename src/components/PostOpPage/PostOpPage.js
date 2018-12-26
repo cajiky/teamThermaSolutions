@@ -7,10 +7,9 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-// import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-// import FormHelperText from '@material-ui/core/FormHelperText';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -18,7 +17,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import ReOperation from './ReoperationSelector';
 import Mortality from './MortalitySelector'
 import DischargeStatus from './DischargeStatus';
-import SeriousAdverseEvents from './SeriousAdverseEvents';
+// import SeriousAdverseEvents from './SeriousAdverseEvents';
 
 
 const styles = theme => ({
@@ -52,6 +51,7 @@ const styles = theme => ({
 class PostOpPage extends Component {
 
     state = {
+        changesMade: false,
         id: 0,
         icu_stays: 0,
         mcu_stays: 0,
@@ -65,14 +65,15 @@ class PostOpPage extends Component {
         discharge_notes: '',
     };
 
-    getPostOp = () => {
-        this.props.dispatch({type: 'FETCH_POST_OP'});
-        console.log('after FETCH', this.props.postOp);
-    }
+    savePostOp = () => {
+        // alert('Add new followup');
+        if (this.state.changesMade) {
+            console.log('before update post op', this.state)
+            this.props.dispatch({ type: 'UPDATE_POST_OP', payload: this.state});
+        }
+    };
 
     componentDidMount () {
-        // console.log('in component mount post op', this.props.reduxState.postOp.serious_advese_event);
-        this.getPostOp()
         this.setState({
             id: this.props.postOp.id,
             icu_stays: this.props.postOp.icu_stays,
@@ -86,10 +87,16 @@ class PostOpPage extends Component {
             status_at_discharge: this.props.postOp.status_at_discharge,
             discharge_notes: this.props.postOp.discharge_notes,
         })
+        console.log('immediately after set state', this.state);
     }
-    
+
+    componentWillUnmount () {
+        this.savePostOp();
+    }
+
     // Called when the input field changes
     handleChange = (event) => {
+        this.state.changesMade = true;
         this.setState({
             ...this.state,
             [event.target.name]: event.target.value,
@@ -98,6 +105,8 @@ class PostOpPage extends Component {
 
     // Called when the input field changes
     handleChangeCheckbox = (event) => {
+        console.log('in checkbox', this.state.serious_advese_event);
+        this.state.changesMade = true;
         this.setState({
             ...this.state,
             [event.target.name]: event.target.checked,
@@ -106,7 +115,7 @@ class PostOpPage extends Component {
     
     render() {
         const { classes } = this.props;
-        
+
         return(
             <div>
             <Grid container spacing={24}>
@@ -136,8 +145,7 @@ class PostOpPage extends Component {
                     shrink: true,
                 }}
                 variant="outlined"
-                />      
-                
+                />  
                 </Grid>
                 <Grid item xs>
                 <TextField
@@ -154,25 +162,21 @@ class PostOpPage extends Component {
                     shrink: true,
                 }}
                 variant="outlined"
-                />      
-                
+                />
                 </Grid>
-                {/* <Grid item xs>
-                
-                </Grid> */}
             </Grid>
             <FormGroup row>
-                        <FormControlLabel
-                        control={
-                            <Checkbox
-                            name="serious_advese_event"
-                            checked={this.state.serious_advese_event}
-                            onChange={this.handleChangeCheckbox}
-                            value={this.state.serious_advese_event}
-                            />
-                        }
-                        label="Serious Adverse Event"
-                        />
+                <FormControlLabel
+                control={
+                    <Checkbox
+                    name="serious_advese_event"
+                    checked={this.state.serious_advese_event}
+                    onChange={this.handleChangeCheckbox}
+                    // value={this.state.serious_advese_event}
+                    />
+                }
+                label="Serious Adverse Event"
+                />
             </FormGroup>
             <ExpansionPanel expanded={this.state.serious_advese_event}>
                 <ExpansionPanelSummary >
@@ -196,7 +200,7 @@ class PostOpPage extends Component {
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Grid container spacing={24}>
-                        <SeriousAdverseEvents handleChangeCheckbox={this.handleChangeCheckbox}/>
+                        {/* <SeriousAdverseEvents handleChangeCheckbox={this.handleChangeCheckbox}/> */}
                     </Grid>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
@@ -232,6 +236,11 @@ class PostOpPage extends Component {
                 {/* <h1>PostOp Page</h1>
                 <h3>This is the PostOpPage and includes the following inputs and drowdowns</h3>
                 <h3>ICU Stays, Hospital Stays, MCU Stay, Stay Notes, Serious Adverse Event, ReOperation, Hospital Mortality, Status as Discharge, Notes</h3> */}
+            <Button onClick={this.savePostOp} className={classes.button}
+                variant="contained" color="primary">
+                Save
+            </Button>      
+
             </div>
 
         )

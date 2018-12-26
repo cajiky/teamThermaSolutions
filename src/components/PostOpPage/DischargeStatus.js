@@ -41,7 +41,7 @@ class DischargeStatus extends Component {
 
     return (
       <FormControl fullWidth="true" variant="outlined">
-          <InputLabel htmlFor="status_at_discharge">Discharge Status</InputLabel>
+          <InputLabel shrink htmlFor="status_at_discharge">Discharge Status</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
             value={this.props.status_at_discharge}

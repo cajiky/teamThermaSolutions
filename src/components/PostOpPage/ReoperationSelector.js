@@ -40,10 +40,10 @@ class ReoperationSelector extends Component {
 
     return (
       <FormControl fullWidth={true} variant="outlined">
-          <InputLabel htmlFor="reoperation_id">Reoperation</InputLabel>
+          <InputLabel shrink htmlFor="reoperation_id">Reoperation</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
-            name="reoperation"
+            // name="reoperation"
             value={this.props.reoperation}
             input={
               <OutlinedInput

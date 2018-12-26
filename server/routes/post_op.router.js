@@ -41,13 +41,28 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 // });
 
 router.put('/', rejectUnauthenticated, (req, res) => {
+    const id = req.body.id
+    const icu_stays = req.body.icu_stays
+    const mcu_stays = req.body.mcu_stays;
+    const hospital_stays = req.body.hospital_stays;
+    const notes = req.body.notes;
+    const serious_advese_event = req.body.serious_advese_event;
+    const score = req.body.score;
+    const reoperation = req.body.reoperation;
+    const hospital_mortality = req.body.hospital_mortality;
+    const status_at_discharge = req.body.status_at_discharge;
+    const discharge_notes = req.body.discharge_notes;
+
     const queryText = `UPDATE postop 
         SET icu_stays=$2, mcu_stays=$3, hospital_stays=$4,
-        notes=$5, serious_advese_event=$6, score=%7,
+        notes=$5, serious_advese_event=$6, score=$7,
         reoperation=$8, hospital_mortality=$9,
         status_at_discharge=$10, discharge_notes=$11
         WHERE id=$1`;
-    pool.query(queryText, [req.body.id, req.body])
+
+    pool.query(queryText, [id, icu_stays, mcu_stays, hospital_stays,
+        notes, serious_advese_event, score, reoperation, hospital_mortality,
+        status_at_discharge, discharge_notes])
       .then((result) => { res.send(result.rows); })
       .catch((err) => {
         console.log('Error completing UPDATE post op query', err);
