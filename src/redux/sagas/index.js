@@ -5,6 +5,7 @@ import userSaga from './userSaga';
 import patientSaga from './patientSaga';
 import postOpSaga from './postOpSaga';
 import followUpSaga from './followUpSaga';
+import recurrenceSaga from './recurrenceSaga';
 import addNewUserSaga from './addNewUserSaga';
 import allUsersSaga from './allUsersSaga';
 import editIndividualUserSaga from './editIndividualProfileSaga';
@@ -25,6 +26,7 @@ export default function* rootSaga() {
     patientSaga(),
     postOpSaga(),
     followUpSaga(),
+    recurrenceSaga(),
     addNewUserSaga(),
     allUsersSaga(),
     editIndividualUserSaga(),

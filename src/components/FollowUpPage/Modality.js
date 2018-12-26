@@ -17,6 +17,7 @@ class Modality extends Component {
 
   renderOptions() {
     // 
+    console.log('this.props.recurrence', this.props.recurrence)
     return this.props.reduxState.dropdownOptions.recModalityOptions.map((option, i) => {
       return (
         <MenuItem
@@ -33,15 +34,15 @@ class Modality extends Component {
 
     return (
       <FormControl fullWidth="true" variant="outlined">
-          <InputLabel htmlFor="modality">Modality</InputLabel>
+          <InputLabel shrink htmlFor="modality">Modality</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
-            value={'Yes'}
+            value={this.props.recurrence.rec_modality}
             input={
               <OutlinedInput
-                  value={this.props.modality}
-                  name="modality"
-                  id="modality"
+                  value={this.props.recurrence.rec_modality}
+                  name="rec_modality"
+                  id="rec_modality"
               />
               }
             onChange={this.props.handleChange}

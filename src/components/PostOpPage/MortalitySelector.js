@@ -40,7 +40,7 @@ class MortalitySelector extends Component {
 
     return (
       <FormControl variant="outlined" fullWidth="true">
-          <InputLabel htmlFor="hospital_mortality">Hospital Mortality</InputLabel>
+          <InputLabel shrink htmlFor="hospital_mortality">Hospital Mortality</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
             value={this.props.hospital_mortality}

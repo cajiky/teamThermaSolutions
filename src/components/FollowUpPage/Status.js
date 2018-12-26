@@ -33,13 +33,13 @@ class Status extends Component {
 
     return (
       <FormControl fullWidth="true" variant="outlined">
-          <InputLabel htmlFor="status">Status</InputLabel>
+          <InputLabel shrink htmlFor="status">Status</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
-            value={'Yes'}
+            value={this.props.recurrence.status}
             input={
               <OutlinedInput
-                  value={this.props.status}
+                  value={this.props.recurrence.status}
                   name="status"
                   id="status"
               />
