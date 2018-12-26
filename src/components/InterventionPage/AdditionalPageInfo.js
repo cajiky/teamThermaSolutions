@@ -39,34 +39,6 @@ const styles = theme => ({
   });
 
   class AdditionalPageInfo extends Component {
-    state = {  
-        AnastomosisNumber:'', 
-        stomaType:'',
-        bloodLoss:'',
-        volume: '',
-        hipecRegiment: '',
-        bloodLossTime: '',
-        concentration: '',
-        rScore: '',
-        duration: '',
-        }
-
-    // Called when the input field changes
-    handleChangeCheckbox = (event) => {
-        this.setState({
-            ...this.state,
-            [event.target.name]: event.target.checked,
-        });
-        console.log('additional page state', this.state);
-        
-      }
-
-      handleChange = (event) => {
-        this.setState ({
-            [event.target.name]: event.target.value,
-        })
-        console.log(this.state);
-    }
 
     render() {
     const { classes } = this.props;
@@ -78,18 +50,18 @@ const styles = theme => ({
                         <FormControlLabel
                         control={
                             <Checkbox
-                            name="Anastomosis"
-                            checked={this.state.status}
-                            onChange={this.handleChangeCheckbox}
-                            value={this.state.status}
+                            name="anastomosis"
+                            checked={this.props.state.status}
+                            onChange={this.props.handleChangeCheckbox}
+                            value={this.props.state.status}
                             />
                         }
                         label="Anastomosis"
                         />
                         <DialogContent >
                                 <TextField
-                                onChange={this.handleChange}
-                                value={this.state.AnastomosisNumber}
+                                onChange={this.props.handleChange}
+                                value={this.props.state.AnastomosisNumber}
                                 name="AnastomosisNumber"
                                 margin="dense"
                                 id="AnastomosisNumber"
@@ -103,10 +75,10 @@ const styles = theme => ({
                         <FormControlLabel
                         control={
                             <Checkbox
-                            name="RevisionStoma"
-                            checked={this.state.status}
-                            onChange={this.handleChangeCheckbox}
-                            value={this.state.status}
+                            name="revisionStoma"
+                            checked={this.props.state.status}
+                            onChange={this.props.handleChangeCheckbox}
+                            value={this.props.state.status}
                             />
                         }
                         label="Revision Stoma"
@@ -114,10 +86,10 @@ const styles = theme => ({
                         <FormControlLabel
                         control={
                             <Checkbox
-                            name="StomaPost-HIPEC"
-                            checked={this.state.status}
-                            onChange={this.handleChangeCheckbox}
-                            value={this.state.status}
+                            name="stomaPostHIPEC"
+                            checked={this.props.state.status}
+                            onChange={this.props.handleChangeCheckbox}
+                            value={this.props.state.status}
                             />
                         }
                         label="Stoma Post-HIPEC"
@@ -130,8 +102,8 @@ const styles = theme => ({
                                         Stoma Type
                                     </InputLabel>
                                 <Select
-                                        value={this.state.stomaType}
-                                        onChange={this.handleChange}
+                                        value={this.props.state.stomaType}
+                                        onChange={this.props.handleChange}
                                         input={
                                         <OutlinedInput
                                             name="stomaType"
@@ -152,8 +124,8 @@ const styles = theme => ({
                 <GridItem item xs={4} >
                         <DialogContent >
                             <TextField
-                                onChange={this.handleChange}
-                                value={this.state.bloodLoss}
+                                onChange={this.props.handleChange}
+                                value={this.props.state.bloodLoss}
                                 name="bloodLoss"
                                 margin="dense"
                                 id="bloodLoss"
@@ -164,8 +136,8 @@ const styles = theme => ({
                         </DialogContent>
                         <DialogContent >
                             <TextField
-                                onChange={this.handleChange}
-                                value={this.state.bloodLossTime}
+                                onChange={this.props.handleChange}
+                                value={this.props.state.bloodLossTime}
                                 name="bloodLossTime"
                                 margin="dense"
                                 id="bloodLossTime"
@@ -189,8 +161,8 @@ const styles = theme => ({
                                         HIPEC Regiment
                                     </InputLabel>
                                 <Select
-                                        value={this.state.hipecRegiment}
-                                        onChange={this.handleChange}
+                                        value={this.props.state.hipecRegiment}
+                                        onChange={this.props.handleChange}
                                         input={
                                         <OutlinedInput
                                             name="hipecRegiment"
@@ -217,8 +189,8 @@ const styles = theme => ({
                                         Duration
                                     </InputLabel>
                                 <Select
-                                        value={this.state.duration}
-                                        onChange={this.handleChange}
+                                        value={this.props.state.duration}
+                                        onChange={this.props.handleChange}
                                         input={
                                         <OutlinedInput
                                             name="duration"
@@ -241,8 +213,8 @@ const styles = theme => ({
                         <GridItem item xs={4}>
                             <DialogContent >
                                 <TextField
-                                    onChange={this.handleChange}
-                                    value={this.state.volume}
+                                    onChange={this.props.handleChange}
+                                    value={this.props.state.volume}
                                     name="volume"
                                     margin="dense"
                                     id="volume"
@@ -253,8 +225,8 @@ const styles = theme => ({
                         </DialogContent>
                         <DialogContent >
                             <TextField
-                                onChange={this.handleChange}
-                                value={this.state.concentration}
+                                onChange={this.props.handleChange}
+                                value={this.props.state.concentration}
                                 name="concentration"
                                 margin="dense"
                                 id="concentration"
@@ -273,8 +245,8 @@ const styles = theme => ({
                                         R-Score
                                     </InputLabel>
                                 <Select
-                                        value={this.state.rScore}
-                                        onChange={this.handleChange}
+                                        value={this.props.state.rScore}
+                                        onChange={this.props.handleChange}
                                         input={
                                         <OutlinedInput
                                             name="rScore"
