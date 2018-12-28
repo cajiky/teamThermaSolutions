@@ -87,6 +87,7 @@ class PostOpPage extends Component {
         if (this.state.changesMade) {
             console.log('before update post op', this.state)
             this.props.dispatch({ type: 'UPDATE_POST_OP', payload: this.state});
+            this.props.dispatch({ type: 'UPDATE_ADVERSE_EVENT', payload: this.state});
         }
     };
 
@@ -141,8 +142,11 @@ class PostOpPage extends Component {
         // 2. Make a shallow copy of the item you want to mutate
         let item = {...items[event.target.value - 1]};
         // 3. Replace the property you're intested in
-        item.postop_id = 1;
-        // item.clavian_score = 4;
+        item.checked = !item.checked;
+        // if checked off then remove the clavian score
+        if (item.checked == false) {
+            item.clavian_score = null;
+        }
         // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
         items[event.target.value - 1] = item;
         // 5. Set the state to our new copy

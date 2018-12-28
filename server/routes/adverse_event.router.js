@@ -13,10 +13,11 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 // order by event_options.id
 
 //   const queryText = 'SELECT * FROM events WHERE postop_id=$1';
-    const queryText = `SELECT event_options.name, event_options.sort as id, postop_id, clavian_score
+    const queryText = `SELECT event_options.name, event_options.sort as id, 
+                        selected_events.checked, postop_id, clavian_score
                         FROM event_options
                         LEFT OUTER JOIN (
-                            SELECT * FROM events
+                            SELECT *, true as checked FROM events
                             WHERE postop_id = $1) AS selected_events
                         ON event_options.id = selected_events.event_id
                         ORDER BY event_options.sort`

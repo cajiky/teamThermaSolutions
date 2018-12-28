@@ -3,17 +3,17 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 
 // worker SAGA: will be fired on 'ADD_POST_OP' action
 // user entered a new patient .. will add a blank row for patient
-function* addAdverseEvent(action) {
-  try {
-      // axios asynch call to add item on database
-      yield call(axios.post, '/api/adverse_event', action.payload);
-      // will need to make a call to update the list of item
-      // yield put( { type: 'FETCH_ITEMS' } );
-  }
-  catch (error) {
-      console.log('error with add adverse events post request');
-  }
-}
+// function* addAdverseEvent(action) {
+//   try {
+//       // axios asynch call to add item on database
+//       yield call(axios.post, '/api/adverse_event', action.payload);
+//       // will need to make a call to update the list of item
+//       // yield put( { type: 'FETCH_ITEMS' } );
+//   }
+//   catch (error) {
+//       console.log('error with add adverse events post request');
+//   }
+// }
 
 // worker Saga: will be fired on "FETCH_POST_OP" actions
 function* fetchAdverseEvent(action) {
@@ -28,16 +28,27 @@ function* fetchAdverseEvent(action) {
   }
 }
 
-// function* updatePostOp(action) {
-//   console.log('in update follow up Saga', action.payload);
-//   try {
-//       yield call(axios.put, `/api/post_op`, action.payload);
-//       yield put( { type: 'FETCH_POST_OP' } );
-//   } catch (error) {
-//       console.log(error);
-//       alert('Unable to update post op');
-//   }
-// }
+function* updateAdverseEvent(action) {
+  // console.log('in update adverse event Saga', action.payload);
+  let updateQuery = '';
+  action.payload.adverse_events.forEach(element => {
+    if (element.checked == true) { 
+      // console.log(element);
+      if (element.clavian_score != null){
+        updateQuery = updateQuery + element.id + ':' + element.clavian_score + ','
+      }
+    }
+  });
+  console.log('what to update in adverse_events table:',updateQuery);
+
+  // try {
+  //     yield call(axios.put, `/api/adverse_event`, action.payload);
+  //     yield put( { type: 'FETCH_ADVERSE_EVENT' } );
+  // } catch (error) {
+  //     console.log(error);
+  //     alert('Unable to update adverse event');
+  // }
+}
 
 // Will we ever need this? Will they remove patients?
 // worker SAGA: will be fired on 'DELETE_ITEM' actions
@@ -54,7 +65,7 @@ function* fetchAdverseEvent(action) {
 // }
 
 function* adverseEventSaga() {
-  yield takeLatest('ADD_ADVERSE_EVENT', addAdverseEvent);
+  yield takeLatest('UPDATE_ADVERSE_EVENT', updateAdverseEvent);
   yield takeLatest('FETCH_ADVERSE_EVENT', fetchAdverseEvent);
   // yield takeLatest('UPDATE_ADVERSE_EVENT', updateAdverseEvent);
   // yield takeLatest('DELETE_ITEM', deleteItem);

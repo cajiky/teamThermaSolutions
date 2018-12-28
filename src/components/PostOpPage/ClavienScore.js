@@ -38,8 +38,8 @@ class ClavienScore extends Component {
       <FormControl>
           {/* <InputLabel htmlFor="clavien_score">Clavien</InputLabel> */}
           <Select
-            value={this.props.clavianScore}
-            disabled={this.props.adverseEvent == null}
+            // value={this.props.clavianScore}
+            disabled={!this.props.checked}
             id={this.props.id}
             input={
               <Input
