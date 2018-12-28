@@ -5,10 +5,11 @@ import user from './userReducer';
 import dropdownOptions from './dropdownOptionsReducer';
 import patientReducer from './patientReducer';
 import postOp from './postOpReducer';
+import adverseEvents from './adverseEventsReducer';
 import followUp from './followUpReducer';
 import recurrenceReducer from './recurrenceReducer';
 import allUsersReducer from './allUsersReducer';
-import individualUserReducer from './individualUserReducer'
+import individualUserReducer from './individualUserReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   patientReducer,
   postOp, // will contain post op information for patient_id
   followUp, // will contain follow up information for patient_id
+  adverseEvents, // will contain adverse events for patient_id
   recurrenceReducer, // will contain recurrence information for followup_id
   allUsersReducer,
   individualUserReducer,

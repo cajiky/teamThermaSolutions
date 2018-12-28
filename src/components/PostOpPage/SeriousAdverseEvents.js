@@ -17,42 +17,47 @@ const styles = theme => ({
 
 class SeriousAdverseEvent extends Component {
 
-  state = [
-    {id: null,
-    clavianScore: null}
-  ];
+  // state = this.props.adverse_events;
 
-  // Called when the input field changes
-  handleChangeCheckbox = (event) => {
-    this.setState({
-        ...this.state,
-        [event.target.name]: event.target.checked,
-    });
-  }
+  // // Called when the input field changes
+  // handleChangeCheckbox = (event) => {
+  //   this.setState({
+  //       ...this.state,
+  //       [event.target.name]: event.target.checked,
+  //   });
+  // }
 
 
   render(){
 
-    const myOptions = this.props.reduxState.dropdownOptions.seriousAdverseEvents;
+    // const myOptions = this.props.reduxState.dropdownOptions.seriousAdverseEvents;
+    // const adverseEvents = this.props.reduxState.adverseEvents;
+
     const { classes } = this.props;
+
+    console.log('passed adverse events in render of sae:', this.props.adverse_events);
 
     return (
       <FormGroup row>
         {
-          myOptions.map((option, index) => (
-            <Grid item xs={3}>
+          this.props.adverse_events.map((event, index) => (
+            <Grid key={index} item xs={3}>
+              {/* {JSON.stringify(event)}
+              {JSON.stringify(event.id)} */}
               <FormControlLabel
               control={
                   <Checkbox
-                  name={option.name}
-                  checked={option.id == 3}
-                  onChange={this.handleChangeCheckbox}
-                  value={option.id}
+                  // key={index}
+                  name={event.name}
+                  checked={event.postop_id != null}
+                  onChange={this.props.handleChangeAdverseEvent}
+                  value={event.id}
                   />
               }
-              label={option.sae_type}
+              label={event.name}
               />
-              <ClavienScore />
+              <ClavienScore adverseEvent={event.postop_id} clavianScore={event.clavian_score} id={event.id}
+                handleChangeClavianScore={this.props.handleChangeClavianScore}/>
               </Grid>
           ))
         }

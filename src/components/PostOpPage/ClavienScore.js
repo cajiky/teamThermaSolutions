@@ -24,7 +24,7 @@ class ClavienScore extends Component {
       return (
         <MenuItem
           key={i}
-          value={option.score}>
+          value={option.id}>
           {option.score}
         </MenuItem>
       ); // end return
@@ -33,20 +33,22 @@ class ClavienScore extends Component {
 
   render(){
     const { classes } = this.props;
-
+    // console.log('in clavian:', this.props.id)
     return (
       <FormControl>
           {/* <InputLabel htmlFor="clavien_score">Clavien</InputLabel> */}
           <Select
-            value={null}
+            value={this.props.clavianScore}
+            disabled={this.props.adverseEvent == null}
+            id={this.props.id}
             input={
               <Input
-                  value={null}
-                  name="clavien_score"
-                  id="clavien_score"
+                  value={this.props.clavianScore}
+                  name={this.props.id}
+                  id={this.props.id}
               />
               }
-            onChange={this.props.handleChange}
+            onChange={this.props.handleChangeClavianScore}
           >
             {this.renderOptions()}
           </Select> 

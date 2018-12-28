@@ -12,6 +12,7 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const patientRouter = require('./routes/newPatient.router');
 const postOpRouter = require('./routes/post_op.router');
+const adverseEventsRouter = require('./routes/adverse_event.router');
 const followUpRouter = require('./routes/follow_up.router');
 const recurrenceRouter = require('./routes/recurrence.router');
 const manageUsersRouter = require('./routes/manageUsers.router');
@@ -32,6 +33,7 @@ app.use('/api/user', userRouter);
 app.use('/api/add-a-patient', patientRouter);
 app.use('/api/find-a-patient', patientRouter);
 app.use('/api/post_op', postOpRouter);
+app.use('/api/adverse_event', adverseEventsRouter);
 app.use('/api/follow_up', followUpRouter);
 app.use('/api/recurrence', recurrenceRouter);
 app.use('/addNewUser', manageUsersRouter)

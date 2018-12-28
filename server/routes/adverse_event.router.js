@@ -6,9 +6,22 @@ const router = express.Router();
 
 // GET ROUTER TO RETRIEVE ADVERSE EVENTS FOR PATIENT ID
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-  // console.log('query.id', req.query.id);
-  const queryText = 'SELECT * FROM events WHERE patient_id=$1';
-  pool.query(queryText, [req.params.id])      
+//   console.log('query.id', req.query.id);
+
+// select event_options.id, postop_id, clavian_score from event_options 
+// left outer join (select * from events where postop_id = 1) as foo on event_options.id = foo.event_id
+// order by event_options.id
+
+//   const queryText = 'SELECT * FROM events WHERE postop_id=$1';
+    const queryText = `SELECT event_options.name, event_options.sort as id, postop_id, clavian_score
+                        FROM event_options
+                        LEFT OUTER JOIN (
+                            SELECT * FROM events
+                            WHERE postop_id = $1) AS selected_events
+                        ON event_options.id = selected_events.event_id
+                        ORDER BY event_options.sort`
+
+    pool.query(queryText, [req.params.id])      
       .then(results => res.send(results.rows))
       .catch(error => {
           console.log('Error making SELECT for adverse events:', error);

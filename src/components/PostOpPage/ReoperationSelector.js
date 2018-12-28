@@ -44,7 +44,7 @@ class ReoperationSelector extends Component {
           <Select fullWidth={true}
             variant="outlined" 
             // name="reoperation"
-            value={this.props.reoperation}
+            // value={this.props.reoperation}
             input={
               <OutlinedInput
                   // labelWidth=100

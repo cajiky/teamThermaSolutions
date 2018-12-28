@@ -1,13 +1,13 @@
-const postOpReducer = (state = {}, action) => {
-  // console.log('in post op reducer');
+const adverseEventsReducer = (state = [], action) => {
+  console.log('in adverse events reducer', action.payload);
   switch (action.type) {
-    case 'SET_POST_OP':
+    case 'SET_ADVERSE_EVENT':
       return action.payload;
     default:
       return state;
   }
 };
 
-// postOp will be on the redux state at:
-// state.postOp
-export default postOpReducer;
+// adverseEvents will be on the redux state at:
+// state.adverseEvents
+export default adverseEventsReducer;

@@ -46,23 +46,40 @@ const styles = theme => ({
     }
 });
 
-
+// const adverseEvent = {
+//     id: 0,
+//     option: '',
+//     score: null,
+// }
 
 class PostOpPage extends Component {
 
     state = {
         changesMade: false,
-        id: 0,
-        icu_stays: 0,
-        mcu_stays: 0,
-        hospital_stays: 0,
-        notes: '',
-        serious_advese_event: false,
-        score: '',
-        reoperation: null,
-        hospital_mortality: null,
-        status_at_discharge: 0,
-        discharge_notes: '',
+        // id: 0,
+        // icu_stays: 0,
+        // mcu_stays: 0,
+        // hospital_stays: 0,
+        // notes: '',
+        // serious_advese_event: false,
+        // score: '',
+        // reoperation: null,
+        // hospital_mortality: null,
+        // status_at_discharge: 0,
+        // discharge_notes: '',
+        // adverse_events: [],
+        id: this.props.postOp.id,
+        icu_stays: this.props.postOp.icu_stays,
+        mcu_stays: this.props.postOp.mcu_stays,
+        hospital_stays: this.props.postOp.hospital_stays,
+        notes: this.props.postOp.notes,
+        serious_advese_event: this.props.postOp.serious_advese_event,
+        score: this.props.postOp.score,
+        reoperation: this.props.postOp.reoperation,
+        hospital_mortality: this.props.postOp.hospital_mortality,
+        status_at_discharge: this.props.postOp.status_at_discharge,
+        discharge_notes: this.props.postOp.discharge_notes,
+        adverse_events: this.props.adverseEvents,
     };
 
     savePostOp = () => {
@@ -75,6 +92,8 @@ class PostOpPage extends Component {
 
     componentDidMount () {
         this.setState({
+            ...this.state,
+            // changesMade = false;
             id: this.props.postOp.id,
             icu_stays: this.props.postOp.icu_stays,
             mcu_stays: this.props.postOp.mcu_stays,
@@ -86,8 +105,9 @@ class PostOpPage extends Component {
             hospital_mortality: this.props.postOp.hospital_mortality,
             status_at_discharge: this.props.postOp.status_at_discharge,
             discharge_notes: this.props.postOp.discharge_notes,
+            adverse_events: this.props.adverseEvents,
         })
-        console.log('immediately after set state', this.state);
+        // console.log('adverse events', this.props.adverseEvents);
     }
 
     componentWillUnmount () {
@@ -96,9 +116,10 @@ class PostOpPage extends Component {
 
     // Called when the input field changes
     handleChange = (event) => {
-        this.state.changesMade = true;
+        // this.state.changesMade = true;
         this.setState({
             ...this.state,
+            changesMade: true,
             [event.target.name]: event.target.value,
         });
     }
@@ -106,16 +127,55 @@ class PostOpPage extends Component {
     // Called when the input field changes
     handleChangeCheckbox = (event) => {
         console.log('in checkbox', this.state.serious_advese_event);
-        this.state.changesMade = true;
+        // this.state.changesMade = true;
         this.setState({
             ...this.state,
+            changesMade: true,
             [event.target.name]: event.target.checked,
         });
     }
     
+    handleChangeAdverseEvent = (event) => {
+        // 1. Make a shallow copy of the items
+        let items = [...this.state.adverse_events];
+        // 2. Make a shallow copy of the item you want to mutate
+        let item = {...items[event.target.value - 1]};
+        // 3. Replace the property you're intested in
+        item.postop_id = 1;
+        // item.clavian_score = 4;
+        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+        items[event.target.value - 1] = item;
+        // 5. Set the state to our new copy
+        this.setState({
+            ...this.state,
+            changesMade: true,
+            adverse_events: items,
+        });
+    }
+
+    handleChangeClavianScore = (event) => {
+        console.log('in change clavian', event.target.name, event.target.value);
+        
+        // 1. Make a shallow copy of the items
+        let items = [...this.state.adverse_events];
+        // 2. Make a shallow copy of the item you want to mutate
+        let item = {...items[event.target.name - 1]};
+        // 3. Replace the property you're intested in
+        // item.postop_id = 1;
+        item.clavian_score = event.target.value;
+        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+        items[event.target.name - 1] = item;
+        // 5. Set the state to our new copy
+        this.setState({
+            ...this.state,
+            changesMade: true,
+            adverse_events: items,
+        });
+    }
+
     render() {
         const { classes } = this.props;
-
+        console.log('in render', this.state);
         return(
             <div>
             <Grid container spacing={24}>
@@ -200,7 +260,9 @@ class PostOpPage extends Component {
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Grid container spacing={24}>
-                        <SeriousAdverseEvents handleChangeCheckbox={this.handleChangeCheckbox}/>
+                        <SeriousAdverseEvents adverse_events={this.state.adverse_events} 
+                            handleChangeAdverseEvent={this.handleChangeAdverseEvent}
+                            handleChangeClavianScore={this.handleChangeClavianScore}/>
                     </Grid>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
@@ -250,6 +312,7 @@ class PostOpPage extends Component {
 
 const mapStateToProps = reduxState => ({
     postOp: reduxState.postOp,
+    adverseEvents: reduxState.adverseEvents,
     // patientSearch: reduxState.patientReducer.patientSearch
 });
 

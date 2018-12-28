@@ -17,7 +17,7 @@ function* addAdverseEvent(action) {
 
 // worker Saga: will be fired on "FETCH_POST_OP" actions
 function* fetchAdverseEvent(action) {
-  // console.log('in fetch post op Saga', action.payload);
+  console.log('in fetch adverse event Saga', action.payload);
   try {
     const response = yield axios.get('api/adverse_event/1');
     console.log('response from adverse event call :', response);
@@ -28,16 +28,16 @@ function* fetchAdverseEvent(action) {
   }
 }
 
-function* updatePostOp(action) {
-  console.log('in update follow up Saga', action.payload);
-  try {
-      yield call(axios.put, `/api/post_op`, action.payload);
-      yield put( { type: 'FETCH_POST_OP' } );
-  } catch (error) {
-      console.log(error);
-      alert('Unable to update post op');
-  }
-}
+// function* updatePostOp(action) {
+//   console.log('in update follow up Saga', action.payload);
+//   try {
+//       yield call(axios.put, `/api/post_op`, action.payload);
+//       yield put( { type: 'FETCH_POST_OP' } );
+//   } catch (error) {
+//       console.log(error);
+//       alert('Unable to update post op');
+//   }
+// }
 
 // Will we ever need this? Will they remove patients?
 // worker SAGA: will be fired on 'DELETE_ITEM' actions
@@ -53,11 +53,11 @@ function* updatePostOp(action) {
 //   } 
 // }
 
-function* postOpSaga() {
+function* adverseEventSaga() {
   yield takeLatest('ADD_ADVERSE_EVENT', addAdverseEvent);
   yield takeLatest('FETCH_ADVERSE_EVENT', fetchAdverseEvent);
-  yield takeLatest('UPDATE_ADVERSE_EVENT', updateAdverseEvent);
+  // yield takeLatest('UPDATE_ADVERSE_EVENT', updateAdverseEvent);
   // yield takeLatest('DELETE_ITEM', deleteItem);
 }
 
-export default postOpSaga;
+export default adverseEventSaga;
