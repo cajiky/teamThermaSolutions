@@ -1,15 +1,87 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import GridItem from '@material-ui/core/Grid';
+import DialogContent from '@material-ui/core/DialogContent';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+const styles = theme => ({
+    root: {
+      width: '100%',
+      flexGrow: 1,
+      marginTop: theme.spacing.unit * 3,
+        overflowX: 'auto',
+    },
+    heading: {
+      fontSize: theme.typography.pxToRem(15),
+      fontWeight: theme.typography.fontWeightRegular,
+      
+    },
+    table: {
+        minWidth: 700,
+      },
+      paper: {
+        padding: theme.spacing.unit * 2,
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    },
+  });
+
 
 class PathologyNotesPage extends Component {
 
+    state = {
+        pathologyNotes: '',
+        userId: '',
+        
+    }
+
+    handleChange = (event) => {
+        this.setState ({
+            [event.target.name]: event.target.value,
+        })
+        console.log(this.state);
+    }
+
+    savePathologyNotes = () => {
+        console.log('Pathology Notes State', this.state);
+        this.props.dispatch({ type: 'UPDATE_PATHOLOGY_NOTE', 
+        payload: {
+            pathologyNotes: this.state.pathologyNotes,
+            userId: this.props.reduxState.patientReducer.patient.id
+        }
+         })
+         
+    }
 
     render() {
+        const { classes } = this.props;
         return(
             <div>
-                <h1>Pathology Notes Page</h1>
-                <h3>This is a simple input form for the Pathology Notes</h3>
-                
+                <h1>Pathology Notes </h1>
+                <Button variant="outlined" onClick={this.savePathologyNotes}>Save</Button>
+                <Grid container spacing={24} >
+                    <GridItem item xs={12}>
+                            <DialogContent >
+                                <TextField
+                                    onChange={this.handleChange}
+                                    value={this.state.pathologyNotes}
+                                    name="pathologyNotes"
+                                    margin="dense"
+                                    id="pathologyNotes"
+                                    label="Pathology Notes"
+                                    type="text"
+                                    fullWidth={true}
+                                    multiline
+                                    rows="20"
+                                    variant="outlined"
+                                    />
+                            </DialogContent>    
+                    </GridItem>
+                </Grid>
             </div>
 
         )
@@ -17,9 +89,13 @@ class PathologyNotesPage extends Component {
   
 };
 
+PathologyNotesPage.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
 const mapStateToProps = reduxState => ({
     reduxState,
 });
 
 
-export default connect(mapStateToProps) (PathologyNotesPage)
+export default connect(mapStateToProps) (withStyles(styles)(PathologyNotesPage))

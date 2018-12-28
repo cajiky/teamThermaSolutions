@@ -2,11 +2,17 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
+import patientSaga from './patientSaga';
 import postOpSaga from './postOpSaga';
+import followUpSaga from './followUpSaga';
+import recurrenceSaga from './recurrenceSaga';
 import addNewUserSaga from './addNewUserSaga';
 import allUsersSaga from './allUsersSaga';
 import editIndividualUserSaga from './editIndividualProfileSaga';
-import findUserProfileSaga from './getIndividualUserSaga'
+import findUserProfileSaga from './getIndividualUserSaga';
+import pathologyNotesSaga from './pathologyNotesSaga';
+import operativeNotesSaga from './operativeNotesSaga';
+import interventionSaga from './interventionResectionSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -20,10 +26,16 @@ export default function* rootSaga() {
     loginSaga(),
     registrationSaga(),
     userSaga(),
+    patientSaga(),
     postOpSaga(),
+    followUpSaga(),
+    recurrenceSaga(),
     addNewUserSaga(),
     allUsersSaga(),
     editIndividualUserSaga(),
     findUserProfileSaga(),
+    pathologyNotesSaga(),
+    operativeNotesSaga(),
+    interventionSaga(),
   ]);
 }

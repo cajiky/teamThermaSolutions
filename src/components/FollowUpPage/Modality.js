@@ -7,25 +7,18 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 
-const myOptions = [
-  {id: 1, status: 'Death of Disease'},
-  {id: 2, status: 'Alive with Disease'},
-  {id: 3, status: 'No Evidence of Disease'},
-  {id: 4, status: 'Treatment Related Death'}
-];
-
 const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit,
-    // minWidth: 120,
   },
 });
 
-class DischargeStatus extends Component {
+class Modality extends Component {
 
   renderOptions() {
     // 
-    return myOptions.map((option, i) => {
+    console.log('this.props.recurrence', this.props.recurrence)
+    return this.props.reduxState.dropdownOptions.recModalityOptions.map((option, i) => {
       return (
         <MenuItem
           key={i}
@@ -41,15 +34,15 @@ class DischargeStatus extends Component {
 
     return (
       <FormControl fullWidth="true" variant="outlined">
-          <InputLabel shrink htmlFor="status_at_discharge">Discharge Status</InputLabel>
+          <InputLabel shrink htmlFor="modality">Modality</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
-            value={this.props.status_at_discharge}
+            value={this.props.recurrence.rec_modality}
             input={
               <OutlinedInput
-                  value={this.props.status_at_discharge}
-                  name="status_at_discharge"
-                  id="status_at_discharge"
+                  value={this.props.recurrence.rec_modality}
+                  name="rec_modality"
+                  id="rec_modality"
               />
               }
             onChange={this.props.handleChange}
@@ -59,10 +52,10 @@ class DischargeStatus extends Component {
       </FormControl>
     )
   } // end return
-} // end class TagSelector
+} // end class Modality
 
 const mapReduxStateToProps = (reduxState) => ({
   reduxState
 });
 
-export default connect(mapReduxStateToProps)(withStyles(styles)(DischargeStatus));
+export default connect(mapReduxStateToProps)(withStyles(styles)(Modality));

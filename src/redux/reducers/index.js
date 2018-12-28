@@ -3,7 +3,10 @@ import errors from './errorsReducer';
 import loginMode from './loginModeReducer';
 import user from './userReducer';
 import dropdownOptions from './dropdownOptionsReducer';
+import patientReducer from './patientReducer';
 import postOp from './postOpReducer';
+import followUp from './followUpReducer';
+import recurrenceReducer from './recurrenceReducer';
 import allUsersReducer from './allUsersReducer';
 import individualUserReducer from './individualUserReducer'
 
@@ -18,7 +21,10 @@ const rootReducer = combineReducers({
   loginMode, // will have a value of 'login' or 'registration' to control which screen is shown
   user, // will have an id and username if someone is logged in
   dropdownOptions,
+  patientReducer,
   postOp, // will contain post op information for patient_id
+  followUp, // will contain follow up information for patient_id
+  recurrenceReducer, // will contain recurrence information for followup_id
   allUsersReducer,
   individualUserReducer,
 });

@@ -5,23 +5,22 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Input from '@material-ui/core/Input'; 
+// import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 const myOptions = [
-  {id: 1, status: 'Death of Disease'},
-  {id: 2, status: 'Alive with Disease'},
-  {id: 3, status: 'No Evidence of Disease'},
-  {id: 4, status: 'Treatment Related Death'}
-];
+  {id: 1, val: true, status: 'Yes'},
+  {id: 2, val: false, status: 'No'},
+  {id: 3, val: null, status: 'Unknown'}
+]
 
 const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit,
-    // minWidth: 120,
   },
 });
 
-class DischargeStatus extends Component {
+class AdjuvantChemotherapy extends Component {
 
   renderOptions() {
     // 
@@ -29,7 +28,7 @@ class DischargeStatus extends Component {
       return (
         <MenuItem
           key={i}
-          value={option.id}>
+          value={option.val}>
           {option.status}
         </MenuItem>
       ); // end return
@@ -37,19 +36,20 @@ class DischargeStatus extends Component {
   } // end renderTagOptions
 
   render(){
-    const { classes } = this.props;
+    // const { classes } = this.props;
 
     return (
       <FormControl fullWidth="true" variant="outlined">
-          <InputLabel shrink htmlFor="status_at_discharge">Discharge Status</InputLabel>
+          <InputLabel shrink htmlFor="adjuvant_chemo">Adjuvant Chemotherapy</InputLabel>
           <Select fullWidth={true}
-            variant="outlined" 
-            value={this.props.status_at_discharge}
+            name="adjuvant_chemo"
+            // variant="outlined" 
+            // value={this.props.chemo}
             input={
-              <OutlinedInput
-                  value={this.props.status_at_discharge}
-                  name="status_at_discharge"
-                  id="status_at_discharge"
+              <Input
+                  value={this.props.chemo}
+                  name="adjuvant_chemo"
+                  id="adjuvant_chemo"
               />
               }
             onChange={this.props.handleChange}
@@ -65,4 +65,4 @@ const mapReduxStateToProps = (reduxState) => ({
   reduxState
 });
 
-export default connect(mapReduxStateToProps)(withStyles(styles)(DischargeStatus));
+export default connect(mapReduxStateToProps)(withStyles(styles)(AdjuvantChemotherapy));

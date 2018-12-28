@@ -7,11 +7,11 @@ const router = express.Router();
 // GET ROUTER TO RETRIEVE POST OP FOR PATIENT
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   // console.log('query.id', req.query.id);
-  const queryText = 'SELECT * FROM postop WHERE patient_id=$1';
+  const queryText = 'SELECT * FROM reoccurence WHERE followup_id=$1';
   pool.query(queryText, [req.params.id])      
       .then(results => res.send(results.rows[0]))
       .catch(error => {
-          console.log('Error making SELECT for post op:', error);
+          console.log('Error making SELECT for recurrence:', error);
           res.sendStatus(500);
       });
 });
@@ -41,35 +41,33 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 // });
 
 router.put('/', rejectUnauthenticated, (req, res) => {
+    console.log('in put:', req.body);
+
     const id = req.body.id
-    const icu_stays = req.body.icu_stays
-    const mcu_stays = req.body.mcu_stays;
-    const hospital_stays = req.body.hospital_stays;
+    const date = req.body.date
+    const cea = req.body.cea;
+    const rec_modality = req.body.rec_modality;
+    const syst_location = req.body.syst_location;
+    const treatment = req.body.treatment;
+    const date_treatment = req.body.date_treatment;
+    const status = req.body.status;
     const notes = req.body.notes;
-    const serious_advese_event = req.body.serious_advese_event;
-    const score = req.body.score;
-    const reoperation = req.body.reoperation;
-    const hospital_mortality = req.body.hospital_mortality;
-    const status_at_discharge = req.body.status_at_discharge;
-    const discharge_notes = req.body.discharge_notes;
+    const location = req.body.location;
 
-    const queryText = `UPDATE postop 
-        SET icu_stays=$2, mcu_stays=$3, hospital_stays=$4,
-        notes=$5, serious_advese_event=$6, score=$7,
-        reoperation=$8, hospital_mortality=$9,
-        status_at_discharge=$10, discharge_notes=$11
-        WHERE id=$1`;
+    const queryText = `UPDATE reoccurence 
+        SET date=$2, cea=$3, rec_modality=$4,
+        syst_location=$5, treatment=$6, date_treatment=$7,
+        status=$8, notes=$9, location=$10 WHERE id=$1`;
 
-    pool.query(queryText, [id, icu_stays, mcu_stays, hospital_stays,
-        notes, serious_advese_event, score, reoperation, hospital_mortality,
-        status_at_discharge, discharge_notes])
+    pool.query(queryText, 
+        [id, date, cea, rec_modality, syst_location, treatment,
+        date_treatment, status, notes, location])
       .then((result) => { res.send(result.rows); })
       .catch((err) => {
-        console.log('Error completing UPDATE post op query', err);
+        console.log('Error completing UPDATE follow recurrence query', err);
         res.sendStatus(500);
       });            
 });
-
 // DELETE ROUTER FOR ITEM
 // router.delete('/', rejectUnauthenticated, (req, res) => {
 //   // console.log('in delete on server', req.query.id);

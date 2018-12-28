@@ -7,25 +7,17 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 
-const myOptions = [
-  {id: 1, status: 'Death of Disease'},
-  {id: 2, status: 'Alive with Disease'},
-  {id: 3, status: 'No Evidence of Disease'},
-  {id: 4, status: 'Treatment Related Death'}
-];
-
 const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit,
-    // minWidth: 120,
   },
 });
 
-class DischargeStatus extends Component {
+class RecurrenceTreatment extends Component {
 
   renderOptions() {
     // 
-    return myOptions.map((option, i) => {
+    return this.props.reduxState.dropdownOptions.recTreatmentOptions.map((option, i) => {
       return (
         <MenuItem
           key={i}
@@ -34,22 +26,22 @@ class DischargeStatus extends Component {
         </MenuItem>
       ); // end return
     }); // end map
-  } // end renderTagOptions
+  } // end renderOptions
 
   render(){
     const { classes } = this.props;
 
     return (
       <FormControl fullWidth="true" variant="outlined">
-          <InputLabel shrink htmlFor="status_at_discharge">Discharge Status</InputLabel>
+          <InputLabel shrink htmlFor="treatment">Treatment</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
-            value={this.props.status_at_discharge}
+            value={this.props.recurrence.treatment}
             input={
               <OutlinedInput
-                  value={this.props.status_at_discharge}
-                  name="status_at_discharge"
-                  id="status_at_discharge"
+                  value={this.props.recurrence.treatment}
+                  name="treatment"
+                  id="treatment"
               />
               }
             onChange={this.props.handleChange}
@@ -59,10 +51,10 @@ class DischargeStatus extends Component {
       </FormControl>
     )
   } // end return
-} // end class TagSelector
+} // end class RecurrenceTreatment
 
 const mapReduxStateToProps = (reduxState) => ({
   reduxState
 });
 
-export default connect(mapReduxStateToProps)(withStyles(styles)(DischargeStatus));
+export default connect(mapReduxStateToProps)(withStyles(styles)(RecurrenceTreatment));
