@@ -30,16 +30,17 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
       });
 });
 
-// POST ROUTER TO ADD NEW ADVERSE EVENT
+
+//POST ROUTER TO ADD NEW ADVERSE EVENT
 // router.post('/', rejectUnauthenticated, (req, res) => {
 //   const newAdverseEvent = req.body;
-//   const queryText = `INSERT INTO events 
-//   ("category_id", "name", "brand_name", "person_id") 
-//     VALUES ($1, $2, $3, $4)`;
+//   const queryText = `INSERT INTO adverse_events 
+//   ("postop_id", "event_options_id", "clavien_score") 
+//     VALUES ($1, $2, $3)`;
 //   const queryValues = [
-//     newAdverseEvent.category_id,
-//     newAdverseEvent.name,
-//     newAdverseEvent.brand_name,
+//     newAdverseEvent.postop_id,
+//     newAdverseEvent.event_id,
+//     newAdverseEvent.clavien_score,
 //     req.user.id,
 //   ];
 //   // console.log('sql query for new items for new user', queryText);

@@ -29,20 +29,32 @@ function* fetchAdverseEvent(action) {
 }
 
 function* updateAdverseEvent(action) {
-  // console.log('in update adverse event Saga', action.payload);
+  console.log('in update adverse event Saga', action.payload);
   let updateQuery = '';
-  action.payload.adverse_events.forEach(element => {
-    if (element.checked == true) { 
-      // console.log(element);
-      if (element.clavian_score != null){
-        updateQuery = updateQuery + element.id + ':' + element.clavian_score + ','
+  let i=0;
+  let events = action.payload.adverse_events.filter(function(eventIn) {
+    return (eventIn.checked == true && eventIn.clavian_score != null);
+  });
+  // let marvelHeroes =  heroes.filter(function(hero) {
+  //   return hero.franchise == “Marvel”;
+  // });
+  // values (1, 1, 3), (1, 3, 1), (1, 15, 3)
+  // action.payload.adverse_events.forEach(element => {
+  for (i = 0; i < events.length; i++) { 
+    if (events[i].checked == true) { 
+      console.log('i', i);
+      if (events[i].clavian_score != null){
+        updateQuery = updateQuery + '(' + action.payload.id + ',' +
+                      events[i].id + ',' + events[i].clavian_score + ')';
+        if (i < events.length - 1) {
+          updateQuery = updateQuery + ','
+        }
       }
     }
-  });
+  };
   console.log('what to update in adverse_events table:',updateQuery);
-
   // try {
-  //     yield call(axios.put, `/api/adverse_event`, action.payload);
+  //     yield call(axios.post, `/api/adverse_event`, action.payload);
   //     yield put( { type: 'FETCH_ADVERSE_EVENT' } );
   // } catch (error) {
   //     console.log(error);
