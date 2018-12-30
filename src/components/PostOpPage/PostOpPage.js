@@ -127,7 +127,7 @@ class PostOpPage extends Component {
 
     // Called when the input field changes
     handleChangeCheckbox = (event) => {
-        console.log('in checkbox', this.state.serious_advese_event);
+        // console.log('in checkbox', this.state.serious_advese_event);
         // this.state.changesMade = true;
         this.setState({
             ...this.state,
@@ -138,22 +138,22 @@ class PostOpPage extends Component {
     
     handleChangeAdverseEvent = (event) => {
         // 1. Make a shallow copy of the items
-        let items = [...this.state.adverse_events];
+        let adverse_events = [...this.state.adverse_events];
         // 2. Make a shallow copy of the item you want to mutate
-        let item = {...items[event.target.value - 1]};
+        let item = {...adverse_events[event.target.value - 1]};
         // 3. Replace the property you're intested in
         item.checked = !item.checked;
         // if checked off then remove the clavian score
         if (item.checked == false) {
-            item.clavian_score = null;
+            item.clavien_score = null;
         }
         // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-        items[event.target.value - 1] = item;
+        adverse_events[event.target.value - 1] = item;
         // 5. Set the state to our new copy
         this.setState({
             ...this.state,
             changesMade: true,
-            adverse_events: items,
+            adverse_events: adverse_events,
         });
     }
 
@@ -161,20 +161,20 @@ class PostOpPage extends Component {
         console.log('in change clavian', this.props.postOp.id, event.target.name, event.target.value);
         
         // 1. Make a shallow copy of the items
-        let items = [...this.state.adverse_events];
+        let adverse_events = [...this.state.adverse_events];
         // 2. Make a shallow copy of the item you want to mutate
-        let item = {...items[event.target.name - 1]};
+        let item = {...adverse_events[event.target.name - 1]};
         // 3. Replace the property you're intested in
         // item.postop_id = 1;
         item.clavien_score = event.target.value;
         item.postop_id = this.props.postOp.id;
         // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-        items[event.target.name - 1] = item;
+        adverse_events[event.target.name - 1] = item;
         // 5. Set the state to our new copy
         this.setState({
             ...this.state,
             changesMade: true,
-            adverse_events: items,
+            adverse_events: adverse_events,
         });
     }
 
