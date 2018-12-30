@@ -272,6 +272,7 @@ seriousAdverseEvents: [
   {id: 16, sae_type: 'Wound Infection'},
   {id: 17, sae_type: 'Other Event'},
 ],
+
 clavienScore: [
   {id: 1, score: '1'},
   {id: 2, score: '2'},

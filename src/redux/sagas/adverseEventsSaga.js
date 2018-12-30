@@ -48,16 +48,16 @@ function* updateAdverseEvent(action) {
     eventsToSend.arrayClavienScores.push(element.clavien_score);
   });
 
-  console.log('delete adverse_events table:', action.payload.id);
-  try {
-    // yield call(axios.delete, '/api/item', {params: {id: action.payload}});
+  // console.log('delete adverse_events table:', action.payload.id);
+  // try {
+  //   // yield call(axios.delete, '/api/item', {params: {id: action.payload}});
 
-    yield call(axios.delete, `/api/adverse_event`, {params: {id: action.payload.id}});
-    // yield put( { type: 'FETCH_ADVERSE_EVENT' } );
-  } catch (error) {
-      console.log(error);
-      alert('Unable to update adverse event');
-  }
+  //   yield call(axios.delete, `/api/adverse_event`, {params: {id: action.payload.id}});
+  //   // yield put( { type: 'FETCH_ADVERSE_EVENT' } );
+  // } catch (error) {
+  //     console.log(error);
+  //     alert('Unable to update adverse event');
+  // }
 
   console.log('what to update in adverse_events table:',events, eventsToSend);
   try {
