@@ -56,7 +56,7 @@ class SeriousAdverseEvent extends Component {
               }
               label={event.name}
               />
-              <ClavienScore checked={event.checked} clavianScore={event.clavian_score} id={event.id}
+              <ClavienScore checked={event.checked} clavianScore={event.clavien_score} id={event.id}
                 handleChangeClavianScore={this.props.handleChangeClavianScore}/>
               </Grid>
           ))

@@ -30,36 +30,43 @@ function* fetchAdverseEvent(action) {
 
 function* updateAdverseEvent(action) {
   console.log('in update adverse event Saga', action.payload);
-  let updateQuery = '';
-  let i=0;
+
   let events = action.payload.adverse_events.filter(function(eventIn) {
-    return (eventIn.checked == true && eventIn.clavian_score != null);
+    return (eventIn.checked == true && eventIn.clavien_score != null);
   });
-  // let marvelHeroes =  heroes.filter(function(hero) {
-  //   return hero.franchise == “Marvel”;
-  // });
-  // values (1, 1, 3), (1, 3, 1), (1, 15, 3)
-  // action.payload.adverse_events.forEach(element => {
-  for (i = 0; i < events.length; i++) { 
-    if (events[i].checked == true) { 
-      console.log('i', i);
-      if (events[i].clavian_score != null){
-        updateQuery = updateQuery + '(' + action.payload.id + ',' +
-                      events[i].id + ',' + events[i].clavian_score + ')';
-        if (i < events.length - 1) {
-          updateQuery = updateQuery + ','
-        }
-      }
-    }
-  };
-  console.log('what to update in adverse_events table:',updateQuery);
-  // try {
-  //     yield call(axios.post, `/api/adverse_event`, action.payload);
-  //     yield put( { type: 'FETCH_ADVERSE_EVENT' } );
-  // } catch (error) {
-  //     console.log(error);
-  //     alert('Unable to update adverse event');
-  // }
+
+  let eventsToSend = {
+    postop_id: action.payload.id,
+    arrayEventOptionIds: [],
+    arrayPostOpIds: [],
+    arrayClavienScores: [],
+  }
+
+  events.forEach(element => {
+    eventsToSend.arrayEventOptionIds.push(element.id);
+    eventsToSend.arrayPostOpIds.push(element.postop_id);
+    eventsToSend.arrayClavienScores.push(element.clavien_score);
+  });
+
+  console.log('delete adverse_events table:', action.payload.id);
+  try {
+    // yield call(axios.delete, '/api/item', {params: {id: action.payload}});
+
+    yield call(axios.delete, `/api/adverse_event`, {params: {id: action.payload.id}});
+    // yield put( { type: 'FETCH_ADVERSE_EVENT' } );
+  } catch (error) {
+      console.log(error);
+      alert('Unable to update adverse event');
+  }
+
+  console.log('what to update in adverse_events table:',events, eventsToSend);
+  try {
+      yield call(axios.post, `/api/adverse_event`, eventsToSend);
+      yield put( { type: 'FETCH_ADVERSE_EVENT' } );
+  } catch (error) {
+      console.log(error);
+      alert('Unable to update adverse event');
+  }
 }
 
 // Will we ever need this? Will they remove patients?
