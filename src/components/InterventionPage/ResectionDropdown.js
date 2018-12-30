@@ -39,21 +39,6 @@ const styles = theme => ({
 
   class ResectionDropdown extends Component {
 
-    state = {
-
-    }
-    
-      // Called when the input field changes
-      handleChangeCheckbox = (event) => {
-        this.setState({
-            ...this.state,
-            [event.target.name]: event.target.checked,
-        });
-        console.log('checkbox state', this.state);
-        
-      }
-
-
     render() {
     const { classes } = this.props;
     const myOptions = this.props.reduxState.dropdownOptions.resections;
@@ -76,9 +61,9 @@ const styles = theme => ({
                         control={
                             <Checkbox
                             key={option.index} 
-                            name={option.name}
-                            checked={this.state.status}
-                            onChange={this.handleChangeCheckbox}
+                            name={option.stateName}
+                            checked={this.props.state.status}
+                            onChange={this.props.handleChangeCheckbox}
                             value={option.status}
                             />
                         }

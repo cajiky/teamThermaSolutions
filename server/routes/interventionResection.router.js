@@ -1,0 +1,100 @@
+const express = require('express');
+const pool = require('../modules/pool');
+const router = express.Router();
+const encryptLib = require('../modules/encryption');
+
+
+
+
+router.post('/', (req, res, next) => {  
+    console.log('Intervention POST req.body', req.body);
+    const central = req.body.interventionState.central;
+    const rightUpper = req.body.interventionState.rightUpper;
+    const Epigastrium = req.body.interventionState.Epigastrium;
+    const leftUpper = req.body.interventionState.leftUpper;
+    const leftFlank = req.body.interventionState.leftFlank;
+    const leftLower = req.body.interventionState.leftLower;
+    const pelvis = req.body.interventionState.pelvis;
+    const rightLower = req.body.interventionState.rightLower;
+    const rightFlank = req.body.interventionState.rightFlank;
+    const upperJejunum = req.body.interventionState.upperJejunum;
+    const lowerJejunum = req.body.interventionState.lowerJejunum;
+    const upperIlium = req.body.interventionState.upperIlium;
+    const lowerIlium = req.body.interventionState.lowerIlium;
+    const surgeonOne = req.body.interventionState.surgeonOne;
+    const surgeonTwo = req.body.interventionState.surgeonTwo;
+    const surgeonThree = req.body.interventionState.surgeonThree;
+    const nrHipec = req.body.interventionState.nrHipec;
+    const hipecType = req.body.interventionState.hipecType;
+    const reasonOC = req.body.interventionState.reasonOC;
+    const anastomosis =req.body.interventionState.anastomosis
+    const AnastomosisNumber = req.body.interventionState.AnastomosisNumber;
+    const stomaType = req.body.interventionState.stomaType;
+    const bloodLoss = req.body.interventionState.bloodLoss;
+    const volume = req.body.interventionState.volume;
+    const hipecRegiment = req.body.interventionState.hipecRegiment;
+    const bloodLossTime = req.body.interventionState.bloodLossTime;
+    const concentration = req.body.interventionState.concentration;
+    const rScore = req.body.interventionState.rScore;
+    const duration = req.body.interventionState.duration;
+    const revisionStoma = req.body.interventionState.revisionStoma;
+    const stomaPostHIPEC = req.body.interventionState.stomaPostHIPEC;
+    const patientId = req.body.userId;
+    const ovaries = req.body.interventionState.ovaries;
+    const uterus = req.body.interventionState.uterus;
+    const omentum = req.body.interventionState.omentum;
+    const rectum = req.body.interventionState.rectum;
+    const sigmoid = req.body.interventionState.sigmoid;
+    const left_colon = req.body.interventionState.left_colon;
+    const transverse_colon = req.body.interventionState.transverse_colon;
+    const right_colon = req.body.interventionState.right_colon;
+    const ileocaecal = req.body.interventionState.ileocaecal;
+    const appendix =req.body.interventionState.appendix;
+    const duodenum = req.body.interventionState.duodenum;
+    const jejunum = req.body.interventionState.jejunum;
+    const ileum = req.body.interventionState.ileum;
+    const gallbladder = req.body.interventionState.gallbladder;
+    const stomach = req.body.interventionState.stomach;
+    const spleen = req.body.interventionState.spleen;
+    const diagphram_l =req.body.interventionState.diagphram_l;
+    const diagphram_r = req.body.interventionState.diagphram_r;
+    const pancreas = req.body.interventionState.pancreas;
+    const bladder = req.body.interventionState.bladder;
+    const urether = req.body.interventionState.urether;
+    const lymphnodes = req.body.interventionState.lymphnodes;
+    const left_peritoneum = req.body.interventionState.left_peritoneum;
+    const right_peritoneum = req.body.interventionState.right_peritoneum;
+    const peritoneum = req.body.interventionState.peritoneum;
+    const pelvisResection = req.body.interventionState.pelvisResection;
+
+
+
+    const queryText = `INSERT INTO intervention 
+    (pci_0, pci_1, pci_2, pci_3, pci_4, pci_5, pci_6, pci_7, pci_8, pci_9, pci_10, pci_11, pci_12, surgeon_1, surgeon_2, surgeon_3, nrhipec, hipec_type, reason_oc, anastomosis, anastomosis_number, revision_stoma, stoma_post_hipec_type, bloodloss, volume, hipec_regiment, time, concentration, r_score, duration, stoma_post_hipec, patient_id) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32) RETURNING id`;
+
+    const queryText2 = `INSERT INTO resections 
+    (ovaries, uterus, omentum, rectum, sigmoid, left_colon, transverse_colon, right_colon, ileocaecal, appendix, duodenum, jejunum, ileum, gallbladder, stomach, spleen, diagphram_l, diagphram_r, pancreas, bladder, urether, lymphnodes, left_peritoneum, right_peritoneum, peritoneum, pelvis, intervention_id) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27)`;
+
+
+    pool.query(queryText, [central, rightUpper, Epigastrium, leftUpper, leftFlank, leftLower, pelvis, rightLower, rightFlank, upperJejunum, lowerJejunum, upperIlium, lowerIlium, surgeonOne, surgeonTwo, surgeonThree, nrHipec, hipecType, reasonOC, anastomosis, AnastomosisNumber, revisionStoma, stomaType, bloodLoss, volume, hipecRegiment, bloodLossTime, concentration, rScore, duration,  stomaPostHIPEC, patientId])
+      .then((results) => { 
+        pool.query(queryText2, [ovaries, uterus, omentum, rectum, sigmoid, left_colon, transverse_colon, right_colon, ileocaecal, appendix, duodenum, jejunum, ileum, gallbladder, stomach, spleen, diagphram_l, diagphram_r, pancreas, bladder, urether, lymphnodes, left_peritoneum, right_peritoneum, peritoneum, pelvisResection, results.rows[0].id])  
+        
+        .then((results) => {
+            res.sendStatus(201);
+        })
+        .catch((error) => {
+            console.log(error);
+            res.sendStatus(500);
+        })
+    }).catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    });
+  });
+
+
+
+module.exports = router;

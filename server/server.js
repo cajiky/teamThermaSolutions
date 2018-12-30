@@ -16,6 +16,9 @@ const adverseEventsRouter = require('./routes/adverse_event.router');
 const followUpRouter = require('./routes/follow_up.router');
 const recurrenceRouter = require('./routes/recurrence.router');
 const manageUsersRouter = require('./routes/manageUsers.router');
+const pathologyNotesRouter = require('./routes/pathologyNotes.router')
+const operativeNotesRouter = require('./routes/operativeNotes.router')
+const interventResectionRouter = require('./routes/interventionResection.router')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -42,8 +45,10 @@ app.use('/editUserProfile', manageUsersRouter)
 app.use('/addNewUser', manageUsersRouter);
 app.use('/getAllUsers', manageUsersRouter); 
 app.use('/editUserProfile', manageUsersRouter);
-app.use('/getIndividualProfile', manageUsersRouter)
-
+app.use('/getIndividualProfile', manageUsersRouter);
+app.use('/pathologyNotes', pathologyNotesRouter);
+app.use('/operativeNotes', operativeNotesRouter);
+app.use('/interventionResection', interventResectionRouter)
 
 // Serve static files
 app.use(express.static('build'));
