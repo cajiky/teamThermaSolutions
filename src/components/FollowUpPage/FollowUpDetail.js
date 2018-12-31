@@ -9,7 +9,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
-import Recurrence from './Recurrence';
+import Recurrence from './FollowUpHistory';
 // import Button from '@material-ui/core/Button';
 // import FormHelperText from '@material-ui/core/FormHelperText';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -59,20 +59,20 @@ class FollowUpDetail extends Component {
     };
 
     componentDidMount () {
-        console.log('in component mount post op', this.props.recurrenceReducer);
+        console.log('in component mount post op', this.props.followUpHistory);
         // this.props.dispatch({type: 'FETCH_POST_OP'});
         this.setState({
-            id: this.props.recurrenceReducer.id,
-            date: moment(this.props.recurrenceReducer.date).format('YYYY-MM-DD'),
-            cea: this.props.recurrenceReducer.cea,
-            rec_modality: this.props.recurrenceReducer.rec_modality,
-            syst_location: this.props.recurrenceReducer.syst_location,
-            last_contact: moment(this.props.recurrenceReducer.last_contact).format('YYYY-MM-DD'),
-            treatment: this.props.recurrenceReducer.treatment,
-            date_treatment: moment(this.props.recurrenceReducer.date_treatment).format('YYYY-MM-DD'),
-            status: this.props.recurrenceReducer.status,
-            notes: this.props.recurrenceReducer.notes,
-            location: this.props.recurrenceReducer.location
+            id: this.props.followUpHistory.id,
+            date: moment(this.props.followUpHistory.date).format('YYYY-MM-DD'),
+            cea: this.props.followUpHistory.cea,
+            rec_modality: this.props.followUpHistory.rec_modality,
+            syst_location: this.props.followUpHistory.syst_location,
+            last_contact: moment(this.props.followUpHistory.last_contact).format('YYYY-MM-DD'),
+            treatment: this.props.followUpHistory.treatment,
+            date_treatment: moment(this.props.followUpHistory.date_treatment).format('YYYY-MM-DD'),
+            status: this.props.followUpHistory.status,
+            notes: this.props.followUpHistory.notes,
+            location: this.props.followUpHistory.location
         })
     }
 
@@ -172,14 +172,12 @@ class FollowUpDetail extends Component {
                 </ExpansionPanelActions>
             </ExpansionPanel>
             </div>
-
         )
     }
-  
 };
 
 const mapStateToProps = reduxState => ({
-    recurrenceReducer: reduxState.recurrenceReducer,
+    followUpHistory: reduxState.followUpHistory,
 });
 
 

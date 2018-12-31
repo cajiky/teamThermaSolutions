@@ -45,7 +45,8 @@ class AdjuvantChemotherapy extends Component {
 
   render(){
     const { classes } = this.props;
-    console.log('chemo?', this.props.adjuvant_chemo);
+    const myValue = this.props.adjuvant_chemo + '';
+    console.log('chemo?', myValue);
     return (
 
       <FormControl component="fieldset" className={classes.formControl}>
@@ -54,7 +55,7 @@ class AdjuvantChemotherapy extends Component {
               aria-label="Adjuvant Chemotherapy"
               name="adjuvant_chemo"
               className={classes.group}
-              value={this.props.adjuvant_chemo}
+              value={myValue}
               onChange={this.props.handleChange}
           >
               <FormControlLabel value='1' control={<Radio />} label="Yes" />

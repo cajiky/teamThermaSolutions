@@ -41,7 +41,7 @@ class FollowUpPage extends Component {
 
     state = {
         id: 0,
-        adjuvant_chemo: false,
+        adjuvant_chemo: 3,
         adjuvant_chemo_type: null,
         biological: null,
         evidence_of_disease: false,
@@ -52,13 +52,13 @@ class FollowUpPage extends Component {
     componentDidMount () {
 
         this.setState({
-            id: this.props.reduxState.followUp.id,
-            adjuvant_chemo: this.props.reduxState.followUp.adjuvant_chemo,
-            adjuvant_chemo_type: this.props.reduxState.followUp.adjuvant_chemo_type,
-            biological: this.props.reduxState.followUp.biological,
-            evidence_of_disease: this.props.reduxState.followUp.evidence_of_disease,
-            last_contact: this.props.reduxState.followUp.last_contact,
-            date_of_death: this.props.reduxState.followUp.date_of_death        
+            id: this.props.followUp.id,
+            adjuvant_chemo: this.props.followUp.adjuvant_chemo,
+            adjuvant_chemo_type: this.props.followUp.adjuvant_chemo_type,
+            biological: this.props.followUp.biological,
+            evidence_of_disease: this.props.followUp.evidence_of_disease,
+            last_contact: this.props.followUp.last_contact,
+            date_of_death: this.props.followUp.date_of_death        
         })
     };
     
@@ -112,7 +112,7 @@ class FollowUpPage extends Component {
 };
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+    followUp: reduxState.followUp,
 });
 
 export default connect(mapStateToProps) (withStyles(styles)(FollowUpPage));

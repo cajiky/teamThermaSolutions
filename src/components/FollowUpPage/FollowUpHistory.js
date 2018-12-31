@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Modality from './Modality';
 import Location from './Location';
 import SystemicLocation from './SystemicLocation';
-import RecurrenceTreatment from './RecurrenceTreatment';
+import FollowUpHistoryTreatment from './FollowUpHistoryTreatment';
 import Status from './Status';
 import moment from 'moment';
 
@@ -36,7 +36,7 @@ const styles = theme => ({
     }
 });
 
-class Recurrence extends Component {
+class FollowUpHistory extends Component {
     
     render() {
         const { classes } = this.props;
@@ -70,7 +70,7 @@ class Recurrence extends Component {
                 fullWidth="true"
                 onChange={this.props.handleChange}
                 name="date"
-                value={moment(this.props.recurrence.date).format('YYYY-MM-DD')}
+                value={moment(this.props.followUpHistory.date).format('YYYY-MM-DD')}
               />
             </Grid>
             <Grid item xs={3}>
@@ -78,7 +78,7 @@ class Recurrence extends Component {
                 name="cea"
                 label="CEA"
                 className={classes.textField}
-                value={this.props.recurrence.cea}
+                value={this.props.followUpHistory.cea}
                 // fullWidth
                 onChange={this.props.handleChange}
                 margin="normal"
@@ -89,7 +89,7 @@ class Recurrence extends Component {
                 />
             </Grid>
             <Grid item xs={3}>
-              <Modality recurrence={this.props.recurrence} 
+              <Modality recurrence={this.props.followUpHistory} 
                             handleChange={this.props.handleChange}
                             handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
@@ -107,26 +107,26 @@ class Recurrence extends Component {
                   fullWidth="true"
                   onChange={this.props.handleChange}
                   name="treatment_date"
-                  value={moment(this.props.recurrence.treatment_date).format('YYYY-MM-DD')}
+                  value={moment(this.props.followUpHistory.treatment_date).format('YYYY-MM-DD')}
                 />
             </Grid>
             <Grid item xs={3}>
-              <Location recurrence={this.props.recurrence} 
+              <Location recurrence={this.props.followUpHistory} 
                             handleChange={this.props.handleChange}
                             handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
             <Grid item xs={3}>
-              <SystemicLocation recurrence={this.props.recurrence} 
+              <SystemicLocation recurrence={this.props.followUpHistory} 
                             handleChange={this.props.handleChange}
                             handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
             <Grid item xs={3}>
-              <RecurrenceTreatment recurrence={this.props.recurrence} 
+              <FollowUpHistoryTreatment recurrence={this.props.followUpHistory} 
                             handleChange={this.props.handleChange}
                             handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
             <Grid item xs={3}>
-              <Status recurrence={this.props.recurrence} 
+              <Status recurrence={this.props.followUpHistory} 
                             handleChange={this.props.handleChange}
                             handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
@@ -135,7 +135,7 @@ class Recurrence extends Component {
                 name="notes"
                 label="Notes"
                 className={classes.textField}
-                value={this.props.recurrence.notes}
+                value={this.props.followUpHistory.notes}
                 multiline
                 rows="2"
                 fullWidth
@@ -154,7 +154,7 @@ class Recurrence extends Component {
 };
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+    followUpHistory: reduxState.followUpHistory,
 });
 
-export default connect(mapStateToProps) (withStyles(styles)(Recurrence));
+export default connect(mapStateToProps) (withStyles(styles)(FollowUpHistory));

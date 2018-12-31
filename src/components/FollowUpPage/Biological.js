@@ -34,7 +34,7 @@ class Biological extends Component {
     // const { classes } = this.props;
 
     return (
-      <FormControl fullWidth="true" variant="outlined" disabled={this.props.adjuvant_chemo == false || this.props.adjuvant_chemo == null}>
+      <FormControl fullWidth="true" variant="outlined" disabled={this.props.adjuvant_chemo == 2 || this.props.adjuvant_chemo == 3}>
           <InputLabel shrink htmlFor="biological">Biological</InputLabel>
           <Select fullWidth={true}
             // variant="outlined" 
