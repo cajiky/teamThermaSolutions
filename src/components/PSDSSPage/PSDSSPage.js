@@ -23,6 +23,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Switch from '@material-ui/core/Switch';
+import Divider from '@material-ui/core/Divider';
 
 
 const styles = theme => ({
@@ -44,7 +45,7 @@ const styles = theme => ({
         margin: `${theme.spacing.unit}px 0`,
       },
       table: {
-        maxWidth: 200,
+        // maxWidth: 200,
         paddingBottom: 20,
       },
 });
@@ -110,7 +111,7 @@ class PSDSSPage extends Component {
                     <Grid item xs={12} className={classes.gridItem} align="center">
                     {/* This is the table that will hold the legend for the surgens to refference while they enter in scores. */}
                         <Paper elevation={12}>
-                            <Table className={classes.table}>
+                            <Table>
                                 <TableHead>
                                 <TableRow>
                                     <TableCell>PSDSS</TableCell>
