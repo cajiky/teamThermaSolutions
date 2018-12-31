@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const router = express.Router();
 
-// GET ROUTER TO RETRIEVE POST OP FOR PATIENT
+// GET ROUTER TO RETRIEVE FOLLOW UP FOR PATIENT
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   // console.log('query.id', req.query.id);
   const queryText = 'SELECT * FROM follow_up WHERE patient_id=$1';
@@ -15,6 +15,18 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
       });
 });
 
+// GET ROUTER TO RETRIEVE FOLLOW UP HISTORY FOR PATIENT
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+    // console.log('query.id', req.query.id);
+    const queryText = 'SELECT * FROM follow_up_history WHERE follow_up_id=$1';
+    pool.query(queryText, [req.params.id])      
+        .then(results => res.send(results.rows[0]))
+        .catch(error => {
+            console.log('Error making SELECT for follow up history:', error);
+            res.sendStatus(500);
+        });
+  });
+  
 // POST ROUTER TO ADD NEW POST OP
 // router.post('/', rejectUnauthenticated, (req, res) => {
 
@@ -39,6 +51,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 //     });
 // });
 
+
+// PUT ROUTER TO UPDATE FOLLOW UP INFORMATION FOR PATIENT
 router.put('/', rejectUnauthenticated, (req, res) => {
     console.log('in put:', req.body);
 
