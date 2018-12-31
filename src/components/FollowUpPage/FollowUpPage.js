@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
 import FollowUpDetail from './FollowUpDetail';
 import ChemotherapyType from './ChemotherapyType';
 import AdjuvantChemotherapy from './AdjuvantChemotherapy';
@@ -30,7 +31,10 @@ const styles = theme => ({
     },
     group: {
         flexDirection: 'row',
-    }
+    },
+    section: {
+        margin: `${theme.spacing.unit * 3}px ${theme.spacing.unit * 2}px`,
+      },
 });
 
 class FollowUpPage extends Component {
@@ -46,8 +50,6 @@ class FollowUpPage extends Component {
     };
 
     componentDidMount () {
-        this.props.dispatch({type: 'FETCH_FOLLOW_UP'});
-        // this.props.dispatch({type: 'FETCH_RECURRENCE'});
 
         this.setState({
             id: this.props.reduxState.followUp.id,
@@ -67,6 +69,7 @@ class FollowUpPage extends Component {
 
     // Called when the input field changes
     handleChange = (event) => {
+        console.log('in on change', event.target.name, event.target.value)
         this.setState({
             ...this.state,
             [event.target.name]: event.target.value,
@@ -87,20 +90,22 @@ class FollowUpPage extends Component {
         return(
             <div>
                 <h3>Follow Up Treatment Plan</h3>
-                <Grid container spacing={24}>
+                <Grid container spacing={24} className={classes.section}>
                     <Grid item xs={4}>
-                    <AdjuvantChemotherapy chemo={this.state.adjuvant_chemo} handleChange={this.handleChange} />
+                    <AdjuvantChemotherapy adjuvant_chemo={this.state.adjuvant_chemo} handleChange={this.handleChange} />
                     </Grid>
                     <Grid item xs={4}>
-                    <ChemotherapyType chemo_type={this.state.adjuvant_chemo_type} handleChange={this.handleChange} />
+                    <ChemotherapyType adjuvant_chemo={this.state.adjuvant_chemo} adjuvant_chemo_type={this.state.adjuvant_chemo_type} handleChange={this.handleChange} />
                     </Grid>
                     <Grid item xs={4}>
-                    <Biological biological={this.state.biological} handleChange={this.handleChange} />
+                    <Biological adjuvant_chemo={this.state.adjuvant_chemo} biological={this.state.biological} handleChange={this.handleChange} />
                     </Grid>
                 </Grid>
-            {/* //Will have more than one -- will be mapped */}
-            <FollowUpDetail followup={this.state} addFollowUp={this.addFollowUp}
-                    handleChangeCheckbox={this.handleChangeCheckbox}/>
+                <Divider variant="middle" />
+                <h3>Follow Up History</h3>
+                {/* //Will have more than one -- will be mapped */}
+                <FollowUpDetail followup={this.state} addFollowUp={this.addFollowUp}
+                        handleChangeCheckbox={this.handleChangeCheckbox}/>
             </div>
         )
     }

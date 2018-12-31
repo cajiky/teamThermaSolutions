@@ -28,8 +28,6 @@ CREATE TABLE "types_of_cancer" (
   OIDS=FALSE
 );
 
-
-
 CREATE TABLE "patients" (
 	"id" serial NOT NULL,
 	"toc_id" integer,
@@ -194,7 +192,7 @@ CREATE TABLE "postop" (
 	"mcu_stays" integer,
 	"hospital_stays" integer,
 	"notes" varchar,
-	"serious_advese_event" BOOLEAN,
+	"serious_adverse_event" BOOLEAN,
 	"score" varchar,
 	"reoperation" BOOLEAN,
 	"hospital_mortality" BOOLEAN,
@@ -205,12 +203,22 @@ CREATE TABLE "postop" (
   OIDS=FALSE
 );
 
+CREATE TABLE "adverse_events" (
+	"id" serial NOT NULL,
+	"postop_id" integer NOT NULL,
+	"name" varchar,
+	"clavian_score" integer,
+	"sae_grade" integer,
+	CONSTRAINT events_pk PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
 
 
 CREATE TABLE "follow_up" (
 	"id" serial NOT NULL,
 	"patient_id" integer,
-	"adjuvant_chemo" BOOLEAN,
+	"adjuvant_chemo" integer,
 	"adjuvant_chemo_type" integer,
 	"biological" integer,
 	"evidence_of_disease" BOOLEAN,
@@ -223,9 +231,9 @@ CREATE TABLE "follow_up" (
 
 
 
-CREATE TABLE "reoccurence" (
+CREATE TABLE "follow_up_history" (
 	"id" serial NOT NULL,
-	"followup_id" integer NOT NULL,
+	"follow_up_id" integer NOT NULL,
 	"date" DATE,
 	"cea" varchar,
 	"rec_modality" integer,
@@ -235,25 +243,10 @@ CREATE TABLE "reoccurence" (
 	"status" integer,
 	"notes" varchar,
 	"location" integer,
-	CONSTRAINT reoccurence_pk PRIMARY KEY ("id")
+	CONSTRAINT follow_up_history_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
-
-
-
-CREATE TABLE "events" (
-	"id" serial NOT NULL,
-	"postop_id" integer NOT NULL,
-	"name" varchar,
-	"clavian_score" integer,
-	"sae_grade" integer,
-	CONSTRAINT events_pk PRIMARY KEY ("id")
-) WITH (
-  OIDS=FALSE
-);
-
-
 
 CREATE TABLE "other_info" (
 	"id" serial NOT NULL,
@@ -267,8 +260,6 @@ CREATE TABLE "other_info" (
 ) WITH (
   OIDS=FALSE
 );
-
-
 
 CREATE TABLE "pathology_op_notes" (
 	"id" serial NOT NULL,
@@ -356,7 +347,7 @@ ALTER TABLE "postop" ADD CONSTRAINT "postop_fk0" FOREIGN KEY ("patient_id") REFE
 
 ALTER TABLE "follow_up" ADD CONSTRAINT "follow_up_fk0" FOREIGN KEY ("patient_id") REFERENCES "patients"("id");
 
-ALTER TABLE "reoccurence" ADD CONSTRAINT "reoccurence_fk0" FOREIGN KEY ("followup_id") REFERENCES "follow_up"("id");
+ALTER TABLE "follow_up_history" ADD CONSTRAINT "follow_up_history_fk0" FOREIGN KEY ("follow_up_id") REFERENCES "follow_up"("id");
 
 ALTER TABLE "events" ADD CONSTRAINT "events_fk0" FOREIGN KEY ("postop_id") REFERENCES "postop"("id");
 
