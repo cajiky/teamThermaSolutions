@@ -8,6 +8,8 @@ const patientReducer = (state = [], action) => {
         return {patient: action.payload};
       case 'ADD_PATIENT':
         return {patient: action.payload};
+      case 'LAST_PATIENT_ID_PLUS_ONE':
+        return {patient: {newPatientId: action.payload}}
       case 'SET_PATIENT':
         return action.payload;
       default:

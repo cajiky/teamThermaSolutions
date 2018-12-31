@@ -70,6 +70,10 @@ class PatientProfileSearchPage extends Component {
         },
         
       };
+
+      componentDidMount(){
+        this.props.dispatch({type: 'LAST_PATIENT_ID_PLUS_ONE'});
+      }
     
       handleNewPatientChange = (name) => (event) => {
         this.setState({patient: {...this.state.patient, [name]: (event.target.value)} });
@@ -90,7 +94,7 @@ class PatientProfileSearchPage extends Component {
     
       handleClickOpen = () => {
         this.setState({ variables: {open: true} });
-        this.props.dispatch({type: 'DROP_PATIENT_RESULT'});
+        // this.props.dispatch({type: 'DROP_PATIENT_RESULT'});
       };
     
       handleClose = () => {
@@ -168,7 +172,7 @@ class PatientProfileSearchPage extends Component {
                             InputLabelProps={{
                                 shrink: true,
                             }}
-                            placeholder="Patient ID e.x. 1234567890"
+                            placeholder={"Suggested Patient ID: " + this.props.reduxState.patientReducer.newPatientId}
                             margin="normal"
                             variant="outlined"
                             fullWidth={true}

@@ -31,6 +31,21 @@ router.get(`/:key`, (req, res) => {
 })
 });
 
+//*** GET last patient ID from db */
+router.get((req, res) => {
+    const sqlText = `SELECT * FROM patients ORDER BY id DESC LIMIT 1;`;
+    pool.query(sqlText).then( rows => {
+        newPatientId = rows.rows[0].id
+        console.log(newPatientId);
+        result = {newPatientId}
+        res.send(result);
+})
+.catch((error) => {
+    console.log('GET error from the server', error);
+    res.sendStatus(500); // A good server always responds!
+})
+});
+
 /**
  * POST route template
  */
