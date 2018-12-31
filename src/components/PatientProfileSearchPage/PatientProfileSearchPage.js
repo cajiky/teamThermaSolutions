@@ -23,7 +23,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import PropTypes from 'prop-types';
 import PatientProfileSearchResult from '../PatientProfileSearchResult/PatientProfileSearchResult';
-import ReactPhoneInput from 'material-ui-phone-number';
+// import ReactPhoneInput from 'material-ui-phone-number';
 
 
 const styles = theme => ({
@@ -396,6 +396,66 @@ class PatientProfileSearchPage extends Component {
                                         
                                     </Select>
                                 </FormControl>
+                                <FormControl className={classes.formControl}>
+                        <TextField
+                        required
+                        id="outlined-required"
+                        label="Interval Prime Surgery - HIPEC"
+                        InputLabelProps={{
+                            shrink: true,
+                          }}
+                          value={this.state.patient.ipshipec}
+                        margin="normal"
+                        variant="outlined"
+                                                    fullWidth={true}
+                            type="string"
+                            onChange={this.handleNewPatientChange('ipshipec', 'value')}
+                        /></FormControl>
+                        <FormControl className={classes.formControl}>
+                        <TextField
+                        required
+                        id="outlined-required"
+                        label="Survival (HIPEC Death)"
+                        InputLabelProps={{
+                            shrink: true,
+                          }}
+                          value={this.state.patient.survivalhipecdeath}
+                        margin="normal"
+                        variant="outlined"
+                                                    fullWidth={true}
+                            type="string"
+                            onChange={this.handleNewPatientChange('survivalhipecdeath', 'value')}
+                        /></FormControl>
+                        <FormControl className={classes.formControl}>
+                        <TextField
+                        required
+                        id="outlined-required"
+                        label="Survival (HIPEC Last Contact)"
+                        InputLabelProps={{
+                            shrink: true,
+                          }}
+                          value={this.state.patient.survivalhipeclastcontact}
+                        margin="normal"
+                        variant="outlined"
+                                                    fullWidth={true}
+                            type="string"
+                            onChange={this.handleNewPatientChange('survivalhipeclastcontact', 'value')}
+                        /></FormControl>
+                        <FormControl className={classes.formControl}>
+                        <TextField
+                        required
+                        id="outlined-required"
+                        label="Interval Diagnosis PC-HIPEC"
+                        InputLabelProps={{
+                            shrink: true,
+                          }}
+                          value={this.state.patient.intervalDiagnosisPcHipec}
+                        margin="normal"
+                        variant="outlined"
+                                                    fullWidth={true}
+                            type="string"
+                            onChange={this.handleNewPatientChange('intervalDiagnosisPcHipec', 'value')}
+                        /></FormControl>
                     </DialogContent>
                                             <DialogActions>
                                 <Button onClick={this.handleClose} color="primary">
