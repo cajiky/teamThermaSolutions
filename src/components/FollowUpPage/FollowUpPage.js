@@ -113,6 +113,7 @@ class FollowUpPage extends Component {
 
 const mapStateToProps = reduxState => ({
     followUp: reduxState.followUp,
+    followUpHistory: reduxState.followUpHistory,
 });
 
 export default connect(mapStateToProps) (withStyles(styles)(FollowUpPage));

@@ -32,7 +32,7 @@ class RecurrenceTreatment extends Component {
     const { classes } = this.props;
 
     return (
-      <FormControl fullWidth="true" variant="outlined">
+      <FormControl fullWidth="true">
           <InputLabel shrink htmlFor="treatment">Treatment</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 

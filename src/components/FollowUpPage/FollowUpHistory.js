@@ -43,8 +43,8 @@ class FollowUpHistory extends Component {
         
         return(
           <Grid container spacing={24}>
-            <Grid item xs={3}>
-              Recurrence Information
+            <Grid item xs={12}>
+              <h3>Recurrence Information</h3>
               {/* <FormGroup row>
                   <FormControlLabel
                   control={
@@ -61,7 +61,7 @@ class FollowUpHistory extends Component {
             </Grid>
             <Grid item xs={3}>
               <TextField 
-                variant="outlined"
+                // variant="outlined"
                 label="Date of Recurrence"
                 InputLabelProps={{
                   shrink: true,
@@ -85,7 +85,7 @@ class FollowUpHistory extends Component {
                 InputLabelProps={{
                     shrink: true,
                 }}
-                variant="outlined"
+                // variant="outlined"
                 />
             </Grid>
             <Grid item xs={3}>
@@ -93,7 +93,7 @@ class FollowUpHistory extends Component {
                             handleChange={this.props.handleChange}
                             handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12}>
                 Treatment
             </Grid>
             <Grid item xs={3}>
@@ -102,7 +102,7 @@ class FollowUpHistory extends Component {
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  variant="outlined"
+                  // variant="outlined"
                   type="date"
                   fullWidth="true"
                   onChange={this.props.handleChange}
@@ -144,7 +144,7 @@ class FollowUpHistory extends Component {
                 }}
                 onChange={this.props.handleChange}
                 margin="normal"
-                variant="outlined"
+                // variant="outlined"
                 />
             </Grid>
           </Grid>

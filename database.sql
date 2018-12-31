@@ -224,6 +224,7 @@ CREATE TABLE "follow_up" (
 	"evidence_of_disease" BOOLEAN,
 	"last_contact" DATE,
 	"date_of_death" DATE,
+	"notes" text,
 	CONSTRAINT follow_up_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -235,13 +236,15 @@ CREATE TABLE "follow_up_history" (
 	"id" serial NOT NULL,
 	"follow_up_id" integer NOT NULL,
 	"date" DATE,
+	"evidence_of_disease" BOOLEAN DEFAULT 'f',
+  "follow_up_notes" varchar,
 	"cea" varchar,
 	"rec_modality" integer,
 	"syst_location" integer,
 	"treatment" integer,
 	"date_treatment" DATE,
 	"status" integer,
-	"notes" varchar,
+	"treatment_notes" varchar,
 	"location" integer,
 	CONSTRAINT follow_up_history_pk PRIMARY KEY ("id")
 ) WITH (

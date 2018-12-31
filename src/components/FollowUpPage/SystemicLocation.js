@@ -32,10 +32,10 @@ class SystemicLocation extends Component {
     const { classes } = this.props;
 
     return (
-      <FormControl fullWidth="true" variant="outlined">
+      <FormControl fullWidth="true">
           <InputLabel shrink htmlFor="location">Systemic Location</InputLabel>
           <Select fullWidth={true}
-            variant="outlined" 
+            // variant="outlined" 
             value={this.props.recurrence.syst_location}
             input={
               <OutlinedInput

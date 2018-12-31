@@ -37,16 +37,15 @@ app.use('/api/find-a-patient', patientRouter);
 app.use('/api/post_op', postOpRouter);
 app.use('/api/follow_up', followUpRouter);
 app.use('/api/follow_up_history', followUpHistoryRouter);
-app.use('/addNewUser', manageUsersRouter)
-app.use('/getAllUsers', manageUsersRouter) 
-app.use('/editUserProfile', manageUsersRouter)
+app.use('/addNewUser', manageUsersRouter);
+app.use('/editUserProfile', manageUsersRouter);
 app.use('/addNewUser', manageUsersRouter);
 app.use('/getAllUsers', manageUsersRouter); 
 app.use('/editUserProfile', manageUsersRouter);
 app.use('/getIndividualProfile', manageUsersRouter);
 app.use('/pathologyNotes', pathologyNotesRouter);
 app.use('/operativeNotes', operativeNotesRouter);
-app.use('/interventionResection', interventResectionRouter)
+app.use('/interventionResection', interventResectionRouter);
 
 // Serve static files
 app.use(express.static('build'));

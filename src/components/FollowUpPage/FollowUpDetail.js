@@ -9,7 +9,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
-import Recurrence from './FollowUpHistory';
+import FollowUpHistory from './FollowUpHistory';
 // import Button from '@material-ui/core/Button';
 // import FormHelperText from '@material-ui/core/FormHelperText';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -47,6 +47,8 @@ class FollowUpDetail extends Component {
     state = {
         id: null,
         date: null,
+        evidence_of_disease: false,
+        follow_up_notes: null,
         cea: null,
         rec_modality: null,
         syst_location: false,
@@ -54,16 +56,18 @@ class FollowUpDetail extends Component {
         treatment: null,
         date_treatment: null,
         status: null,
-        notes: null,
+        treatment_notes: null,
         location: null
     };
 
     componentDidMount () {
-        console.log('in component mount post op', this.props.followUpHistory);
+        console.log('in component mount follow up detail', this.props.followUpHistory);
         // this.props.dispatch({type: 'FETCH_POST_OP'});
         this.setState({
             id: this.props.followUpHistory.id,
             date: moment(this.props.followUpHistory.date).format('YYYY-MM-DD'),
+            evidence_of_disease: this.props.followUpHistory.evidence_of_disease,
+            follow_up_notes: this.props.followUpHistory.follow_up_notes,
             cea: this.props.followUpHistory.cea,
             rec_modality: this.props.followUpHistory.rec_modality,
             syst_location: this.props.followUpHistory.syst_location,
@@ -71,7 +75,7 @@ class FollowUpDetail extends Component {
             treatment: this.props.followUpHistory.treatment,
             date_treatment: moment(this.props.followUpHistory.date_treatment).format('YYYY-MM-DD'),
             status: this.props.followUpHistory.status,
-            notes: this.props.followUpHistory.notes,
+            treatment_notes: this.props.followUpHistory.treatment_notes,
             location: this.props.followUpHistory.location
         })
     }
@@ -94,8 +98,8 @@ class FollowUpDetail extends Component {
 
     // addFollowUp = () => {
     //     // alert('Add new followup');
-    //     console.log('before update recurrence', this.state)
-    //     this.props.dispatch({ type: 'UPDATE_RECURRENCE', payload: this.state});
+    //     console.log('before update FollowUpHistory', this.state)
+    //     this.props.dispatch({ type: 'UPDATE_FollowUpHistory', payload: this.state});
     //     // this.props.addFollowUp();
     // };
     
@@ -105,59 +109,66 @@ class FollowUpDetail extends Component {
         
         return(
             <div>
-            <ExpansionPanel expanded={true}>
+            <ExpansionPanel>
                 <ExpansionPanelSummary >
-                    <TextField
-                        name="follow_up_date"
-                        label="Follow Up Date"
-                        className={classes.textField}
-                        value={moment(this.state.date).format('YYYY-MM-DD')}
-                        // fullWidth
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        type="date"
-                        onChange={this.handleChange}
-                        margin="normal"
-                        variant="outlined"
-                    />
+                    <h3>{this.state.date}</h3>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Grid container spacing={24}>
+                        <Grid item xs={3}>
+                        <TextField
+                            name="follow_up_date"
+                            label="Follow Up Date"
+                            className={classes.textField}
+                            value={moment(this.state.date).format('YYYY-MM-DD')}
+                            // fullWidth
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            type="date"
+                            onChange={this.handleChange}
+                            margin="normal"
+                            // variant="outlined"
+                        />
+                        </Grid>
+
                         <Grid item xs={3}>
                             <FormGroup row>
                                 <FormControlLabel
                                 control={
                                     <Checkbox
                                     name="evidence_of_disease"
-                                    checked={this.props.followup.evidence_of_disease}
-                                    onChange={this.props.handleChangeCheckbox}
-                                    value={this.props.followup.evidence_of_disease}
+                                    checked={this.state.evidence_of_disease}
+                                    onChange={this.handleChangeCheckbox}
+                                    value={this.state.evidence_of_disease}
                                     />
                                 }
                                 label="Evidence of Disease"
                                 />
                             </FormGroup>
                         </Grid>
-                        <Grid item xs={9}>
+                        <Grid item xs={6}>
                             <TextField
                             name="follow_up_notes"
                             label="Notes"
                             className={classes.textField}
-                            value={this.props.followup.notes}
-                            rows={2}
+                            value={this.state.follow_up_notes}
+                            rows={4}
                             fullWidth
                             InputLabelProps={{
                                 shrink: true,
                             }}
-                            onChange={this.props.handleChange}
+                            onChange={this.handleChange}
                             margin="normal"
-                            variant="outlined"
+                            // variant="outlined"
                             />
                         </Grid>
-                        <Recurrence recurrence={this.state} 
+                        {/* display recurrence information only if disease */}
+                        {this.state.evidence_of_disease && 
+                        <FollowUpHistory recurrence={this.state} 
                             handleChange={this.handleChange}
                             handleChangeCheckbox={this.handleChangeCheckbox}/>
+                        }
                     </Grid>
                 </ExpansionPanelDetails>
                 <ExpansionPanelActions>
