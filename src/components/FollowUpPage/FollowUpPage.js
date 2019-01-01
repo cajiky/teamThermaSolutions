@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button';
 import FollowUpDetail from './FollowUpDetail';
 import ChemotherapyType from './ChemotherapyType';
 import AdjuvantChemotherapy from './AdjuvantChemotherapy';
@@ -101,9 +102,18 @@ class FollowUpPage extends Component {
                     <Biological adjuvant_chemo={this.state.adjuvant_chemo} biological={this.state.biological} handleChange={this.handleChange} />
                     </Grid>
                 </Grid>
+                <Button onClick={this.props.addFollowUp} className={classes.button}
+                            variant="contained" color="primary">
+                        Save Follow Up
+                    </Button>      
+                    <Button className={classes.button}
+                            variant="contained" color="primary">
+                        New Follow Up
+                    </Button>                    
+
                 <Divider variant="middle" />
                 <h3>Follow Up History</h3>
-                {/* //Will have more than one -- will be mapped */}
+                {/* //Will have more than one -- will be mapped through */}
                 <FollowUpDetail followup={this.state} addFollowUp={this.addFollowUp}
                         handleChangeCheckbox={this.handleChangeCheckbox}/>
             </div>

@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Modality from './Modality';
 import Location from './Location';
 import SystemicLocation from './SystemicLocation';
-import FollowUpHistoryTreatment from './FollowUpHistoryTreatment';
+import FollowUpDetailTreatment from './FollowUpDetailTreatment';
 import Status from './Status';
 import moment from 'moment';
 
@@ -36,7 +36,7 @@ const styles = theme => ({
     }
 });
 
-class FollowUpHistory extends Component {
+class FollowUpDetailRecurrence extends Component {
     
     render() {
         const { classes } = this.props;
@@ -45,19 +45,6 @@ class FollowUpHistory extends Component {
           <Grid container spacing={24}>
             <Grid item xs={12}>
               <h3>Recurrence Information</h3>
-              {/* <FormGroup row>
-                  <FormControlLabel
-                  control={
-                      <Checkbox
-                      name="recurrence"
-                      checked={this.state.recurrence}
-                      onChange={this.handleChangeCheckbox}
-                      value={this.state.recurrence}
-                      />
-                  }
-                  label="Recurrence"
-                  />
-              </FormGroup> */}
             </Grid>
             <Grid item xs={3}>
               <TextField 
@@ -70,7 +57,7 @@ class FollowUpHistory extends Component {
                 fullWidth="true"
                 onChange={this.props.handleChange}
                 name="date"
-                value={moment(this.props.followUpHistory.date).format('YYYY-MM-DD')}
+                value={moment(this.props.recurrence.date).format('YYYY-MM-DD')}
               />
             </Grid>
             <Grid item xs={3}>
@@ -78,7 +65,7 @@ class FollowUpHistory extends Component {
                 name="cea"
                 label="CEA"
                 className={classes.textField}
-                value={this.props.followUpHistory.cea}
+                value={this.props.recurrence.cea}
                 // fullWidth
                 onChange={this.props.handleChange}
                 margin="normal"
@@ -89,7 +76,7 @@ class FollowUpHistory extends Component {
                 />
             </Grid>
             <Grid item xs={3}>
-              <Modality recurrence={this.props.followUpHistory} 
+              <Modality recurrence={this.props.recurrence} 
                             handleChange={this.props.handleChange}
                             handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
@@ -107,26 +94,26 @@ class FollowUpHistory extends Component {
                   fullWidth="true"
                   onChange={this.props.handleChange}
                   name="treatment_date"
-                  value={moment(this.props.followUpHistory.treatment_date).format('YYYY-MM-DD')}
+                  value={moment(this.props.recurrence.treatment_date).format('YYYY-MM-DD')}
                 />
             </Grid>
             <Grid item xs={3}>
-              <Location recurrence={this.props.followUpHistory} 
+              <Location recurrence={this.props.recurrence} 
                             handleChange={this.props.handleChange}
                             handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
             <Grid item xs={3}>
-              <SystemicLocation recurrence={this.props.followUpHistory} 
+              <SystemicLocation recurrence={this.props.recurrence} 
                             handleChange={this.props.handleChange}
                             handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
             <Grid item xs={3}>
-              <FollowUpHistoryTreatment recurrence={this.props.followUpHistory} 
+              <FollowUpDetailTreatment recurrence={this.props.recurrence} 
                             handleChange={this.props.handleChange}
                             handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
             <Grid item xs={3}>
-              <Status recurrence={this.props.followUpHistory} 
+              <Status recurrence={this.props.recurrence} 
                             handleChange={this.props.handleChange}
                             handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
@@ -135,7 +122,7 @@ class FollowUpHistory extends Component {
                 name="notes"
                 label="Notes"
                 className={classes.textField}
-                value={this.props.followUpHistory.notes}
+                value={this.props.recurrence.notes}
                 multiline
                 rows="2"
                 fullWidth
@@ -157,4 +144,4 @@ const mapStateToProps = reduxState => ({
     followUpHistory: reduxState.followUpHistory,
 });
 
-export default connect(mapStateToProps) (withStyles(styles)(FollowUpHistory));
+export default connect(mapStateToProps) (withStyles(styles)(FollowUpDetailRecurrence));

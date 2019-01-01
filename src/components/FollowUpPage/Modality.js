@@ -5,7 +5,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Input from '@material-ui/core/Input';
 
 const styles = theme => ({
   formControl: {
@@ -39,7 +39,7 @@ class Modality extends Component {
             // variant="outlined" 
             value={this.props.recurrence.rec_modality}
             input={
-              <OutlinedInput
+              <Input
                   value={this.props.recurrence.rec_modality}
                   name="rec_modality"
                   id="rec_modality"

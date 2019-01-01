@@ -5,13 +5,12 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
-import FollowUpHistory from './FollowUpHistory';
-// import Button from '@material-ui/core/Button';
-// import FormHelperText from '@material-ui/core/FormHelperText';
+import FollowUpHistory from './FollowUpDetailRecurrence';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import moment from 'moment';
@@ -163,7 +162,8 @@ class FollowUpDetail extends Component {
                             // variant="outlined"
                             />
                         </Grid>
-                        {/* display recurrence information only if disease */}
+                        <Divider variant="middle" />
+                        {/* display recurrence information only if evidence of disease */}
                         {this.state.evidence_of_disease && 
                         <FollowUpHistory recurrence={this.state} 
                             handleChange={this.handleChange}
@@ -174,12 +174,8 @@ class FollowUpDetail extends Component {
                 <ExpansionPanelActions>
                     <Button onClick={this.props.addFollowUp} className={classes.button}
                             variant="contained" color="primary">
-                        Save Follow Up
+                        Update
                     </Button>      
-                    <Button className={classes.button}
-                            variant="contained" color="primary">
-                        New Follow Up
-                    </Button>                    
                 </ExpansionPanelActions>
             </ExpansionPanel>
             </div>
