@@ -26,6 +26,7 @@ import Switch from '@material-ui/core/Switch';
 import Divider from '@material-ui/core/Divider';
 
 
+
 const styles = theme => ({
     root: {
         width: '100%',
@@ -48,6 +49,13 @@ const styles = theme => ({
         // maxWidth: 200,
         paddingBottom: 20,
       },
+      headingElements:{
+          marginTop: 10,
+          marginBottom: 30,
+      },
+      containerPaper:{
+          padding: 20,
+      }
 });
 
 class PSDSSPage extends Component {
@@ -110,8 +118,14 @@ class PSDSSPage extends Component {
                     </Grid>
                     <Grid item xs={12} className={classes.gridItem} align="center">
                     {/* This is the table that will hold the legend for the surgens to refference while they enter in scores. */}
-                        <Paper elevation={12}>
-                            <Table>
+                        <Paper elevation={12} className={classes.containerPaper}>
+                        <Grid
+                         container
+                         direction="row"
+                         justify="space-evenly"
+                         alignItems="center"
+                         >
+                            {/* <Table>
                                 <TableHead>
                                 <TableRow>
                                     <TableCell>PSDSS</TableCell>
@@ -188,7 +202,171 @@ class PSDSSPage extends Component {
                                         </TableCell>
                                     </TableRow>
                                 </TableBody>
-                            </Table>
+                            </Table> */}
+                                <Grid item xs={4} className={classes.headingElements} align="center">
+                                    <Typography variant="h4">
+                                        Clinical
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={4} className={classes.headingElements} align="center">
+                                    <Typography variant="h4">
+                                        PCI
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={4} className={classes.headingElements} align="center">
+                                    <Typography variant="h4">
+                                        Histology
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={12} className={classes.gridItem} align="center">
+                                    <Divider />
+                                </Grid>
+                                <Grid item xs={4} className={classes.gridItem} align="center">
+                                    <Typography variant="overline">
+                                        No Symptoms
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={4} className={classes.gridItem} align="center">
+                                    <Typography variant="overline">
+                                        {"<"}  10
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={4} className={classes.gridItem} align="center">
+                                    <Typography variant="overline">
+                                        Good/Moderate NO
+                                    </Typography>
+                                </Grid>
+                                <Grid itme xs={4} className={classes.gridItem} align="center">
+                                    <Typography variant="subheading">
+                                        1
+                                    </Typography>
+                                </Grid>
+                                <Grid itme xs={4} className={classes.gridItem} align="center">
+                                    <Typography variant="subheading">
+                                        1
+                                    </Typography>
+                                </Grid>
+                                <Grid itme xs={4} className={classes.gridItem} align="center">
+                                    <Typography variant="subheading">
+                                        1
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={12} className={classes.gridItem} align="center">
+                                    <Divider variant="fullWidth"></Divider>
+                                </Grid>
+                                <Grid item xs={4} className={classes.gridItem} align="center">
+                                    <Typography variant="overline">
+                                        Mild Symptoms
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={4} className={classes.gridItem} align="center">
+                                    <Typography variant="overline">
+                                        10-20
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={4} className={classes.gridItem} align="center">
+                                    <Typography variant="overline">
+                                        Moderate N1-2
+                                    </Typography>
+                                </Grid>
+                                <Grid itme xs={4} className={classes.gridItem} align="center">
+                                    <Typography variant="subheading">
+                                        1
+                                    </Typography>
+                                </Grid>
+                                <Grid itme xs={4} className={classes.gridItem} align="center">
+                                    <Typography variant="subheading">
+                                        3
+                                    </Typography>
+                                </Grid>
+                                <Grid itme xs={4} className={classes.gridItem} align="center">
+                                    <Typography variant="subheading">
+                                        3
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={12} className={classes.gridItem} align="center">
+                                    <Divider variant="fullWidth"></Divider>
+                                </Grid>
+                                <Grid item xs={12} className={classes.gridItem} align="center">
+                                    <Divider variant="fullWidth"></Divider>
+                                </Grid>
+                                <Grid item xs={4} className={classes.gridItem} align="center">
+                                    <Typography variant="overline">
+                                        Severe Symptoms
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={4} className={classes.gridItem} align="center">
+                                    <Typography variant="overline">
+                                        {">"}  20
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={4} className={classes.gridItem} align="center">
+                                    <Typography variant="overline">
+                                        Poor/Signet
+                                    </Typography>
+                                </Grid>
+                                <Grid itme xs={4} className={classes.gridItem} align="center">
+                                    <Typography variant="subheading">
+                                        6
+                                    </Typography>
+                                </Grid>
+                                <Grid itme xs={4} className={classes.gridItem} align="center">
+                                    <Typography variant="subheading">
+                                        7
+                                    </Typography>
+                                </Grid>
+                                <Grid itme xs={4} className={classes.gridItem} align="center">
+                                    <Typography variant="subheading">
+                                        9
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={12} className={classes.gridItem} align="center">
+                                    <Divider variant="fullWidth"></Divider>
+                                </Grid>
+                                <Grid item xs={2} className={classes.gridItem} align="center">
+                                    <TextField
+                                    label="Clinical"
+                                    style={{width: 130, marginBottom: 10,}}
+                                    onChange={this.handleChange}
+                                    name="clinicalScore"
+                                    value={this.state.clinicalScore}
+                                    id="patientWeightInput"
+                                    className={classNames(classes.margin, classes.textField)}
+                                    />
+                                </Grid>
+                                <Grid itme xs={2}>
+                                    <Typography variant="overline">
+                                        +
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={2} className={classes.gridItem} align="center">
+                                    <TextField
+                                        label="PCI Score"
+                                        style={{width: 130, marginBottom: 10,}}
+                                        onChange={this.handleChange}
+                                        name="pciScore"
+                                        value={this.state.pciScore}
+                                        id="patientWeightInput"
+                                        className={classNames(classes.margin, classes.textField)}
+                                    />
+                                </Grid>
+                                <Grid itme xs={2}>
+                                    <Typography variant="overline">
+                                        +
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={2} className={classes.gridItem}>
+                                    <TextField
+                                        label="Hist Score"
+                                        style={{width: 130, marginBottom: 10,}}
+                                        onChange={this.handleChange}
+                                        name="histologyScore"
+                                        value={this.state.histologyScore}
+                                        id="histologyScore"
+                                        className={classNames(classes.margin, classes.textField)}
+                                    />
+                                </Grid>
+                            </Grid>
                         </Paper>
                         <Grid item xs={12} className={classes.gridItem}></Grid>
                         <Grid item xs={12} className={classes.gridItem}>
