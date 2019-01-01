@@ -119,90 +119,12 @@ class PSDSSPage extends Component {
                     <Grid item xs={12} className={classes.gridItem} align="center">
                     {/* This is the table that will hold the legend for the surgens to refference while they enter in scores. */}
                         <Paper elevation={12} className={classes.containerPaper}>
-                        <Grid
-                         container
-                         direction="row"
-                         justify="space-evenly"
-                         alignItems="center"
-                         >
-                            {/* <Table>
-                                <TableHead>
-                                <TableRow>
-                                    <TableCell>PSDSS</TableCell>
-                                    <TableCell align="right">Clinical</TableCell>
-                                    <TableCell align="right">PCI</TableCell>
-                                    <TableCell align="right">Histology</TableCell>
-                                    <TableCell align="right"></TableCell>
-                                </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            Low
-                                        </TableCell>
-                                        <TableCell align="right">No Symptoms = 0</TableCell>
-                                        <TableCell align="right">Less than 10 = 1</TableCell>
-                                        <TableCell align="right">Good/Moderate =1</TableCell>
-                                        <TableCell align="right"></TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            Med
-                                        </TableCell>
-                                        <TableCell align="right">Mild Symptoms = 1</TableCell>
-                                        <TableCell align="right">10-20 = 3</TableCell>
-                                        <TableCell align="right">Moderate N1-2 = 3</TableCell>
-                                        <TableCell align="right"></TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            High
-                                        </TableCell>
-                                        <TableCell align="right">Severe Symptoms = 3</TableCell>
-                                        <TableCell align="right">Greater Than 20 = 7</TableCell>
-                                        <TableCell align="right">Poor/Signet = 9</TableCell>
-                                        <TableCell align="right"></TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell component="th" scope="row">
-                                            Score:
-                                        </TableCell>
-                                        <TableCell align="right">
-                                        <TextField
-                                            label="Clinical"
-                                            style={{width: 130, marginBottom: 10,}}
-                                            onChange={this.handleChange}
-                                            name="clinicalScore"
-                                            value={this.state.clinicalScore}
-                                            id="patientWeightInput"
-                                            className={classNames(classes.margin, classes.textField)}
-                                        />
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            <TextField
-                                                label="PCI Score"
-                                                style={{width: 130, marginBottom: 10,}}
-                                                onChange={this.handleChange}
-                                                name="pciScore"
-                                                value={this.state.pciScore}
-                                                id="patientWeightInput"
-                                                className={classNames(classes.margin, classes.textField)}
-                                            />
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            <TextField
-                                                    label="Hist Score"
-                                                    style={{width: 130, marginBottom: 10,}}
-                                                    onChange={this.handleChange}
-                                                    name="histologyScore"
-                                                    value={this.state.histologyScore}
-                                                    id="histologyScore"
-                                                    className={classNames(classes.margin, classes.textField)}
-                                                />
-                                        </TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table> */}
+                            <Grid
+                            container
+                            direction="row"
+                            justify="space-evenly"
+                            alignItems="center"
+                            >
                                 <Grid item xs={4} className={classes.headingElements} align="center">
                                     <Typography variant="h4">
                                         Clinical
