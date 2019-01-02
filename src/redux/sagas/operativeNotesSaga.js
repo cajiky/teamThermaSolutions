@@ -7,7 +7,7 @@ function* operativeNotes(action) {
     
     try {
         yield call(axios.post, `/operativeNotes`, action.payload);
-        // yield put({ type: 'RENDER_ALL_USERS', payload: action.payload.profileUserId } )
+        yield put({ type: 'GET_OPERATIVE_HISTORY', payload: action.payload.userId } )
 
     } catch (error) {
         console.log(error);

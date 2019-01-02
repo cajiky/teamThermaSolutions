@@ -168,7 +168,6 @@ const styles = theme => ({
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-      <Button variant="outlined" onClick={this.saveForm}>Save</Button>
         <ExpansionPanel onclick={this.expansionPanel} >
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>Peritoneal Cancer Index (PCI)</Typography>
@@ -675,6 +674,7 @@ const styles = theme => ({
 
         <ResectionDropdown state={this.state} handleChange={this.handleChange} handleChangeCheckbox={this.handleChangeCheckbox}/>
         <AdditionalPageInfo state={this.state} handleChange={this.handleChange} handleChangeCheckbox={this.handleChangeCheckbox}/>
+        <Button variant="contained" color="primary" onClick={this.saveForm}>Save</Button>
       </div>
     )};
   }
