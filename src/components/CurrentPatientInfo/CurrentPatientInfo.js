@@ -70,14 +70,16 @@ class CurrentPatientInfo extends Component {
                 </Grid>
                 {this.props.patient.hipec_date ? (<Grid item xs={2.5}><span className={classes.redBold}>HIPEC: </span>YES</Grid>) : (<></>)}
                 {this.props.patient.hipec_date ? (<Grid item xs={2.5}><span className={classes.redBold}>Date of HIPEC: </span>{moment(this.props.patient.hipec_date).format('MM-DD-YYYY')}</Grid>) : (<></>)}
+                {this.props.patient.referal_date ? (<Grid item xs={2.5}><span className={classes.redBold}>Date of Referral: </span>{moment(this.props.patient.referal_date).format('MM-DD-YYYY')}</Grid>) : (<></>)}
+                {this.props.patient.toc_id ? (<Grid item xs={2.5}><span className={classes.redBold}>Type of Cancer: </span>{this.props.patient.toc_id}</Grid>) : (<></>)}
             </Grid>
             </Typography>
           </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Typography>
-              <span className={classes.redBold}>Additional patient data will live here</span>
-            </Typography>
-          </ExpansionPanelDetails>
+            <ExpansionPanelDetails>
+                <Typography>
+                  {this.props.patient.diagnosis_date ? (<Grid item xs={2.5}><span className={classes.redBold}>Diagnosis Date: </span>{moment(this.props.patient.diagnosis_date).format('MM-DD-YYYY')}</Grid>) : (<></>)}
+                </Typography>
+            </ExpansionPanelDetails>
         </ExpansionPanel>
             </div>
         );
