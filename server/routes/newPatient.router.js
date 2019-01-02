@@ -52,8 +52,8 @@ router.get((req, res) => {
 router.post('/', async(req, res) => {
     let newPatientObj = req.body;
     console.log(newPatientObj);
-    const sqlText = `INSERT INTO patients (toc_id, patient_no, dob, gender, referal_date, hipec_date, diagnosis_date) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`;
-    pool.query(sqlText, [newPatientObj.toc, newPatientObj.patientId, newPatientObj.dob, newPatientObj.gender, newPatientObj.dateOfReferral, newPatientObj.dateOfHipec, newPatientObj.diagnosisDate])
+    const sqlText = `INSERT INTO patients (toc_id, patient_no, dob, gender, referal_date, hipec_date, diagnosis_date, sensor, hospital_telephone, refering_doctor, notes, current_status, interval_prime_surgery, survival_hipec_last_contact, survival_hipec_death, interval_diagnosis_pc_hipec) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING id`;
+    pool.query(sqlText, [newPatientObj.toc, newPatientObj.patientId, newPatientObj.dob, newPatientObj.gender, newPatientObj.dateOfReferral, newPatientObj.dateOfHipec, newPatientObj.diagnosisDate, newPatientObj.sensor, newPatientObj.hospitalTel, newPatientObj.refDoc, newPatientObj.notes, newPatientObj.currentStatus, newPatientObj.ipshipec, newPatientObj.survivalhipeclastcontact, newPatientObj.survivalhipecdeath, newPatientObj.intervalDiagnosisPcHipec])
       .then((response) => {
           console.log('There was success POSTing a new patient', response)
       }) 

@@ -23,6 +23,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import PropTypes from 'prop-types';
 import PatientProfileSearchResult from '../PatientProfileSearchResult/PatientProfileSearchResult';
+import InputBase from '@material-ui/core/InputBase';
 // import ReactPhoneInput from 'material-ui-phone-number';
 
 
@@ -71,7 +72,7 @@ class PatientProfileSearchPage extends Component {
         
       };
 
-      componentDidMount(){
+        componentDidMount(){
         this.props.dispatch({type: 'LAST_PATIENT_ID_PLUS_ONE'});
       }
     
@@ -104,6 +105,7 @@ class PatientProfileSearchPage extends Component {
       addPatient = () => {
           this.props.dispatch({type: 'ADD_PATIENT', payload: this.state.patient});
           this.setState({ variables: {open: false}, patient: {} });
+          this.props.dispatch({type: 'LAST_PATIENT_ID_PLUS_ONE'});
       }
 
       searchPatient = () => {
@@ -157,24 +159,28 @@ class PatientProfileSearchPage extends Component {
                     <Grid item xs={3}>
                     </Grid>
                         <Dialog
-                            fullScreen
+                            fullWidth
                             disableBackdropClick
-                            disableEscapeKeyDown
                             open={this.state.variables.open}
                             onClose={this.handleClose}>
                             <DialogContent>
             {/* Patient ID Input */}
                         <FormControl className={classes.formControl}>
-                            <TextField
+                            <InputBase disabled value="New Patient ID: ">{"New Patient ID: " + this.props.reduxState.patientReducer.newPatientId}</InputBase>
+                            <InputBase
                             required
                             id="outlined-required"
-                            label="Patient ID"
+                            label="New Patient ID"
                             InputLabelProps={{
                                 shrink: true,
                             }}
-                            placeholder={"Suggested Patient ID: " + this.props.reduxState.patientReducer.newPatientId}
+                            InputProps={{
+                                readOnly: true,
+                              }}
+                            placeholder={"New Patient ID: " + this.props.reduxState.patientReducer.newPatientId}
+                            value={this.props.reduxState.patientReducer.newPatientId}
                             margin="normal"
-                            variant="outlined"
+                            // variant="outlined"
                             fullWidth={true}
                             type="number"
                             onChange={this.handleNewPatientChange('patientId', 'value')}
