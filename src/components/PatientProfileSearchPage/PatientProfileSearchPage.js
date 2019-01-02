@@ -226,7 +226,6 @@ class PatientProfileSearchPage extends Component {
                             <Select
                                 value={this.state.patient.gender}
                                 onChange={this.handleNewPatientChange('gender', 'value')}
-                                input={<Input name="gender" id="gender-label-placeholder"/>}
                                 displayEmpty
                                 name="gender"
                                 className={classes.selectEmpty}
