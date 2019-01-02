@@ -7,6 +7,7 @@ import GridItem from '@material-ui/core/Grid';
 import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import PathologyNotesHistory from './PathologyNotesHistory';
 
 const styles = theme => ({
     root: {
@@ -57,12 +58,13 @@ class PathologyNotesPage extends Component {
          
     }
 
+    
+
     render() {
         const { classes } = this.props;
         return(
             <div>
                 <h1>Pathology Notes </h1>
-                <Button variant="outlined" onClick={this.savePathologyNotes}>Save</Button>
                 <Grid container spacing={24} >
                     <GridItem item xs={12}>
                             <DialogContent >
@@ -82,6 +84,10 @@ class PathologyNotesPage extends Component {
                             </DialogContent>    
                     </GridItem>
                 </Grid>
+                <Button variant="contained" color="primary" onClick={this.savePathologyNotes}>Save</Button>
+                <br/>
+                <PathologyNotesHistory />
+
             </div>
 
         )

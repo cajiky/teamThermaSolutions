@@ -19,18 +19,32 @@ router.post('/', (req, res) => {
       });            
 });
 
-router.post('/', (req, res) => {
-  console.log('notes post req.body', req.body);
+// router.post('/', (req, res) => {
+//   console.log('notes post req.body', req.body);
   
-  const userId = req.body.userId;
-  const operative_notes = req.body.operativeNotes;
-  const queryText = `INSERT INTO operative_op_notes ("operative_notes", "patient_id" ) VALUES ($1, $2)`;
-  pool.query(queryText, [operative_notes, userId])
+//   const userId = req.body.userId;
+//   const operative_notes = req.body.operativeNotes;
+//   const queryText = `INSERT INTO operative_op_notes ("operative_notes", "patient_id" ) VALUES ($1, $2)`;
+//   pool.query(queryText, [operative_notes, userId])
+//     .then((result) => { res.send(result.rows); })
+//     .catch((err) => {
+//       console.log('Error completing UPDATE post op query', err);
+//       res.sendStatus(500);
+//     });            
+// });
+
+
+router.get('/:id', (req, res) => {
+  console.log('GET req.params.id', req.params.id);
+  
+  let reqId = req.params.id;
+  const queryText = `SELECT * FROM pathology_op_notes WHERE patient_id=${reqId}`;
+  pool.query(queryText)
     .then((result) => { res.send(result.rows); })
     .catch((err) => {
-      console.log('Error completing UPDATE post op query', err);
+      console.log('Error completing SELECT user query', err);
       res.sendStatus(500);
-    });            
+    });
 });
 
 

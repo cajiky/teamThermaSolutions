@@ -15,9 +15,11 @@ const postOpRouter = require('./routes/post_op.router');
 const followUpRouter = require('./routes/follow_up.router');
 const recurrenceRouter = require('./routes/recurrence.router');
 const manageUsersRouter = require('./routes/manageUsers.router');
-const pathologyNotesRouter = require('./routes/pathologyNotes.router')
-const operativeNotesRouter = require('./routes/operativeNotes.router')
-const interventResectionRouter = require('./routes/interventionResection.router')
+const pathologyNotesRouter = require('./routes/pathologyNotes.router');
+const operativeNotesRouter = require('./routes/operativeNotes.router');
+const interventResectionRouter = require('./routes/interventionResection.router');
+const pathologyHistoryRouter = require('./routes/pathologyNotes.router');
+const operativeHistoryRouter = require('./routes/operativeNotes.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -46,7 +48,9 @@ app.use('/editUserProfile', manageUsersRouter);
 app.use('/getIndividualProfile', manageUsersRouter);
 app.use('/pathologyNotes', pathologyNotesRouter);
 app.use('/operativeNotes', operativeNotesRouter);
-app.use('/interventionResection', interventResectionRouter)
+app.use('/interventionResection', interventResectionRouter);
+app.use('/getPathologyHistory', pathologyHistoryRouter);
+app.use('/getOperativeHistory', operativeHistoryRouter);
 
 // Serve static files
 app.use(express.static('build'));
