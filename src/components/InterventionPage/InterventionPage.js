@@ -70,13 +70,14 @@ const styles = theme => ({
         lowerJejunum:0,
         upperIlium:0,
         lowerIlium:0,
+        PCITotal:0,
         surgeonOne: '',
         surgeonTwo:'',
         surgeonThree: '',
         nrHipec: '',
         hipecType:'',
         reasonOC:'',
-        expanded: true,
+        expanded: '',
         ///additionalPageInfo from here down
         checked: '',
         anastomosis: false ,
@@ -123,9 +124,35 @@ const styles = theme => ({
 
     }
 
-    componendDidMount(){
+    componentDidMount(){
+        
+        this.props.dispatch({ type: 'GET_PCI_TOTAL', payload: this.props.reduxState.patientReducer.patient.id })
+        // this.setState({
+        //     expanded: true
+        // })
+    }
+
+    calculatePCI = () => {
+        let PCI;
+        let PCI1 = Number(this.state.central);
+        let PCI2 = Number(this.state.rightUpper);
+        let PCI3 = Number(this.state.Epigastrium);
+        let PCI4 = Number(this.state.leftUpper);
+        let PCI5 = Number(this.state.leftFlank);
+        let PCI6 = Number(this.state.leftLower);
+        let PCI7 = Number(this.state.pelvis);
+        let PCI8 = Number(this.state.rightLower);
+        let PCI9 = Number(this.state.rightFlank);
+        let PCI10 = Number(this.state.upperJejunum);
+        let PCI11 = Number(this.state.lowerJejunum);
+        let PCI12 = Number(this.state.upperIlium);
+        let PCI13 = Number(this.state.lowerIlium);
+        PCI = PCI1 + PCI2 + PCI3 + PCI4 + PCI5 + PCI6 + PCI7 + PCI8 + PCI9 + PCI10 + PCI11 + PCI12 + PCI13
+
+        console.log('PCI Total', PCI);
+        
         this.setState({
-            expanded: true
+            PCITotal: PCI
         })
     }
 
@@ -133,7 +160,8 @@ const styles = theme => ({
         this.setState({
             ...this.state,
             [event.target.name]: event.target.value,
-        });
+        },
+        this.calculatePCI);
         console.log('intervention state', this.state);
         
       }
@@ -168,11 +196,17 @@ const styles = theme => ({
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <ExpansionPanel onclick={this.expansionPanel} >
+      {JSON.stringify(this.props.reduxState.pciReducer)}
+        <ExpansionPanel onClick={this.expansionPanel} >
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>Peritoneal Cancer Index (PCI)</Typography>
-            <Typography className={classes.heading}>PCI: 36</Typography>
-            <Typography className={classes.heading}>(click to expand)</Typography>
+            
+            {this.props.reduxState.pciReducer.pci_score !== undefined ? (
+                <Typography className={classes.heading}><h3>PCI: {this.props.reduxState.pciReducer.pci_score}</h3></Typography>
+            ) : (
+                <Typography className={classes.heading}><h3>PCI: {this.state.PCITotal}</h3></Typography>
+            ) }
+            <Typography className={classes.heading}>(click to expand/retract)</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Grid container spacing={24} >

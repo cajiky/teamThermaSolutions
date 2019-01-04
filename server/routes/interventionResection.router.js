@@ -21,6 +21,7 @@ router.put('/:id', (req, res, next) => {
     const lowerJejunum = req.body.interventionState.lowerJejunum;
     const upperIlium = req.body.interventionState.upperIlium;
     const lowerIlium = req.body.interventionState.lowerIlium;
+    const PCITotal = req.body.interventionState.PCITotal;
     const surgeonOne = req.body.interventionState.surgeonOne;
     const surgeonTwo = req.body.interventionState.surgeonTwo;
     const surgeonThree = req.body.interventionState.surgeonThree;
@@ -70,12 +71,12 @@ router.put('/:id', (req, res, next) => {
 
 
     const queryText = `UPDATE intervention 
-    SET (pci_0, pci_1, pci_2, pci_3, pci_4, pci_5, pci_6, pci_7, pci_8, pci_9, pci_10, pci_11, pci_12, surgeon_1, surgeon_2, surgeon_3, nrhipec, hipec_type, reason_oc, anastomosis, anastomosis_number, revision_stoma, stoma_post_hipec_type, bloodloss, volume, hipec_regiment, time, concentration, r_score, duration, stoma_post_hipec) =
-    ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31) 
+    SET (pci_0, pci_1, pci_2, pci_3, pci_4, pci_5, pci_6, pci_7, pci_8, pci_9, pci_10, pci_11, pci_12, pci_score, surgeon_1, surgeon_2, surgeon_3, nrhipec, hipec_type, reason_oc, anastomosis, anastomosis_number, revision_stoma, stoma_post_hipec_type, bloodloss, volume, hipec_regiment, time, concentration, r_score, duration, stoma_post_hipec) =
+    ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32) 
     WHERE patient_id=${patientId} RETURNING id;`;
 
 
-    pool.query(queryText, [central, rightUpper, Epigastrium, leftUpper, leftFlank, leftLower, pelvis, rightLower, rightFlank, upperJejunum, lowerJejunum, upperIlium, lowerIlium, surgeonOne, surgeonTwo, surgeonThree, nrHipec, hipecType, reasonOC, anastomosis, AnastomosisNumber, revisionStoma, stomaType, bloodLoss, volume, hipecRegiment, bloodLossTime, concentration, rScore, duration,  stomaPostHIPEC])
+    pool.query(queryText, [central, rightUpper, Epigastrium, leftUpper, leftFlank, leftLower, pelvis, rightLower, rightFlank, upperJejunum, lowerJejunum, upperIlium, lowerIlium, PCITotal, surgeonOne, surgeonTwo, surgeonThree, nrHipec, hipecType, reasonOC, anastomosis, AnastomosisNumber, revisionStoma, stomaType, bloodLoss, volume, hipecRegiment, bloodLossTime, concentration, rScore, duration,  stomaPostHIPEC])
       .then((results) => { 
         console.log('results ', results.rows[0].id);
         
