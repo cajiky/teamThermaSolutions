@@ -7,9 +7,11 @@ const router = express.Router();
 // GET ROUTER TO RETRIEVE POST OP FOR PATIENT
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   // console.log('query.id', req.query.id);
-  const queryText = 'SELECT * FROM follow_up_history WHERE follow_up_id=$1';
+  const queryText = `SELECT * FROM follow_up_history 
+                    WHERE follow_up_id=$1
+                    ORDER BY id desc`;
   pool.query(queryText, [req.params.id])      
-      .then(results => res.send(results.rows[0]))
+      .then(results => res.send(results.rows))
       .catch(error => {
           console.log('Error making SELECT for follow up history:', error);
           res.sendStatus(500);
@@ -44,6 +46,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     console.log('in put:', req.body);
 
     const id = req.body.id;
+    // const follow_up_id = req.body.follow_up_id;
     const date = req.body.date;
     const evidence_of_disease = req.body.evidence_of_disease;
     const follow_up_notes = req.body.follow_up_notes;

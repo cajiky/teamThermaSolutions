@@ -10,7 +10,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
-import FollowUpHistory from './FollowUpDetailRecurrence';
+import FollowUpDetailRecurrence from './FollowUpDetailRecurrence';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import moment from 'moment';
@@ -45,6 +45,7 @@ class FollowUpDetail extends Component {
 
     state = {
         id: null,
+        follow_up_id: null,
         date: null,
         evidence_of_disease: false,
         follow_up_notes: null,
@@ -60,22 +61,35 @@ class FollowUpDetail extends Component {
     };
 
     componentDidMount () {
-        console.log('in component mount follow up detail', this.props.followUpHistory);
+        console.log('in component mount follow up detail', this.props.followup);
         // this.props.dispatch({type: 'FETCH_POST_OP'});
+        let followUpDate = null;
+        if (this.props.followup.date != null) {
+            followUpDate = moment(this.props.followup.date).format('YYYY-MM-DD')
+        }
+        let lastContactDate = null;
+        if (this.props.followup.last_contact != null) {
+            followUpDate = moment(this.props.followup.last_contact).format('YYYY-MM-DD')
+        }
+        let treatmentDate = null;
+        if (this.props.followup.date_treatment != null) {
+            treatmentDate = moment(this.props.followup.date_treatment).format('YYYY-MM-DD')
+        }
         this.setState({
-            id: this.props.followUpHistory.id,
-            date: moment(this.props.followUpHistory.date).format('YYYY-MM-DD'),
-            evidence_of_disease: this.props.followUpHistory.evidence_of_disease,
-            follow_up_notes: this.props.followUpHistory.follow_up_notes,
-            cea: this.props.followUpHistory.cea,
-            rec_modality: this.props.followUpHistory.rec_modality,
-            syst_location: this.props.followUpHistory.syst_location,
-            last_contact: moment(this.props.followUpHistory.last_contact).format('YYYY-MM-DD'),
-            treatment: this.props.followUpHistory.treatment,
-            date_treatment: moment(this.props.followUpHistory.date_treatment).format('YYYY-MM-DD'),
-            status: this.props.followUpHistory.status,
-            treatment_notes: this.props.followUpHistory.treatment_notes,
-            location: this.props.followUpHistory.location
+            id: this.props.followup.id,
+            follow_up_id: this.props.followup.follow_up_id,
+            date: followUpDate,
+            evidence_of_disease: this.props.followup.evidence_of_disease,
+            follow_up_notes: this.props.followup.follow_up_notes,
+            cea: this.props.followup.cea,
+            rec_modality: this.props.followup.rec_modality,
+            syst_location: this.props.followup.syst_location,
+            last_contact: lastContactDate,
+            treatment: this.props.followup.treatment,
+            date_treatment: treatmentDate,
+            status: this.props.followup.status,
+            treatment_notes: this.props.followup.treatment_notes,
+            location: this.props.followup.location
         })
     }
 
@@ -95,12 +109,11 @@ class FollowUpDetail extends Component {
         });
     };
 
-    // addFollowUp = () => {
-    //     // alert('Add new followup');
-    //     console.log('before update FollowUpHistory', this.state)
-    //     this.props.dispatch({ type: 'UPDATE_FollowUpHistory', payload: this.state});
-    //     // this.props.addFollowUp();
-    // };
+    updateFollowUpHistory = () => {
+        // alert('Update followup history');
+        this.props.dispatch({type: 'UPDATE_FOLLOW_UP_HISTORY', payload: this.state});
+        this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY'});
+    };
     
     render() {
 
@@ -165,14 +178,14 @@ class FollowUpDetail extends Component {
                         <Divider variant="middle" />
                         {/* display recurrence information only if evidence of disease */}
                         {this.state.evidence_of_disease && 
-                        <FollowUpHistory recurrence={this.state} 
+                        <FollowUpDetailRecurrence recurrence={this.state} 
                             handleChange={this.handleChange}
                             handleChangeCheckbox={this.handleChangeCheckbox}/>
                         }
                     </Grid>
                 </ExpansionPanelDetails>
                 <ExpansionPanelActions>
-                    <Button onClick={this.props.addFollowUp} className={classes.button}
+                    <Button onClick={this.updateFollowUpHistory} className={classes.button}
                             variant="contained" color="primary">
                         Update
                     </Button>      
@@ -184,7 +197,7 @@ class FollowUpDetail extends Component {
 };
 
 const mapStateToProps = reduxState => ({
-    followUpHistory: reduxState.followUpHistory,
+    reduxState,
 });
 
 

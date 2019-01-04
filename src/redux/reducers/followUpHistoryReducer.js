@@ -1,4 +1,4 @@
-const followUpHistoryReducer = (state = {}, action) => {
+const followUpHistoryReducer = (state = [], action) => {
   // console.log('in post op reducer');
   switch (action.type) {
     case 'SET_FOLLOW_UP_HISTORY':

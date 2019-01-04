@@ -47,7 +47,8 @@ class FollowUpPage extends Component {
         biological: null,
         evidence_of_disease: false,
         last_contact: null,
-        date_of_death: null
+        date_of_death: null,
+        follow_up_history: []
     };
 
     componentDidMount () {
@@ -59,18 +60,19 @@ class FollowUpPage extends Component {
             biological: this.props.followUp.biological,
             evidence_of_disease: this.props.followUp.evidence_of_disease,
             last_contact: this.props.followUp.last_contact,
-            date_of_death: this.props.followUp.date_of_death        
+            date_of_death: this.props.followUp.date_of_death,
+            follow_up_history: this.props.followUpHistory,
         })
     };
     
-    addFollowUp = () => {
+    updateFollowUp = () => {
         // alert('Add new followup');
-        this.props.dispatch({ type: 'UPDATE_FOLLOW_UP', payload: this.state})
+        this.props.dispatch({ type: 'UPDATE_FOLLOW_UP', payload: this.state});
     };
 
     // Called when the input field changes
     handleChange = (event) => {
-        console.log('in on change', event.target.name, event.target.value)
+        // console.log('in on change', event.target.name, event.target.value)
         this.setState({
             ...this.state,
             [event.target.name]: event.target.value,
@@ -87,7 +89,7 @@ class FollowUpPage extends Component {
     
     render() {
         const { classes } = this.props;
-        
+        console.log('in render follow up page:', this.props.followUpHistory);
         return(
             <div>
                 <h3>Follow Up Treatment Plan</h3>
@@ -102,7 +104,7 @@ class FollowUpPage extends Component {
                     <Biological adjuvant_chemo={this.state.adjuvant_chemo} biological={this.state.biological} handleChange={this.handleChange} />
                     </Grid>
                 </Grid>
-                <Button onClick={this.props.addFollowUp} className={classes.button}
+                <Button onClick={this.props.updateFollowUp} className={classes.button}
                             variant="contained" color="primary">
                         Save Follow Up
                     </Button>      
@@ -114,8 +116,12 @@ class FollowUpPage extends Component {
                 <Divider variant="middle" />
                 <h3>Follow Up History</h3>
                 {/* //Will have more than one -- will be mapped through */}
-                <FollowUpDetail followup={this.state} addFollowUp={this.addFollowUp}
-                        handleChangeCheckbox={this.handleChangeCheckbox}/>
+                {/* myOptions.map((option, index) => ( */}
+                {
+                    this.state.follow_up_history.map((history, index) => (
+                        <FollowUpDetail key={index} followup={history} />
+                    ))
+                }
             </div>
         )
     }

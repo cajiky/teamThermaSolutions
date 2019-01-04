@@ -93,8 +93,8 @@ class FollowUpDetailRecurrence extends Component {
                   type="date"
                   fullWidth="true"
                   onChange={this.props.handleChange}
-                  name="treatment_date"
-                  value={moment(this.props.recurrence.treatment_date).format('YYYY-MM-DD')}
+                  name="date_treatment"
+                  value={moment(this.props.recurrence.date_treatment).format('YYYY-MM-DD')}
                 />
             </Grid>
             <Grid item xs={3}>
@@ -119,10 +119,10 @@ class FollowUpDetailRecurrence extends Component {
             </Grid>
             <Grid item xs={6}>
                 <TextField
-                name="notes"
+                name="treatment_notes"
                 label="Notes"
                 className={classes.textField}
-                value={this.props.recurrence.notes}
+                value={this.props.recurrence.treatment_notes}
                 multiline
                 rows="2"
                 fullWidth
