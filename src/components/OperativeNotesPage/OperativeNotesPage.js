@@ -36,6 +36,9 @@ class OperativeNotesPage extends Component {
     state = {
         operativeNotes: '',
         userId: '',
+        title: '',
+        firstName: '',
+        lastName: '',
     }
 
     handleChange = (event) => {
@@ -50,7 +53,10 @@ class OperativeNotesPage extends Component {
         this.props.dispatch({ type: 'UPDATE_OPERATIVE_NOTE', 
         payload: {
             operativeNotes: this.state.operativeNotes,
-            userId: this.props.reduxState.patientReducer.patient.id
+            userId: this.props.reduxState.patientReducer.patient.id,
+            title: this.props.reduxState.user.title,
+            firstName: this.props.reduxState.user.first_name,
+            lastName: this.props.reduxState.user.last_name,
         }
          })
          

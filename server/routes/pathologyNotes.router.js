@@ -10,8 +10,11 @@ router.post('/', (req, res) => {
     
     const userId = req.body.userId;
     const pathology_report = req.body.pathologyNotes;
-    const queryText = `INSERT INTO pathology_op_notes ("pathology_report", "patient_id" ) VALUES ($1, $2)`;
-    pool.query(queryText, [pathology_report, userId])
+    const title = req.body.title;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const queryText = `INSERT INTO pathology_op_notes ("pathology_report", "patient_id", "title", "first_name", "last_name"  ) VALUES ($1, $2, $3, $4, $5)`;
+    pool.query(queryText, [pathology_report, userId, title, firstName, lastName])
       .then((result) => { res.send(result.rows); })
       .catch((err) => {
         console.log('Error completing UPDATE post op query', err);
@@ -19,26 +22,13 @@ router.post('/', (req, res) => {
       });            
 });
 
-// router.post('/', (req, res) => {
-//   console.log('notes post req.body', req.body);
-  
-//   const userId = req.body.userId;
-//   const operative_notes = req.body.operativeNotes;
-//   const queryText = `INSERT INTO operative_op_notes ("operative_notes", "patient_id" ) VALUES ($1, $2)`;
-//   pool.query(queryText, [operative_notes, userId])
-//     .then((result) => { res.send(result.rows); })
-//     .catch((err) => {
-//       console.log('Error completing UPDATE post op query', err);
-//       res.sendStatus(500);
-//     });            
-// });
 
 
 router.get('/:id', (req, res) => {
   console.log('GET req.params.id', req.params.id);
   
   let reqId = req.params.id;
-  const queryText = `SELECT * FROM pathology_op_notes WHERE patient_id=${reqId}`;
+  const queryText = `SELECT * FROM pathology_op_notes WHERE patient_id=${reqId} ORDER BY date_completed DESC`;
   pool.query(queryText)
     .then((result) => { res.send(result.rows); })
     .catch((err) => {

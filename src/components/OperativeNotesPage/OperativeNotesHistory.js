@@ -25,6 +25,7 @@ import TableRow from '@material-ui/core/TableRow';
 // import Select from '@material-ui/core/Select';
 // import OutlinedInput from '@material-ui/core/OutlinedInput';
 // import FormControl from '@material-ui/core/FormControl';
+import moment from 'moment';
 
 const styles = theme => ({
     root: {
@@ -55,7 +56,7 @@ class OperativeNotesHistory extends React.Component {
         <Table className={classes.table}>
             <TableHead>
                 <TableRow>
-                    <TableCell>Dr. Last Name</TableCell>
+                    <TableCell>Created By</TableCell>
                     <TableCell>Operative Notes</TableCell>
                     <TableCell>Note Completion Date</TableCell>
                 </TableRow>
@@ -64,9 +65,9 @@ class OperativeNotesHistory extends React.Component {
                 {this.props.reduxState.operativeHistoryReducer.map( note => {
                     return(
                     <TableRow>
-                        <TableCell>Dr. Last Name</TableCell>
+                        <TableCell>{note.title} {note.last_name}, {note.first_name}</TableCell>
                         <TableCell>{note.operative_notes}</TableCell>
-                        <TableCell>{note.date_completed}</TableCell>
+                        <TableCell>{moment(note.date_completed).format('LLLL')}</TableCell>
                     </TableRow>
                     )}
                 )} 

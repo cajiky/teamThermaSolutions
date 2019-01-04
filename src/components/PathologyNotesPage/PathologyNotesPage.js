@@ -37,7 +37,9 @@ class PathologyNotesPage extends Component {
     state = {
         pathologyNotes: '',
         userId: '',
-        
+        title: '',
+        firstName: '',
+        lastName: '',
     }
 
     handleChange = (event) => {
@@ -52,7 +54,10 @@ class PathologyNotesPage extends Component {
         this.props.dispatch({ type: 'UPDATE_PATHOLOGY_NOTE', 
         payload: {
             pathologyNotes: this.state.pathologyNotes,
-            userId: this.props.reduxState.patientReducer.patient.id
+            userId: this.props.reduxState.patientReducer.patient.id,
+            title: this.props.reduxState.user.title,
+            firstName: this.props.reduxState.user.first_name,
+            lastName: this.props.reduxState.user.last_name,
         }
          })
          
