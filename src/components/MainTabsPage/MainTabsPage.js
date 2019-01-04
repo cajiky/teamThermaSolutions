@@ -46,10 +46,12 @@ state = {
     value: 0,
   };
   componentDidMount () {
+    console.log('in main tabs page for patient#', this.props.reduxState.patientReducer.patient.id);
+    let patientId = this.props.reduxState.patientReducer.patient.id;
     this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'});
-    this.props.dispatch({type: 'FETCH_POST_OP'});
-    this.props.dispatch({type: 'FETCH_ADVERSE_EVENT'});
-
+    this.props.dispatch({type: 'FETCH_POST_OP', payload: patientId});
+    this.props.dispatch({type: 'FETCH_ADVERSE_EVENT', payload: patientId});
+    // console.log('patient id:', patientId);
     // this.props.dispatch({type: 'TEST_PATIENT'});
   }
 

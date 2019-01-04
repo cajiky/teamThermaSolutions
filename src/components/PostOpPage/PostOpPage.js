@@ -56,39 +56,19 @@ class PostOpPage extends Component {
 
     state = {
         changesMade: false,
-        // id: 0,
-        // icu_stays: 0,
-        // mcu_stays: 0,
-        // hospital_stays: 0,
-        // notes: '',
-        // serious_advese_event: false,
-        // score: '',
-        // reoperation: null,
-        // hospital_mortality: null,
-        // status_at_discharge: 0,
-        // discharge_notes: '',
-        // adverse_events: [],
-        id: this.props.postOp.id,
-        icu_stays: this.props.postOp.icu_stays,
-        mcu_stays: this.props.postOp.mcu_stays,
-        hospital_stays: this.props.postOp.hospital_stays,
-        notes: this.props.postOp.notes,
-        serious_advese_event: this.props.postOp.serious_advese_event,
-        score: this.props.postOp.score,
-        reoperation: this.props.postOp.reoperation,
-        hospital_mortality: this.props.postOp.hospital_mortality,
-        status_at_discharge: this.props.postOp.status_at_discharge,
-        discharge_notes: this.props.postOp.discharge_notes,
-        adverse_events: this.props.adverseEvents,
-    };
-
-    savePostOp = () => {
-        // alert('Add new followup');
-        if (this.state.changesMade) {
-            console.log('before update post op', this.state)
-            this.props.dispatch({ type: 'UPDATE_POST_OP', payload: this.state});
-            this.props.dispatch({ type: 'UPDATE_ADVERSE_EVENT', payload: this.state});
-        }
+        patient_id: 0,
+        id: 0,
+        icu_stays: null,
+        mcu_stays: null,
+        hospital_stays: null,
+        notes: null,
+        serious_advese_event: false,
+        score: null,
+        reoperation: null,
+        hospital_mortality: null,
+        status_at_discharge: null,
+        discharge_notes: null,
+        adverse_events: [],
     };
 
     componentDidMount () {
@@ -96,6 +76,7 @@ class PostOpPage extends Component {
             ...this.state,
             changesMade: false,
             id: this.props.postOp.id,
+            patient_id: this.props.patientReducer.patient.id,
             icu_stays: this.props.postOp.icu_stays,
             mcu_stays: this.props.postOp.mcu_stays,
             hospital_stays: this.props.postOp.hospital_stays,
@@ -178,9 +159,20 @@ class PostOpPage extends Component {
         });
     }
 
+    savePostOp = () => {
+        // alert('Add new followup');
+        if (this.state.changesMade) {
+            console.log('before update post op', this.state)
+            this.props.dispatch({ type: 'UPDATE_POST_OP', payload: this.state});
+            this.props.dispatch({ type: 'UPDATE_ADVERSE_EVENT', payload: this.state});
+        }
+    };
+
     render() {
         const { classes } = this.props;
-        console.log('in render', this.state);
+        // let patientId = this.state.patient_id;
+        // console.log('in post-op render', patientId, this.props.patientReducer);
+
         return(
             <div>
             <Grid container spacing={24}>
@@ -318,7 +310,7 @@ class PostOpPage extends Component {
 const mapStateToProps = reduxState => ({
     postOp: reduxState.postOp,
     adverseEvents: reduxState.adverseEvents,
-    // patientSearch: reduxState.patientReducer.patientSearch
+    patientReducer: reduxState.patientReducer,
 });
 
 

@@ -18,8 +18,9 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 // worker Saga: will be fired on "FETCH_POST_OP" actions
 function* fetchAdverseEvent(action) {
   console.log('in fetch adverse event Saga', action.payload);
+  // let patientId = action.payload.patient.id;
   try {
-    const response = yield axios.get('api/adverse_event/1');
+    const response = yield axios.get(`api/adverse_event/${action.payload}`);
     console.log('response from adverse event call :', response);
     // set state
     yield put({ type: 'SET_ADVERSE_EVENT', payload: response.data });
@@ -62,7 +63,7 @@ function* updateAdverseEvent(action) {
   console.log('what to update in adverse_events table:',events, eventsToSend);
   try {
       yield call(axios.post, `/api/adverse_event`, eventsToSend);
-      yield put( { type: 'FETCH_ADVERSE_EVENT' } );
+      yield put( { type: 'FETCH_ADVERSE_EVENT', payload: action.payload.patient_id } );
   } catch (error) {
       console.log(error);
       alert('Unable to update adverse event');

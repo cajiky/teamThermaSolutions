@@ -6,9 +6,8 @@ const router = express.Router();
 
 // GET ROUTER TO RETRIEVE POST OP FOR PATIENT
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-  // console.log('query.id', req.query.id);
   const queryText = 'SELECT * FROM postop WHERE patient_id=$1';
-  pool.query(queryText, [req.params.id])      
+  pool.query(queryText, [req.params.id])
       .then(results => res.send(results.rows[0]))
       .catch(error => {
           console.log('Error making SELECT for post op:', error);

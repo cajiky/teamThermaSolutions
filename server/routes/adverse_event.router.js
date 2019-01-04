@@ -57,8 +57,9 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
                     selected_events.clavien_score
                     FROM event_options
                     LEFT OUTER JOIN (
-                        SELECT *, true as checked FROM adverse_events
-                        WHERE postop_id = $1) AS selected_events
+                        SELECT adverse_events.*, true as checked FROM adverse_events
+                        JOIN postop ON postop.id = adverse_events.postop_id
+                        WHERE postop.patient_id = $1) AS selected_events
                     ON event_options.id = selected_events.event_options_id
                     ORDER BY event_options.sort`
 
