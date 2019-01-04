@@ -288,7 +288,7 @@ class EnhancedTable extends React.Component {
                       }
                       
                       <TableCell align="right">{n.access_level}</TableCell>
-                      <TableCell><Button variant="outlined" component="span" className={classes.button} onClick={() => this.handleClickOpen(n)}>Edit</Button></TableCell>
+                      <TableCell><Button variant="contained" color="primary" component="span" className={classes.button} onClick={() => this.handleClickOpen(n)}>Edit</Button></TableCell>
                     </TableRow>
                   );
                 })}

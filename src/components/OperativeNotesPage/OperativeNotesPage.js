@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import GridItem from '@material-ui/core/Grid';
 import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
+import OperativeNotesHistory from './OperativeNotesHistory';
 
 const styles = theme => ({
     root: {
@@ -35,6 +36,9 @@ class OperativeNotesPage extends Component {
     state = {
         operativeNotes: '',
         userId: '',
+        title: '',
+        firstName: '',
+        lastName: '',
     }
 
     handleChange = (event) => {
@@ -49,7 +53,10 @@ class OperativeNotesPage extends Component {
         this.props.dispatch({ type: 'UPDATE_OPERATIVE_NOTE', 
         payload: {
             operativeNotes: this.state.operativeNotes,
-            userId: this.props.reduxState.patientReducer.patient.id
+            userId: this.props.reduxState.patientReducer.patient.id,
+            title: this.props.reduxState.user.title,
+            firstName: this.props.reduxState.user.first_name,
+            lastName: this.props.reduxState.user.last_name,
         }
          })
          
@@ -60,7 +67,6 @@ class OperativeNotesPage extends Component {
         return(
             <div>
                 <h1>Operative Notes </h1>
-                <Button variant="outlined" onClick={this.saveOperativeNotes}>Save</Button>
                 <Grid container spacing={24} >
                     <GridItem item xs={12}>
                             <DialogContent >
@@ -80,6 +86,8 @@ class OperativeNotesPage extends Component {
                             </DialogContent> 
                     </GridItem>
                 </Grid> 
+                <Button variant="contained" color="primary" onClick={this.saveOperativeNotes}>Save</Button>
+            <OperativeNotesHistory/>
             </div>
 
         )
