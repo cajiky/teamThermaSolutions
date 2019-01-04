@@ -14,6 +14,9 @@ import findUserProfileSaga from './getIndividualUserSaga';
 import pathologyNotesSaga from './pathologyNotesSaga';
 import operativeNotesSaga from './operativeNotesSaga';
 import interventionSaga from './interventionResectionSaga';
+import pathologyHistorySaga from './getPathologyHistorySaga';
+import operativeHistorySaga from './getOperativeHistorySaga';
+import pciTotalSaga from './pciSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -39,5 +42,8 @@ export default function* rootSaga() {
     pathologyNotesSaga(),
     operativeNotesSaga(),
     interventionSaga(),
+    pathologyHistorySaga(),
+    operativeHistorySaga(),
+    pciTotalSaga(),
   ]);
 }

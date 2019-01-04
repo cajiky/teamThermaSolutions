@@ -64,7 +64,7 @@ class PatientProfileSearchResult extends Component {
                 {(this.props.patientSearch.referal_date) ? (<><h3>Referral Date:</h3> {this.props.patientSearch.referal_date}</>) : (<></>)}
                 {(this.props.patientSearch.hipec_date) ? (<><h3>HIPEC Date:</h3> {this.props.patientSearch.hipec_date}</>) : (<></>)}
                 {(this.props.patientSearch.diagnosis_date) ? (<><h3>Diagnosis Date:</h3> {this.props.patientSearch.diagnosis_date}</>) : (<></>)}
-                {(this.props.patientSearch.sensor) ? (<><h3>Sensor:</h3> {this.props.patientSearch.sensor}</>) : (<></>)}
+                {(this.props.patientSearch.sensor) ? (<><h3>Sensor:</h3> Yes</>) : (<></>)}
                 {(this.props.patientSearch.hospital_telephone) ? (<><h3>Hospital Telephone Number:</h3> {this.props.patientSearch.hospital_telephone}</>) : (<></>)}
                 {(this.props.patientSearch.refering_doctor) ? (<><h3>Referring Doctor:</h3> {this.props.patientSearch.refering_doctor}</>) : (<></>)}
                 {(this.props.patientSearch.notes) ? (<><h3>Notes:</h3> {this.props.patientSearch.notes}</>) : (<></>)}
@@ -74,6 +74,10 @@ class PatientProfileSearchResult extends Component {
                 {(this.props.patientSearch.last_contact_date) ? (<><h3>Last Contact Date:</h3> {this.props.patientSearch.last_contact_date}</>) : (<></>)}
                 {(this.props.patientSearch.date_of_death) ? (<><h3>Date of Death:</h3> {this.props.patientSearch.date_of_death}</>) : (<></>)}
                 {(this.props.patientSearch.alive_on_date) ? (<><h3>Alive on Date:</h3> {this.props.patientSearch.alive_on_date}</>) : (<></>)}
+                {(this.props.patientSearch.interval_prime_surgery) ? (<><h3>Interval prime surgery HIPEC:</h3> {this.props.patientSearch.interval_prime_surgery}</>) : (<></>)}
+                {(this.props.patientSearch.survival_hipec_death) ? (<><h3>Survival HIPEC death:</h3> {this.props.patientSearch.survival_hipec_death}</>) : (<></>)}
+                {(this.props.patientSearch.survival_hipec_last_contact) ? (<><h3>Survival HIPEC last contact:</h3> {this.props.patientSearch.survival_hipec_last_contact}</>) : (<></>)}
+                {(this.props.patientSearch.interval_diagnosis_pc_hipec) ? (<><h3>Interval diagnosis PC-HIPEC:</h3> {this.props.patientSearch.interval_diagnosis_pc_hipec}</>) : (<></>)}
                 </>
                 </Typography>
                 <Button onClick={this.selectPatient} className={classes.button} variant="contained" color="primary">Select this patient</Button></>) : (<><h3>Patient Not Found</h3></>)}

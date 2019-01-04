@@ -48,7 +48,7 @@ const styles = theme => ({
         <ExpansionPanel>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>Resection</Typography>
-            <Typography className={classes.heading}>(click to expand)</Typography>
+            <Typography className={classes.heading}>(click to expand/retract)</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <FormGroup row>
@@ -60,7 +60,7 @@ const styles = theme => ({
                         <FormControlLabel
                         control={
                             <Checkbox
-                            key={option.index} 
+                            key={index} 
                             name={option.stateName}
                             checked={this.props.state.status}
                             onChange={this.props.handleChangeCheckbox}
