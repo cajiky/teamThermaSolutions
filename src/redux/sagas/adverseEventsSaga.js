@@ -15,7 +15,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 //   }
 // }
 
-// worker Saga: will be fired on "FETCH_POST_OP" actions
+// worker Saga: will be fired on "FETCH_ADVERSE_EVENT" actions
 function* fetchAdverseEvent(action) {
   console.log('in fetch adverse event Saga', action.payload);
   // let patientId = action.payload.patient.id;
@@ -29,6 +29,7 @@ function* fetchAdverseEvent(action) {
   }
 }
 
+// worker Saga: will be fired on "UPDATE_ADVERSE_EVENT" actions
 function* updateAdverseEvent(action) {
   console.log('in update adverse event Saga', action.payload);
 
@@ -37,15 +38,15 @@ function* updateAdverseEvent(action) {
   });
 
   let eventsToSend = {
-    postop_id: action.payload.id,
+    patient_id: action.payload.patient_id,
     arrayEventOptionIds: [],
-    arrayPostOpIds: [],
+    arrayPatientIds: [],
     arrayClavienScores: [],
   }
 
   events.forEach(element => {
     eventsToSend.arrayEventOptionIds.push(element.id);
-    eventsToSend.arrayPostOpIds.push(element.postop_id);
+    eventsToSend.arrayPatientIds.push(element.patient_id);
     eventsToSend.arrayClavienScores.push(element.clavien_score);
   });
 
@@ -60,7 +61,7 @@ function* updateAdverseEvent(action) {
   //     alert('Unable to update adverse event');
   // }
 
-  console.log('what to update in adverse_events table:',events, eventsToSend);
+  console.log('what to update in adverse_events table:', eventsToSend, eventsToSend.patient_id);
   try {
       yield call(axios.post, `/api/adverse_event`, eventsToSend);
       yield put( { type: 'FETCH_ADVERSE_EVENT', payload: action.payload.patient_id } );

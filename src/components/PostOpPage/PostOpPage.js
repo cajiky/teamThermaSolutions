@@ -139,16 +139,15 @@ class PostOpPage extends Component {
     }
 
     handleChangeClavianScore = (event) => {
-        console.log('in change clavian', this.props.postOp.id, event.target.name, event.target.value);
+        console.log('in change clavian', this.props.patientReducer.patient.id, event.target.name, event.target.value);
         
         // 1. Make a shallow copy of the items
         let adverse_events = [...this.state.adverse_events];
         // 2. Make a shallow copy of the item you want to mutate
         let item = {...adverse_events[event.target.name - 1]};
         // 3. Replace the property you're intested in
-        // item.postop_id = 1;
         item.clavien_score = event.target.value;
-        item.postop_id = this.props.postOp.id;
+        item.patient_id = this.props.patientReducer.patient.id;
         // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
         adverse_events[event.target.name - 1] = item;
         // 5. Set the state to our new copy

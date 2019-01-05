@@ -40,8 +40,9 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 // });
 
 router.put('/', rejectUnauthenticated, (req, res) => {
-    const id = req.body.id
-    const icu_stays = req.body.icu_stays
+    const id = req.body.id;
+    const patient_id = req.body.patient_id;
+    const icu_stays = req.body.icu_stays;
     const mcu_stays = req.body.mcu_stays;
     const hospital_stays = req.body.hospital_stays;
     const notes = req.body.notes;
@@ -52,14 +53,27 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     const status_at_discharge = req.body.status_at_discharge;
     const discharge_notes = req.body.discharge_notes;
 
-    const queryText = `UPDATE postop 
-        SET icu_stays=$2, mcu_stays=$3, hospital_stays=$4,
-        notes=$5, serious_advese_event=$6, score=$7,
-        reoperation=$8, hospital_mortality=$9,
-        status_at_discharge=$10, discharge_notes=$11
-        WHERE id=$1`;
+    // const queryText = `UPDATE postop 
+    //     SET icu_stays=$2, mcu_stays=$3, hospital_stays=$4,
+    //     notes=$5, serious_advese_event=$6, score=$7,
+    //     reoperation=$8, hospital_mortality=$9,
+    //     status_at_discharge=$10, discharge_notes=$11
+    //     WHERE id=$1`;
 
-    pool.query(queryText, [id, icu_stays, mcu_stays, hospital_stays,
+    const queryTextUpsert = 
+        `INSERT INTO postop (patient_id, icu_stays, mcu_stays, hospital_stays,
+            notes, serious_advese_event, score, reoperation,
+            hospital_mortality, status_at_discharge, discharge_notes)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+        ON CONFLICT (patient_id)
+        DO UPDATE SET icu_stays=$2, mcu_stays=$3, hospital_stays=$4,
+            notes=$5, serious_advese_event=$6, score=$7,
+            reoperation=$8, hospital_mortality=$9,
+            status_at_discharge=$10, discharge_notes=$11
+        WHERE postop.patient_id=$1`
+
+    console.log('IN QUERY FOR UPSERT', queryTextUpsert);
+    pool.query(queryTextUpsert, [patient_id, icu_stays, mcu_stays, hospital_stays,
         notes, serious_advese_event, score, reoperation, hospital_mortality,
         status_at_discharge, discharge_notes])
       .then((result) => { res.send(result.rows); })
