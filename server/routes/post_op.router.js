@@ -53,13 +53,6 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     const status_at_discharge = req.body.status_at_discharge;
     const discharge_notes = req.body.discharge_notes;
 
-    // const queryText = `UPDATE postop 
-    //     SET icu_stays=$2, mcu_stays=$3, hospital_stays=$4,
-    //     notes=$5, serious_advese_event=$6, score=$7,
-    //     reoperation=$8, hospital_mortality=$9,
-    //     status_at_discharge=$10, discharge_notes=$11
-    //     WHERE id=$1`;
-
     const queryTextUpsert = 
         `INSERT INTO postop (patient_id, icu_stays, mcu_stays, hospital_stays,
             notes, serious_advese_event, score, reoperation,

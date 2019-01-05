@@ -8,34 +8,33 @@ const router = express.Router();
 // first remove all entries for patient_id and then insert
 // entries from those selected and with clavien scores
 router.post('/',rejectUnauthenticated, async (req, res) => {
+
   const newAdverseEvent = req.body;
+  // setup arrays of values for bulk insert
   const queryValues = [
     newAdverseEvent.arrayPatientIds,
     newAdverseEvent.arrayEventOptionIds,
     newAdverseEvent.arrayClavienScores,
   ];
-  console.log('query values:', req.body, queryValues);
-  
   // We need to use the same connection for all queries...
   const connection = await pool.connect()
     
   // Using basic JavaScript try/catch/finally 
   try {
     await connection.query('BEGIN');
-    console.log('after begin:', newAdverseEvent, queryValues);
-    //remove all events for postop_id
+    //remove all events for patient_id
     let sqlText = `DELETE FROM adverse_events WHERE patient_id = $1`;
     await connection.query( sqlText, [newAdverseEvent.patient_id]);
-    console.log('after delete query', queryValues);
-    //add all events for postop_id
+    //add all events for patient_id
     sqlText = `INSERT INTO adverse_events 
           ("patient_id", "event_options_id", "clavien_score") 
             SELECT * FROM UNNEST(($1)::int[],($2)::int[],($3)::int[])`;
-    await connection.query( sqlText, queryValues);      
-    console.log('after insert query');
+    await connection.query( sqlText, queryValues);
+    // complete transaction
     await connection.query('COMMIT');
     res.sendStatus(200); 
   } catch ( error ) {
+    // if error rollback all changes
     await connection.query('ROLLBACK');
     console.log(`Transaction Error - Rolling back adverse events`, error);
     res.sendStatus(500); 

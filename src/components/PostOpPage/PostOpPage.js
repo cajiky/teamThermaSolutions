@@ -46,12 +46,6 @@ const styles = theme => ({
     }
 });
 
-// const adverseEvent = {
-//     id: 0,
-//     option: '',
-//     score: null,
-// }
-
 class PostOpPage extends Component {
 
     state = {
@@ -89,7 +83,6 @@ class PostOpPage extends Component {
             discharge_notes: this.props.postOp.discharge_notes,
             adverse_events: this.props.adverseEvents,
         })
-        // console.log('adverse events', this.props.adverseEvents);
     }
 
     componentWillUnmount () {
@@ -139,8 +132,6 @@ class PostOpPage extends Component {
     }
 
     handleChangeClavianScore = (event) => {
-        console.log('in change clavian', this.props.patientReducer.patient.id, event.target.name, event.target.value);
-        
         // 1. Make a shallow copy of the items
         let adverse_events = [...this.state.adverse_events];
         // 2. Make a shallow copy of the item you want to mutate
@@ -159,9 +150,7 @@ class PostOpPage extends Component {
     }
 
     savePostOp = () => {
-        // alert('Add new followup');
         if (this.state.changesMade) {
-            console.log('before update post op', this.state)
             this.props.dispatch({ type: 'UPDATE_POST_OP', payload: this.state});
             this.props.dispatch({ type: 'UPDATE_ADVERSE_EVENT', payload: this.state});
         }
@@ -169,9 +158,7 @@ class PostOpPage extends Component {
 
     render() {
         const { classes } = this.props;
-        // let patientId = this.state.patient_id;
-        // console.log('in post-op render', patientId, this.props.patientReducer);
-
+ 
         return(
             <div>
             <Grid container spacing={24}>
@@ -187,7 +174,7 @@ class PostOpPage extends Component {
                 }}
                 onChange={this.handleChange}
                 margin="normal"
-                variant="outlined"
+                // variant="outlined"
                 />
                 <TextField
                 name="hospital_stays"
@@ -200,7 +187,7 @@ class PostOpPage extends Component {
                 InputLabelProps={{
                     shrink: true,
                 }}
-                variant="outlined"
+                // variant="outlined"
                 />  
                 </Grid>
                 <Grid item xs>
@@ -217,7 +204,7 @@ class PostOpPage extends Component {
                 InputLabelProps={{
                     shrink: true,
                 }}
-                variant="outlined"
+                // variant="outlined"
                 />
                 </Grid>
             </Grid>
@@ -286,7 +273,7 @@ class PostOpPage extends Component {
                 InputLabelProps={{
                     shrink: true,
                 }}
-                variant="outlined"
+                // variant="outlined"
                 />      
                 
             </Grid>
