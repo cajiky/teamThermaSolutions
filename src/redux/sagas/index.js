@@ -4,6 +4,7 @@ import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
 import patientSaga from './patientSaga';
 import postOpSaga from './postOpSaga';
+import adverseEventsSaga from './adverseEventsSaga';
 import followUpSaga from './followUpSaga';
 import recurrenceSaga from './recurrenceSaga';
 import addNewUserSaga from './addNewUserSaga';
@@ -31,6 +32,7 @@ export default function* rootSaga() {
     userSaga(),
     patientSaga(),
     postOpSaga(),
+    adverseEventsSaga(),
     followUpSaga(),
     recurrenceSaga(),
     addNewUserSaga(),
