@@ -276,7 +276,7 @@ CREATE TABLE "follow_up_history" (
 
 CREATE TABLE "adverse_events" (
 	"id" serial NOT NULL,
-	"patient_id" integer UNIQUE NOT NULL,
+	"patient_id" integer NOT NULL,
 	"event_options_id" integer NOT NULL,
 	"clavien_score" integer
 	CONSTRAINT adverse_events_pk PRIMARY KEY ("id")
@@ -379,7 +379,7 @@ ALTER TABLE "postop" ADD CONSTRAINT "postop_fk0" FOREIGN KEY ("patient_id") REFE
 ALTER TABLE "follow_up" ADD CONSTRAINT "follow_up_fk0" FOREIGN KEY ("patient_id") REFERENCES "patients"("id");
 ALTER TABLE "follow_up_history" ADD CONSTRAINT "follow_up_history_id_fk1" FOREIGN KEY ("patient_id") REFERENCES "follow_up"("patient_id");
 
-ALTER TABLE "adverse_events" ADD CONSTRAINT "adverse_events_fk0" FOREIGN KEY ("postop_id") REFERENCES "postop"("id");
+ALTER TABLE "adverse_events" ADD CONSTRAINT "adverse_events_fk0" FOREIGN KEY ("patient_id") REFERENCES "postop"("patient_id");
 
 -- ALTER TABLE "other_info" ADD CONSTRAINT "other_info_fk0" FOREIGN KEY ("patient_id") REFERENCES "patients"("id");
 
