@@ -5,7 +5,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Input from '@material-ui/core/Input';
 
 const myOptions = [
   {id: 1, status: 'Death of Disease'},
@@ -40,13 +40,13 @@ class DischargeStatus extends Component {
     const { classes } = this.props;
 
     return (
-      <FormControl fullWidth="true" variant="outlined">
+      <FormControl fullWidth="true" >
           <InputLabel shrink htmlFor="status_at_discharge">Discharge Status</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
             value={this.props.status_at_discharge}
             input={
-              <OutlinedInput
+              <Input
                   value={this.props.status_at_discharge}
                   name="status_at_discharge"
                   id="status_at_discharge"
@@ -62,7 +62,7 @@ class DischargeStatus extends Component {
 } // end class TagSelector
 
 const mapReduxStateToProps = (reduxState) => ({
-  reduxState
+  dropdownOptions:reduxState
 });
 
 export default connect(mapReduxStateToProps)(withStyles(styles)(DischargeStatus));
