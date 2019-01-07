@@ -37,7 +37,7 @@ router.get(`/:key`, (req, res) => {
 router.post('/', async(req, res) => {
     let newPatientObj = req.body;
     console.log(newPatientObj);
-    const sqlText = `INSERT INTO patients (toc_id, patient_no, dob, gender, referal_date, hipec_date, diagnosis_date) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`;
+    const sqlText = `INSERT INTO patients (toc_id, patient_no, dob, gender, referral_date, hipec_date, diagnosis_date) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`;
     pool.query(sqlText, [newPatientObj.toc, newPatientObj.patientId, newPatientObj.dob, newPatientObj.gender, newPatientObj.dateOfReferral, newPatientObj.dateOfHipec, newPatientObj.diagnosisDate])
       .then((response) => {
           console.log('There was success POSTing a new patient', response)
