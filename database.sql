@@ -34,7 +34,11 @@ VALUES ('Colorectal Cancer', 'CRC'),
 			('Ovarian', 'Ovarian'),
 			('Mesothelioma', 'Meso'),
 			('Pseudomyxoma Peritonei', 'PMP'),
+<<<<<<< HEAD
 			('Other', 'Other')
+=======
+			('Other', 'Other');
+>>>>>>> master
 
 CREATE TABLE "event_options" (
 	"id" serial NOT NULL,
@@ -45,7 +49,8 @@ CREATE TABLE "event_options" (
   OIDS=FALSE
 );
 
-INSERT INTO event_options VALUES 
+INSERT INTO event_options (name, sort) 
+VALUES 
 	('Abcess', 1),
 	('Anastomotic Leakage', 2),
 	('Anemia', 3),
@@ -62,7 +67,7 @@ INSERT INTO event_options VALUES
 	('Urinary Tract Infection', 14),
 	('Wound Dehiscense', 15),
 	('Wound Infection', 16),
-	('Other Event', 17)
+	('Other Event', 17);
 
 CREATE TABLE "patients" (
 	"id" serial NOT NULL,
@@ -237,7 +242,11 @@ CREATE TABLE "adverse_events" (
 	"id" serial NOT NULL,
 	"patient_id" integer NOT NULL,
 	"event_options_id" integer NOT NULL,
+<<<<<<< HEAD
 	"clavien_score" integer
+=======
+	"clavien_score" integer,
+>>>>>>> master
 	CONSTRAINT adverse_events_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -281,7 +290,11 @@ CREATE TABLE "pathology_op_notes" (
 	"id" serial NOT NULL,
 	"patient_id" integer NOT NULL REFERENCES patients(id),
 	"pathology_report" varchar,
+<<<<<<< HEAD
 	"date_completed" TIMESTAMP DEFAULT current_time,
+=======
+	"date_completed" TIMESTAMP DEFAULT now(),
+>>>>>>> master
 	"title" varchar,
 	"first_name" varchar,
 	"last_name" varchar,
@@ -294,7 +307,11 @@ CREATE TABLE "operative_op_notes" (
     "id" SERIAL PRIMARY KEY,
     "patient_id" integer NOT NULL REFERENCES patients(id),
     "operative_notes" varchar,
+<<<<<<< HEAD
 		"date_completed" TIMESTAMP DEFAULT current_time,
+=======
+		"date_completed" TIMESTAMP DEFAULT now(),
+>>>>>>> master
 		"title" varchar,
 		"first_name" varchar,
 		"last_name" varchar,
@@ -354,10 +371,11 @@ ALTER TABLE "follow_up" ADD CONSTRAINT "follow_up_fk0" FOREIGN KEY ("patient_id"
 
 ALTER TABLE "follow_up_history" ADD CONSTRAINT "follow_up_history_id_fk0" FOREIGN KEY ("patient_id") REFERENCES "follow_up"("patient_id");
 
-ALTER TABLE "events" ADD CONSTRAINT "events_fk0" FOREIGN KEY ("postop_id") REFERENCES "postop"("id");
+ALTER TABLE "adverse_events" ADD CONSTRAINT "adverse_events_fk0" FOREIGN KEY ("patient_id") REFERENCES "postop"("patient_id");
 
 ALTER TABLE "adverse_events" ADD CONSTRAINT "adverse_events_fk0" FOREIGN KEY ("patient_id") REFERENCES "postop"("patient_id");
 
 ALTER TABLE "pathology_op_notes" ADD CONSTRAINT "pathology_op_notes_fk0" FOREIGN KEY ("patient_id") REFERENCES "patients"("id");
+ALTER TABLE "operative_op_notes" ADD CONSTRAINT "operative_op_notes_fk0" FOREIGN KEY ("patient_id") REFERENCES "patients"("id");
 
 ALTER TABLE "resections" ADD CONSTRAINT "resections_fk0" FOREIGN KEY ("intervention_id") REFERENCES "intervention"("id");

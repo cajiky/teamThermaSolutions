@@ -56,7 +56,7 @@ class PostOpPage extends Component {
         mcu_stays: null,
         hospital_stays: null,
         notes: null,
-        serious_advese_event: false,
+        serious_adverse_event: false,
         score: null,
         reoperation: null,
         hospital_mortality: null,
@@ -75,7 +75,7 @@ class PostOpPage extends Component {
             mcu_stays: this.props.postOp.mcu_stays,
             hospital_stays: this.props.postOp.hospital_stays,
             notes: this.props.postOp.notes,
-            serious_advese_event: this.props.postOp.serious_advese_event,
+            serious_adverse_event: this.props.postOp.serious_adverse_event,
             score: this.props.postOp.score,
             reoperation: this.props.postOp.reoperation,
             hospital_mortality: this.props.postOp.hospital_mortality,
@@ -101,7 +101,7 @@ class PostOpPage extends Component {
 
     // Called when the input field changes
     handleChangeCheckbox = (event) => {
-        // console.log('in checkbox', this.state.serious_advese_event);
+        // console.log('in checkbox', this.state.serious_adverse_event);
         // this.state.changesMade = true;
         this.setState({
             ...this.state,
@@ -212,16 +212,16 @@ class PostOpPage extends Component {
                 <FormControlLabel
                 control={
                     <Checkbox
-                    name="serious_advese_event"
-                    checked={this.state.serious_advese_event}
+                    name="serious_adverse_event"
+                    checked={this.state.serious_adverse_event}
                     onChange={this.handleChangeCheckbox}
-                    // value={this.state.serious_advese_event}
+                    // value={this.state.serious_adverse_event}
                     />
                 }
                 label="Serious Adverse Event"
                 />
             </FormGroup>
-            <ExpansionPanel expanded={this.state.serious_advese_event}>
+            <ExpansionPanel expanded={this.state.serious_adverse_event}>
                 <ExpansionPanelSummary >
                 <FormControl component="fieldset" className={classes.formControl}>
                     <FormLabel component="legend">Score</FormLabel>
