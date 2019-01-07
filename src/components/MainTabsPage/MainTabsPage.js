@@ -45,9 +45,16 @@ class MainTabsPage extends Component {
 state = {
     value: 0,
   };
+
+  getPatientIDFromCookie = () => {
+    console.log(document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1"))
+    this.props.dispatch({type:'GET_PATIENT_ID_FROM_COOKIE', payload: document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1")})
+  }
+
   componentDidMount () {    
-    console.log('in main tabs page for patient#', this.props.reduxState.patientReducer.patient.id);
-    let patientId = this.props.reduxState.patientReducer.patient.id;
+    // console.log('in main tabs page for patient#', this.props.reduxState.patientReducer.patient.id);
+    this.getPatientIDFromCookie()
+    let patientId = document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'});
     this.props.dispatch({type: 'FETCH_POST_OP', payload: patientId});
     this.props.dispatch({type: 'FETCH_ADVERSE_EVENT', payload: patientId});
