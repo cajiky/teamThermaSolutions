@@ -104,6 +104,7 @@ class PatientProfileSearchPage extends Component {
           this.props.dispatch({type: 'ADD_PATIENT', payload: this.state.patient});
           this.setState({ variables: {open: false}, patient: {} });
           this.props.dispatch({type: 'LAST_PATIENT_ID_PLUS_ONE'});
+          this.props.history.push(`/MainTabsPage`);
       }
 
       searchPatient = () => {
