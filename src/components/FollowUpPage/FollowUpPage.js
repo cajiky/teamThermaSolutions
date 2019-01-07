@@ -73,14 +73,14 @@ class FollowUpPage extends Component {
     };
 
     addFollowUpHistory = () => {
-        console.log('in add followup history', this.state);
+        console.log('in add followup history', this.state, this.props.followUpHistory);
         this.props.dispatch({type: 'ADD_FOLLOW_UP_HISTORY', payload: this.state});
         this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY', payload: this.state.patient_id});
-        // console.log('after add followup history', this.state);
         this.setState({
             ...this.state,
             follow_up_history: this.props.followUpHistory,
-        });        
+        });
+        console.log('after add followup history', this.state, this.props.followUpHistory);
     }
 
     // Called when the input field changes
@@ -102,7 +102,7 @@ class FollowUpPage extends Component {
     
     render() {
         const { classes } = this.props;
-        console.log('in render follow up page:', this.props.followUpHistory);
+        console.log('in render follow up page:', this.state.follow_up_history);
         return(
             <div>
                 <h3>Follow Up Treatment Plan</h3>
@@ -119,7 +119,7 @@ class FollowUpPage extends Component {
                 </Grid>
                 <Button onClick={this.updateFollowUp} className={classes.button}
                             variant="contained" color="primary">
-                        Save Follow Up
+                        Save
                     </Button>      
                     <Button onClick={this.addFollowUpHistory} className={classes.button}
                             variant="contained" color="primary">
