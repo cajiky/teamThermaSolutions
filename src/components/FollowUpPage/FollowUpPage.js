@@ -42,7 +42,8 @@ class FollowUpPage extends Component {
 
     state = {
         id: 0,
-        adjuvant_chemo: 3,
+        patient_id: 0,
+        adjuvant_chemo: null,
         adjuvant_chemo_type: null,
         biological: null,
         evidence_of_disease: false,
@@ -55,6 +56,7 @@ class FollowUpPage extends Component {
 
         this.setState({
             id: this.props.followUp.id,
+            patient_id: this.props.patientReducer.patient.id,
             adjuvant_chemo: this.props.followUp.adjuvant_chemo,
             adjuvant_chemo_type: this.props.followUp.adjuvant_chemo_type,
             biological: this.props.followUp.biological,
@@ -67,8 +69,16 @@ class FollowUpPage extends Component {
     
     updateFollowUp = () => {
         // alert('Add new followup');
+        console.log('before dispatch update followup', this.state);
         this.props.dispatch({ type: 'UPDATE_FOLLOW_UP', payload: this.state});
     };
+
+    addFollowUpHistory = () => {
+        console.log('in add followup history', this.state);
+        this.props.dispatch({type: 'ADD_FOLLOW_UP_HISTORY', payload: this.state});
+        this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY', payload: this.state.patient_id});
+        // console.log('after add followup history', this.state);
+    }
 
     // Called when the input field changes
     handleChange = (event) => {
@@ -104,11 +114,11 @@ class FollowUpPage extends Component {
                     <Biological adjuvant_chemo={this.state.adjuvant_chemo} biological={this.state.biological} handleChange={this.handleChange} />
                     </Grid>
                 </Grid>
-                <Button onClick={this.props.updateFollowUp} className={classes.button}
+                <Button onClick={this.updateFollowUp} className={classes.button}
                             variant="contained" color="primary">
                         Save Follow Up
                     </Button>      
-                    <Button className={classes.button}
+                    <Button onClick={this.addFollowUpHistory} className={classes.button}
                             variant="contained" color="primary">
                         New Follow Up
                     </Button>                    
@@ -130,6 +140,7 @@ class FollowUpPage extends Component {
 const mapStateToProps = reduxState => ({
     followUp: reduxState.followUp,
     followUpHistory: reduxState.followUpHistory,
+    patientReducer: reduxState.patientReducer,
 });
 
 export default connect(mapStateToProps) (withStyles(styles)(FollowUpPage));

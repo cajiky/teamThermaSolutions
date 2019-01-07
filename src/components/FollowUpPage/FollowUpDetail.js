@@ -10,6 +10,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FollowUpDetailRecurrence from './FollowUpDetailRecurrence';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -24,7 +25,7 @@ const styles = theme => ({
       marginLeft: theme.spacing.unit,
       marginRight: theme.spacing.unit,
     },
-    expanded: {
+    expasion: {
       backgroundColor: '#cccccc',
       minHeight: 0,
       marginTop: 0,
@@ -38,15 +39,21 @@ const styles = theme => ({
     },
     group: {
         flexDirection: 'row',
+    },
+    superCool: {
+        backgroundColor: '#eeeeee',
+        height: 25,
     }
 });
+
 
 class FollowUpDetail extends Component {
 
     state = {
-        id: null,
+        id: 0,
+        patient_id: 0,
         follow_up_id: null,
-        date: null,
+        follow_up_date: null,
         evidence_of_disease: false,
         follow_up_notes: null,
         cea: null,
@@ -64,12 +71,12 @@ class FollowUpDetail extends Component {
         console.log('in component mount follow up detail', this.props.followup);
         // this.props.dispatch({type: 'FETCH_POST_OP'});
         let followUpDate = null;
-        if (this.props.followup.date != null) {
-            followUpDate = moment(this.props.followup.date).format('YYYY-MM-DD')
+        if (this.props.followup.follow_up_date != null) {
+            followUpDate = moment(this.props.followup.follow_up_date).format('YYYY-MM-DD')
         }
         let lastContactDate = null;
         if (this.props.followup.last_contact != null) {
-            followUpDate = moment(this.props.followup.last_contact).format('YYYY-MM-DD')
+            lastContactDate = moment(this.props.followup.last_contact).format('YYYY-MM-DD')
         }
         let treatmentDate = null;
         if (this.props.followup.date_treatment != null) {
@@ -77,8 +84,9 @@ class FollowUpDetail extends Component {
         }
         this.setState({
             id: this.props.followup.id,
+            patient_id: this.props.followup.patient_id,
             follow_up_id: this.props.followup.follow_up_id,
-            date: followUpDate,
+            follow_up_date: followUpDate,
             evidence_of_disease: this.props.followup.evidence_of_disease,
             follow_up_notes: this.props.followup.follow_up_notes,
             cea: this.props.followup.cea,
@@ -112,7 +120,7 @@ class FollowUpDetail extends Component {
     updateFollowUpHistory = () => {
         // alert('Update followup history');
         this.props.dispatch({type: 'UPDATE_FOLLOW_UP_HISTORY', payload: this.state});
-        this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY'});
+        this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY', payload: this.state.patient_id});
     };
     
     render() {
@@ -122,8 +130,8 @@ class FollowUpDetail extends Component {
         return(
             <div>
             <ExpansionPanel>
-                <ExpansionPanelSummary >
-                    <h3>{this.state.date}</h3>
+                <ExpansionPanelSummary className={classes.superCool} expandIcon={<ExpandMoreIcon />}>
+                    <h3>{this.state.follow_up_date}</h3>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Grid container spacing={24}>
@@ -132,7 +140,7 @@ class FollowUpDetail extends Component {
                             name="follow_up_date"
                             label="Follow Up Date"
                             className={classes.textField}
-                            value={moment(this.state.date).format('YYYY-MM-DD')}
+                            value={moment(this.state.follow_up_date).format('YYYY-MM-DD')}
                             // fullWidth
                             InputLabelProps={{
                                 shrink: true,
