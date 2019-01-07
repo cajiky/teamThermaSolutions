@@ -45,10 +45,15 @@ const styles = theme => ({
 
     return (
       <div className={classes.root}>
+      <Grid container spacing={12} >
         <ExpansionPanel>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>Resection</Typography>
-            <Typography className={classes.heading}>(click to expand/retract)</Typography>
+            <GridItem item xs={10} >
+              <Typography className={classes.heading}><h3>Resection</h3></Typography>
+            </GridItem>
+            <GridItem item xs={2} >
+              <Typography className={classes.heading}>(click to expand/retract)</Typography>
+            </GridItem>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <FormGroup row>
@@ -76,7 +81,7 @@ const styles = theme => ({
             </FormGroup>
           </ExpansionPanelDetails>
         </ExpansionPanel>
-        
+        </Grid>
       </div>
     )};
   }
