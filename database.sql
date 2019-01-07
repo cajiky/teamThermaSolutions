@@ -27,14 +27,19 @@ CREATE TABLE "types_of_cancer" (
 );
 
 -- Need to get these codes ---
--- INSERT INTO types_of_cancer (name, abbreviation) 
--- VALUES ('Colorectal Cancer', 'CRC'), 
--- 			('Appendix', '')
+INSERT INTO types_of_cancer (name, abbreviation) 
+VALUES ('Colorectal Cancer', 'CRC'), 
+			('Appendix', 'Appendix'),
+			('Gastric', 'Gastric'),
+			('Ovarian', 'Ovarian'),
+			('Mesothelioma', 'Meso'),
+			('Pseudomyxoma Peritonei', 'PMP'),
+			('Other', 'Other')
 
 CREATE TABLE "event_options" (
 	"id" serial NOT NULL,
 	"name" varchar,
-	"sort" integer
+	"sort" integer,
 	CONSTRAINT event_options_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -79,6 +84,10 @@ CREATE TABLE "patients" (
 	"last_contact_date" DATE,
 	"date_of_death" DATE,
 	"alive_on_date" DATE,
+	"interval_prime_surgery" INTEGER,
+	"survival_hipec_death" INTEGER,
+	"survival_hipec_last_contact" INTEGER,
+	"interval_diagnosis_pc_hipec" INTEGER,
 	CONSTRAINT patients_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -169,9 +178,9 @@ CREATE TABLE "psdss" (
 CREATE TABLE "intervention" (
 	"id" serial NOT NULL,
 	"patient_id" integer UNIQUE NOT NULL,
-	"Surgeon_1" varchar,
-	"Surgeon_2" varchar,
-	"Surgeon_3" varchar,
+	"surgeon_1" varchar,
+	"surgeon_2" varchar,
+	"surgeon_3" varchar,
 	"nrhipec" varchar,
 	"hipec_type" integer,
 	"reason_oc" integer,
@@ -224,6 +233,16 @@ CREATE TABLE "postop" (
   OIDS=FALSE
 );
 
+CREATE TABLE "adverse_events" (
+	"id" serial NOT NULL,
+	"patient_id" integer NOT NULL,
+	"event_options_id" integer NOT NULL,
+	"clavien_score" integer
+	CONSTRAINT adverse_events_pk PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
 CREATE TABLE "follow_up" (
 	"id" serial NOT NULL,
 	"patient_id" integer UNIQUE NOT NULL,
@@ -233,31 +252,15 @@ CREATE TABLE "follow_up" (
 	"evidence_of_disease" BOOLEAN,
 	"last_contact" DATE,
 	"date_of_death" DATE,
+	"notes" text,
 	CONSTRAINT follow_up_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
 
--- CREATE TABLE "reoccurence" (
--- 	"id" serial NOT NULL,
--- 	"followup_id" integer NOT NULL,
--- 	"date" DATE,
--- 	"cea" varchar,
--- 	"rec_modality" integer,
--- 	"syst_location" integer,
--- 	"treatment" integer,
--- 	"date_treatment" DATE,
--- 	"status" integer,
--- 	"notes" varchar,
--- 	"location" integer,
--- 	CONSTRAINT reoccurence_pk PRIMARY KEY ("id")
--- ) WITH (
---   OIDS=FALSE
--- );
-
 CREATE TABLE "follow_up_history" (
   "id" serial NOT NULL,
-  "patient_id" integer UNIQUE NOT NULL,
+  "patient_id" integer NOT NULL,
   "date" DATE,
   "evidence_of_disease" BOOLEAN DEFAULT 'f',
   "follow_up_notes" varchar,
@@ -274,33 +277,14 @@ CREATE TABLE "follow_up_history" (
   OIDS=FALSE
 );
 
-CREATE TABLE "adverse_events" (
-	"id" serial NOT NULL,
-	"patient_id" integer NOT NULL,
-	"event_options_id" integer NOT NULL,
-	"clavien_score" integer
-	CONSTRAINT adverse_events_pk PRIMARY KEY ("id")
-) WITH (
-  OIDS=FALSE
-);
-
--- CREATE TABLE "other_info" (
--- 	"id" serial NOT NULL,
--- 	"patient_id" integer NOT NULL,
--- 	"live_metasis_treatment" varchar,
--- 	"timing" varchar,
--- 	"date_treatment" DATE,
--- 	"treatment_type" varchar,
--- 	"notes" varchar,
--- 	CONSTRAINT other_info_pk PRIMARY KEY ("id")
--- ) WITH (
---   OIDS=FALSE
--- );
-
 CREATE TABLE "pathology_op_notes" (
 	"id" serial NOT NULL,
-	"patient_id" integer UNIQUE NOT NULL,
+	"patient_id" integer NOT NULL REFERENCES patients(id),
 	"pathology_report" varchar,
+	"date_completed" TIMESTAMP DEFAULT current_time,
+	"title" varchar,
+	"first_name" varchar,
+	"last_name" varchar,
 	CONSTRAINT pathology_op_notes_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -308,22 +292,13 @@ CREATE TABLE "pathology_op_notes" (
 
 CREATE TABLE "operative_op_notes" (
     "id" SERIAL PRIMARY KEY,
-    "patient_id" integer UNIQUE NOT NULL REFERENCES patients(id),
-    "operative_notes" varchar
+    "patient_id" integer NOT NULL REFERENCES patients(id),
+    "operative_notes" varchar,
+		"date_completed" TIMESTAMP DEFAULT current_time,
+		"title" varchar,
+		"first_name" varchar,
+		"last_name" varchar,
 );
-
--- CREATE TABLE "other_data" (
--- 	"id" serial NOT NULL,
--- 	"patient_id" integer NOT NULL,
--- 	"synchronous_liver_metastases " BOOLEAN,
--- 	"timing_of_treatment" integer,
--- 	"date_of_treatment" DATE,
--- 	"treatment_type" integer,
--- 	"notes" varchar,
--- 	CONSTRAINT other_data_pk PRIMARY KEY ("id")
--- ) WITH (
---   OIDS=FALSE
--- );
 
 CREATE TABLE "resections" (
 	"id" serial NOT NULL,
@@ -360,7 +335,6 @@ CREATE TABLE "resections" (
 );
 
 
-
 ALTER TABLE "person" ADD CONSTRAINT "person_fk0" FOREIGN KEY ("type_of_cancer") REFERENCES "types_of_cancer"("id");
 
 ALTER TABLE "patients" ADD CONSTRAINT "patients_fk0" FOREIGN KEY ("toc_id") REFERENCES "types_of_cancer"("id");
@@ -377,14 +351,13 @@ ALTER TABLE "intervention" ADD CONSTRAINT "intervention_fk0" FOREIGN KEY ("patie
 ALTER TABLE "postop" ADD CONSTRAINT "postop_fk0" FOREIGN KEY ("patient_id") REFERENCES "patients"("id");
 
 ALTER TABLE "follow_up" ADD CONSTRAINT "follow_up_fk0" FOREIGN KEY ("patient_id") REFERENCES "patients"("id");
-ALTER TABLE "follow_up_history" ADD CONSTRAINT "follow_up_history_id_fk1" FOREIGN KEY ("patient_id") REFERENCES "follow_up"("patient_id");
+
+ALTER TABLE "follow_up_history" ADD CONSTRAINT "follow_up_history_id_fk0" FOREIGN KEY ("patient_id") REFERENCES "follow_up"("patient_id");
+
+ALTER TABLE "events" ADD CONSTRAINT "events_fk0" FOREIGN KEY ("postop_id") REFERENCES "postop"("id");
 
 ALTER TABLE "adverse_events" ADD CONSTRAINT "adverse_events_fk0" FOREIGN KEY ("patient_id") REFERENCES "postop"("patient_id");
 
--- ALTER TABLE "other_info" ADD CONSTRAINT "other_info_fk0" FOREIGN KEY ("patient_id") REFERENCES "patients"("id");
-
 ALTER TABLE "pathology_op_notes" ADD CONSTRAINT "pathology_op_notes_fk0" FOREIGN KEY ("patient_id") REFERENCES "patients"("id");
-
--- ALTER TABLE "other_data" ADD CONSTRAINT "other_data_fk0" FOREIGN KEY ("patient_id") REFERENCES "patients"("id");
 
 ALTER TABLE "resections" ADD CONSTRAINT "resections_fk0" FOREIGN KEY ("intervention_id") REFERENCES "intervention"("id");
