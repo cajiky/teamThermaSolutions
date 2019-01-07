@@ -53,7 +53,6 @@ class FollowUpPage extends Component {
     };
 
     componentDidMount () {
-
         this.setState({
             id: this.props.followUp.id,
             patient_id: this.props.patientReducer.patient.id,
@@ -69,7 +68,7 @@ class FollowUpPage extends Component {
     
     updateFollowUp = () => {
         // alert('Add new followup');
-        console.log('before dispatch update followup', this.state);
+        // console.log('before dispatch update followup', this.state);
         this.props.dispatch({ type: 'UPDATE_FOLLOW_UP', payload: this.state});
     };
 
@@ -78,6 +77,10 @@ class FollowUpPage extends Component {
         this.props.dispatch({type: 'ADD_FOLLOW_UP_HISTORY', payload: this.state});
         this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY', payload: this.state.patient_id});
         // console.log('after add followup history', this.state);
+        this.setState({
+            ...this.state,
+            follow_up_history: this.props.followUpHistory,
+        });        
     }
 
     // Called when the input field changes
@@ -125,8 +128,6 @@ class FollowUpPage extends Component {
 
                 <Divider variant="middle" />
                 <h3>Follow Up History</h3>
-                {/* //Will have more than one -- will be mapped through */}
-                {/* myOptions.map((option, index) => ( */}
                 {
                     this.state.follow_up_history.map((history, index) => (
                         <FollowUpDetail key={index} followup={history} />

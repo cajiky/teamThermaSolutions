@@ -5,7 +5,7 @@ const router = express.Router();
 
 // GET ROUTER TO RETRIEVE FOLLOW UP FOR PATIENT
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-  // console.log('query.id', req.query.id);
+  console.log('patient id in followup', req.params.id);
   const queryText = 'SELECT * FROM follow_up WHERE patient_id=$1';
   pool.query(queryText, [req.params.id])      
       .then(results => res.send(results.rows[0]))

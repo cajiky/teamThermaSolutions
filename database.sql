@@ -34,11 +34,7 @@ VALUES ('Colorectal Cancer', 'CRC'),
 			('Ovarian', 'Ovarian'),
 			('Mesothelioma', 'Meso'),
 			('Pseudomyxoma Peritonei', 'PMP'),
-<<<<<<< HEAD
-			('Other', 'Other')
-=======
 			('Other', 'Other');
->>>>>>> master
 
 CREATE TABLE "event_options" (
 	"id" serial NOT NULL,
@@ -242,11 +238,7 @@ CREATE TABLE "adverse_events" (
 	"id" serial NOT NULL,
 	"patient_id" integer NOT NULL,
 	"event_options_id" integer NOT NULL,
-<<<<<<< HEAD
-	"clavien_score" integer
-=======
 	"clavien_score" integer,
->>>>>>> master
 	CONSTRAINT adverse_events_pk PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -290,11 +282,7 @@ CREATE TABLE "pathology_op_notes" (
 	"id" serial NOT NULL,
 	"patient_id" integer NOT NULL REFERENCES patients(id),
 	"pathology_report" varchar,
-<<<<<<< HEAD
-	"date_completed" TIMESTAMP DEFAULT current_time,
-=======
 	"date_completed" TIMESTAMP DEFAULT now(),
->>>>>>> master
 	"title" varchar,
 	"first_name" varchar,
 	"last_name" varchar,
@@ -307,11 +295,7 @@ CREATE TABLE "operative_op_notes" (
     "id" SERIAL PRIMARY KEY,
     "patient_id" integer NOT NULL REFERENCES patients(id),
     "operative_notes" varchar,
-<<<<<<< HEAD
-		"date_completed" TIMESTAMP DEFAULT current_time,
-=======
 		"date_completed" TIMESTAMP DEFAULT now(),
->>>>>>> master
 		"title" varchar,
 		"first_name" varchar,
 		"last_name" varchar,

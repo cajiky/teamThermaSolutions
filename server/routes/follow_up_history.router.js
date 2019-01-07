@@ -39,7 +39,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     console.log('in put:', req.body);
 
     const id = req.body.id;
-    const follow_up_date = req.body.follow_up_date;
+    const follow_up_date = req.body.date;
     const evidence_of_disease = req.body.evidence_of_disease;
     const follow_up_notes = req.body.follow_up_notes;
     const cea = req.body.cea;
@@ -52,7 +52,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     const location = req.body.location;
 
     const queryText = `UPDATE follow_up_history 
-        SET follow_up_date=$2, evidence_of_disease=$3, follow_up_notes=$4,
+        SET date=$2, evidence_of_disease=$3, follow_up_notes=$4,
         cea=$5, rec_modality=$6,
         syst_location=$7, treatment=$8, date_treatment=$9,
         status=$10, treatment_notes=$11, location=$12 WHERE id=$1`;

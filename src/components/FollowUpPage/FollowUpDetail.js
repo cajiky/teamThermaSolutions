@@ -53,7 +53,7 @@ class FollowUpDetail extends Component {
         id: 0,
         patient_id: 0,
         follow_up_id: null,
-        follow_up_date: null,
+        date: null,
         evidence_of_disease: false,
         follow_up_notes: null,
         cea: null,
@@ -71,8 +71,8 @@ class FollowUpDetail extends Component {
         console.log('in component mount follow up detail', this.props.followup);
         // this.props.dispatch({type: 'FETCH_POST_OP'});
         let followUpDate = null;
-        if (this.props.followup.follow_up_date != null) {
-            followUpDate = moment(this.props.followup.follow_up_date).format('YYYY-MM-DD')
+        if (this.props.followup.date != null) {
+            followUpDate = moment(this.props.followup.date).format('YYYY-MM-DD')
         }
         let lastContactDate = null;
         if (this.props.followup.last_contact != null) {
@@ -86,7 +86,7 @@ class FollowUpDetail extends Component {
             id: this.props.followup.id,
             patient_id: this.props.followup.patient_id,
             follow_up_id: this.props.followup.follow_up_id,
-            follow_up_date: followUpDate,
+            date: followUpDate,
             evidence_of_disease: this.props.followup.evidence_of_disease,
             follow_up_notes: this.props.followup.follow_up_notes,
             cea: this.props.followup.cea,
@@ -131,16 +131,18 @@ class FollowUpDetail extends Component {
             <div>
             <ExpansionPanel>
                 <ExpansionPanelSummary className={classes.superCool} expandIcon={<ExpandMoreIcon />}>
-                    <h3>{this.state.follow_up_date}</h3>
+                    {this.state.date ? (<h3>{this.state.date}</h3>) : (<h3>Enter Details</h3>)}
+                    {/* {this.props.reduxState.patientReducer.patient ? (<CurrentPatientInfo/>) : (<></>)} */}
+                
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Grid container spacing={24}>
                         <Grid item xs={3}>
                         <TextField
-                            name="follow_up_date"
+                            name="date"
                             label="Follow Up Date"
                             className={classes.textField}
-                            value={moment(this.state.follow_up_date).format('YYYY-MM-DD')}
+                            value={moment(this.state.date).format('YYYY-MM-DD')}
                             // fullWidth
                             InputLabelProps={{
                                 shrink: true,
