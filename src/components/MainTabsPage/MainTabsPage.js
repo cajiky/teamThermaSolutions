@@ -7,7 +7,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-
 import PatientProfileSearchPage from '../PatientProfileSearchPage/PatientProfileSearchPage';
 import TreatmentFormPatientData from '../TreatmentFormPatientData/TreatmentFormPatientData';
 import PrimaryTumorPage from '../PrimaryTumorPage/PrimaryTumorPage';
@@ -18,7 +17,6 @@ import PathologyNotesPage from '../PathologyNotesPage/PathologyNotesPage';
 import OperativeNotesPage from '../OperativeNotesPage/OperativeNotesPage';
 import PostOpPage from '../PostOpPage/PostOpPage';
 import FollowUpPage from '../FollowUpPage/FollowUpPage';
-import AdditionalDataPage from '../AdditionalDataPage/AdditionalDataPage';
 import ManageUsersPage from '../ManageUsersPage/ManageUsersPage';
 import CurrentPatientInfo from '../CurrentPatientInfo/CurrentPatientInfo';
 
@@ -60,6 +58,9 @@ state = {
     this.props.dispatch({type: 'FETCH_ADVERSE_EVENT', payload: patientId});
     this.props.dispatch({type: 'FETCH_FOLLOW_UP', payload: patientId});
     this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY', payload: patientId});
+    console.log('patient id:', patientId);
+    this.props.dispatch({type: 'TEST_PATIENT'});
+    this.props.dispatch({ type: 'GET_PCI_TOTAL', payload: this.props.reduxState.patientReducer.patient.id })
     // console.log('patient id:', patientId);
     // this.props.dispatch({type: 'TEST_PATIENT'});
   }
@@ -93,7 +94,6 @@ state = {
                     <Tab label="Operative Notes" />
                     <Tab label="Post-Op" />
                     <Tab label="Follow Up" />
-                    <Tab label="Additional Data" />
                     </Tabs>
                 </AppBar>
                 {value === 0 && <TabContainer><PrimaryTumorPage /></TabContainer>}
@@ -104,7 +104,6 @@ state = {
                 {value === 5 && <TabContainer><OperativeNotesPage /></TabContainer>}
                 {value === 6 && <TabContainer><PostOpPage /></TabContainer>}
                 {value === 7 && <TabContainer><FollowUpPage /></TabContainer>}
-                {value === 8 && <TabContainer><AdditionalDataPage /></TabContainer>}
 
                 {/* <PatientProfileSearchPage />
                 <TreatmentFormPatientData /> */}

@@ -57,11 +57,11 @@ router.post('/', (req, res, next) => {
     const newLastName = req.body.lastName;
     const accessLevel = req.body.accessLevel;
     const active = req.body.active;
-    const userName = req.body.username;
-    const password = encryptLib.encryptPassword(req.body.password);
+    // const userName = req.body.username;
+    // const password = encryptLib.encryptPassword(req.body.password);
     const queryText = `UPDATE person 
-    SET ("title", "first_name", "last_name", "access_level", "active", "username", "password") 
-    = ($1, $2, $3, $4, $5, $6, $7)
+    SET ("title", "first_name", "last_name", "access_level", "active") 
+    = ($1, $2, $3, $4, $5)
     WHERE person.id=${reqId};`;
     const queryValues = [
         title,
@@ -69,8 +69,8 @@ router.post('/', (req, res, next) => {
         newLastName,
         accessLevel,
         active,
-        userName,
-        password,
+        // userName,
+        // password,
     ];
     pool.query(queryText, queryValues)
       .then(() => { res.sendStatus(201); })

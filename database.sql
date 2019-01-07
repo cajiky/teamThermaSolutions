@@ -292,13 +292,16 @@ CREATE TABLE "pathology_op_notes" (
 );
 
 CREATE TABLE "operative_op_notes" (
-    "id" SERIAL PRIMARY KEY,
+    "id" SERIAL NOT NULL,
     "patient_id" integer NOT NULL REFERENCES patients(id),
     "operative_notes" varchar,
-		"date_completed" TIMESTAMP DEFAULT now(),
-		"title" varchar,
-		"first_name" varchar,
-		"last_name" varchar,
+        "date_completed" TIMESTAMP DEFAULT now(),
+        "title" varchar,
+        "first_name" varchar,
+        "last_name" varchar,
+CONSTRAINT operative_op_notes_pk PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
 );
 
 CREATE TABLE "resections" (

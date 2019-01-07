@@ -266,7 +266,7 @@ class ManageUsersPage extends Component {
                     </DialogActions>
                     <DialogActions>
                         <Button onClick={this.handleNewUserSubmit} color="primary">
-                        Add New Patient
+                        Add New User
                         </Button>
                     </DialogActions>
                 </Dialog>

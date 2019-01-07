@@ -7,7 +7,7 @@ function* addNewUser(action) {
     
     try {
         yield call(axios.post, '/addNewUser', action.payload)
-        yield put({ type: 'RENDER_ALL_USERS' })
+        yield put({ type: 'RENDER_ALL_USERS', payload: action.payload.profileUserId })
 
     } catch (error) {
         console.log(error);
