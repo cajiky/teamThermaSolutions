@@ -209,9 +209,6 @@ class PSDSSPage extends Component {
                                 <Grid item xs={12} className={classes.gridItem} align="center">
                                     <Divider variant="fullWidth"></Divider>
                                 </Grid>
-                                <Grid item xs={12} className={classes.gridItem} align="center">
-                                    <Divider variant="fullWidth"></Divider>
-                                </Grid>
                                 <Grid item xs={4} className={classes.gridItem} align="center">
                                     <Typography variant="overline">
                                         Severe Symptoms
