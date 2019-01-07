@@ -40,8 +40,8 @@ class PrimaryTumorPage extends Component {
         // labelWidth: 105,
     }
 
-    getInitialValues = () => {
-        this.props.dispatch({type: 'GET_INITIAL_VALUES'})
+    getInitialValues = (id) => {
+        this.props.dispatch({type: 'GET_INITIAL_VALUES', payload: id})
     }
 
     getDropDownOptions = () => {
@@ -56,8 +56,9 @@ class PrimaryTumorPage extends Component {
     }
 
     componentDidMount() {
+        let patientId = document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1");
         this.getDropDownOptions();
-        this.getInitialValues();
+        this.getInitialValues(patientId);
     }
 
     render() {

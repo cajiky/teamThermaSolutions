@@ -23,6 +23,7 @@ const interventResectionRouter = require('./routes/interventionResection.router'
 const pathologyHistoryRouter = require('./routes/pathologyNotes.router');
 const operativeHistoryRouter = require('./routes/operativeNotes.router');
 const pciRouter = require('./routes/pciTotal.router');
+const primaryTumorRouter = require('./routes/primaryTumorRouter');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -57,6 +58,7 @@ app.use('/interventionResection', interventResectionRouter);
 app.use('/getPathologyHistory', pathologyHistoryRouter);
 app.use('/getOperativeHistory', operativeHistoryRouter);
 app.use('/pciTotal', pciRouter);
+app.use('/api/primaryTumor', primaryTumorRouter);
 
 // Serve static files
 app.use(express.static('build'));

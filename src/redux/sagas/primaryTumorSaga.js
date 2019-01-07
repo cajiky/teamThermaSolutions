@@ -2,23 +2,22 @@ import { takeLatest , call, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 
-function* GetInitalValues(action) { 
+function* getInitalValues(action) { 
     console.log('Getting init values for primary tumor page', action.payload);
     
     try {
-        yield call(axios.get, `/primaryTumor`, action.payload);
-        yield put({ type: 'GET_OPERATIVE_HISTORY', payload: action.payload.userId } )
+        const response = yield call(axios.post, `/api/primaryTumor/getDataFor`, );
+        yield put({ type: 'SET_INIT_VALUES', payload: action.payload } )
 
     } catch (error) {
         console.log(error);
-        alert('Unable to add project');
     }
 }
 
 
 function* primaryTumorSaga() {
-  yield takeLatest('GET_INITIAL_VALUES', operativeNotes);
+  yield takeLatest('GET_INITIAL_VALUES', getInitalValues);
   
 }
 
-export default operativeNotesSaga;
+export default primaryTumorSaga;
