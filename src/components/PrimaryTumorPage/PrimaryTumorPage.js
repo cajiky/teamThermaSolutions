@@ -40,6 +40,10 @@ class PrimaryTumorPage extends Component {
         // labelWidth: 105,
     }
 
+    getInitialValues = () => {
+        this.props.dispatch({type: 'GET_INITIAL_VALUES'})
+    }
+
     getDropDownOptions = () => {
         this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'})
     }
@@ -53,6 +57,7 @@ class PrimaryTumorPage extends Component {
 
     componentDidMount() {
         this.getDropDownOptions();
+        this.getInitialValues();
     }
 
     render() {
