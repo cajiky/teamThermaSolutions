@@ -303,9 +303,9 @@ class PrimaryTumorPage extends Component {
                                         value={this.props.primaryTumor.mucinous}
                                         onChange={this.handleChange}
                                     >
-                                        <FormControlLabel value={true} control={<Radio />} label="Yes" />
-                                        <FormControlLabel value={false} control={<Radio />} label="No" />
-                                        <FormControlLabel value={null} control={<Radio />} label="Unknown" />
+                                        <FormControlLabel value={1} control={<Radio />} label="Yes" />
+                                        <FormControlLabel value={2} control={<Radio />} label="No" />
+                                        <FormControlLabel value={3} control={<Radio />} label="Unknown" />
 
                                     </RadioGroup>
                                 </FormControl>
