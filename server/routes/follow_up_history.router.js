@@ -22,8 +22,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 router.post('/', rejectUnauthenticated, (req, res) => {
 
   const queryText = `INSERT INTO follow_up_history 
-                    ("patient_id") VALUES ($1)`;
-  const queryValues = [req.body.patient_id];
+                    ("patient_id", "date") VALUES ($1, $2)`;
+  const queryValues = [req.body.patient_id, req.body.date];
 
   // console.log('sql query for new items for new user', queryText);
   pool.query(queryText, queryValues)

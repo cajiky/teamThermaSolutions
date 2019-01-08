@@ -265,6 +265,7 @@ CREATE TABLE "follow_up_history" (
   "date" DATE,
   "evidence_of_disease" BOOLEAN DEFAULT 'f',
   "follow_up_notes" varchar,
+	"recurrence" BOOLEAN DEFAULT 'f',
   "cea" varchar,
   "rec_modality" integer,
   "syst_location" integer,

@@ -8,6 +8,26 @@ import FollowUpDetail from './FollowUpDetail';
 import ChemotherapyType from './ChemotherapyType';
 import AdjuvantChemotherapy from './AdjuvantChemotherapy';
 import Biological from './Biological';
+import AddFollowUpHistory from './AddFollowUpDialog';
+
+const emptyFollowUpHistory = {
+    id: 0,
+    patient_id: 0,
+    follow_up_id: null,
+    date: null,
+    evidence_of_disease: false,
+    follow_up_notes: null,
+    // recurrence: false,
+    cea: null,
+    rec_modality: null,
+    syst_location: false,
+    last_contact: null,
+    treatment: null,
+    date_treatment: null,
+    status: null,
+    treatment_notes: null,
+    location: null
+};
 
 const styles = theme => ({
     container: {
@@ -74,11 +94,15 @@ class FollowUpPage extends Component {
 
     addFollowUpHistory = () => {
         console.log('in add followup history', this.state, this.props.followUpHistory);
+        // this will happen on button add/update
         this.props.dispatch({type: 'ADD_FOLLOW_UP_HISTORY', payload: this.state});
-        this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY', payload: this.state.patient_id});
+        // this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY', payload: this.state.patient_id});
+        // add empty local state .. will need to spread first
         this.setState({
             ...this.state,
-            follow_up_history: this.props.followUpHistory,
+            // follow_up_history: this.props.followUpHistory,
+            // ...this.state.follow_up_history, emptyFollowUpHistory
+            follow_up_history: [emptyFollowUpHistory, ...this.state.follow_up_history],
         });
         console.log('after add followup history', this.state, this.props.followUpHistory);
     }
@@ -125,7 +149,7 @@ class FollowUpPage extends Component {
                             variant="contained" color="primary">
                         New Follow Up
                     </Button>                    
-
+                    <AddFollowUpHistory />
                 <Divider variant="middle" />
                 <h3>Follow Up History</h3>
                 {
