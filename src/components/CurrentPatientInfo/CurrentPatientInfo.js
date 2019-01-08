@@ -71,7 +71,7 @@ class CurrentPatientInfo extends Component {
                 {this.props.patient.hipec_date ? (<Grid item xs={2.5}><span className={classes.redBold}>HIPEC: </span>YES</Grid>) : (<></>)}
                 {this.props.patient.hipec_date ? (<Grid item xs={2.5}><span className={classes.redBold}>Date of HIPEC: </span>{moment(this.props.patient.hipec_date).format('MM-DD-YYYY')}</Grid>) : (<></>)}
                 {this.props.patient.referal_date ? (<Grid item xs={2.5}><span className={classes.redBold}>Date of Referral: </span>{moment(this.props.patient.referal_date).format('MM-DD-YYYY')}</Grid>) : (<></>)}
-                {this.props.patient.toc_id ? (<Grid item xs={2.5}><span className={classes.redBold}>Type of Cancer: </span>{this.props.patient.toc_id}</Grid>) : (<></>)}
+                {this.props.patient.type_of_cancer ? (<Grid item xs={2.5}><span className={classes.redBold}>Type of Cancer: </span>{this.props.patient.type_of_cancer}</Grid>) : (<></>)}
             </Grid>
             </Typography>
           </ExpansionPanelSummary>

@@ -60,7 +60,7 @@ state = {
     this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY', payload: patientId});
     console.log('patient id:', patientId);
     this.props.dispatch({type: 'TEST_PATIENT'});
-    this.props.dispatch({ type: 'GET_PCI_TOTAL', payload: this.props.reduxState.patientReducer.patient.id })
+    this.props.dispatch({ type: 'GET_PCI_TOTAL', payload: patientId })
     // console.log('patient id:', patientId);
     // this.props.dispatch({type: 'TEST_PATIENT'});
   }

@@ -9,7 +9,7 @@ router.get(`/:key`, (req, res) => {
     console.log(req.params);
     const patientId = req.params.key;
     console.log('THIS IS THE PATIENT ID', patientId);
-    const sqlText = `SELECT * FROM patients WHERE patients.patient_no = $1;`;
+    const sqlText = `SELECT types_of_cancer.name AS "type_of_cancer", patients.* FROM patients JOIN types_of_cancer ON patients.toc_id = types_of_cancer.id WHERE patients.patient_no = $1;`;
     pool.query(sqlText, [patientId]).then( rows => {
         patientSearch = rows.rows[0]
         result = {patientSearch: patientSearch}
@@ -53,7 +53,7 @@ router.post('/', async(req, res) => {
     let newPatientObj = req.body;
     console.log(newPatientObj);
     const sqlText = `INSERT INTO patients (toc_id, patient_no, dob, gender, referral_date, hipec_date, diagnosis_date, sensor, hospital_telephone, referring_doctor, notes, current_status, interval_prime_surgery, survival_hipec_last_contact, survival_hipec_death, interval_diagnosis_pc_hipec) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING id`;
-    pool.query(sqlText, [newPatientObj.toc, newPatientObj.patientId, newPatientObj.dob, newPatientObj.gender, newPatientObj.dateOfReferral, newPatientObj.dateOfHipec, newPatientObj.diagnosisDate, newPatientObj.sensor, newPatientObj.hospitalTel, newPatientObj.refDoc, newPatientObj.notes, newPatientObj.currentStatus, newPatientObj.ipshipec, newPatientObj.survivalhipeclastcontact, newPatientObj.survivalhipecdeath, newPatientObj.intervalDiagnosisPcHipec])
+    pool.query(sqlText, [newPatientObj.toc, newPatientObj.patient_no, newPatientObj.dob, newPatientObj.gender, newPatientObj.dateOfReferral, newPatientObj.dateOfHipec, newPatientObj.diagnosisDate, newPatientObj.sensor, newPatientObj.hospitalTel, newPatientObj.refDoc, newPatientObj.notes, newPatientObj.currentStatus, newPatientObj.ipshipec, newPatientObj.survivalhipeclastcontact, newPatientObj.survivalhipecdeath, newPatientObj.intervalDiagnosisPcHipec])
       .then((response) => {
           console.log('There was success POSTing a new patient', response)
       }) 

@@ -192,7 +192,7 @@ CREATE TABLE "intervention" (
 	"stoma_post_hipec" BOOLEAN,
 	"stoma_post_hipec_type" integer,
 	"bloodloss" varchar,
-	"time" TIME,
+	"time" timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
 	"hipec_regiment" integer,
 	"duration" varchar,
 	"volume" varchar,
