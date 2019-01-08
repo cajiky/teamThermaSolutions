@@ -92,7 +92,7 @@ class PatientProfileSearchPage extends Component {
       };
     
       handleClickOpen = () => {
-        this.setState({ variables: {open: true} });
+        this.setState({ variables: {open: true}, patient: {patient_no: this.props.reduxState.patientReducer.newPatientId} });
         // this.props.dispatch({type: 'DROP_PATIENT_RESULT'});
       };
     
@@ -102,8 +102,8 @@ class PatientProfileSearchPage extends Component {
 
       addPatient = () => {
           this.props.dispatch({type: 'ADD_PATIENT', payload: this.state.patient});
-          this.props.dispatch({type: 'FIND_PATIENT', payload: this.state.patient.patientId});
           this.setState({ variables: {open: false}});
+          document.cookie = `patientID=${this.props.reduxState.patientReducer.newPatientId}`
           this.props.history.push(`/MainTabsPage`);
       }
 
