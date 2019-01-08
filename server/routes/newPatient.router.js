@@ -9,7 +9,7 @@ router.get(`/:key`, (req, res) => {
     console.log(req.params);
     const patientId = req.params.key;
     console.log('THIS IS THE PATIENT ID', patientId);
-    const sqlText = `SELECT * FROM patients WHERE patients.patient_no = $1;`;
+    const sqlText = `SELECT types_of_cancer.name AS "type_of_cancer", patients.* FROM patients JOIN types_of_cancer ON patients.toc_id = types_of_cancer.id WHERE patients.patient_no = $1;`;
     pool.query(sqlText, [patientId]).then( rows => {
         patientSearch = rows.rows[0]
         result = {patientSearch: patientSearch}
