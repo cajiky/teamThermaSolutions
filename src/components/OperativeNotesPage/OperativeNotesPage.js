@@ -80,7 +80,7 @@ class OperativeNotesPage extends Component {
                                     type="text"
                                     fullWidth={true}
                                     multiline
-                                    rows="20"
+                                    rows="10"
                                     variant="outlined"
                                     />
                             </DialogContent> 

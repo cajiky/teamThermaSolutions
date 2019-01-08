@@ -162,8 +162,8 @@ class EnhancedTable extends React.Component {
     lastName: '', 
     accessLevel: '',
     active: '',
-    username: '', 
-    password: '',
+    // username: '', 
+    // password: '',
     
   };
 
@@ -210,8 +210,8 @@ class EnhancedTable extends React.Component {
         lastName: n.last_name, 
         accessLevel: n.access_level,
         active: n.active,
-        username: n.username, 
-        password: n.password,
+        // username: n.username, 
+        // password: n.password,
         open: true,
     })
   };
@@ -226,8 +226,8 @@ class EnhancedTable extends React.Component {
         lastName: this.state.lastName, 
         accessLevel: this.state.accessLevel,
         active: this.state.active,
-        username: this.state.username, 
-        password: this.state.password,
+        // username: this.state.username, 
+        // password: this.state.password,
       }
     })
     swal("Success!", "Profile is Updated!", "success");
@@ -500,7 +500,7 @@ class EnhancedTable extends React.Component {
                                 </Select>
                         </FormControl>
           </DialogContent>
-          <DialogContent>
+          {/* <DialogContent>
             <TextField
               onChange={this.handleChange}
               value={this.state.username}
@@ -527,7 +527,7 @@ class EnhancedTable extends React.Component {
               fullWidth
               variant="outlined"
             />
-          </DialogContent>
+          </DialogContent> */}
 
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">

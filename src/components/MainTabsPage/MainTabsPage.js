@@ -7,7 +7,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-
 import PatientProfileSearchPage from '../PatientProfileSearchPage/PatientProfileSearchPage';
 import TreatmentFormPatientData from '../TreatmentFormPatientData/TreatmentFormPatientData';
 import PrimaryTumorPage from '../PrimaryTumorPage/PrimaryTumorPage';
@@ -18,7 +17,6 @@ import PathologyNotesPage from '../PathologyNotesPage/PathologyNotesPage';
 import OperativeNotesPage from '../OperativeNotesPage/OperativeNotesPage';
 import PostOpPage from '../PostOpPage/PostOpPage';
 import FollowUpPage from '../FollowUpPage/FollowUpPage';
-import AdditionalDataPage from '../AdditionalDataPage/AdditionalDataPage';
 import ManageUsersPage from '../ManageUsersPage/ManageUsersPage';
 import CurrentPatientInfo from '../CurrentPatientInfo/CurrentPatientInfo';
 
@@ -46,21 +44,25 @@ state = {
     value: 0,
   };
 
-  getPatientIDFromCookie = () => {
-    console.log(document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1"))
-    this.props.dispatch({type:'GET_PATIENT_ID_FROM_COOKIE', payload: document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1")})
-  }
+  // getPatientIDFromCookie = () => {
+  //   console.log(document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1"))
+  //   this.props.dispatch({type:'GET_PATIENT_ID_FROM_COOKIE', payload: document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1")})
+  // }
 
   componentDidMount () {    
     // console.log('in main tabs page for patient#', this.props.reduxState.patientReducer.patient.id);
-    this.getPatientIDFromCookie()
+    // this.getPatientIDFromCookie(patientId)
     let patientId = document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     this.props.dispatch({type: 'GET_INITIAL_VALUES', payload: patientId})
+    this.props.dispatch({type:'GET_PATIENT_ID_FROM_COOKIE', payload: patientId})
     this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'});
     this.props.dispatch({type: 'FETCH_POST_OP', payload: patientId});
     this.props.dispatch({type: 'FETCH_ADVERSE_EVENT', payload: patientId});
     console.log('patient id:', patientId);
     this.props.dispatch({type: 'TEST_PATIENT'});
+    this.props.dispatch({ type: 'GET_PCI_TOTAL', payload: patientId })
+    // console.log('patient id:', patientId);
+    // this.props.dispatch({type: 'TEST_PATIENT'});
   }
 
   handleTabChange = (event, value) => {
@@ -92,7 +94,6 @@ state = {
                     <Tab label="Operative Notes" />
                     <Tab label="Post-Op" />
                     <Tab label="Follow Up" />
-                    <Tab label="Additional Data" />
                     </Tabs>
                 </AppBar>
                 {value === 0 && <TabContainer><PrimaryTumorPage /></TabContainer>}
@@ -103,7 +104,6 @@ state = {
                 {value === 5 && <TabContainer><OperativeNotesPage /></TabContainer>}
                 {value === 6 && <TabContainer><PostOpPage /></TabContainer>}
                 {value === 7 && <TabContainer><FollowUpPage /></TabContainer>}
-                {value === 8 && <TabContainer><AdditionalDataPage /></TabContainer>}
 
                 {/* <PatientProfileSearchPage />
                 <TreatmentFormPatientData /> */}

@@ -57,7 +57,7 @@ const styles = theme => ({
 
   class InterventionPage extends Component {
     state = {
-        central: 0 ,
+        central: 0,
         rightUpper: 0,
         Epigastrium: 0,
         leftUpper:0,
@@ -77,7 +77,8 @@ const styles = theme => ({
         nrHipec: '',
         hipecType:'',
         reasonOC:'',
-        expanded: '',
+        expanded1: true,
+        expanded2: false,
         ///additionalPageInfo from here down
         checked: '',
         anastomosis: false ,
@@ -126,10 +127,44 @@ const styles = theme => ({
 
     componentDidMount(){
         
-        this.props.dispatch({ type: 'GET_PCI_TOTAL', payload: this.props.reduxState.patientReducer.patient.id })
-        // this.setState({
-        //     expanded: true
-        // })
+        // this.props.dispatch({ type: 'GET_PCI_TOTAL', payload: this.props.reduxState.patientReducer.patient.id })
+        {this.props.reduxState.pciReducer.length != 0 ? (
+        this.setState({
+            central: this.props.reduxState.pciReducer[0].pci_0,
+            rightUpper: this.props.reduxState.pciReducer[0].pci_1,
+            Epigastrium: this.props.reduxState.pciReducer[0].pci_2,
+            leftUpper: this.props.reduxState.pciReducer[0].pci_3,
+            leftFlank: this.props.reduxState.pciReducer[0].pci_4,
+            leftLower: this.props.reduxState.pciReducer[0].pci_5,
+            pelvis: this.props.reduxState.pciReducer[0].pci_6,
+            rightLower: this.props.reduxState.pciReducer[0].pci_7,
+            rightFlank: this.props.reduxState.pciReducer[0].pci_8,
+            upperJejunum: this.props.reduxState.pciReducer[0].pci_9,
+            lowerJejunum: this.props.reduxState.pciReducer[0].pci_10,
+            upperIlium: this.props.reduxState.pciReducer[0].pci_11,
+            lowerIlium: this.props.reduxState.pciReducer[0].pci_12,
+            PCITotal: this.props.reduxState.pciReducer[0].pci_score,
+            expanded1: true,
+            
+        })
+        ):(
+        this.setState({
+            central: 0,
+            rightUpper: 0,
+            Epigastrium: 0,
+            leftUpper:0,
+            leftFlank:0,
+            leftLower:0,
+            pelvis:0,
+            rightLower:0,
+            rightFlank:0,
+            upperJejunum:0,
+            lowerJejunum:0,
+            upperIlium:0,
+            lowerIlium:0,
+            PCITotal:0,
+            })
+        )}
     }
 
     calculatePCI = () => {
@@ -156,7 +191,7 @@ const styles = theme => ({
         })
     }
 
-    handleChange = (event) => {
+    handlePCIChange = (event) => {
         this.setState({
             ...this.state,
             [event.target.name]: event.target.value,
@@ -166,9 +201,22 @@ const styles = theme => ({
         
       }
 
-    expansionPanel = () => {
+    handleChange = (event) => {
         this.setState({
-            expanded: !true
+            ...this.state,
+            [event.target.name]: event.target.value,
+        })
+      }
+
+    expansionPanel1 = () => {
+        this.setState({
+            expanded1: true
+        })
+    }
+
+    expansionPanel2 = () => {
+        this.setState({
+            expanded2: !true
         })
     }
 
@@ -196,517 +244,521 @@ const styles = theme => ({
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-      {JSON.stringify(this.props.reduxState.pciReducer)}
-        <ExpansionPanel onClick={this.expansionPanel} >
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>Peritoneal Cancer Index (PCI)</Typography>
+        <Grid container spacing={12} >
+            <ExpansionPanel defaultExpanded onClick={this.expansionPanel1} >
             
-            {this.props.reduxState.pciReducer.pci_score !== undefined ? (
-                <Typography className={classes.heading}><h3>PCI: {this.props.reduxState.pciReducer.pci_score}</h3></Typography>
-            ) : (
-                <Typography className={classes.heading}><h3>PCI: {this.state.PCITotal}</h3></Typography>
-            ) }
-            <Typography className={classes.heading}>(click to expand/retract)</Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Grid container spacing={24} >
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Region Number</TableCell>
-                                <TableCell>Region Name</TableCell>
-                                <TableCell>Lesion Size/Score</TableCell>
-                            </TableRow>
-                        </TableHead>
-                            <TableBody>
-                                    <TableRow >
-                                        <TableCell>
-                                            0
-                                        </TableCell>
-                                        <TableCell>
-                                            Central
-                                        </TableCell>
-                                        <TableCell>
-                                            <Select fullWidth={true}
-                                                value={this.state.central}
-                                                onChange={this.handleChange}
-                                                input={
-                                                <OutlinedInput
-                                                    value={this.state.central}
-                                                    name="central"
-                                                    id="central"
-                                                />
-                                                }
-                                            >
-                                                {lesionSizeScore.map( score => {
-                                                    return(
-                                                        <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
-                                                    )
-                                                })}
-                                                
-                                            </Select>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow >
-                                        <TableCell>
-                                            1
-                                        </TableCell>
-                                        <TableCell>
-                                        Right Upper
-                                        </TableCell>
-                                        <TableCell>
-                                            <Select fullWidth={true}
-                                                value={this.state.rightUpper}
-                                                onChange={this.handleChange}
-                                                input={
-                                                <OutlinedInput
-                                                    value={this.state.rightUpper}
-                                                    name="rightUpper"
-                                                    id="rightUpper"
-                                                />
-                                                }
-                                            >
-                                                {lesionSizeScore.map( score => {
-                                                    return(
-                                                        <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
-                                                    )
-                                                })}
-                                                
-                                            </Select>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow >
-                                        <TableCell>
-                                            2
-                                        </TableCell>
-                                        <TableCell>
-                                        Epigastrium
-                                        </TableCell>
-                                        <TableCell>
-                                            <Select fullWidth={true}
-                                                value={this.state.Epigastrium}
-                                                onChange={this.handleChange}
-                                                input={
-                                                <OutlinedInput
-                                                    value={this.state.Epigastrium}
-                                                    name="Epigastrium"
-                                                    id="Epigastrium"
-                                                />
-                                                }
-                                            >
-                                                {lesionSizeScore.map( score => {
-                                                    return(
-                                                        <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
-                                                    )
-                                                })}
-                                                
-                                            </Select>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow >
-                                        <TableCell>
-                                            3
-                                        </TableCell>
-                                        <TableCell>
-                                        Left Upper
-                                        </TableCell>
-                                        <TableCell>
-                                            <Select fullWidth={true}
-                                                value={this.state.leftUpper}
-                                                onChange={this.handleChange}
-                                                input={
-                                                <OutlinedInput
-                                                    value={this.state.leftUpper}
-                                                    name="leftUpper"
-                                                    id="leftUpper"
-                                                />
-                                                }
-                                            >
-                                                {lesionSizeScore.map( score => {
-                                                    return(
-                                                        <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
-                                                    )
-                                                })}
-                                                
-                                            </Select>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow >
-                                        <TableCell>
-                                            4
-                                        </TableCell>
-                                        <TableCell>
-                                        Left Flank
-                                        </TableCell>
-                                        <TableCell>
-                                            <Select fullWidth={true}
-                                                value={this.state.leftFlank}
-                                                onChange={this.handleChange}
-                                                input={
-                                                <OutlinedInput
-                                                    value={this.state.leftFlank}
-                                                    name="leftFlank"
-                                                    id="leftFlank"
-                                                />
-                                                }
-                                            >
-                                                {lesionSizeScore.map( score => {
-                                                    return(
-                                                        <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
-                                                    )
-                                                })}
-                                                
-                                            </Select>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow >
-                                        <TableCell>
-                                            5
-                                        </TableCell>
-                                        <TableCell>
-                                        Left Lower
-                                        </TableCell>
-                                        <TableCell>
-                                            <Select fullWidth={true}
-                                                value={this.state.leftLower}
-                                                onChange={this.handleChange}
-                                                input={
-                                                <OutlinedInput
-                                                    value={this.state.leftLower}
-                                                    name="leftLower"
-                                                    id="leftLower"
-                                                />
-                                                }
-                                            >
-                                                {lesionSizeScore.map( score => {
-                                                    return(
-                                                        <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
-                                                    )
-                                                })}
-                                            </Select>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow >
-                                        <TableCell>
-                                            6
-                                        </TableCell>
-                                        <TableCell>
-                                        Pelvis
-                                        </TableCell>
-                                        <TableCell>
-                                            <Select fullWidth={true}
-                                                value={this.state.pelvis}
-                                                onChange={this.handleChange}
-                                                input={
-                                                <OutlinedInput
-                                                    value={this.state.pelvis}
-                                                    name="pelvis"
-                                                    id="pelvis"
-                                                />
-                                                }
-                                            >
-                                                {lesionSizeScore.map( score => {
-                                                    return(
-                                                        <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
-                                                    )
-                                                })}
-                                                
-                                            </Select>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow >
-                                        <TableCell>
-                                            7
-                                        </TableCell>
-                                        <TableCell>
-                                        Right Lower
-                                        </TableCell>
-                                        <TableCell>
-                                            <Select fullWidth={true}
-                                                value={this.state.rightLower}
-                                                onChange={this.handleChange}
-                                                input={
-                                                <OutlinedInput
-                                                    value={this.state.rightLower}
-                                                    name="rightLower"
-                                                    id="rightLower"
-                                                />
-                                                }
-                                            >
-                                                {lesionSizeScore.map( score => {
-                                                    return(
-                                                        <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
-                                                    )
-                                                })}
-                                                
-                                            </Select>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow >
-                                        <TableCell>
-                                            8
-                                        </TableCell>
-                                        <TableCell>
-                                        Right Flank
-                                        </TableCell>
-                                        <TableCell>
-                                            <Select fullWidth={true}
-                                                value={this.state.rightFlank}
-                                                onChange={this.handleChange}
-                                                input={
-                                                <OutlinedInput
-                                                    value={this.state.rightFlank}
-                                                    name="rightFlank"
-                                                    id="rightFlank"
-                                                />
-                                                }
-                                            >
-                                                {lesionSizeScore.map( score => {
-                                                    return(
-                                                        <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
-                                                    )
-                                                })}
-                                                
-                                            </Select>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow >
-                                        <TableCell>
-                                            9
-                                        </TableCell>
-                                        <TableCell>
-                                        Upper Jejunum
-                                        </TableCell>
-                                        <TableCell>
-                                            <Select fullWidth={true}
-                                                value={this.state.upperJejunum}
-                                                onChange={this.handleChange}
-                                                input={
-                                                <OutlinedInput
-                                                    value={this.state.upperJejunum}
-                                                    name="upperJejunum"
-                                                    id="upperJejunum"
-                                                />
-                                                }
-                                            >
-                                                {lesionSizeScore.map( score => {
-                                                    return(
-                                                        <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
-                                                    )
-                                                })}
-                                                
-                                            </Select>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow >
-                                        <TableCell>
-                                            10
-                                        </TableCell>
-                                        <TableCell>
-                                        Lower Jejunum
-                                        </TableCell>
-                                        <TableCell>
-                                            <Select fullWidth={true}
-                                                value={this.state.lowerJejunum}
-                                                onChange={this.handleChange}
-                                                input={
-                                                <OutlinedInput
-                                                    value={this.state.lowerJejunum}
-                                                    name="lowerJejunum"
-                                                    id="lowerJejunum"
-                                                />
-                                                }
-                                            >
-                                                {lesionSizeScore.map( score => {
-                                                    return(
-                                                        <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
-                                                    )
-                                                })}
-                                                
-                                            </Select>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow >
-                                        <TableCell>
-                                            11
-                                        </TableCell>
-                                        <TableCell>
-                                        Upper Ilium
-                                        </TableCell>
-                                        <TableCell>
-                                            <Select fullWidth={true}
-                                                value={this.state.upperIlium}
-                                                onChange={this.handleChange}
-                                                input={
-                                                <OutlinedInput
-                                                    value={this.state.upperIlium}
-                                                    name="upperIlium"
-                                                    id="upperIlium"
-                                                />
-                                                }
-                                            >
-                                                {lesionSizeScore.map( score => {
-                                                    return(
-                                                        <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
-                                                    )
-                                                })}
-                                                
-                                            </Select>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow >
-                                        <TableCell>
-                                            12
-                                        </TableCell>
-                                        <TableCell>
-                                        Lower Ilium
-                                        </TableCell>
-                                        <TableCell>
-                                            <Select fullWidth={true}
-                                                value={this.state.lowerIlium}
-                                                onChange={this.handleChange}
-                                                input={
-                                                <OutlinedInput
-                                                    value={this.state.lowerIlium}
-                                                    name="lowerIlium"
-                                                    id="lowerIlium"
-                                                />
-                                                }
-                                            >
-                                                {lesionSizeScore.map( score => {
-                                                    return(
-                                                        <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
-                                                    )
-                                                })}
-                                                
-                                            </Select>
-                                    </TableCell>
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <GridItem item xs={5} >
+                    <Typography className={classes.heading}><h4>Peritoneal Cancer Index (PCI)</h4></Typography>
+                </GridItem>
+                <GridItem item xs={5} >
+                    <Typography className={classes.heading}><h1>PCI: {this.state.PCITotal}</h1></Typography>
+                </GridItem>
+                <GridItem item xs={2} >
+                    <Typography className={classes.heading}>(click to expand/retract)</Typography>
+                </GridItem>
+            </ExpansionPanelSummary>
+            
+            <ExpansionPanelDetails>
+                <Grid container spacing={24} >
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Region Number</TableCell>
+                                    <TableCell>Region Name</TableCell>
+                                    <TableCell>Lesion Size/Score</TableCell>
                                 </TableRow>
-                        </TableBody>
-                    </Table>
-            </Grid>
-            <Grid  container spacing={24}>
-                    <img height="650" width="750" src="images/bodyImage.png"/>
-                    <GridItem item xs={4} sm={4}>
-                            <DialogContent >
-                                <TextField
-                                onChange={this.handleChange}
-                                value={this.state.surgeonOne}
-                                name="surgeonOne"
-                                margin="dense"
-                                id="surgeonOne"
-                                label="Surgeon 1"
-                                type="text"
-                                variant="outlined"
-                                />
-                            </DialogContent>
-                    </GridItem>
-                    <GridItem item xs={4} sm={4}>
-                            <DialogContent >
-                                <TextField
-                                onChange={this.handleChange}
-                                value={this.state.surgeonTwo}
-                                name="surgeonTwo"
-                                margin="dense"
-                                id="surgeonTwo"
-                                label="Surgeon 2"
-                                type="text"
-                                variant="outlined"
-                                />
-                            </DialogContent>
-                    </GridItem>
-                    <GridItem item xs={4} sm={4}>
-                            <DialogContent >
-                                <TextField
-                                onChange={this.handleChange}
-                                value={this.state.surgeonThree}
-                                name="surgeonThree"
-                                margin="dense"
-                                id="surgeonThree"
-                                label="Surgeon 3"
-                                type="text"
-                                variant="outlined"
-                                />
-                            </DialogContent>
-                    </GridItem>
-                    <GridItem item xs={4} sm={4}>
-                            <DialogContent >
-                                <TextField
-                                onChange={this.handleChange}
-                                value={this.state.nrHipec}
-                                name="nrHipec"
-                                margin="dense"
-                                id="nrHipec"
-                                label="Nr HIPEC"
-                                type="text"
-                                variant="outlined"
-                                />
-                            </DialogContent>
-                    </GridItem>
-                    <GridItem item xs={4} sm={4}>
-                        <DialogContent >
-                            <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl}>
-                                    <InputLabel
-                                        htmlFor="outlined-age-native-simple"
-                                    >
-                                        HIPEC Type
-                                    </InputLabel>
-                                <Select
-                                        value={this.state.hipecType}
-                                        onChange={this.handleChange}
-                                        input={
-                                        <OutlinedInput
-                                            value={this.state.hipecType}
-                                            name="hipecType"
-                                            id="hipecType"
-                                        />
-                                        }
-                                    >
-                                        {this.props.reduxState.dropdownOptions.hipecTypeOptions.map( option => {
-                                            return(
-                                                <MenuItem key={option.index} value={option.id}>{option.status}</MenuItem>
-                                            )
-                                            
-                                        })}
-                                        
-                                    </Select>
-                                </FormControl>
-                            </DialogContent>
-                    </GridItem>
-                    <GridItem item xs={4} sm={4}>
+                            </TableHead>
+                                <TableBody>
+                                        <TableRow >
+                                            <TableCell>
+                                                0
+                                            </TableCell>
+                                            <TableCell>
+                                                Central
+                                            </TableCell>
+                                            <TableCell>
+                                                <Select fullWidth={true}
+                                                    value={this.state.central}
+                                                    onChange={this.handlePCIChange}
+                                                    input={
+                                                    <OutlinedInput
+                                                        value={this.state.central}
+                                                        name="central"
+                                                        id="central"
+                                                    />
+                                                    }
+                                                >
+                                                    {lesionSizeScore.map( score => {
+                                                        return(
+                                                            <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
+                                                        )
+                                                    })}
+                                                    
+                                                </Select>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow >
+                                            <TableCell>
+                                                1
+                                            </TableCell>
+                                            <TableCell>
+                                            Right Upper
+                                            </TableCell>
+                                            <TableCell>
+                                                <Select fullWidth={true}
+                                                    value={this.state.rightUpper}
+                                                    onChange={this.handlePCIChange}
+                                                    input={
+                                                    <OutlinedInput
+                                                        value={this.state.rightUpper}
+                                                        name="rightUpper"
+                                                        id="rightUpper"
+                                                    />
+                                                    }
+                                                >
+                                                    {lesionSizeScore.map( score => {
+                                                        return(
+                                                            <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
+                                                        )
+                                                    })}
+                                                    
+                                                </Select>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow >
+                                            <TableCell>
+                                                2
+                                            </TableCell>
+                                            <TableCell>
+                                            Epigastrium
+                                            </TableCell>
+                                            <TableCell>
+                                                <Select fullWidth={true}
+                                                    value={this.state.Epigastrium}
+                                                    onChange={this.handlePCIChange}
+                                                    input={
+                                                    <OutlinedInput
+                                                        value={this.state.Epigastrium}
+                                                        name="Epigastrium"
+                                                        id="Epigastrium"
+                                                    />
+                                                    }
+                                                >
+                                                    {lesionSizeScore.map( score => {
+                                                        return(
+                                                            <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
+                                                        )
+                                                    })}
+                                                    
+                                                </Select>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow >
+                                            <TableCell>
+                                                3
+                                            </TableCell>
+                                            <TableCell>
+                                            Left Upper
+                                            </TableCell>
+                                            <TableCell>
+                                                <Select fullWidth={true}
+                                                    value={this.state.leftUpper}
+                                                    onChange={this.handlePCIChange}
+                                                    input={
+                                                    <OutlinedInput
+                                                        value={this.state.leftUpper}
+                                                        name="leftUpper"
+                                                        id="leftUpper"
+                                                    />
+                                                    }
+                                                >
+                                                    {lesionSizeScore.map( score => {
+                                                        return(
+                                                            <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
+                                                        )
+                                                    })}
+                                                    
+                                                </Select>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow >
+                                            <TableCell>
+                                                4
+                                            </TableCell>
+                                            <TableCell>
+                                            Left Flank
+                                            </TableCell>
+                                            <TableCell>
+                                                <Select fullWidth={true}
+                                                    value={this.state.leftFlank}
+                                                    onChange={this.handlePCIChange}
+                                                    input={
+                                                    <OutlinedInput
+                                                        value={this.state.leftFlank}
+                                                        name="leftFlank"
+                                                        id="leftFlank"
+                                                    />
+                                                    }
+                                                >
+                                                    {lesionSizeScore.map( score => {
+                                                        return(
+                                                            <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
+                                                        )
+                                                    })}
+                                                    
+                                                </Select>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow >
+                                            <TableCell>
+                                                5
+                                            </TableCell>
+                                            <TableCell>
+                                            Left Lower
+                                            </TableCell>
+                                            <TableCell>
+                                                <Select fullWidth={true}
+                                                    value={this.state.leftLower}
+                                                    onChange={this.handlePCIChange}
+                                                    input={
+                                                    <OutlinedInput
+                                                        value={this.state.leftLower}
+                                                        name="leftLower"
+                                                        id="leftLower"
+                                                    />
+                                                    }
+                                                >
+                                                    {lesionSizeScore.map( score => {
+                                                        return(
+                                                            <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
+                                                        )
+                                                    })}
+                                                </Select>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow >
+                                            <TableCell>
+                                                6
+                                            </TableCell>
+                                            <TableCell>
+                                            Pelvis
+                                            </TableCell>
+                                            <TableCell>
+                                                <Select fullWidth={true}
+                                                    value={this.state.pelvis}
+                                                    onChange={this.handlePCIChange}
+                                                    input={
+                                                    <OutlinedInput
+                                                        value={this.state.pelvis}
+                                                        name="pelvis"
+                                                        id="pelvis"
+                                                    />
+                                                    }
+                                                >
+                                                    {lesionSizeScore.map( score => {
+                                                        return(
+                                                            <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
+                                                        )
+                                                    })}
+                                                    
+                                                </Select>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow >
+                                            <TableCell>
+                                                7
+                                            </TableCell>
+                                            <TableCell>
+                                            Right Lower
+                                            </TableCell>
+                                            <TableCell>
+                                                <Select fullWidth={true}
+                                                    value={this.state.rightLower}
+                                                    onChange={this.handlePCIChange}
+                                                    input={
+                                                    <OutlinedInput
+                                                        value={this.state.rightLower}
+                                                        name="rightLower"
+                                                        id="rightLower"
+                                                    />
+                                                    }
+                                                >
+                                                    {lesionSizeScore.map( score => {
+                                                        return(
+                                                            <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
+                                                        )
+                                                    })}
+                                                    
+                                                </Select>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow >
+                                            <TableCell>
+                                                8
+                                            </TableCell>
+                                            <TableCell>
+                                            Right Flank
+                                            </TableCell>
+                                            <TableCell>
+                                                <Select fullWidth={true}
+                                                    value={this.state.rightFlank}
+                                                    onChange={this.handlePCIChange}
+                                                    input={
+                                                    <OutlinedInput
+                                                        value={this.state.rightFlank}
+                                                        name="rightFlank"
+                                                        id="rightFlank"
+                                                    />
+                                                    }
+                                                >
+                                                    {lesionSizeScore.map( score => {
+                                                        return(
+                                                            <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
+                                                        )
+                                                    })}
+                                                    
+                                                </Select>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow >
+                                            <TableCell>
+                                                9
+                                            </TableCell>
+                                            <TableCell>
+                                            Upper Jejunum
+                                            </TableCell>
+                                            <TableCell>
+                                                <Select fullWidth={true}
+                                                    value={this.state.upperJejunum}
+                                                    onChange={this.handlePCIChange}
+                                                    input={
+                                                    <OutlinedInput
+                                                        value={this.state.upperJejunum}
+                                                        name="upperJejunum"
+                                                        id="upperJejunum"
+                                                    />
+                                                    }
+                                                >
+                                                    {lesionSizeScore.map( score => {
+                                                        return(
+                                                            <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
+                                                        )
+                                                    })}
+                                                    
+                                                </Select>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow >
+                                            <TableCell>
+                                                10
+                                            </TableCell>
+                                            <TableCell>
+                                            Lower Jejunum
+                                            </TableCell>
+                                            <TableCell>
+                                                <Select fullWidth={true}
+                                                    value={this.state.lowerJejunum}
+                                                    onChange={this.handlePCIChange}
+                                                    input={
+                                                    <OutlinedInput
+                                                        value={this.state.lowerJejunum}
+                                                        name="lowerJejunum"
+                                                        id="lowerJejunum"
+                                                    />
+                                                    }
+                                                >
+                                                    {lesionSizeScore.map( score => {
+                                                        return(
+                                                            <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
+                                                        )
+                                                    })}
+                                                    
+                                                </Select>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow >
+                                            <TableCell>
+                                                11
+                                            </TableCell>
+                                            <TableCell>
+                                            Upper Ilium
+                                            </TableCell>
+                                            <TableCell>
+                                                <Select fullWidth={true}
+                                                    value={this.state.upperIlium}
+                                                    onChange={this.handlePCIChange}
+                                                    input={
+                                                    <OutlinedInput
+                                                        value={this.state.upperIlium}
+                                                        name="upperIlium"
+                                                        id="upperIlium"
+                                                    />
+                                                    }
+                                                >
+                                                    {lesionSizeScore.map( score => {
+                                                        return(
+                                                            <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
+                                                        )
+                                                    })}
+                                                    
+                                                </Select>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow >
+                                            <TableCell>
+                                                12
+                                            </TableCell>
+                                            <TableCell>
+                                            Lower Ilium
+                                            </TableCell>
+                                            <TableCell>
+                                                <Select fullWidth={true}
+                                                    value={this.state.lowerIlium}
+                                                    onChange={this.handlePCIChange}
+                                                    input={
+                                                    <OutlinedInput
+                                                        value={this.state.lowerIlium}
+                                                        name="lowerIlium"
+                                                        id="lowerIlium"
+                                                    />
+                                                    }
+                                                >
+                                                    {lesionSizeScore.map( score => {
+                                                        return(
+                                                            <MenuItem key={score.index} value={score.score} >{score.option}</MenuItem>
+                                                        )
+                                                    })}
+                                                    
+                                                </Select>
+                                        </TableCell>
+                                    </TableRow>
+                            </TableBody>
+                        </Table>
+                </Grid>
+                <Grid  container spacing={24}>
+                        <img height="650" width="750" src="images/bodyImage.png"/>
+                        <GridItem item xs={4} sm={4}>
+                                <DialogContent >
+                                    <TextField
+                                    onChange={this.handleChange}
+                                    value={this.state.surgeonOne}
+                                    name="surgeonOne"
+                                    margin="dense"
+                                    id="surgeonOne"
+                                    label="Surgeon 1"
+                                    type="text"
+                                    variant="outlined"
+                                    />
+                                </DialogContent>
+                        </GridItem>
+                        <GridItem item xs={4} sm={4}>
+                                <DialogContent >
+                                    <TextField
+                                    onChange={this.handleChange}
+                                    value={this.state.surgeonTwo}
+                                    name="surgeonTwo"
+                                    margin="dense"
+                                    id="surgeonTwo"
+                                    label="Surgeon 2"
+                                    type="text"
+                                    variant="outlined"
+                                    />
+                                </DialogContent>
+                        </GridItem>
+                        <GridItem item xs={4} sm={4}>
+                                <DialogContent >
+                                    <TextField
+                                    onChange={this.handleChange}
+                                    value={this.state.surgeonThree}
+                                    name="surgeonThree"
+                                    margin="dense"
+                                    id="surgeonThree"
+                                    label="Surgeon 3"
+                                    type="text"
+                                    variant="outlined"
+                                    />
+                                </DialogContent>
+                        </GridItem>
+                        <GridItem item xs={4} sm={4}>
+                                <DialogContent >
+                                    <TextField
+                                    onChange={this.handleChange}
+                                    value={this.state.nrHipec}
+                                    name="nrHipec"
+                                    margin="dense"
+                                    id="nrHipec"
+                                    label="Nr HIPEC"
+                                    type="text"
+                                    variant="outlined"
+                                    />
+                                </DialogContent>
+                        </GridItem>
+                        <GridItem item xs={4} sm={4}>
                             <DialogContent >
                                 <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl}>
-                                    <InputLabel
-                                        htmlFor="outlined-age-native-simple"
-                                    >
-                                        Reason O/C
-                                    </InputLabel>
+                                        <InputLabel
+                                            htmlFor="outlined-age-native-simple"
+                                        >
+                                            HIPEC Type
+                                        </InputLabel>
                                     <Select
-                                        value={this.state.reasonOC}
-                                        onChange={this.handleChange}
-                                        input={
-                                        <OutlinedInput
-                                            name="reasonOC"
-                                            fullWidth
-                                            id="reasonOC"
-                                        />
-                                        }
-                                    >
-                                    {this.props.reduxState.dropdownOptions.reasonOpenCloseOption.map( option => {
-                                            return(
-                                                <MenuItem key={option.index} value={option.id}>{option.status}</MenuItem>
-                                            )
+                                            value={this.state.hipecType}
+                                            onChange={this.handleChange}
+                                            input={
+                                            <OutlinedInput
+                                                value={this.state.hipecType}
+                                                name="hipecType"
+                                                id="hipecType"
+                                            />
+                                            }
+                                        >
+                                            {this.props.reduxState.dropdownOptions.hipecTypeOptions.map( option => {
+                                                return(
+                                                    <MenuItem key={option.index} value={option.id}>{option.status}</MenuItem>
+                                                )
+                                                
+                                            })}
                                             
-                                        })}
-                                    </Select>
-                                </FormControl>
-                            </DialogContent>
-                    </GridItem>
-                </Grid>                    
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
+                                        </Select>
+                                    </FormControl>
+                                </DialogContent>
+                        </GridItem>
+                        <GridItem item xs={4} sm={4}>
+                                <DialogContent >
+                                    <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl}>
+                                        <InputLabel
+                                            htmlFor="outlined-age-native-simple"
+                                        >
+                                            Reason O/C
+                                        </InputLabel>
+                                        <Select
+                                            value={this.state.reasonOC}
+                                            onChange={this.handleChange}
+                                            input={
+                                            <OutlinedInput
+                                                name="reasonOC"
+                                                fullWidth
+                                                id="reasonOC"
+                                            />
+                                            }
+                                        >
+                                        {this.props.reduxState.dropdownOptions.reasonOpenCloseOption.map( option => {
+                                                return(
+                                                    <MenuItem key={option.index} value={option.id}>{option.status}</MenuItem>
+                                                )
+                                                
+                                            })}
+                                        </Select>
+                                    </FormControl>
+                                </DialogContent>
+                        </GridItem>
+                    </Grid>                    
+            </ExpansionPanelDetails>
+            </ExpansionPanel>
+        </Grid> 
 
-        <ResectionDropdown state={this.state} handleChange={this.handleChange} handleChangeCheckbox={this.handleChangeCheckbox}/>
+        <ResectionDropdown state={this.state} handleChange={this.handleChange} expansionPanel2={this.expansionPanel2} handleChangeCheckbox={this.handleChangeCheckbox}/>
         <AdditionalPageInfo state={this.state} handleChange={this.handleChange} handleChangeCheckbox={this.handleChangeCheckbox}/>
         <Button variant="contained" color="primary" onClick={this.saveForm}>Save</Button>
       </div>
