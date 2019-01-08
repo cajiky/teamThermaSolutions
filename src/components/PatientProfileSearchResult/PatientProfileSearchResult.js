@@ -60,7 +60,7 @@ class PatientProfileSearchResult extends Component {
                 <Typography><>
                 {(this.props.patientSearch.patient_no) ? (<><h3>Patient ID:</h3> {this.props.patientSearch.patient_no}</>) : (<></>)}
                 {(this.props.patientSearch.dob) ? (<><h3>Date of Birth:</h3> {this.props.patientSearch.dob}</>) : (<></>)}
-                {(this.props.patientSearch.toc_id) ? (<><h3>Type of Cancer:</h3> {this.props.patientSearch.toc_id}</>) : (<></>)}
+                {(this.props.patientSearch.type_of_cancer) ? (<><h3>Type of Cancer:</h3> {this.props.patientSearch.type_of_cancer}</>) : (<></>)}
                 {(this.props.patientSearch.gender) ? (<><h3>Gender:</h3> {this.props.patientSearch.gender}</>) : (<></>)}
                 {(this.props.patientSearch.referal_date) ? (<><h3>Referral Date:</h3> {this.props.patientSearch.referal_date}</>) : (<></>)}
                 {(this.props.patientSearch.hipec_date) ? (<><h3>HIPEC Date:</h3> {this.props.patientSearch.hipec_date}</>) : (<></>)}
