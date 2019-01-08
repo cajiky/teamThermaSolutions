@@ -144,11 +144,14 @@ class FollowUpPage extends Component {
                 <Button onClick={this.updateFollowUp} className={classes.button}
                             variant="contained" color="primary">
                         Save
-                    </Button>      
+                    </Button>
+                    {/* {this.state.date ? (<h3>{this.state.date}</h3>) : (<h3>Enter Details</h3>)} */}
+                    {this.state.id ? (
                     <Button onClick={this.addFollowUpHistory} className={classes.button}
                             variant="contained" color="primary">
                         New Follow Up
-                    </Button>                    
+                    </Button>) : ''
+                    }                 
                     <AddFollowUpHistory />
                 <Divider variant="middle" />
                 <h3>Follow Up History</h3>

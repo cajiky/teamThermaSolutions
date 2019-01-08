@@ -56,6 +56,7 @@ class FollowUpDetail extends Component {
         date: null,
         evidence_of_disease: false,
         follow_up_notes: null,
+        recurrence: false,
         cea: null,
         rec_modality: null,
         syst_location: false,
@@ -89,6 +90,7 @@ class FollowUpDetail extends Component {
             date: followUpDate,
             evidence_of_disease: this.props.followup.evidence_of_disease,
             follow_up_notes: this.props.followup.follow_up_notes,
+            recurrence: this.props.followup.recurrence,
             cea: this.props.followup.cea,
             rec_modality: this.props.followup.rec_modality,
             syst_location: this.props.followup.syst_location,
@@ -129,7 +131,7 @@ class FollowUpDetail extends Component {
         
         return(
             <div>
-            <ExpansionPanel>
+            <ExpansionPanel defaultExpanded>
                 <ExpansionPanelSummary className={classes.superCool} expandIcon={<ExpandMoreIcon />}>
                     {this.state.date ? (<h3>{this.state.date}</h3>) : (<h3>Enter Details</h3>)}
                     {/* {this.props.reduxState.patientReducer.patient ? (<CurrentPatientInfo/>) : (<></>)} */}
@@ -168,6 +170,19 @@ class FollowUpDetail extends Component {
                                 label="Evidence of Disease"
                                 />
                             </FormGroup>
+                            <FormGroup row>
+                                <FormControlLabel
+                                control={
+                                    <Checkbox
+                                    name="recurrence"
+                                    checked={this.state.recurrence}
+                                    onChange={this.handleChangeCheckbox}
+                                    value={this.state.recurrence}
+                                    />
+                                }
+                                label="Recurrence"
+                                />
+                            </FormGroup>
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
@@ -187,7 +202,7 @@ class FollowUpDetail extends Component {
                         </Grid>
                         <Divider variant="middle" />
                         {/* display recurrence information only if evidence of disease */}
-                        {this.state.evidence_of_disease && 
+                        {this.state.recurrence && 
                         <FollowUpDetailRecurrence recurrence={this.state} 
                             handleChange={this.handleChange}
                             handleChangeCheckbox={this.handleChangeCheckbox}/>

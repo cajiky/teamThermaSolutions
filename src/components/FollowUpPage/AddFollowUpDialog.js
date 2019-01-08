@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -52,7 +52,7 @@ const styles = theme => ({
   }
 });
 
-class AddFollowUpDialog extends React.Component {
+class AddFollowUpDialog extends Component {
 
   state = {
     open: false,
@@ -73,6 +73,14 @@ class AddFollowUpDialog extends React.Component {
 
   handleClose = () => {
     this.setState({ open: false });
+  };
+
+  // Called when the input field changes
+  handleChange = (event) => {
+    this.setState({
+        ...this.state,
+        [event.target.name]: event.target.value,
+    });
   };
 
   addFollowUpHistory = () => {

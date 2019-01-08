@@ -42,6 +42,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     const follow_up_date = req.body.date;
     const evidence_of_disease = req.body.evidence_of_disease;
     const follow_up_notes = req.body.follow_up_notes;
+    const recurrence = req.body.recurrence;
     const cea = req.body.cea;
     const rec_modality = req.body.rec_modality;
     const syst_location = req.body.syst_location;
@@ -53,13 +54,13 @@ router.put('/', rejectUnauthenticated, (req, res) => {
 
     const queryText = `UPDATE follow_up_history 
         SET date=$2, evidence_of_disease=$3, follow_up_notes=$4,
-        cea=$5, rec_modality=$6,
-        syst_location=$7, treatment=$8, date_treatment=$9,
-        status=$10, treatment_notes=$11, location=$12 WHERE id=$1`;
+        recurrence=$5, cea=$6, rec_modality=$7,
+        syst_location=$8, treatment=$9, date_treatment=$10,
+        status=$11, treatment_notes=$12, location=$13 WHERE id=$1`;
 
     pool.query(queryText, 
         [id, follow_up_date, evidence_of_disease, follow_up_notes,
-        cea, rec_modality, syst_location, treatment,
+        recurrence, cea, rec_modality, syst_location, treatment,
         date_treatment, status, treatment_notes, location])
       .then((result) => { res.send(result.rows); })
       .catch((err) => {
