@@ -192,7 +192,7 @@ CREATE TABLE "intervention" (
 	"stoma_post_hipec" BOOLEAN,
 	"stoma_post_hipec_type" integer,
 	"bloodloss" varchar,
-	"time" timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+	"time" varchar,
 	"hipec_regiment" integer,
 	"duration" varchar,
 	"volume" varchar,
@@ -306,7 +306,7 @@ CONSTRAINT operative_op_notes_pk PRIMARY KEY ("id")
 
 CREATE TABLE "resections" (
 	"id" serial NOT NULL,
-	"intervention_id" integer NOT NULL,
+	"intervention_id" integer NOT NULL REFERENCES "intervention"("id") UNIQUE,
 	"ovaries" BOOLEAN DEFAULT 'f',
 	"uterus" BOOLEAN DEFAULT 'f',
 	"omentum" BOOLEAN DEFAULT 'f',
