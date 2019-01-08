@@ -128,7 +128,7 @@ const styles = theme => ({
     componentDidMount(){
         
         // this.props.dispatch({ type: 'GET_PCI_TOTAL', payload: this.props.reduxState.patientReducer.patient.id })
-        console.log('central:', this.props.reduxState.pciReducer[0].pci_0);
+        {this.props.reduxState.pciReducer.length != 0 ? (
         this.setState({
             central: this.props.reduxState.pciReducer[0].pci_0,
             rightUpper: this.props.reduxState.pciReducer[0].pci_1,
@@ -145,7 +145,26 @@ const styles = theme => ({
             lowerIlium: this.props.reduxState.pciReducer[0].pci_12,
             PCITotal: this.props.reduxState.pciReducer[0].pci_score,
             expanded1: true,
+            
         })
+        ):(
+        this.setState({
+            central: 0,
+            rightUpper: 0,
+            Epigastrium: 0,
+            leftUpper:0,
+            leftFlank:0,
+            leftLower:0,
+            pelvis:0,
+            rightLower:0,
+            rightFlank:0,
+            upperJejunum:0,
+            lowerJejunum:0,
+            upperIlium:0,
+            lowerIlium:0,
+            PCITotal:0,
+            })
+        )}
     }
 
     calculatePCI = () => {
@@ -172,7 +191,7 @@ const styles = theme => ({
         })
     }
 
-    handleChange = (event) => {
+    handlePCIChange = (event) => {
         this.setState({
             ...this.state,
             [event.target.name]: event.target.value,
@@ -180,6 +199,13 @@ const styles = theme => ({
         this.calculatePCI);
         console.log('intervention state', this.state);
         
+      }
+
+    handleChange = (event) => {
+        this.setState({
+            ...this.state,
+            [event.target.name]: event.target.value,
+        })
       }
 
     expansionPanel1 = () => {
@@ -254,7 +280,7 @@ const styles = theme => ({
                                             <TableCell>
                                                 <Select fullWidth={true}
                                                     value={this.state.central}
-                                                    onChange={this.handleChange}
+                                                    onChange={this.handlePCIChange}
                                                     input={
                                                     <OutlinedInput
                                                         value={this.state.central}
@@ -282,7 +308,7 @@ const styles = theme => ({
                                             <TableCell>
                                                 <Select fullWidth={true}
                                                     value={this.state.rightUpper}
-                                                    onChange={this.handleChange}
+                                                    onChange={this.handlePCIChange}
                                                     input={
                                                     <OutlinedInput
                                                         value={this.state.rightUpper}
@@ -310,7 +336,7 @@ const styles = theme => ({
                                             <TableCell>
                                                 <Select fullWidth={true}
                                                     value={this.state.Epigastrium}
-                                                    onChange={this.handleChange}
+                                                    onChange={this.handlePCIChange}
                                                     input={
                                                     <OutlinedInput
                                                         value={this.state.Epigastrium}
@@ -338,7 +364,7 @@ const styles = theme => ({
                                             <TableCell>
                                                 <Select fullWidth={true}
                                                     value={this.state.leftUpper}
-                                                    onChange={this.handleChange}
+                                                    onChange={this.handlePCIChange}
                                                     input={
                                                     <OutlinedInput
                                                         value={this.state.leftUpper}
@@ -366,7 +392,7 @@ const styles = theme => ({
                                             <TableCell>
                                                 <Select fullWidth={true}
                                                     value={this.state.leftFlank}
-                                                    onChange={this.handleChange}
+                                                    onChange={this.handlePCIChange}
                                                     input={
                                                     <OutlinedInput
                                                         value={this.state.leftFlank}
@@ -394,7 +420,7 @@ const styles = theme => ({
                                             <TableCell>
                                                 <Select fullWidth={true}
                                                     value={this.state.leftLower}
-                                                    onChange={this.handleChange}
+                                                    onChange={this.handlePCIChange}
                                                     input={
                                                     <OutlinedInput
                                                         value={this.state.leftLower}
@@ -421,7 +447,7 @@ const styles = theme => ({
                                             <TableCell>
                                                 <Select fullWidth={true}
                                                     value={this.state.pelvis}
-                                                    onChange={this.handleChange}
+                                                    onChange={this.handlePCIChange}
                                                     input={
                                                     <OutlinedInput
                                                         value={this.state.pelvis}
@@ -449,7 +475,7 @@ const styles = theme => ({
                                             <TableCell>
                                                 <Select fullWidth={true}
                                                     value={this.state.rightLower}
-                                                    onChange={this.handleChange}
+                                                    onChange={this.handlePCIChange}
                                                     input={
                                                     <OutlinedInput
                                                         value={this.state.rightLower}
@@ -477,7 +503,7 @@ const styles = theme => ({
                                             <TableCell>
                                                 <Select fullWidth={true}
                                                     value={this.state.rightFlank}
-                                                    onChange={this.handleChange}
+                                                    onChange={this.handlePCIChange}
                                                     input={
                                                     <OutlinedInput
                                                         value={this.state.rightFlank}
@@ -505,7 +531,7 @@ const styles = theme => ({
                                             <TableCell>
                                                 <Select fullWidth={true}
                                                     value={this.state.upperJejunum}
-                                                    onChange={this.handleChange}
+                                                    onChange={this.handlePCIChange}
                                                     input={
                                                     <OutlinedInput
                                                         value={this.state.upperJejunum}
@@ -533,7 +559,7 @@ const styles = theme => ({
                                             <TableCell>
                                                 <Select fullWidth={true}
                                                     value={this.state.lowerJejunum}
-                                                    onChange={this.handleChange}
+                                                    onChange={this.handlePCIChange}
                                                     input={
                                                     <OutlinedInput
                                                         value={this.state.lowerJejunum}
@@ -561,7 +587,7 @@ const styles = theme => ({
                                             <TableCell>
                                                 <Select fullWidth={true}
                                                     value={this.state.upperIlium}
-                                                    onChange={this.handleChange}
+                                                    onChange={this.handlePCIChange}
                                                     input={
                                                     <OutlinedInput
                                                         value={this.state.upperIlium}
@@ -589,7 +615,7 @@ const styles = theme => ({
                                             <TableCell>
                                                 <Select fullWidth={true}
                                                     value={this.state.lowerIlium}
-                                                    onChange={this.handleChange}
+                                                    onChange={this.handlePCIChange}
                                                     input={
                                                     <OutlinedInput
                                                         value={this.state.lowerIlium}

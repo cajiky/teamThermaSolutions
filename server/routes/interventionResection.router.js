@@ -70,21 +70,28 @@ router.put('/:id', (req, res, next) => {
 
 
 
-    const queryText = `UPDATE intervention 
-    SET (pci_0, pci_1, pci_2, pci_3, pci_4, pci_5, pci_6, pci_7, pci_8, pci_9, pci_10, pci_11, pci_12, pci_score, surgeon_1, surgeon_2, surgeon_3, nrhipec, hipec_type, reason_oc, anastomosis, anastomosis_number, revision_stoma, stoma_post_hipec_type, bloodloss, volume, hipec_regiment, time, concentration, r_score, duration, stoma_post_hipec) =
-    ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32) 
-    WHERE patient_id=${patientId} RETURNING id;`;
+    const queryText = `INSERT INTO intervention 
+    (patient_id, pci_0, pci_1, pci_2, pci_3, pci_4, pci_5, pci_6, pci_7, pci_8, pci_9, pci_10, pci_11, pci_12, pci_score, surgeon_1, surgeon_2, surgeon_3, nrhipec, hipec_type, reason_oc, anastomosis, anastomosis_number, revision_stoma, stoma_post_hipec_type, bloodloss, volume, hipec_regiment, time, concentration, r_score, duration, stoma_post_hipec)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33) 
+    ON CONFLICT (patient_id)
+    DO UPDATE SET (pci_0, pci_1, pci_2, pci_3, pci_4, pci_5, pci_6, pci_7, pci_8, pci_9, pci_10, pci_11, pci_12, pci_score, surgeon_1, surgeon_2, surgeon_3, nrhipec, hipec_type, reason_oc, anastomosis, anastomosis_number, revision_stoma, stoma_post_hipec_type, bloodloss, volume, hipec_regiment, time, concentration, r_score, duration, stoma_post_hipec) = 
+    ($2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33)
+    WHERE intervention.patient_id=$1 RETURNING id;`;
 
 
-    pool.query(queryText, [central, rightUpper, Epigastrium, leftUpper, leftFlank, leftLower, pelvis, rightLower, rightFlank, upperJejunum, lowerJejunum, upperIlium, lowerIlium, PCITotal, surgeonOne, surgeonTwo, surgeonThree, nrHipec, hipecType, reasonOC, anastomosis, AnastomosisNumber, revisionStoma, stomaType, bloodLoss, volume, hipecRegiment, bloodLossTime, concentration, rScore, duration,  stomaPostHIPEC])
+    pool.query(queryText, [patientId, central, rightUpper, Epigastrium, leftUpper, leftFlank, leftLower, pelvis, rightLower, rightFlank, upperJejunum, lowerJejunum, upperIlium, lowerIlium, PCITotal, surgeonOne, surgeonTwo, surgeonThree, nrHipec, hipecType, reasonOC, anastomosis, AnastomosisNumber, revisionStoma, stomaType, bloodLoss, volume, hipecRegiment, bloodLossTime, concentration, rScore, duration, stomaPostHIPEC])
       .then((results) => { 
         console.log('results ', results.rows[0].id);
         
-    const queryText2 = `UPDATE resections 
-    SET (ovaries, uterus, omentum, rectum, sigmoid, left_colon, transverse_colon, right_colon, ileocaecal, appendix, duodenum, jejunum, ileum, gallbladder, stomach, spleen, diagphram_l, diagphram_r, pancreas, bladder, urether, lymphnodes, left_peritoneum, right_peritoneum, peritoneum, pelvis) 
-    = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26)
-    WHERE intervention_id=${results.rows[0].id};`;
-        pool.query(queryText2, [ovaries, uterus, omentum, rectum, sigmoid, left_colon, transverse_colon, right_colon, ileocaecal, appendix, duodenum, jejunum, ileum, gallbladder, stomach, spleen, diagphram_l, diagphram_r, pancreas, bladder, urether, lymphnodes, left_peritoneum, right_peritoneum, peritoneum, pelvisResection])  
+    const interventionId = results.rows[0].id;
+    const queryText2 = `INSERT INTO resections 
+    (intervention_id, ovaries, uterus, omentum, rectum, sigmoid, left_colon, transverse_colon, right_colon, ileocaecal, appendix, duodenum, jejunum, ileum, gallbladder, stomach, spleen, diagphram_l, diagphram_r, pancreas, bladder, urether, lymphnodes, left_peritoneum, right_peritoneum, peritoneum, pelvis) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27)
+    ON CONFLICT (intervention_id)
+    DO UPDATE SET (ovaries, uterus, omentum, rectum, sigmoid, left_colon, transverse_colon, right_colon, ileocaecal, appendix, duodenum, jejunum, ileum, gallbladder, stomach, spleen, diagphram_l, diagphram_r, pancreas, bladder, urether, lymphnodes, left_peritoneum, right_peritoneum, peritoneum, pelvis) =
+    ($2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27)
+    WHERE resections.intervention_id=${results.rows[0].id};`;
+        pool.query(queryText2, [interventionId, ovaries, uterus, omentum, rectum, sigmoid, left_colon, transverse_colon, right_colon, ileocaecal, appendix, duodenum, jejunum, ileum, gallbladder, stomach, spleen, diagphram_l, diagphram_r, pancreas, bladder, urether, lymphnodes, left_peritoneum, right_peritoneum, peritoneum, pelvisResection])  
         
         .then((results) => {
             res.sendStatus(201);
