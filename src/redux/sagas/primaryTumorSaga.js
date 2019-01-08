@@ -6,8 +6,8 @@ function* getInitalValues(action) {
     console.log('Getting init values for primary tumor page', action.payload);
     
     try {
-        const response = yield call(axios.post, `/api/primaryTumor/getDataFor`, );
-        yield put({ type: 'SET_INIT_VALUES', payload: action.payload } )
+        const response = yield call(axios.post, `/api/primaryTumor/getDataFor`, {id: action.payload});
+        yield put({ type: 'SET_INIT_VALUES', payload: response.data } )
 
     } catch (error) {
         console.log(error);

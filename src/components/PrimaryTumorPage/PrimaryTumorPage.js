@@ -36,8 +36,32 @@ const styles = theme => ({
 
 class PrimaryTumorPage extends Component {
     state = {
+        adj_chemotherapy: this.props.primaryTumor.adj_chemotherapy,
+            adj_chemotherapy_type: this.props.primaryTumor.adj_chemotherapy_type,
+            biological: this.props.primaryTumor.biological,
+            chemo_type_1: this.props.primaryTumor.chemo_type_1,
+            chemo_type_2: this.props.primaryTumor.chemo_type_2,
+            date_primary_diagnosis: this.props.primaryTumor.date_primary_diagnosis,
+            date_prime_surgery: this.props.primaryTumor.date_prime_surgery,
+            differentiation: this.props.primaryTumor.differentiation,
+            id: this.props.primaryTumor.id,
+            intervention_type: this.props.primaryTumor.intervention_type,
+            m: this.props.primaryTumor.m,
+            m_location: this.props.primaryTumor.m_location,
+            mucinous: this.props.primaryTumor.mucinous,
+            n: this.props.primaryTumor.n,
+            notes: this.props.primaryTumor.notes,
+            patient_id: this.props.primaryTumor.patient_id,
+            primary_location: this.props.primaryTumor.primary_location,
+            prime_tumor_surgery: this.props.primaryTumor.prime_tumor_surgery,
+            reason_acute: this.props.primaryTumor.reason_acute,
+            t: this.props.primaryTumor.t,
+    }
 
-        // labelWidth: 105,
+    setValuesForPatient = () => {
+        this.setState({
+            
+        })
     }
 
     getInitialValues = (id) => {
@@ -56,9 +80,8 @@ class PrimaryTumorPage extends Component {
     }
 
     componentDidMount() {
-        let patientId = document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1");
         this.getDropDownOptions();
-        this.getInitialValues(patientId);
+        // this.setValuesForPatient();
     }
 
     render() {
@@ -95,8 +118,8 @@ class PrimaryTumorPage extends Component {
                                 type="date"
                                 fullWidth="true"
                                 onChange={this.handleChange}
-                                name="dateOfPrimaryDiagnosis"
-                                value={this.state.dateOfPrimaryDiagnosis}
+                                name="date_primary_diagnosis"
+                                value={this.props.reduxState.primaryTumorReducer.date_primary_diagnosis}
                                 />
                             </Grid>
                             <Grid item xs={6} className={classes.gridItem}>
@@ -105,13 +128,13 @@ class PrimaryTumorPage extends Component {
                             <Grid item xs={6} className={classes.gridItem}>
                                 <FormControl variant="outlined" fullWidth="true">
                                     <Select
-                                        value={this.state.primaryLocation}
+                                        value={this.props.reduxState.primaryTumorReducer.primary_location}
                                         onChange={this.handleChange}
                                         input={
                                         <OutlinedInput
-                                            value={this.state.primaryLocation}
-                                            name="primaryLocation"
-                                            id="primary-location"
+                                            value={this.props.reduxState.primaryTumorReducer.primary_location}
+                                            name="primary_location"
+                                            id="primary_location"
                                         />
                                         }
                                     >
@@ -159,13 +182,13 @@ class PrimaryTumorPage extends Component {
                                     <Grid item xs={3} >
                                         <FormControl variant="outlined" fullWidth="true">
                                         <Select
-                                            value={this.state.t}
+                                            value={this.props.primaryTumor.t}
                                             onChange={this.handleChange}
                                             input={
                                             <OutlinedInput
-                                                value={this.state.t}
+                                                value={this.props.primaryTumor.t}
                                                 name="t"
-                                                id="primary-location"
+                                                id="t"
                                             />
                                             }
                                         >
@@ -180,12 +203,12 @@ class PrimaryTumorPage extends Component {
                                     {/* <InputLabel ref={ref => {this.InputLabelRef = ref;}} htmlFor="m-input">Input Required</InputLabel> */}
 
                                         <Select
-                                            value={this.state.m}
+                                            value={this.props.primaryTumor.m}
                                             onChange={this.handleChange}
                                             labelWidth={this.state.labelWidth}
                                             input={
                                             <OutlinedInput
-                                                value={this.state.m}
+                                                value={this.props.primaryTumor.m}
                                                 name="m"
                                                 id="m-input"
                                             />
@@ -201,11 +224,11 @@ class PrimaryTumorPage extends Component {
                                     <FormControl variant="outlined" fullWidth="true">
                                     {/* <InputLabel ref={ref => {this.InputLabelRef = ref;}} htmlFor="primary-location">Input Required</InputLabel> */}
                                         <Select
-                                            value={this.state.n}
+                                            value={this.props.primaryTumor.n}
                                             onChange={this.handleChange}
                                             input={
                                             <OutlinedInput
-                                                value={this.state.n}
+                                                value={this.props.primaryTumor.n}
                                                 labelWidth={this.state.labelWidth}
                                                 name="n"
                                                 id="primary-location"
@@ -226,12 +249,12 @@ class PrimaryTumorPage extends Component {
                             <Grid item xs={6} className={classes.gridItem}>
                                 <FormControl variant="outlined" fullWidth="true">
                                     <Select
-                                        value={this.state.mLocation}
+                                        value={this.props.primaryTumor.m_location}
                                         onChange={this.handleChange}
                                         input={
                                         <OutlinedInput
-                                            value={this.state.mLocation}
-                                            name="mLocation"
+                                            value={this.props.primaryTumor.m_location}
+                                            name="m_location"
                                             id="primary-location"
                                         />
                                         }
@@ -251,11 +274,11 @@ class PrimaryTumorPage extends Component {
                             <Grid item xs={6} className={classes.gridItem}>
                                 <FormControl variant="outlined" fullWidth="true" required>
                                     <Select
-                                        value={this.state.differentiation}
+                                        value={this.props.primaryTumor.differentiation}
                                         onChange={this.handleChange}
                                         input={
                                         <OutlinedInput
-                                            value={this.state.differentiation}
+                                            value={this.props.primaryTumor.differentiation}
                                             name="differentiation"
                                             id="differentiation"
                                         />
@@ -277,12 +300,12 @@ class PrimaryTumorPage extends Component {
                                         aria-label="mucinous"
                                         name="mucinous"
                                         className={classes.group}
-                                        value={this.state.mucinous}
+                                        value={this.props.primaryTumor.mucinous}
                                         onChange={this.handleChange}
                                     >
-                                        <FormControlLabel value='true' control={<Radio />} label="Yes" />
-                                        <FormControlLabel value='false' control={<Radio />} label="No" />
-                                        <FormControlLabel value='null' control={<Radio />} label="Unknown" />
+                                        <FormControlLabel value={true} control={<Radio />} label="Yes" />
+                                        <FormControlLabel value={false} control={<Radio />} label="No" />
+                                        <FormControlLabel value={null} control={<Radio />} label="Unknown" />
 
                                     </RadioGroup>
                                 </FormControl>
@@ -497,7 +520,9 @@ class PrimaryTumorPage extends Component {
 };
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+    reduxState: reduxState,
+    primaryTumor: reduxState.primaryTumorReducer,
+    
 });
 
 

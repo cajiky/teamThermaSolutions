@@ -55,6 +55,7 @@ state = {
     // console.log('in main tabs page for patient#', this.props.reduxState.patientReducer.patient.id);
     this.getPatientIDFromCookie()
     let patientId = document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    this.props.dispatch({type: 'GET_INITIAL_VALUES', payload: patientId})
     this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'});
     this.props.dispatch({type: 'FETCH_POST_OP', payload: patientId});
     this.props.dispatch({type: 'FETCH_ADVERSE_EVENT', payload: patientId});
