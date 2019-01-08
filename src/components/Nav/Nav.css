@@ -31,8 +31,8 @@ body {
   outline:0;
 }
 
-.nav-link:hover {
-  background-color: #008183;
+.nav-link:hover, .nav-title:hover {
+  color: #008183;
 }
 
 .nav-right {
