@@ -15,11 +15,9 @@ function* addFollowUp(action) {
 
 // worker Saga: will be fired on "FETCH_FOLLOW_UP" actions
 function* fetchFollowUp(action) {
-  console.log('in fetch follow up Saga', action.payload);
+  // console.log('in fetch follow up Saga', action.payload);
   try {
-    const response = yield axios.get('api/follow_up/1');
-    console.log('response from follow up:', response);
-    
+    const response = yield axios.get(`api/follow_up/${action.payload}`);
     // set state
     yield put({ type: 'SET_FOLLOW_UP', payload: response.data });
   } catch (error) {
@@ -27,12 +25,13 @@ function* fetchFollowUp(action) {
   }
 }
 
+// worker Saga: will be fired on "UPDATE_FOLLOW_UP" actions
 function* updateFollowUp(action) {
   console.log('in update follow up Saga', action.payload);
   try {
       yield call(axios.put, `/api/follow_up`, action.payload);
-      // yield put({ type: 'RENDER_ALL_USERS', payload: action.payload.profileUserId } )
-
+      // call to update state
+      yield put( { type: 'FETCH_FOLLOW_UP' , payload: action.payload.patient_id} );
   } catch (error) {
       console.log(error);
       alert('Unable to update follow up');

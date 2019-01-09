@@ -29,9 +29,6 @@ const styles = theme => ({
       },
 });
 
-
-
-
 class PrimaryTumorPage extends Component {
     state = {
             // adj_chemotherapy: this.props.reduxState.primaryTumorReducer.adj_chemotherapy,

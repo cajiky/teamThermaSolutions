@@ -15,7 +15,7 @@ const newPatientId = require('./routes/newPatientId.router')
 const postOpRouter = require('./routes/post_op.router');
 const adverseEventsRouter = require('./routes/adverse_event.router');
 const followUpRouter = require('./routes/follow_up.router');
-const recurrenceRouter = require('./routes/recurrence.router');
+const followUpHistoryRouter = require('./routes/follow_up_history.router');
 const manageUsersRouter = require('./routes/manageUsers.router');
 const pathologyNotesRouter = require('./routes/pathologyNotes.router');
 const operativeNotesRouter = require('./routes/operativeNotes.router');
@@ -44,10 +44,9 @@ app.use('/api/new-patient-id', newPatientId);
 app.use('/api/post_op', postOpRouter);
 app.use('/api/adverse_event', adverseEventsRouter);
 app.use('/api/follow_up', followUpRouter);
-app.use('/api/recurrence', recurrenceRouter);
-app.use('/addNewUser', manageUsersRouter)
-app.use('/getAllUsers', manageUsersRouter) 
-app.use('/editUserProfile', manageUsersRouter)
+app.use('/api/follow_up_history', followUpHistoryRouter);
+app.use('/addNewUser', manageUsersRouter);
+app.use('/editUserProfile', manageUsersRouter);
 app.use('/addNewUser', manageUsersRouter);
 app.use('/getAllUsers', manageUsersRouter); 
 app.use('/editUserProfile', manageUsersRouter);

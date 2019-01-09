@@ -5,7 +5,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Input from '@material-ui/core/Input';
 
 const styles = theme => ({
   formControl: {
@@ -32,13 +32,13 @@ class RecurrenceTreatment extends Component {
     const { classes } = this.props;
 
     return (
-      <FormControl fullWidth="true" variant="outlined">
+      <FormControl fullWidth="true">
           <InputLabel shrink htmlFor="treatment">Treatment</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
             value={this.props.recurrence.treatment}
             input={
-              <OutlinedInput
+              <Input
                   value={this.props.recurrence.treatment}
                   name="treatment"
                   id="treatment"

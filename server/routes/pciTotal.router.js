@@ -9,7 +9,9 @@ router.get('/:id', (req, res) => {
   console.log('GET req.params.id', req.params.id);
   
   let reqId = req.params.id;
-  const queryText = `SELECT * FROM intervention WHERE patient_id=${reqId}`;
+  const queryText = `SELECT intervention.*, resections.* FROM intervention
+  JOIN resections on resections.intervention_id = intervention.id
+  WHERE patient_id=${reqId};`;
   pool.query(queryText)
     .then((result) => { res.send(result.rows); })
     .catch((err) => {

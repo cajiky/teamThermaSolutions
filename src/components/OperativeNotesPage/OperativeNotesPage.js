@@ -8,6 +8,8 @@ import GridItem from '@material-ui/core/Grid';
 import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
 import OperativeNotesHistory from './OperativeNotesHistory';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const styles = theme => ({
     root: {
@@ -34,6 +36,7 @@ const styles = theme => ({
 
 class OperativeNotesPage extends Component {
     state = {
+        changesMade: false,
         operativeNotes: '',
         userId: '',
         title: '',
@@ -43,6 +46,7 @@ class OperativeNotesPage extends Component {
 
     handleChange = (event) => {
         this.setState ({
+            changesMade: true,
             [event.target.name]: event.target.value,
         })
         console.log(this.state);
@@ -50,6 +54,7 @@ class OperativeNotesPage extends Component {
 
     saveOperativeNotes = () => {
         console.log('Operative Notes State', this.state);
+        if (this.state.changesMade){ 
         this.props.dispatch({ type: 'UPDATE_OPERATIVE_NOTE', 
         payload: {
             operativeNotes: this.state.operativeNotes,
@@ -59,7 +64,14 @@ class OperativeNotesPage extends Component {
             lastName: this.props.reduxState.user.last_name,
         }
          })
-         
+         this.setState ({
+            operativeNotes: '',
+        })
+        }
+    }
+
+    componentWillUnmount () {
+        this.saveOperativeNotes();
     }
 
     render() {
