@@ -59,6 +59,7 @@ const styles = theme => ({
 
   class InterventionPage extends Component {
     state = {
+        changesMade: false,
         central: 0,
         rightUpper: 0,
         Epigastrium: 0,
@@ -129,6 +130,7 @@ const styles = theme => ({
 
     componentDidMount(){
         this.setState({
+            changesMade: false,
             central: this.props.reduxState.pciReducer[0].pci_0,
             rightUpper: this.props.reduxState.pciReducer[0].pci_1,
             Epigastrium: this.props.reduxState.pciReducer[0].pci_2,
@@ -215,6 +217,7 @@ const styles = theme => ({
         console.log('PCI Total', PCI);
         
         this.setState({
+            changesMade: true,
             PCITotal: PCI
         })
     }
@@ -222,6 +225,7 @@ const styles = theme => ({
     handlePCIChange = (event) => {
         this.setState({
             ...this.state,
+            changesMade: true,
             [event.target.name]: event.target.value,
         },
         this.calculatePCI);
@@ -232,6 +236,7 @@ const styles = theme => ({
     handleChange = (event) => {
         this.setState({
             ...this.state,
+            changesMade: true,
             [event.target.name]: event.target.value,
         })
       }
@@ -260,9 +265,10 @@ const styles = theme => ({
     // }
 
     saveForm = () => {
+        if (this.state.changesMade){ 
         confirmAlert({
-          title: 'Confirm to submit form',
-          message: 'Are you sure you want to do this?',
+          title: 'Save Intervention Form',
+          message: 'Do you want to save Intervention Form?',
           buttons: [
             {
               label: 'Yes',
@@ -280,15 +286,21 @@ const styles = theme => ({
           ]
         })
     }
+    }
     
     handleChangeCheckbox = (event) => {
         this.setState({
             ...this.state,
+            changesMade: true,
             [event.target.name]: event.target.checked,
         });
         console.log('checkbox state', this.state);
         
       }
+
+    componentWillUnmount () {
+        this.saveForm();
+    }
 
     render() {
     const { classes } = this.props;

@@ -36,6 +36,7 @@ const styles = theme => ({
 
 class OperativeNotesPage extends Component {
     state = {
+        changesMade: false,
         operativeNotes: '',
         userId: '',
         title: '',
@@ -45,6 +46,7 @@ class OperativeNotesPage extends Component {
 
     handleChange = (event) => {
         this.setState ({
+            changesMade: true,
             [event.target.name]: event.target.value,
         })
         console.log(this.state);
@@ -52,6 +54,7 @@ class OperativeNotesPage extends Component {
 
     saveOperativeNotes = () => {
         console.log('Operative Notes State', this.state);
+        if (this.state.changesMade){ 
         this.props.dispatch({ type: 'UPDATE_OPERATIVE_NOTE', 
         payload: {
             operativeNotes: this.state.operativeNotes,
@@ -64,6 +67,11 @@ class OperativeNotesPage extends Component {
          this.setState ({
             operativeNotes: '',
         })
+        }
+    }
+
+    componentWillUnmount () {
+        this.saveOperativeNotes();
     }
 
     render() {

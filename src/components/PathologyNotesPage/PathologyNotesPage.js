@@ -37,6 +37,7 @@ const styles = theme => ({
 class PathologyNotesPage extends Component {
 
     state = {
+        changesMade: false,
         pathologyNotes: '',
         userId: '',
         title: '',
@@ -46,6 +47,7 @@ class PathologyNotesPage extends Component {
 
     handleChange = (event) => {
         this.setState ({
+            changesMade: true,
             [event.target.name]: event.target.value,
         })
         console.log(this.state);
@@ -53,6 +55,7 @@ class PathologyNotesPage extends Component {
 
     savePathologyNotes = () => {
         console.log('Pathology Notes State', this.state);
+        if (this.state.changesMade){ 
         this.props.dispatch({ type: 'UPDATE_PATHOLOGY_NOTE', 
         payload: {
             pathologyNotes: this.state.pathologyNotes,
@@ -65,8 +68,12 @@ class PathologyNotesPage extends Component {
          this.setState ({
             pathologyNotes: '',
         })
+        }
     }
 
+    componentWillUnmount () {
+        this.savePathologyNotes();
+    }
     
 
     render() {
