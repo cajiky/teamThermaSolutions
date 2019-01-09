@@ -88,8 +88,10 @@ class AddFollowUpDialog extends Component {
     // console.log('in add followup history', this.state, this.props.followUpHistory);
     // this will happen on button add
     this.props.dispatch({type: 'ADD_FOLLOW_UP_HISTORY', payload: this.state});
-    // this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY', payload: this.state.patient_id});
+    this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY', payload: this.state.patient_id});
     this.setState({ open: false });
+    this.setState({ date: null });
+    
     // add empty local state .. will need to spread first
     // this.setState({
     //     ...this.state,

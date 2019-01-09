@@ -10,25 +10,6 @@ import AdjuvantChemotherapy from './AdjuvantChemotherapy';
 import Biological from './Biological';
 import AddFollowUpDialog from './AddFollowUpDialog';
 
-// const emptyFollowUpHistory = {
-//     id: 0,
-//     patient_id: 0,
-//     follow_up_id: null,
-//     date: null,
-//     evidence_of_disease: false,
-//     follow_up_notes: null,
-//     // recurrence: false,
-//     cea: null,
-//     rec_modality: null,
-//     syst_location: false,
-//     last_contact: null,
-//     treatment: null,
-//     date_treatment: null,
-//     status: null,
-//     treatment_notes: null,
-//     location: null
-// };
-
 const styles = theme => ({
     container: {
       display: 'flex',
@@ -95,21 +76,6 @@ class FollowUpPage extends Component {
         this.props.dispatch({ type: 'UPDATE_FOLLOW_UP', payload: this.state});
     };
 
-    // addFollowUpHistory = () => {
-    //     console.log('in add followup history', this.state, this.props.followUpHistory);
-    //     // this will happen on button add/update
-    //     // this.props.dispatch({type: 'ADD_FOLLOW_UP_HISTORY', payload: this.state});
-    //     // this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY', payload: this.state.patient_id});
-    //     // add empty local state .. will need to spread first
-    //     // this.setState({
-    //     //     ...this.state,
-    //     //     // follow_up_history: this.props.followUpHistory,
-    //     //     // ...this.state.follow_up_history, emptyFollowUpHistory
-    //     //     follow_up_history: [emptyFollowUpHistory, ...this.state.follow_up_history],
-    //     // });
-    //     console.log('after add followup history', this.state, this.props.followUpHistory);
-    // }
-
     // Called when the input field changes
     handleChange = (event) => {
         // console.log('in on change', event.target.name, event.target.value)
@@ -153,12 +119,13 @@ class FollowUpPage extends Component {
                 <Divider variant="middle" />
                 {/* <pre>{JSON.stringify(this.props.followUpHistory)}</pre> */}
                 <h3>Follow Up History</h3>
-                {
+                <FollowUpDetail />
+                {/* {
                     this.props.followUpHistory.map((history, index) => (
                         // <pre>{JSON.stringify(history)}</pre>
                         <FollowUpDetail key={index} history={history} />
                     ))
-                }
+                } */}
             </div>
         )
     }

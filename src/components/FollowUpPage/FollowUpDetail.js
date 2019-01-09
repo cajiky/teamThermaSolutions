@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -132,21 +132,30 @@ class FollowUpDetail extends Component {
         
         return(
             <div>
-            {/* <pre>{JSON.stringify(this.props.history)}</pre> */}
-            <ExpansionPanel defaultExpanded>
-                <ExpansionPanelSummary className={classes.superCool} expandIcon={<ExpandMoreIcon />}>
-                    {this.props.history.date ? (<h3>{moment(this.props.history.date).format('YYYY-MM-DD')}</h3>) : (<h3>Enter Details</h3>)}
-                </ExpansionPanelSummary>
-                <FollowUpDetailDetail history={this.props.history} />
-            </ExpansionPanel>
+            {
+                this.props.followUpHistory.map((history, index) => (
+                    // <pre>{JSON.stringify(history)}</pre>
+                    // <FollowUpDetail key={index} history={history} />
+                    <div key={history.id}>
+                    {/* <pre>{JSON.stringify(history)}</pre> */}
+                        <ExpansionPanel defaultExpanded>
+                            <ExpansionPanelSummary className={classes.superCool} expandIcon={<ExpandMoreIcon />}>
+                                {history.date ? (<h3>{moment(history.date).format('MM-DD-YYYY')}</h3>) : (<h3>Enter Details</h3>)}
+                            </ExpansionPanelSummary>
+                            <FollowUpDetailDetail history={history} />
+                        </ExpansionPanel>
+                    </div>
+                ))
+            }
+
+
             </div>
         )
     }
 };
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+    followUpHistory: reduxState.followUpHistory,
 });
-
 
 export default connect(mapStateToProps) (withStyles(styles)(FollowUpDetail));

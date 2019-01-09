@@ -70,7 +70,6 @@ class FollowUpDetailDetail extends Component {
 
     componentDidMount () {
         console.log('in component mount follow up detail', this.props.history);
-        // this.props.dispatch({type: 'FETCH_POST_OP'});
         let followUpDate = null;
         if (this.props.history.date != null) {
             followUpDate = moment(this.props.history.date).format('YYYY-MM-DD')
@@ -131,6 +130,8 @@ class FollowUpDetailDetail extends Component {
         
         return(
             <div>
+                {/* <pre>{JSON.stringify(this.state)}</pre>
+                <pre>{JSON.stringify(this.props)}</pre> */}
                 <ExpansionPanelDetails>
                 <Grid container spacing={24}>
                     <Grid item xs={3}>
@@ -215,7 +216,7 @@ class FollowUpDetailDetail extends Component {
 };
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+    followUpHistory: reduxState.followUpHistory
 });
 
 
