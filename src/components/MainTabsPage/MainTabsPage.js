@@ -57,6 +57,8 @@ state = {
     this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'});
     this.props.dispatch({type: 'FETCH_POST_OP', payload: patientId});
     this.props.dispatch({type: 'FETCH_ADVERSE_EVENT', payload: patientId});
+    this.props.dispatch({type: 'FETCH_FOLLOW_UP', payload: patientId});
+    this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY', payload: patientId});
     console.log('patient id:', patientId);
     this.props.dispatch({type: 'TEST_PATIENT'});
     this.props.dispatch({ type: 'GET_PCI_TOTAL', payload: patientId })

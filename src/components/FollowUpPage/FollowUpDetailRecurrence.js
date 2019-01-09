@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Modality from './Modality';
 import Location from './Location';
 import SystemicLocation from './SystemicLocation';
-import RecurrenceTreatment from './RecurrenceTreatment';
+import FollowUpDetailTreatment from './FollowUpDetailTreatment';
 import Status from './Status';
 import moment from 'moment';
 
@@ -36,32 +36,19 @@ const styles = theme => ({
     }
 });
 
-class Recurrence extends Component {
+class FollowUpDetailRecurrence extends Component {
     
     render() {
         const { classes } = this.props;
         
         return(
           <Grid container spacing={24}>
-            <Grid item xs={3}>
-              Recurrence Information
-              {/* <FormGroup row>
-                  <FormControlLabel
-                  control={
-                      <Checkbox
-                      name="recurrence"
-                      checked={this.state.recurrence}
-                      onChange={this.handleChangeCheckbox}
-                      value={this.state.recurrence}
-                      />
-                  }
-                  label="Recurrence"
-                  />
-              </FormGroup> */}
+            <Grid item xs={12}>
+              <h3>Recurrence Information</h3>
             </Grid>
             <Grid item xs={3}>
               <TextField 
-                variant="outlined"
+                // variant="outlined"
                 label="Date of Recurrence"
                 InputLabelProps={{
                   shrink: true,
@@ -85,7 +72,7 @@ class Recurrence extends Component {
                 InputLabelProps={{
                     shrink: true,
                 }}
-                variant="outlined"
+                // variant="outlined"
                 />
             </Grid>
             <Grid item xs={3}>
@@ -93,7 +80,7 @@ class Recurrence extends Component {
                             handleChange={this.props.handleChange}
                             handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12}>
                 Treatment
             </Grid>
             <Grid item xs={3}>
@@ -102,12 +89,12 @@ class Recurrence extends Component {
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  variant="outlined"
+                  // variant="outlined"
                   type="date"
                   fullWidth="true"
                   onChange={this.props.handleChange}
-                  name="treatment_date"
-                  value={moment(this.props.recurrence.treatment_date).format('YYYY-MM-DD')}
+                  name="date_treatment"
+                  value={moment(this.props.recurrence.date_treatment).format('YYYY-MM-DD')}
                 />
             </Grid>
             <Grid item xs={3}>
@@ -121,7 +108,7 @@ class Recurrence extends Component {
                             handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
             <Grid item xs={3}>
-              <RecurrenceTreatment recurrence={this.props.recurrence} 
+              <FollowUpDetailTreatment recurrence={this.props.recurrence} 
                             handleChange={this.props.handleChange}
                             handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
@@ -132,10 +119,10 @@ class Recurrence extends Component {
             </Grid>
             <Grid item xs={6}>
                 <TextField
-                name="notes"
+                name="treatment_notes"
                 label="Notes"
                 className={classes.textField}
-                value={this.props.recurrence.notes}
+                value={this.props.recurrence.treatment_notes}
                 multiline
                 rows="2"
                 fullWidth
@@ -144,7 +131,7 @@ class Recurrence extends Component {
                 }}
                 onChange={this.props.handleChange}
                 margin="normal"
-                variant="outlined"
+                // variant="outlined"
                 />
             </Grid>
           </Grid>
@@ -154,7 +141,7 @@ class Recurrence extends Component {
 };
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+    followUpHistory: reduxState.followUpHistory,
 });
 
-export default connect(mapStateToProps) (withStyles(styles)(Recurrence));
+export default connect(mapStateToProps) (withStyles(styles)(FollowUpDetailRecurrence));

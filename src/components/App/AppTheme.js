@@ -21,6 +21,13 @@ const appTheme = createMuiTheme({
     useNextVariants: true,
     fontSize: 16,
   },
+  overrides: {
+    MuiExpansionPanelSummary: { // Name of the component ⚛️ / style sheet
+      root: { // Name of the rule
+        // backgroundColor: '#888888', // Some CSS
+      },
+    },
+  },
 });
 
 export default appTheme;

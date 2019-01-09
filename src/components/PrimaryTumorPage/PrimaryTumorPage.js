@@ -31,9 +31,6 @@ const styles = theme => ({
       },
 });
 
-
-
-
 class PrimaryTumorPage extends Component {
     state = {
 
