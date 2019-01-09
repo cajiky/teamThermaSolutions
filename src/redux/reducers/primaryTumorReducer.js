@@ -3,6 +3,8 @@ const primaryTumorReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_INIT_VALUES':
         return action.payload;
+        case 'UPDATE_INIT_FIELDS':
+        return action.payload
       default:
         return state;
     }
