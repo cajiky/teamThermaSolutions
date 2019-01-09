@@ -24,6 +24,7 @@ function* newPatientId(action) {
 function* addNewPatient(action) {
     try {
     yield call(axios.post, '/api/add-a-patient', action.payload);
+    yield put({ type: 'SET_PATIENT', payload: action.payload });
 }
 catch (error) {
     console.log('there was an error with your POST', error);
