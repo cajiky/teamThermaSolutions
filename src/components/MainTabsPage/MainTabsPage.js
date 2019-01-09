@@ -75,7 +75,7 @@ state = {
             <div className={classes.root}>
                 {/* <h1>Main Tabs Page</h1>
                 <h3>This Page houses all the Tab Components</h3> */}
-                {this.props.reduxState.patientReducer.patient ? (<CurrentPatientInfo/>) : (<></>)}
+                {this.props.patient ? (<CurrentPatientInfo/>) : (<></>)}
                 <AppBar position="static" color="default">
                     <Tabs
                     value={value}
@@ -119,7 +119,7 @@ state = {
 //   };
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+    patient: reduxState.patientReducer.patient,
 });
 
 

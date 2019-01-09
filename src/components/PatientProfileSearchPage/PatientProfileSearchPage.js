@@ -92,7 +92,7 @@ class PatientProfileSearchPage extends Component {
       };
     
       handleClickOpen = () => {
-        this.setState({ variables: {open: true}, patient: {patient_no: this.props.reduxState.patientReducer.newPatientId} });
+        this.setState({ variables: {open: true}, patient: {patient_no: this.props.newPatientId} });
         // this.props.dispatch({type: 'DROP_PATIENT_RESULT'});
       };
     
@@ -103,7 +103,7 @@ class PatientProfileSearchPage extends Component {
       addPatient = () => {
           this.props.dispatch({type: 'ADD_PATIENT', payload: this.state.patient});
           this.setState({ variables: {open: false}});
-          document.cookie = `patientID=${this.props.reduxState.patientReducer.newPatientId}`
+          document.cookie = `patientID=${this.props.newPatientId}`
           this.props.history.push(`/MainTabsPage`);
       }
 
@@ -146,7 +146,7 @@ class PatientProfileSearchPage extends Component {
                     </Grid>
                     
                     <Grid item xs={12}>
-                        {this.props.reduxState.patientReducer.patientSearch ? (<PatientProfileSearchResult/>) : (<></>)}
+                        {this.props.patientSearch ? (<PatientProfileSearchResult/>) : (<></>)}
                     </Grid>
                     
                     <Grid item xs={3}>
@@ -166,7 +166,7 @@ class PatientProfileSearchPage extends Component {
                             <DialogContent>
             {/* Patient ID Input */}
                         <FormControl className={classes.formControl}>
-                            <InputBase disabled value="New Patient ID: ">{"New Patient ID: " + this.props.reduxState.patientReducer.newPatientId}</InputBase>
+                            <InputBase disabled value="New Patient ID: ">{"New Patient ID: " + this.props.newPatientId}</InputBase>
                             <InputBase
                             required
                             id="outlined-required"
@@ -177,8 +177,8 @@ class PatientProfileSearchPage extends Component {
                             InputProps={{
                                 readOnly: true,
                               }}
-                            placeholder={"New Patient ID: " + this.props.reduxState.patientReducer.newPatientId}
-                            value={this.props.reduxState.patientReducer.newPatientId}
+                            placeholder={"New Patient ID: " + this.props.newPatientId}
+                            value={this.props.newPatientId}
                             margin="normal"
                             // variant="outlined"
                             fullWidth={true}
@@ -236,6 +236,30 @@ class PatientProfileSearchPage extends Component {
                                 <MenuItem value='Other'>Other</MenuItem>
                             </Select>
                         </FormControl>
+                        <FormControl className={classes.formControl} variant="outlined">
+                            <InputLabel shrink
+                                htmlFor="outlined-toc-simple"                                
+                            >
+                                Type of Cancer
+                            </InputLabel>
+                            <Select
+                                value={this.state.patient.toc}
+                                onChange={this.handleNewPatientChange('toc', 'value')}
+                                input={
+                                <OutlinedInput
+                                    name="Type of Cancer"
+                                    id="outlined-toc-simple"
+                                    labelWidth={this.state.labelWidth}
+                                />
+                                }
+                            >
+                                <MenuItem value={1}>CRC</MenuItem>
+                                <MenuItem value={2}>Appendiceal</MenuItem>
+                                <MenuItem value={3}>Gastric</MenuItem>
+                                <MenuItem value={4}>Ovarian</MenuItem>
+                                <MenuItem value={5}>Other</MenuItem>
+                            </Select>
+                        </FormControl>
                         <FormControl component="fieldset" className={classes.formControlSub}>
                             <FormLabel component="legend" style={{display: 'inline-block'}}>HIPEC</FormLabel>
                             <RadioGroup
@@ -275,30 +299,6 @@ class PatientProfileSearchPage extends Component {
                         variant="outlined"
                         onChange={this.handleNewPatientChange('dateOfReferral', 'value')}
                         /></FormControl>
-                        <FormControl className={classes.formControl} variant="outlined">
-                            <InputLabel shrink
-                                htmlFor="outlined-toc-simple"                                
-                            >
-                                Type of Cancer
-                            </InputLabel>
-                            <Select
-                                value={this.state.patient.toc}
-                                onChange={this.handleNewPatientChange('toc', 'value')}
-                                input={
-                                <OutlinedInput
-                                    name="Type of Cancer"
-                                    id="outlined-toc-simple"
-                                    labelWidth={this.state.labelWidth}
-                                />
-                                }
-                            >
-                                <MenuItem value={1}>CRC</MenuItem>
-                                <MenuItem value={2}>Appendiceal</MenuItem>
-                                <MenuItem value={3}>Gastric</MenuItem>
-                                <MenuItem value={4}>Ovarian</MenuItem>
-                                <MenuItem value={5}>Other</MenuItem>
-                            </Select>
-                        </FormControl>
                         <FormControl className={classes.formControl}>
                         <TextField
                         required
@@ -395,7 +395,7 @@ class PatientProfileSearchPage extends Component {
                                         />
                                         }
                                     >
-                                    {this.props.reduxState.dropdownOptions.currentStatusOptions.map( option => {
+                                    {this.props.dropdownOptions.map( option => {
                                             return(
                                                 <MenuItem key={option.id} value={option.id}>{option.status}</MenuItem>
                                             )
@@ -488,7 +488,9 @@ PatientProfileSearchPage.propTypes = {
   };
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+    patientSearch: reduxState.patientReducer.patientSearch,
+    newPatientId: reduxState.patientReducer.newPatientId,
+    dropdownOptions: reduxState.dropdownOptions.currentStatusOptions,
 });
 
 
