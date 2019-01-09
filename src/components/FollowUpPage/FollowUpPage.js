@@ -10,24 +10,24 @@ import AdjuvantChemotherapy from './AdjuvantChemotherapy';
 import Biological from './Biological';
 import AddFollowUpDialog from './AddFollowUpDialog';
 
-const emptyFollowUpHistory = {
-    id: 0,
-    patient_id: 0,
-    follow_up_id: null,
-    date: null,
-    evidence_of_disease: false,
-    follow_up_notes: null,
-    // recurrence: false,
-    cea: null,
-    rec_modality: null,
-    syst_location: false,
-    last_contact: null,
-    treatment: null,
-    date_treatment: null,
-    status: null,
-    treatment_notes: null,
-    location: null
-};
+// const emptyFollowUpHistory = {
+//     id: 0,
+//     patient_id: 0,
+//     follow_up_id: null,
+//     date: null,
+//     evidence_of_disease: false,
+//     follow_up_notes: null,
+//     // recurrence: false,
+//     cea: null,
+//     rec_modality: null,
+//     syst_location: false,
+//     last_contact: null,
+//     treatment: null,
+//     date_treatment: null,
+//     status: null,
+//     treatment_notes: null,
+//     location: null
+// };
 
 const styles = theme => ({
     container: {
@@ -37,6 +37,9 @@ const styles = theme => ({
     textField: {
       marginLeft: theme.spacing.unit,
       marginRight: theme.spacing.unit,
+    },
+    button: {
+        margin: `${theme.spacing.unit * 3}px`
     },
     expanded: {
       backgroundColor: '#cccccc',
@@ -145,7 +148,7 @@ class FollowUpPage extends Component {
                             variant="contained" color="primary">
                         Save
                     </Button>
-                    {this.state.id ? (<AddFollowUpDialog />) : ''
+                    {this.props.followUp.id ? (<AddFollowUpDialog />) : ''
                     }
                 <Divider variant="middle" />
                 {/* <pre>{JSON.stringify(this.props.followUpHistory)}</pre> */}
