@@ -8,6 +8,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import PathologyNotesHistory from './PathologyNotesHistory';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const styles = theme => ({
     root: {
@@ -35,6 +37,7 @@ const styles = theme => ({
 class PathologyNotesPage extends Component {
 
     state = {
+        changesMade: false,
         pathologyNotes: '',
         userId: '',
         title: '',
@@ -44,6 +47,7 @@ class PathologyNotesPage extends Component {
 
     handleChange = (event) => {
         this.setState ({
+            changesMade: true,
             [event.target.name]: event.target.value,
         })
         console.log(this.state);
@@ -51,6 +55,7 @@ class PathologyNotesPage extends Component {
 
     savePathologyNotes = () => {
         console.log('Pathology Notes State', this.state);
+        if (this.state.changesMade){ 
         this.props.dispatch({ type: 'UPDATE_PATHOLOGY_NOTE', 
         payload: {
             pathologyNotes: this.state.pathologyNotes,
@@ -60,9 +65,15 @@ class PathologyNotesPage extends Component {
             lastName: this.props.reduxState.user.last_name,
         }
          })
-         
+         this.setState ({
+            pathologyNotes: '',
+        })
+        }
     }
 
+    componentWillUnmount () {
+        this.savePathologyNotes();
+    }
     
 
     render() {
@@ -91,7 +102,7 @@ class PathologyNotesPage extends Component {
                 </Grid>
                 <Button variant="contained" color="primary" onClick={this.savePathologyNotes}>Save</Button>
                 <br/>
-                <PathologyNotesHistory />
+                <PathologyNotesHistory pathState={this.state}/>
 
             </div>
 

@@ -46,6 +46,7 @@ class PathologyNotesHistory extends React.Component {
 
     componentDidMount(){
         this.props.dispatch({ type: 'GET_PATHOLOGY_HISTORY', payload: this.props.reduxState.patientReducer.patient.id })
+        this.setState ({ pathologyNotes: '',})
       }
 
 

@@ -1,4 +1,4 @@
-import { takeLatest , call } from 'redux-saga/effects';
+import { takeLatest , call, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 
@@ -7,7 +7,7 @@ function* interventionResection(action) {
     
     try {
         yield call(axios.put, `/interventionResection/${action.payload.userId}`, action.payload);
-        // yield put({ type: 'RENDER_ALL_USERS', payload: action.payload.profileUserId } )
+        yield put({ type: 'GET_PCI_TOTAL', payload: action.payload.userId } )
 
     } catch (error) {
         console.log(error);
