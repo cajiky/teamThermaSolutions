@@ -62,18 +62,18 @@ const styles = theme => ({
               myOptions.map((option, index) => (
                 
                 <GridItem item xs={2} >
-                        <FormControlLabel
+                    <FormControlLabel
                         control={
                             <Checkbox
                             key={index} 
                             name={option.stateName}
-                            checked={this.props.state.status}
+                            checked={this.props.state[option.stateName]}
                             onChange={this.props.handleChangeCheckbox}
                             value={option.status}
                             />
                         }
                         label={option.name}
-                        />  
+                    />  
                 </GridItem>
               ))
               }

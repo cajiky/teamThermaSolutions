@@ -24,6 +24,8 @@ import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const styles = theme => ({
     root: {
@@ -63,7 +65,7 @@ const styles = theme => ({
         leftUpper:0,
         leftFlank:0,
         leftLower:0,
-        pelvis:0,
+        pelvisPCI:0,
         rightLower:0,
         rightFlank:0,
         upperJejunum:0,
@@ -121,14 +123,11 @@ const styles = theme => ({
         left_peritoneum:false,
         right_peritoneum:false,
         peritoneum:false,
-        pelvisResection:false,
+        pelvis:false,
 
     }
 
     componentDidMount(){
-        
-        // this.props.dispatch({ type: 'GET_PCI_TOTAL', payload: this.props.reduxState.patientReducer.patient.id })
-        {this.props.reduxState.pciReducer.length != 0 ? (
         this.setState({
             central: this.props.reduxState.pciReducer[0].pci_0,
             rightUpper: this.props.reduxState.pciReducer[0].pci_1,
@@ -136,7 +135,7 @@ const styles = theme => ({
             leftUpper: this.props.reduxState.pciReducer[0].pci_3,
             leftFlank: this.props.reduxState.pciReducer[0].pci_4,
             leftLower: this.props.reduxState.pciReducer[0].pci_5,
-            pelvis: this.props.reduxState.pciReducer[0].pci_6,
+            pelvisPCI: this.props.reduxState.pciReducer[0].pci_6,
             rightLower: this.props.reduxState.pciReducer[0].pci_7,
             rightFlank: this.props.reduxState.pciReducer[0].pci_8,
             upperJejunum: this.props.reduxState.pciReducer[0].pci_9,
@@ -144,27 +143,56 @@ const styles = theme => ({
             upperIlium: this.props.reduxState.pciReducer[0].pci_11,
             lowerIlium: this.props.reduxState.pciReducer[0].pci_12,
             PCITotal: this.props.reduxState.pciReducer[0].pci_score,
-            expanded1: true,
+            surgeonOne: this.props.reduxState.pciReducer[0].surgeon_1,
+            surgeonTwo:this.props.reduxState.pciReducer[0].surgeon_2,
+            surgeonThree: this.props.reduxState.pciReducer[0].surgeon_3,
+            nrHipec: this.props.reduxState.pciReducer[0].nrhipec,
+            hipecType: this.props.reduxState.pciReducer[0].hipec_type,
+            reasonOC:this.props.reduxState.pciReducer[0].reason_oc,
+            anastomosis: this.props.reduxState.pciReducer[0].anastomosis ,
+            AnastomosisNumber: this.props.reduxState.pciReducer[0].anastomosis_number , 
+            revisionStoma: this.props.reduxState.pciReducer[0].revision_stoma ,
+            stomaType: this.props.reduxState.pciReducer[0].stoma_post_hipec_type ,
+            bloodLoss: this.props.reduxState.pciReducer[0].bloodloss ,
+            volume: this.props.reduxState.pciReducer[0].volume ,
+            hipecRegiment: this.props.reduxState.pciReducer[0].hipec_regiment ,
+            bloodLossTime: this.props.reduxState.pciReducer[0].time,
+            concentration: this.props.reduxState.pciReducer[0].concentration,
+            rScore: this.props.reduxState.pciReducer[0].r_score,
+            duration: this.props.reduxState.pciReducer[0].duration,
+            stomaPostHIPEC: this.props.reduxState.pciReducer[0].stoma_post_hipec, 
+            // checked: this.props.reduxState.pciReducer[0][status],
+            // StomaPostHIPECType: '',
+            ovaries: this.props.reduxState.pciReducer[0].ovaries,
+            uterus: this.props.reduxState.pciReducer[0].uterus,
+            omentum:this.props.reduxState.pciReducer[0].omentum,
+            rectum:this.props.reduxState.pciReducer[0].rectum ,
+            sigmoid:this.props.reduxState.pciReducer[0].sigmoid,
+            left_colon:this.props.reduxState.pciReducer[0].left_colon,
+            transverse_colon:this.props.reduxState.pciReducer[0].transverse_colon,
+            right_colon:this.props.reduxState.pciReducer[0].right_colon,
+            ileocaecal: this.props.reduxState.pciReducer[0].ileocaecal,
+            appendix:this.props.reduxState.pciReducer[0].appendix,
+            duodenum:this.props.reduxState.pciReducer[0].duodenum,
+            jejunum: this.props.reduxState.pciReducer[0].jejunum,
+            ileum:this.props.reduxState.pciReducer[0].ileum,
+            gallbladder: this.props.reduxState.pciReducer[0].gallbladder,
+            stomach: this.props.reduxState.pciReducer[0].stomach,
+            spleen:this.props.reduxState.pciReducer[0].spleen,
+            diagphram_l:this.props.reduxState.pciReducer[0].diagphram_l,
+            diagphram_r:this.props.reduxState.pciReducer[0].diagphram_r,
+            pancreas:this.props.reduxState.pciReducer[0].pancreas,
+            bladder:this.props.reduxState.pciReducer[0].bladder,
+            urether:this.props.reduxState.pciReducer[0].urether,
+            lymphnodes:this.props.reduxState.pciReducer[0].lymphnodes,
+            left_peritoneum:this.props.reduxState.pciReducer[0].left_peritoneum,
+            right_peritoneum:this.props.reduxState.pciReducer[0].right_peritoneum,
+            peritoneum:this.props.reduxState.pciReducer[0].peritoneum,
+            pelvis:this.props.reduxState.pciReducer[0].pelvis,
+            
             
         })
-        ):(
-        this.setState({
-            central: 0,
-            rightUpper: 0,
-            Epigastrium: 0,
-            leftUpper:0,
-            leftFlank:0,
-            leftLower:0,
-            pelvis:0,
-            rightLower:0,
-            rightFlank:0,
-            upperJejunum:0,
-            lowerJejunum:0,
-            upperIlium:0,
-            lowerIlium:0,
-            PCITotal:0,
-            })
-        )}
+        
     }
 
     calculatePCI = () => {
@@ -220,17 +248,39 @@ const styles = theme => ({
         })
     }
 
-    saveForm = () => {
-        console.log('Save Intervention State', this.state);
-        this.props.dispatch({ type: 'POST_INTERVENTION_PAGE', 
-        payload: {
-            interventionState: this.state,
-            userId: this.props.reduxState.patientReducer.patient.id
-        }
-         })
+    // saveForm = () => {
+    //     console.log('Save Intervention State', this.state);
+    //     this.props.dispatch({ type: 'POST_INTERVENTION_PAGE', 
+    //     payload: {
+    //         interventionState: this.state,
+    //         userId: this.props.reduxState.patientReducer.patient.id
+    //     }
+    //      })
          
-    }
+    // }
 
+    saveForm = () => {
+        confirmAlert({
+          title: 'Confirm to submit form',
+          message: 'Are you sure you want to do this?',
+          buttons: [
+            {
+              label: 'Yes',
+              onClick: () => this.props.dispatch({ type: 'POST_INTERVENTION_PAGE', 
+              payload: {
+                  interventionState: this.state,
+                  userId: this.props.reduxState.patientReducer.patient.id
+              }
+               })
+            },
+            {
+              label: 'No',
+              onClick: () => alert('Form not submitted')
+            }
+          ]
+        })
+    }
+    
     handleChangeCheckbox = (event) => {
         this.setState({
             ...this.state,
@@ -243,6 +293,7 @@ const styles = theme => ({
     render() {
     const { classes } = this.props;
     return (
+        
       <div className={classes.root}>
         <Grid container spacing={12} >
             <ExpansionPanel defaultExpanded onClick={this.expansionPanel1} >
@@ -446,13 +497,13 @@ const styles = theme => ({
                                             </TableCell>
                                             <TableCell>
                                                 <Select fullWidth={true}
-                                                    value={this.state.pelvis}
+                                                    value={this.state.pelvisPCI}
                                                     onChange={this.handlePCIChange}
                                                     input={
                                                     <OutlinedInput
-                                                        value={this.state.pelvis}
-                                                        name="pelvis"
-                                                        id="pelvis"
+                                                        value={this.state.pelvisPCI}
+                                                        name="pelvisPCI"
+                                                        id="pelvisPCI"
                                                     />
                                                     }
                                                 >

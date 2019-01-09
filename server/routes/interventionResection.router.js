@@ -14,7 +14,7 @@ router.put('/:id', (req, res, next) => {
     const leftUpper = req.body.interventionState.leftUpper;
     const leftFlank = req.body.interventionState.leftFlank;
     const leftLower = req.body.interventionState.leftLower;
-    const pelvis = req.body.interventionState.pelvis;
+    const pelvis = req.body.interventionState.pelvisPCI;
     const rightLower = req.body.interventionState.rightLower;
     const rightFlank = req.body.interventionState.rightFlank;
     const upperJejunum = req.body.interventionState.upperJejunum;
@@ -66,7 +66,7 @@ router.put('/:id', (req, res, next) => {
     const left_peritoneum = req.body.interventionState.left_peritoneum;
     const right_peritoneum = req.body.interventionState.right_peritoneum;
     const peritoneum = req.body.interventionState.peritoneum;
-    const pelvisResection = req.body.interventionState.pelvisResection;
+    const pelvisResection = req.body.interventionState.pelvis;
 
 
 

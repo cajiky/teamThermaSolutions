@@ -165,7 +165,7 @@ resections: [
   {id: 23, name: 'Left Peritoneum', stateName: "left_peritoneum", status: false},
   {id: 24, name: 'Right Peritoneum', stateName: "right_peritoneum", status: false},
   {id: 25, name: 'Peritoneum', stateName: "peritoneum", status: false},
-  {id: 26, name: 'Pelvis', stateName: "pelvisResection", status: false},
+  {id: 26, name: 'Pelvis', stateName: "pelvis", status: false},
 ],
 
 stomaTypeOptions: [
