@@ -12,7 +12,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
-
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
     gridItem:{
@@ -73,13 +73,18 @@ class PrimaryTumorPage extends Component {
             mucinous: this.props.primaryTumorReducer.mucinous,
             n: this.props.primaryTumorReducer.n,
             notes: this.props.primaryTumorReducer.notes,
-            patient_id: this.props.primaryTumorReducer.patient_id,
+            patient_id: this.props.patientId,
             primary_location: this.props.primaryTumorReducer.primary_location,
             prime_tumor_surgery: this.props.primaryTumorReducer.prime_tumor_surgery,
             reason_acute: this.props.primaryTumorReducer.reason_acute,
             t: this.props.primaryTumorReducer.t,
             setting: this.props.primaryTumorReducer.setting,
-        });
+        }, this.getInitialValues());
+    }
+
+    updateEntriesInDB = () => {
+        this.props.dispatch({type: 'UPSERT_DATA_FOR_PRIMARY_TUMOR', payload: this.state})
+        console.log('RUNNING UPDATEENTRIESINDB Function')
     }
 
     getInitialValues = (id) => {
@@ -101,10 +106,14 @@ class PrimaryTumorPage extends Component {
     }
 
     componentDidMount() {
+
         console.log('Inside compDidMount to check reducer status',this.props.primaryTumorReducer)
         this.setValuesForPatient();
     }
 
+    // componentWillUnmount(){
+    //     this.updateEntriesInDB()
+    // }
     
 
     render() {
@@ -112,10 +121,10 @@ class PrimaryTumorPage extends Component {
         return(
             <>
             <pre>
-                {JSON.stringify(this.state, null, 2)}
+                {/* {JSON.stringify(this.state, null, 2)} */}
             </pre>
             <pre>
-            {JSON.stringify(this.props.primaryTumorReducer, null, 2)}
+                {/* {JSON.stringify(this.props.primaryTumorReducer, null, 2)} */}
             </pre>
             <Grid
             container
@@ -541,6 +550,11 @@ class PrimaryTumorPage extends Component {
                                     label="Notes"
                                 />
                             </Grid>
+                            <Grid item xs={12} className={classes.gridItem} onClick={this.updateEntriesInDB}>
+                                <Button color="primary">
+                                    Save
+                                </Button>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -552,7 +566,8 @@ class PrimaryTumorPage extends Component {
 };
 
 const mapStateToProps = reduxState => ({
-   dropdownOptions: reduxState.dropdownOptions,
+    patientId: reduxState.patientReducer.patient.id,
+    dropdownOptions: reduxState.dropdownOptions,
     primaryTumorReducer: reduxState.primaryTumorReducer,
     
 });

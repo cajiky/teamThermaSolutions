@@ -14,10 +14,22 @@ function* getInitalValues(action) {
     }
 }
 
+function* updateEntries(action) {
+    console.log('Sending data to server to update database')
+
+    try{
+        yield call(axios.put, `/api/primaryTumor`, {userInfo: action.payload})
+        yield put({type: 'GET_INITIAL_VALUES'})
+    }
+    catch(error){
+        console.log('error trying to update db from primaryTumorSaga')
+    }
+}
+
 
 function* primaryTumorSaga() {
   yield takeLatest('GET_INITIAL_VALUES', getInitalValues);
-  
+  yield takeLatest('UPSERT_DATA_FOR_PRIMARY_TUMOR', updateEntries)
 }
 
 export default primaryTumorSaga;
