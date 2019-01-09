@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -12,6 +12,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+// import Fragment from '@material-ui/core/Fragment';
 // import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 // import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 // import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -87,7 +88,7 @@ class AddFollowUpDialog extends Component {
     // console.log('in add followup history', this.state, this.props.followUpHistory);
     // this will happen on button add
     this.props.dispatch({type: 'ADD_FOLLOW_UP_HISTORY', payload: this.state});
-    this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY', payload: this.state.patient_id});
+    // this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY', payload: this.state.patient_id});
     this.setState({ open: false });
     // add empty local state .. will need to spread first
     // this.setState({
@@ -103,8 +104,8 @@ class AddFollowUpDialog extends Component {
     const { classes } = this.props;
 
     return (
-      <div>
-        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+      <Fragment>
+        <Button variant="contained" color="primary" onClick={this.handleClickOpen}>
           New Followup
         </Button>
         <Dialog
@@ -141,7 +142,7 @@ class AddFollowUpDialog extends Component {
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
+      </Fragment>
     );
   }
 }

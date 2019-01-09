@@ -11,6 +11,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import FollowUpDetailDetail from './FollowUpDetailDetail';
 import FollowUpDetailRecurrence from './FollowUpDetailRecurrence';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -69,37 +70,37 @@ class FollowUpDetail extends Component {
     };
 
     componentDidMount () {
-        console.log('in component mount follow up detail', this.props.followup);
+        console.log('in component mount follow up detail', this.props.history);
         // this.props.dispatch({type: 'FETCH_POST_OP'});
-        let followUpDate = null;
-        if (this.props.followup.date != null) {
-            followUpDate = moment(this.props.followup.date).format('YYYY-MM-DD')
-        }
-        let lastContactDate = null;
-        if (this.props.followup.last_contact != null) {
-            lastContactDate = moment(this.props.followup.last_contact).format('YYYY-MM-DD')
-        }
-        let treatmentDate = null;
-        if (this.props.followup.date_treatment != null) {
-            treatmentDate = moment(this.props.followup.date_treatment).format('YYYY-MM-DD')
-        }
+        // let followUpDate = null;
+        // if (this.props.history.date != null) {
+        //     followUpDate = moment(this.props.history.date).format('YYYY-MM-DD')
+        // }
+        // let lastContactDate = null;
+        // if (this.props.history.last_contact != null) {
+        //     lastContactDate = moment(this.props.history.last_contact).format('YYYY-MM-DD')
+        // }
+        // let treatmentDate = null;
+        // if (this.props.history.date_treatment != null) {
+        //     treatmentDate = moment(this.props.history.date_treatment).format('YYYY-MM-DD')
+        // }
         this.setState({
-            id: this.props.followup.id,
-            patient_id: this.props.followup.patient_id,
-            follow_up_id: this.props.followup.follow_up_id,
-            date: followUpDate,
-            evidence_of_disease: this.props.followup.evidence_of_disease,
-            follow_up_notes: this.props.followup.follow_up_notes,
-            recurrence: this.props.followup.recurrence,
-            cea: this.props.followup.cea,
-            rec_modality: this.props.followup.rec_modality,
-            syst_location: this.props.followup.syst_location,
-            last_contact: lastContactDate,
-            treatment: this.props.followup.treatment,
-            date_treatment: treatmentDate,
-            status: this.props.followup.status,
-            treatment_notes: this.props.followup.treatment_notes,
-            location: this.props.followup.location
+            id: this.props.history.id,
+            patient_id: this.props.history.patient_id,
+            follow_up_id: this.props.history.follow_up_id,
+            date: this.props.history.date,
+            evidence_of_disease: this.props.history.evidence_of_disease,
+            follow_up_notes: this.props.history.follow_up_notes,
+            recurrence: this.props.history.recurrence,
+            cea: this.props.history.cea,
+            rec_modality: this.props.history.rec_modality,
+            syst_location: this.props.history.syst_location,
+            last_contact: this.props.history.last_contact,
+            treatment: this.props.history.treatment,
+            date_treatment: this.props.history.date_treatment,
+            status: this.props.history.status,
+            treatment_notes: this.props.history.treatment_notes,
+            location: this.props.history.location
         })
     }
 
@@ -119,11 +120,11 @@ class FollowUpDetail extends Component {
         });
     };
 
-    updateFollowUpHistory = () => {
-        // alert('Update followup history');
-        this.props.dispatch({type: 'UPDATE_FOLLOW_UP_HISTORY', payload: this.state});
-        this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY', payload: this.state.patient_id});
-    };
+    // updateFollowUpHistory = () => {
+    //     // alert('Update followup history');
+    //     this.props.dispatch({type: 'UPDATE_FOLLOW_UP_HISTORY', payload: this.state});
+    //     // this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY', payload: this.state.patient_id});
+    // };
     
     render() {
 
@@ -131,90 +132,14 @@ class FollowUpDetail extends Component {
         
         return(
             <div>
+            {/* <pre>{JSON.stringify(this.props.history)}</pre> */}
             <ExpansionPanel defaultExpanded>
                 <ExpansionPanelSummary className={classes.superCool} expandIcon={<ExpandMoreIcon />}>
-                    {this.state.date ? (<h3>{this.state.date}</h3>) : (<h3>Enter Details</h3>)}
+                    {this.props.history.date ? (<h3>{moment(this.props.history.date).format('YYYY-MM-DD')}</h3>) : (<h3>Enter Details</h3>)}
                     {/* {this.props.reduxState.patientReducer.patient ? (<CurrentPatientInfo/>) : (<></>)} */}
-                
                 </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <Grid container spacing={24}>
-                        <Grid item xs={3}>
-                        <TextField
-                            name="date"
-                            label="Follow Up Date"
-                            className={classes.textField}
-                            value={moment(this.state.date).format('YYYY-MM-DD')}
-                            // fullWidth
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            type="date"
-                            onChange={this.handleChange}
-                            margin="normal"
-                            // variant="outlined"
-                        />
-                        </Grid>
-
-                        <Grid item xs={3}>
-                            <FormGroup row>
-                                <FormControlLabel
-                                control={
-                                    <Checkbox
-                                    name="evidence_of_disease"
-                                    checked={this.state.evidence_of_disease}
-                                    onChange={this.handleChangeCheckbox}
-                                    value={this.state.evidence_of_disease}
-                                    />
-                                }
-                                label="Evidence of Disease"
-                                />
-                            </FormGroup>
-                            <FormGroup row>
-                                <FormControlLabel
-                                control={
-                                    <Checkbox
-                                    name="recurrence"
-                                    checked={this.state.recurrence}
-                                    onChange={this.handleChangeCheckbox}
-                                    value={this.state.recurrence}
-                                    />
-                                }
-                                label="Recurrence"
-                                />
-                            </FormGroup>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextField
-                            name="follow_up_notes"
-                            label="Notes"
-                            className={classes.textField}
-                            value={this.state.follow_up_notes}
-                            rows={4}
-                            fullWidth
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            onChange={this.handleChange}
-                            margin="normal"
-                            // variant="outlined"
-                            />
-                        </Grid>
-                        <Divider variant="middle" />
-                        {/* display recurrence information only if evidence of disease */}
-                        {this.state.recurrence && 
-                        <FollowUpDetailRecurrence recurrence={this.state} 
-                            handleChange={this.handleChange}
-                            handleChangeCheckbox={this.handleChangeCheckbox}/>
-                        }
-                    </Grid>
-                </ExpansionPanelDetails>
-                <ExpansionPanelActions>
-                    <Button onClick={this.updateFollowUpHistory} className={classes.button}
-                            variant="contained" color="primary">
-                        Update
-                    </Button>      
-                </ExpansionPanelActions>
+                {/*  */}
+                <FollowUpDetailDetail history={this.props.history} />
             </ExpansionPanel>
             </div>
         )

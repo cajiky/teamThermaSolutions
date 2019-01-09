@@ -18,7 +18,7 @@ function* fetchFollowUpHistory(action) {
   // console.log('in fetch follow up history Saga', action.payload);
   try {
     const response = yield axios.get(`api/follow_up_history/${action.payload}`);
-    console.log('response from follow up history:', response);
+    // console.log('response from follow up history:', response);
     // set state
     yield put({ type: 'SET_FOLLOW_UP_HISTORY', payload: response.data });
   } catch (error) {
