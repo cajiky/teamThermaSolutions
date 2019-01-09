@@ -8,6 +8,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import PathologyNotesHistory from './PathologyNotesHistory';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const styles = theme => ({
     root: {
@@ -60,7 +62,9 @@ class PathologyNotesPage extends Component {
             lastName: this.props.reduxState.user.last_name,
         }
          })
-         
+         this.setState ({
+            pathologyNotes: '',
+        })
     }
 
     
@@ -91,7 +95,7 @@ class PathologyNotesPage extends Component {
                 </Grid>
                 <Button variant="contained" color="primary" onClick={this.savePathologyNotes}>Save</Button>
                 <br/>
-                <PathologyNotesHistory />
+                <PathologyNotesHistory pathState={this.state}/>
 
             </div>
 

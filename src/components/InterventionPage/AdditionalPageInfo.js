@@ -51,7 +51,7 @@ const styles = theme => ({
                         control={
                             <Checkbox
                             name="anastomosis"
-                            checked={this.props.state.status}
+                            checked={this.props.state.anastomosis}
                             onChange={this.props.handleChangeCheckbox}
                             value={this.props.state.status}
                             />
@@ -76,7 +76,7 @@ const styles = theme => ({
                         control={
                             <Checkbox
                             name="revisionStoma"
-                            checked={this.props.state.status}
+                            checked={this.props.state.revisionStoma}
                             onChange={this.props.handleChangeCheckbox}
                             value={this.props.state.status}
                             />
@@ -87,7 +87,7 @@ const styles = theme => ({
                         control={
                             <Checkbox
                             name="stomaPostHIPEC"
-                            checked={this.props.state.status}
+                            checked={this.props.state.stomaPostHIPEC}
                             onChange={this.props.handleChangeCheckbox}
                             value={this.props.state.status}
                             />

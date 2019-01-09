@@ -8,6 +8,8 @@ import GridItem from '@material-ui/core/Grid';
 import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
 import OperativeNotesHistory from './OperativeNotesHistory';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const styles = theme => ({
     root: {
@@ -59,7 +61,9 @@ class OperativeNotesPage extends Component {
             lastName: this.props.reduxState.user.last_name,
         }
          })
-         
+         this.setState ({
+            operativeNotes: '',
+        })
     }
 
     render() {
