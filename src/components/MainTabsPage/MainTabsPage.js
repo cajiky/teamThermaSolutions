@@ -44,15 +44,11 @@ state = {
     value: 0,
   };
 
-  // getPatientIDFromCookie = () => {
-  //   console.log(document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1"))
-  //   this.props.dispatch({type:'GET_PATIENT_ID_FROM_COOKIE', payload: document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1")})
-  // }
-
   componentDidMount () {    
     // console.log('in main tabs page for patient#', this.props.reduxState.patientReducer.patient.id);
     // this.getPatientIDFromCookie(patientId)
     let patientId = document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    this.props.dispatch({type: 'GET_INITIAL_VALUES', payload: patientId})
     this.props.dispatch({type:'GET_PATIENT_ID_FROM_COOKIE', payload: patientId})
     this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'});
     this.props.dispatch({type: 'FETCH_POST_OP', payload: patientId});
@@ -61,7 +57,8 @@ state = {
     this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY', payload: patientId});
     console.log('patient id:', patientId);
     this.props.dispatch({type: 'TEST_PATIENT'});
-    this.props.dispatch({ type: 'GET_PCI_TOTAL', payload: patientId })
+    this.props.dispatch({ type: 'GET_PCI_TOTAL', payload: patientId });
+    this.props.dispatch({type: 'GET_INITIAL_DATA_FOR_INTAKE', payload: patientId});
     // console.log('patient id:', patientId);
     // this.props.dispatch({type: 'TEST_PATIENT'});
   }
