@@ -18,8 +18,8 @@ function* updateEntries(action) {
     console.log('Sending data to server to update database')
 
     try{
-        yield call(axios.put, `/api/primaryTumor`, {userInfo: action.payload})
-        yield put({type: 'GET_INITIAL_VALUES'})
+        const response = yield call(axios.put, `/api/primaryTumor`, {userInfo: action.payload})
+        yield put({type: 'SET_INIT_VALUES', payload: response.data})
     }
     catch(error){
         console.log('error trying to update db from primaryTumorSaga')

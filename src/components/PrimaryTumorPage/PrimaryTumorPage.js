@@ -70,17 +70,18 @@ class PrimaryTumorPage extends Component {
             mucinous: this.props.primaryTumorReducer.mucinous,
             n: this.props.primaryTumorReducer.n,
             notes: this.props.primaryTumorReducer.notes,
-            patient_id: this.props.patientId,
+            patient_id: this.props.patient.id,
             primary_location: this.props.primaryTumorReducer.primary_location,
             prime_tumor_surgery: this.props.primaryTumorReducer.prime_tumor_surgery,
             reason_acute: this.props.primaryTumorReducer.reason_acute,
             t: this.props.primaryTumorReducer.t,
             setting: this.props.primaryTumorReducer.setting,
-        }, this.getInitialValues());
+            type: this.props.primaryTumorReducer.type,
+        });
     }
 
     updateEntriesInDB = () => {
-        this.props.dispatch({type: 'UPSERT_DATA_FOR_PRIMARY_TUMOR', payload: this.state})
+        this.props.dispatch({type: 'UPSERT_DATA_FOR_PRIMARY_TUMOR', payload: {state: this.state, id: this.props.patient.patient.id}})
         console.log('RUNNING UPDATEENTRIESINDB Function')
     }
 
@@ -118,7 +119,7 @@ class PrimaryTumorPage extends Component {
         return(
             <>
             <pre>
-                {/* {JSON.stringify(this.state, null, 2)} */}
+                {JSON.stringify(this.props.patient.id, null, 2)}
             </pre>
             <pre>
                 {/* {JSON.stringify(this.props.primaryTumorReducer, null, 2)} */}
@@ -444,13 +445,13 @@ class PrimaryTumorPage extends Component {
                             <Grid item xs={6} className={classes.gridItem}>
                                 <FormControl variant="outlined" fullWidth="true">
                                     <Select
-                                        value={this.state.primaryTumorSurgery}
+                                        value={this.state.prime_tumor_surgery}
                                         onChange={this.handleChange}
                                         input={
                                         <OutlinedInput
-                                            value={this.state.primaryTumorSurgery}
-                                            name="primaryTumorSurgery"
-                                            id="primaryTumorSurgery"
+                                            value={this.state.prime_tumor_surgery}
+                                            name="prime_tumor_surgery"
+                                            id="prime_tumor_surgery"
                                         />
                                         }
                                     >
@@ -539,8 +540,8 @@ class PrimaryTumorPage extends Component {
                                     fullWidth="true"
                                     className={classes.treatmentPrimeTumorNotes}
                                     onChange={this.handleChange}
-                                    value={this.state.treatmentPrimeTumorNotes}
-                                    name='treatmentPrimeTumorNotes'
+                                    value={this.state.notes}
+                                    name='notes'
                                     multiline
                                     rows="5"
                                     variant="outlined"
@@ -563,11 +564,11 @@ class PrimaryTumorPage extends Component {
 };
 
 const mapStateToProps = reduxState => ({
-    patientId: reduxState.patientReducer.patient.id,
     dropdownOptions: reduxState.dropdownOptions,
     primaryTumorReducer: reduxState.primaryTumorReducer,
-    
+    patient: reduxState.patientReducer,
 });
+
 
 
 export default connect(mapStateToProps) (withStyles(styles)(PrimaryTumorPage))
