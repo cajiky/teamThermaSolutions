@@ -101,10 +101,18 @@ class PatientProfileSearchPage extends Component {
       };
 
       addPatient = () => {
-          this.props.dispatch({type: 'ADD_PATIENT', payload: this.state.patient});
-          this.setState({ variables: {open: false}});
-          document.cookie = `patientID=${this.props.newPatientId}`
-          this.props.history.push(`/MainTabsPage`);
+          this.props.dispatch({type: 'ADD_PATIENT', 
+            payload: {
+                patientObject: this.state.patient,
+                history: this.props.history,
+            }
+        });
+        console.log('in add patient after')
+        this.setState({ variables: {open: false}});
+        //   document.cookie = `patientID=${this.props.newPatientId}`
+        //   document.cookie = `patientID=${this.state.patient.patient_no}`
+        //   console.log('IN ADD PATIENT', document.cookie, this.state.patient);
+          //this.props.history.push(`/MainTabsPage`);
       }
 
       searchPatient = () => {
