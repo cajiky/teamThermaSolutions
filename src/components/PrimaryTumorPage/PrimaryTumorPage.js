@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -14,7 +12,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
-
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
     gridItem:{
@@ -33,33 +31,104 @@ const styles = theme => ({
 
 class PrimaryTumorPage extends Component {
     state = {
+            // adj_chemotherapy: this.props.reduxState.primaryTumorReducer.adj_chemotherapy,
+            // adj_chemotherapy_type: this.props.reduxState.primaryTumorReducer.adj_chemotherapy_type,
+            // biological: this.props.reduxState.primaryTumorReducer.biological,
+            // chemo_type_1: this.props.reduxState.primaryTumorReducer.chemo_type_1,
+            // chemo_type_2: this.props.reduxState.primaryTumorReducer.chemo_type_2,
+            // date_primary_diagnosis: this.props.reduxState.primaryTumorReducer.date_primary_diagnosis,
+            // date_prime_surgery: this.props.reduxState.primaryTumorReducer.date_prime_surgery,
+            // differentiation: this.props.reduxState.primaryTumorReducer.differentiation,
+            // id: this.props.reduxState.primaryTumorReducer.id,
+            // intervention_type: this.props.reduxState.primaryTumorReducer.intervention_type,
+            // m: this.props.reduxState.primaryTumorReducer.m,
+            // m_location: this.props.reduxState.primaryTumorReducer.m_location,
+            // mucinous: this.props.reduxState.primaryTumorReducer.mucinous,
+            // n: this.props.reduxState.primaryTumorReducer.n,
+            // notes: this.props.reduxState.primaryTumorReducer.notes,
+            // patient_id: this.props.reduxState.primaryTumorReducer.patient_id,
+            // primary_location: this.props.reduxState.primaryTumorReducer.primary_location,
+            // prime_tumor_surgery: this.props.reduxState.primaryTumorReducer.prime_tumor_surgery,
+            // reason_acute: this.props.reduxState.primaryTumorReducer.reason_acute,
+            // t: this.props.reduxState.primaryTumorReducer.t,
+    };
 
-        // labelWidth: 105,
+    setValuesForPatient = () => {
+        this.setState({
+            adj_chemotherapy: this.props.primaryTumorReducer.adj_chemotherapy,
+            adj_chemotherapy_type: this.props.primaryTumorReducer.adj_chemotherapy_type,
+            biological: this.props.primaryTumorReducer.biological,
+            chemo_type_1: this.props.primaryTumorReducer.chemo_type_1,
+            chemo_type_2: this.props.primaryTumorReducer.chemo_type_2,
+            date_primary_diagnosis: this.props.primaryTumorReducer.date_primary_diagnosis,
+            date_prime_surgery: this.props.primaryTumorReducer.date_prime_surgery,
+            differentiation: this.props.primaryTumorReducer.differentiation,
+            id: this.props.primaryTumorReducer.id,
+            intervention_type: this.props.primaryTumorReducer.intervention_type,
+            m: this.props.primaryTumorReducer.m,
+            m_location: this.props.primaryTumorReducer.m_location,
+            mucinous: this.props.primaryTumorReducer.mucinous,
+            n: this.props.primaryTumorReducer.n,
+            notes: this.props.primaryTumorReducer.notes,
+            patient_id: this.props.patient.id,
+            primary_location: this.props.primaryTumorReducer.primary_location,
+            prime_tumor_surgery: this.props.primaryTumorReducer.prime_tumor_surgery,
+            reason_acute: this.props.primaryTumorReducer.reason_acute,
+            t: this.props.primaryTumorReducer.t,
+            setting: this.props.primaryTumorReducer.setting,
+            type: this.props.primaryTumorReducer.type,
+        });
     }
 
-    getInitialValues = () => {
-        this.props.dispatch({type: 'GET_INITIAL_VALUES'})
+    updateEntriesInDB = () => {
+        this.props.dispatch({type: 'UPSERT_DATA_FOR_PRIMARY_TUMOR', payload: {state: this.state, id: this.props.patient.patient.id}})
+        console.log('RUNNING UPDATEENTRIESINDB Function')
+    }
+
+    getInitialValues = (id) => {
+        this.props.dispatch({type: 'GET_INITIAL_VALUES', payload: id})
     }
 
     // getDropDownOptions = () => {
     //     this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'})
     // }
+    updateReduxState = () => {
+        this.props.dispatch({type: 'UPDATE_INIT_FIELDS', payload: this.state})
+    }
+
 
     handleChange = (event) => {
         this.setState ({
+            ...this.state,
             [event.target.name]: event.target.value,
-        })
+        },this.setValuesForPatient())
         console.log(this.state);
+        
     }
 
     componentDidMount() {
         // this.getDropDownOptions();
         this.getInitialValues();
+
+        console.log('Inside compDidMount to check reducer status',this.props.primaryTumorReducer)
+        this.setValuesForPatient();
     }
+
+    // componentWillUnmount(){
+    //     this.updateEntriesInDB()
+    // }
+    
 
     render() {
         const { classes } = this.props;
         return(
+            <>
+            <pre>
+                {JSON.stringify(this.props.patient.id, null, 2)}
+            </pre>
+            <pre>
+                {/* {JSON.stringify(this.props.primaryTumorReducer, null, 2)} */}
+            </pre>
             <Grid
             container
             direction="row"
@@ -91,8 +160,8 @@ class PrimaryTumorPage extends Component {
                                 type="date"
                                 fullWidth="true"
                                 onChange={this.handleChange}
-                                name="dateOfPrimaryDiagnosis"
-                                value={this.state.dateOfPrimaryDiagnosis}
+                                name="date_primary_diagnosis"
+                                value={this.state.date_primary_diagnosis}
                                 />
                             </Grid>
                             <Grid item xs={6} className={classes.gridItem}>
@@ -101,20 +170,21 @@ class PrimaryTumorPage extends Component {
                             <Grid item xs={6} className={classes.gridItem}>
                                 <FormControl variant="outlined" fullWidth="true">
                                     <Select
-                                        value={this.state.primaryLocation}
+                                        value={this.state.primary_location}
                                         onChange={this.handleChange}
+                                        name="primary_location"
                                         input={
                                         <OutlinedInput
-                                            value={this.state.primaryLocation}
-                                            name="primaryLocation"
-                                            id="primary-location"
+                                            value={this.state.primary_location}
+                                            name="primary_location"
+                                            id="primary_location"
                                         />
                                         }
                                     >
                                         <MenuItem value="">
                                             <em>None</em>
                                         </MenuItem>
-                                        {this.props.reduxState.dropdownOptions.primaryLocationOptions.map(location => (
+                                        {this.props.dropdownOptions.primaryLocationOptions.map(location => (
                                             <MenuItem key={location.id} value={location.id}>{location.status}</MenuItem> 
                                         ))} 
                                     </Select>
@@ -161,11 +231,11 @@ class PrimaryTumorPage extends Component {
                                             <OutlinedInput
                                                 value={this.state.t}
                                                 name="t"
-                                                id="primary-location"
+                                                id="t"
                                             />
                                             }
                                         >
-                                            {this.props.reduxState.dropdownOptions.t.map(t => (
+                                            {this.props.dropdownOptions.t.map(t => (
                                                 <MenuItem key={t.id} value={t.status}>{t.name}</MenuItem> 
                                             ))} 
                                             </Select>
@@ -187,7 +257,7 @@ class PrimaryTumorPage extends Component {
                                             />
                                             }
                                         >
-                                            {this.props.reduxState.dropdownOptions.m.map(m => (
+                                            {this.props.dropdownOptions.m.map(m => (
                                                 <MenuItem key={m.id} value={m.status}>{m.name}</MenuItem> 
                                             ))} 
                                             </Select>
@@ -208,7 +278,7 @@ class PrimaryTumorPage extends Component {
                                             />
                                             }
                                         >
-                                            {this.props.reduxState.dropdownOptions.n.map(n => (
+                                            {this.props.dropdownOptions.n.map(n => (
                                                 <MenuItem key={n.id} value={n.status}>{n.name}</MenuItem> 
                                             ))} 
                                             </Select>
@@ -222,12 +292,12 @@ class PrimaryTumorPage extends Component {
                             <Grid item xs={6} className={classes.gridItem}>
                                 <FormControl variant="outlined" fullWidth="true">
                                     <Select
-                                        value={this.state.mLocation}
+                                        value={this.state.m_location}
                                         onChange={this.handleChange}
                                         input={
                                         <OutlinedInput
-                                            value={this.state.mLocation}
-                                            name="mLocation"
+                                            value={this.state.m_location}
+                                            name="m_location"
                                             id="primary-location"
                                         />
                                         }
@@ -235,7 +305,7 @@ class PrimaryTumorPage extends Component {
                                         <MenuItem value="">
                                             <em>None</em>
                                         </MenuItem>
-                                        {this.props.reduxState.dropdownOptions.mLocationOptions.map(location => (
+                                        {this.props.dropdownOptions.mLocationOptions.map(location => (
                                             <MenuItem key={location.id} value={location.id}>{location.status}</MenuItem> 
                                         ))} 
                                     </Select>
@@ -260,7 +330,7 @@ class PrimaryTumorPage extends Component {
                                         <MenuItem value="">
                                             <em>None</em>
                                         </MenuItem>
-                                        {this.props.reduxState.dropdownOptions.differentiationOptions.map(dif => (
+                                        {this.props.dropdownOptions.differentiationOptions.map(dif => (
                                             <MenuItem key={dif.id} value={dif.id}>{dif.status}</MenuItem> 
                                         ))} 
                                     </Select>
@@ -276,9 +346,9 @@ class PrimaryTumorPage extends Component {
                                         value={this.state.mucinous}
                                         onChange={this.handleChange}
                                     >
-                                        <FormControlLabel value='true' control={<Radio />} label="Yes" />
-                                        <FormControlLabel value='false' control={<Radio />} label="No" />
-                                        <FormControlLabel value='null' control={<Radio />} label="Unknown" />
+                                        <FormControlLabel value="1" control={<Radio />} label="Yes" />
+                                        <FormControlLabel value="2" control={<Radio />} label="No" />
+                                        <FormControlLabel value="3" control={<Radio />} label="Unknown" />
 
                                     </RadioGroup>
                                 </FormControl>
@@ -314,8 +384,8 @@ class PrimaryTumorPage extends Component {
                                 type="date"
                                 fullWidth="true"
                                 onChange={this.handleChange}
-                                name="dateOfPrimarySurgery"
-                                value={this.state.dateOfPrimarySurgery}
+                                name="date_prime_surgery"
+                                value={this.state.date_prime_surgery}
                                 />
                             </Grid >
                             <Grid item xs={6} className={classes.gridItem}>
@@ -326,12 +396,12 @@ class PrimaryTumorPage extends Component {
                             <Grid item xs={6} className={classes.gridItem}>
                                 <FormControl variant="outlined" fullWidth="true">
                                     <Select
-                                        value={this.state.interventionType}
+                                        value={this.state.intervention_type}
                                         onChange={this.handleChange}
                                         input={
                                         <OutlinedInput
-                                            value={this.state.interventionType}
-                                            name="interventionType"
+                                            value={this.state.intervention_type}
+                                            name="intervention_type"
                                             id="interventionType"
                                         />
                                         }
@@ -339,7 +409,7 @@ class PrimaryTumorPage extends Component {
                                         <MenuItem value="">
                                             <em>None</em>
                                         </MenuItem>
-                                        {this.props.reduxState.dropdownOptions.interventionTypeOptions.map(int => (
+                                        {this.props.dropdownOptions.interventionTypeOptions.map(int => (
                                             <MenuItem key={int.id} value={int.id}>{int.status}</MenuItem> 
                                         ))} 
                                     </Select>
@@ -366,7 +436,7 @@ class PrimaryTumorPage extends Component {
                                         <MenuItem value="">
                                             <em>None</em>
                                         </MenuItem>
-                                        {this.props.reduxState.dropdownOptions.interventionTypeOptions.map(set => (
+                                        {this.props.dropdownOptions.interventionTypeOptions.map(set => (
                                             <MenuItem key={set.id} value={set.id}>{set.status}</MenuItem> 
                                         ))} 
                                     </Select>
@@ -380,20 +450,20 @@ class PrimaryTumorPage extends Component {
                             <Grid item xs={6} className={classes.gridItem}>
                                 <FormControl variant="outlined" fullWidth="true">
                                     <Select
-                                        value={this.state.primaryTumorSurgery}
+                                        value={this.state.prime_tumor_surgery}
                                         onChange={this.handleChange}
                                         input={
                                         <OutlinedInput
-                                            value={this.state.primaryTumorSurgery}
-                                            name="primaryTumorSurgery"
-                                            id="primaryTumorSurgery"
+                                            value={this.state.prime_tumor_surgery}
+                                            name="prime_tumor_surgery"
+                                            id="prime_tumor_surgery"
                                         />
                                         }
                                     >
                                         <MenuItem value="">
                                             <em>None</em>
                                         </MenuItem>
-                                        {this.props.reduxState.dropdownOptions.primaryTumorSurgeryOptions.map(pts => (
+                                        {this.props.dropdownOptions.primaryTumorSurgeryOptions.map(pts => (
                                             <MenuItem key={pts.id} value={pts.id}>{pts.status}</MenuItem> 
                                         ))} 
                                     </Select>
@@ -442,7 +512,7 @@ class PrimaryTumorPage extends Component {
                                         <MenuItem value="">
                                             <em>None</em>
                                         </MenuItem>
-                                        {this.props.reduxState.dropdownOptions.adjChemoTypeOptions.map(adj => (
+                                        {this.props.dropdownOptions.adjChemoTypeOptions.map(adj => (
                                             <MenuItem key={adj.id} value={adj.id}>{adj.status}</MenuItem> 
                                         ))} 
                                     </Select>
@@ -464,7 +534,7 @@ class PrimaryTumorPage extends Component {
                                         <MenuItem value="">
                                             <em>None</em>
                                         </MenuItem>
-                                        {this.props.reduxState.dropdownOptions.biologicalOptions.map(adj => (
+                                        {this.props.dropdownOptions.biologicalOptions.map(adj => (
                                             <MenuItem key={adj.id} value={adj.id}>{adj.status}</MenuItem> 
                                         ))} 
                                     </Select>
@@ -475,26 +545,35 @@ class PrimaryTumorPage extends Component {
                                     fullWidth="true"
                                     className={classes.treatmentPrimeTumorNotes}
                                     onChange={this.handleChange}
-                                    value={this.state.treatmentPrimeTumorNotes}
-                                    name='treatmentPrimeTumorNotes'
+                                    value={this.state.notes}
+                                    name='notes'
                                     multiline
                                     rows="5"
                                     variant="outlined"
                                     label="Notes"
                                 />
                             </Grid>
+                            <Grid item xs={12} className={classes.gridItem} onClick={this.updateEntriesInDB}>
+                                <Button color="primary">
+                                    Save
+                                </Button>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
             </Grid>
+            </>
         )
     }
   
 };
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+    dropdownOptions: reduxState.dropdownOptions,
+    primaryTumorReducer: reduxState.primaryTumorReducer,
+    patient: reduxState.patientReducer,
 });
+
 
 
 export default connect(mapStateToProps) (withStyles(styles)(PrimaryTumorPage))
