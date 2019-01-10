@@ -29,7 +29,7 @@ function* updateEntries(action) {
 
 function* primaryTumorSaga() {
   yield takeLatest('GET_INITIAL_VALUES', getInitalValues);
-  yield takeLatest('UPSERT_DATA_FOR_PRIMARY_TUMOR', updateEntries)
+  yield takeLatest('UPSERT_DATA_FOR_PRIMARY_TUMOR', updateEntries);
 }
 
 export default primaryTumorSaga;

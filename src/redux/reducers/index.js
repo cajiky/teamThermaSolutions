@@ -14,6 +14,7 @@ import pathologyHistoryReducer from './pathologyHistoryReducer';
 import operativeHistoryReducer from './operativeHistoryReducer';
 import pciReducer from './pciReducer';
 import primaryTumorReducer from './primaryTumorReducer';
+import intakeReducer from './intakeReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   operativeHistoryReducer,
   pciReducer,
   primaryTumorReducer,
+  intakeReducer,
 });
 
 export default rootReducer;

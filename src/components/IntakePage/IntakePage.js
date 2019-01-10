@@ -58,11 +58,15 @@ class IntakePage extends Component {
         console.log(this.state);
     }
     
-    // componentDidUpdate(prevState){
-    //     if(this.state.length !== prevState.length || this.state.patientWeight !== prevState.patientWeight){
-    //         console.log(this.state);
-    //     }
+    // getInitialState = () => {
+    //     let patientId = document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    //     console.log(patientId);
+    //     this.props.dispatch({type:'GET_INITIAL_DATA_FOR_INTAKE', payload: patientId.id });
     // }
+
+    componentDidMount(){
+
+    }
 
     render() {
         const { classes } = this.props;

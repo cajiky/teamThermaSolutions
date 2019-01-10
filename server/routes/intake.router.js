@@ -3,10 +3,20 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 /**
- * GET route template
+ * Post route template
  */
-router.get('/', (req, res) => {
-    
+router.post('/getDataFor', (req, res) => {
+    const patientID = req.body.id
+    const sqlText = `SELECT * FROM intake WHERE patient_id = $1`
+    pool.query(sqlText,[patientID])
+    .then((result) => {
+        res.send(result.rows[0]);
+    })
+    .catch((error) => {
+        res.sendStatus(500);
+        console.log(error);
+
+    })
 });
 
 /**

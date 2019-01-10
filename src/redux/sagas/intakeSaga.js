@@ -2,16 +2,16 @@ import { put, takeLatest , call } from 'redux-saga/effects';
 import axios from 'axios';
 
 
-function* getInitalDataForIntake(action) {
+function* getInitalDataForIntake(action) { 
+    console.log('Getting init values for intake page', action.payload);
     
     try {
-        const response = yield call(axios.get, '/api/intake', action.payload);
-        yield put({type: 'SET_INITAL_DATA_FOR_INTAKE', payload: response.data});
-        
-      }
-      catch (error) {
-        console.log('error in our getInitalDataForIntake', error);
-      }
+        const response = yield call(axios.post, `/api/intake/getDataFor`, {id: 1});
+        yield put({ type: 'SET_INIT_VALUES', payload: response.data } )
+
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 
@@ -20,4 +20,4 @@ function* intakeSaga() {
   yield takeLatest('GET_INITIAL_DATA_FOR_INTAKE', getInitalDataForIntake);
 }
 
-export default getPathologyHistorySaga;
+export default intakeSaga;
