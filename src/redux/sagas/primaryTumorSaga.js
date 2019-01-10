@@ -17,8 +17,8 @@ function* GetInitalValues(action) {
 
 
 function* primaryTumorSaga() {
-  yield takeLatest('GET_INITIAL_VALUES', operativeNotes);
+  yield takeLatest('GET_INITIAL_VALUES', GetInitalValues);
   
 }
 
-export default operativeNotesSaga;
+export default primaryTumorSaga;

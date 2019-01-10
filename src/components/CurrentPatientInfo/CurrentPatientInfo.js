@@ -51,6 +51,7 @@ class CurrentPatientInfo extends Component {
         const { classes } = this.props;
         return (
             <div>
+                <pre>{JSON.stringify(this.props.patient)}</pre>
                 <ExpansionPanel className={classes.superCool}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>

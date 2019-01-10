@@ -41,9 +41,9 @@ class PrimaryTumorPage extends Component {
         this.props.dispatch({type: 'GET_INITIAL_VALUES'})
     }
 
-    getDropDownOptions = () => {
-        this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'})
-    }
+    // getDropDownOptions = () => {
+    //     this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'})
+    // }
 
     handleChange = (event) => {
         this.setState ({
@@ -53,7 +53,7 @@ class PrimaryTumorPage extends Component {
     }
 
     componentDidMount() {
-        this.getDropDownOptions();
+        // this.getDropDownOptions();
         this.getInitialValues();
     }
 
