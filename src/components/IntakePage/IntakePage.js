@@ -14,6 +14,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
     gridItem:{
@@ -32,21 +33,46 @@ const styles = theme => ({
 
 class IntakePage extends Component {
     state = {
-        bmi: '(auto)',
-        length: '',
-        patientWeight: '',
+        bmi_auto: '(auto)',
+        length_m: this.props.patient.weight_kg,
+        weight_kg: this.props.patient.length_m,
+        id: this.props.patient.id,
+        patient_id: this.props.patient.patient_id,
+        crp: this.props.patient.crp,
+        ca125: this.props.patient.ca125,
+        leucocyte: this.props.patient.leucocyte,
+        smoking: this.props.patient.smoking,
+        diabetes: this.props.patient.diabetes,
+        insulin_dependant: this.props.patient.insulin_dependant,
+        cardiovascular: this.props.patient.cardiovascular,
+        hypertension: this.props.patient.hypertension,
+        stoma_pre_hipec: this.props.patient.stoma_pre_hipec,
+        stoma_type: this.props.patient.stoma_type,
+        neo_adjuvant_chemo: this.props.patient.neo_adjuvant_chemo,
+        neo_adjuvant_chemo_type: this.props.patient.neo_adjuvant_chemo_type,
+        biological: this.props.patient.biological,
+        notes: this.props.patient.notes,
+        diagnostic_scopy: this.props.patient.diagnostic_scopy,
+        date_scopy: this.props.patient.date_scopy,
+        scopy_conclusion: this.props.patient.scopy_conclusion,
+        scopy_notes: this.props.patient.scopy_notes,
+        syn_metachronous: this.props.patient.syn_metachronous,
+        date_diagnosis_pc: this.props.patient.date_diagnosis_pc,
+        assessment_of_pss: this.props.patient.assessment_of_pss,
+        asa_score_date_time_stamp: this.props.patient.asa_score_date_time_stamp,
+        date: this.props.patient.date,
     }
 
     //Function to calculate the bmi for the patient.
     calculateBMI = () => {
         let bmi;
-        let height = Number(this.state.length);
-        let weight = Number(this.state.patientWeight);
+        let height = Number(this.state.length_m);
+        let weight = Number(this.state.weight_kg);
         let squaredHeight = height * height;
         // console.log(`SquaredHeight: ${squaredHeight}, Weight: ${weight}`)
         bmi = weight/squaredHeight;
         this.setState({
-            bmi: String(parseFloat(bmi).toFixed(2)),
+            bmi_auto: String(parseFloat(bmi).toFixed(2)),
         })
     }
 
@@ -63,6 +89,10 @@ class IntakePage extends Component {
     //     console.log(patientId);
     //     this.props.dispatch({type:'GET_INITIAL_DATA_FOR_INTAKE', payload: patientId.id });
     // }
+    updateEntriesInDB = () => {
+        this.props.dispatch({type: 'UPSERT_DATA_FOR_INTAKE', payload: {state: this.state, id: this.props.patient.patient.id}})
+        console.log('RUNNING UPDATEENTRIESINDB Function')
+    }
 
     componentDidMount(){
 
@@ -99,8 +129,8 @@ class IntakePage extends Component {
                                 <TextField
                                     style={{width: 150}}
                                     onChange={this.handleChange}
-                                    name="patientWeight"
-                                    value={this.state.patientWeight}
+                                    name="weight_kg"
+                                    value={this.state.weight_kg}
                                     id="patientWeightInput"
                                     className={classNames(classes.margin, classes.textField)}
                                     InputProps={{
@@ -115,8 +145,8 @@ class IntakePage extends Component {
                                 <TextField
                                     style={{width: 150}}
                                     onChange={this.handleChange}
-                                    name="length"
-                                    value={this.state.length}
+                                    name="length_m"
+                                    value={this.state.length_m}
                                     id="lengthInput"
                                     InputProps={{
                                         startAdornment: <InputAdornment position="start">M</InputAdornment>,
@@ -127,7 +157,7 @@ class IntakePage extends Component {
                                 <Typography variant="overline">
                                     BMI:
                                 </Typography>
-                                <Typography variant="h4">{this.state.bmi}</Typography>
+                                <Typography variant="h4">{this.state.bmi_auto}</Typography>
                             </Grid>
                             <Grid item xs={4} className={classes.gridItem}>
                                 <Typography variant="overline">
@@ -136,9 +166,9 @@ class IntakePage extends Component {
                                 <TextField
                                     style={{width: 150}}
                                     onChange={this.handleChange}
-                                    name="cea"
-                                    value={this.state.cea}
-                                    id="ceaInput"
+                                    name="ca125"
+                                    value={this.state.ca125}
+                                    id="ca125"
                                 />
                             </Grid>
                             <Grid item xs={4} className={classes.gridItem}>
@@ -150,7 +180,7 @@ class IntakePage extends Component {
                                     onChange={this.handleChange}
                                     name="crp"
                                     vlaue={this.state.crp}
-                                    id="crpInput"
+                                    id="copInput"
                                 />
                             </Grid>
                             <Grid item xs={4} className={classes.gridItem}>
@@ -175,9 +205,9 @@ class IntakePage extends Component {
                                         value={this.state.smoking}
                                         onChange={this.handleChange}
                                     >
-                                        <FormControlLabel value='true' control={<Radio />} label="Yes" />
-                                        <FormControlLabel value='false' control={<Radio />} label="No" />
-                                        <FormControlLabel value='null' control={<Radio />} label="Unknown" />
+                                        <FormControlLabel value='1' control={<Radio />} label="Yes" />
+                                        <FormControlLabel value='2' control={<Radio />} label="No" />
+                                        <FormControlLabel value='3' control={<Radio />} label="Unknown" />
 
                                     </RadioGroup>
                                 </FormControl>
@@ -192,9 +222,9 @@ class IntakePage extends Component {
                                         value={this.state.diabetes}
                                         onChange={this.handleChange}
                                     >
-                                        <FormControlLabel value='true' control={<Radio />} label="Yes" />
-                                        <FormControlLabel value='false' control={<Radio />} label="No" />
-                                        <FormControlLabel value='null' control={<Radio />} label="Unknown" />
+                                        <FormControlLabel value='1' control={<Radio />} label="Yes" />
+                                        <FormControlLabel value='2' control={<Radio />} label="No" />
+                                        <FormControlLabel value='3' control={<Radio />} label="Unknown" />
 
                                     </RadioGroup>
                                 </FormControl>
@@ -204,31 +234,31 @@ class IntakePage extends Component {
                                     <FormLabel component="legend">Insulin Dependant</FormLabel>
                                     <RadioGroup
                                         aria-label="insulinDep"
-                                        name="insulinDep"
+                                        name="insulin_dependant"
                                         className={classes.group}
-                                        value={this.state.insulinDep}
+                                        value={this.state.insulin_dependant}
                                         onChange={this.handleChange}
                                     >
-                                        <FormControlLabel value='true' control={<Radio />} label="Yes" />
-                                        <FormControlLabel value='false' control={<Radio />} label="No" />
-                                        <FormControlLabel value='null' control={<Radio />} label="Unknown" />
+                                        <FormControlLabel value='1' control={<Radio />} label="Yes" />
+                                        <FormControlLabel value='2' control={<Radio />} label="No" />
+                                        <FormControlLabel value='3' control={<Radio />} label="Unknown" />
 
                                     </RadioGroup>
                                 </FormControl>
                             </Grid>
                             <Grid item xs={4} className={classes.gridItem}>
                                 <FormControl component="fieldset" className={classes.formControl}>
-                                    <FormLabel component="legend">Cardiovasc</FormLabel>
+                                    <FormLabel component="legend">Cardiovascular</FormLabel>
                                     <RadioGroup
                                         aria-label="cardiovasc"
-                                        name="cardiovasc"
+                                        name="cardiovascular"
                                         className={classes.group}
-                                        value={this.state.cardiovasc}
+                                        value={this.state.cardiovascular}
                                         onChange={this.handleChange}
                                     >
-                                        <FormControlLabel value='true' control={<Radio />} label="Yes" />
-                                        <FormControlLabel value='false' control={<Radio />} label="No" />
-                                        <FormControlLabel value='null' control={<Radio />} label="Unknown" />
+                                        <FormControlLabel value='1' control={<Radio />} label="Yes" />
+                                        <FormControlLabel value='2' control={<Radio />} label="No" />
+                                        <FormControlLabel value='3' control={<Radio />} label="Unknown" />
 
                                     </RadioGroup>
                                 </FormControl>
@@ -243,9 +273,9 @@ class IntakePage extends Component {
                                         value={this.state.hypertension}
                                         onChange={this.handleChange}
                                     >
-                                        <FormControlLabel value='true' control={<Radio />} label="Yes" />
-                                        <FormControlLabel value='false' control={<Radio />} label="No" />
-                                        <FormControlLabel value='null' control={<Radio />} label="Unknown" />
+                                        <FormControlLabel value='1' control={<Radio />} label="Yes" />
+                                        <FormControlLabel value='2' control={<Radio />} label="No" />
+                                        <FormControlLabel value='3' control={<Radio />} label="Unknown" />
 
                                     </RadioGroup>
                                 </FormControl>
@@ -278,14 +308,14 @@ class IntakePage extends Component {
                                         <FormLabel component="legend">Neo Adjuvant Chemo:</FormLabel>
                                         <RadioGroup
                                             aria-label="nac"
-                                            name="nac"
+                                            name="neo_adjuvant_chemo"
                                             className={classes.group}
-                                            value={this.state.nac}
+                                            value={this.state.neo_adjuvant_chemo}
                                             onChange={this.handleChange}
                                         >
-                                            <FormControlLabel value='true' control={<Radio />} label="Yes" />
-                                            <FormControlLabel value='false' control={<Radio />} label="No" />
-                                            <FormControlLabel value='null' control={<Radio />} label="Unknown" />
+                                            <FormControlLabel value='1' control={<Radio />} label="Yes" />
+                                            <FormControlLabel value='2' control={<Radio />} label="No" />
+                                            <FormControlLabel value='3' control={<Radio />} label="Unknown" />
 
                                         </RadioGroup>
                                     </FormControl>
@@ -303,17 +333,17 @@ class IntakePage extends Component {
                                 <Grid item xs={6} className={classes.gridItem} align="center">
                                     <FormControl variant="outlined" style={{width: 200}}>
                                         <Select
-                                            value={this.state.type}
+                                            value={this.state.neo_adjuvant_chemo_type}
                                             onChange={this.handleChange}
                                             input={
                                             <OutlinedInput
-                                                value={this.state.type}
-                                                name="type"
+                                                value={this.state.neo_adjuvant_chemo_type}
+                                                name="neo_adjuvant_chemo_type"
                                                 id="type"
                                             />
                                             }
                                         >
-                                            {this.props.reduxState.dropdownOptions.adjChemoTypeOptions.map(adj => (
+                                            {this.props.dropdownOptions.adjChemoTypeOptions.map(adj => (
                                                 <MenuItem key={adj.id} value={adj.id}>{adj.status}</MenuItem> 
                                             ))} 
                                         </Select>
@@ -336,7 +366,7 @@ class IntakePage extends Component {
                                             <MenuItem value="">
                                                 <em>None</em>
                                             </MenuItem>
-                                            {this.props.reduxState.dropdownOptions.biologicalOptions.map(adj => (
+                                            {this.props.dropdownOptions.biologicalOptions.map(adj => (
                                                 <MenuItem key={adj.id} value={adj.id}>{adj.status}</MenuItem> 
                                             ))} 
                                         </Select>
@@ -347,8 +377,8 @@ class IntakePage extends Component {
                                     fullWidth="true"
                                     className={classes.treatmentPrimeTumorNotes}
                                     onChange={this.handleChange}
-                                    value={this.state.adjChemoNotes}
-                                    name='adjChemoNotes'
+                                    value={this.state.notes}
+                                    name='notes'
                                     multiline
                                     rows="5"
                                     variant="outlined"
@@ -372,15 +402,15 @@ class IntakePage extends Component {
                                     <FormControl component="fieldset" className={classes.formControl}>
                                         <FormLabel component="legend">Diagnostic Scopy</FormLabel>
                                         <RadioGroup
-                                            aria-label="Hypertension"
-                                            name="diagnosticScopy"
+                                            aria-label="diagnostic_scopy"
+                                            name="diagnostic_scopy"
                                             className={classes.group}
-                                            value={this.state.diagnosticScopy}
+                                            value={this.state.diagnostic_scopy}
                                             onChange={this.handleChange}
                                         >
-                                            <FormControlLabel value='true' control={<Radio />} label="Yes" />
-                                            <FormControlLabel value='false' control={<Radio />} label="No" />
-                                            <FormControlLabel value='null' control={<Radio />} label="Unknown" />
+                                            <FormControlLabel value='1' control={<Radio />} label="Yes" />
+                                            <FormControlLabel value='2' control={<Radio />} label="No" />
+                                            <FormControlLabel value='3' control={<Radio />} label="Unknown" />
 
                                         </RadioGroup>
                                     </FormControl>
@@ -389,10 +419,10 @@ class IntakePage extends Component {
                                     <FormControl component="fieldset" className={classes.formControl}>
                                         <FormLabel component="legend">Scopy Conclusion</FormLabel>
                                         <RadioGroup
-                                            aria-label="Hypertension"
-                                            name="scopyConclusion"
+                                            aria-label="scopy_conclusion"
+                                            name="scopy_conclusion"
                                             className={classes.group}
-                                            value={this.state.scopyConclusion}
+                                            value={this.state.scopy_conclusion}
                                             onChange={this.handleChange}
                                         >
                                             <FormControlLabel value='1' control={<Radio />} label="Amenable" />
@@ -411,10 +441,15 @@ class IntakePage extends Component {
                                     type="date"
                                     fullWidth="true"
                                     onChange={this.handleChange}
-                                    name="dateOfScopy"
-                                    value={this.state.dateOfScopy}
+                                    name="date_scopy"
+                                    value={this.state.date_scopy}
                                     />
                                 </Grid>
+                                <Grid item xs={12} className={classes.gridItem} onClick={this.updateEntriesInDB}>
+                                <Button color="primary">
+                                    Save
+                                </Button>
+                            </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -426,7 +461,8 @@ class IntakePage extends Component {
 };
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+    patient: reduxState.patientReducer,
+    dropdownOptions: reduxState.dropdownOptions,
 });
 
 

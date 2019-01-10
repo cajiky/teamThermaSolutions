@@ -128,7 +128,7 @@ CREATE TABLE "intake" (
 	"patient_id" integer UNIQUE NOT NULL,
 	"weight_kg" integer,
 	"length_m" integer,
-	"bmi_auto" integer,
+	"bmi_auto" double precision,
 	"crp" varchar,
 	"ca125" varchar,
 	"leucocyte" varchar,

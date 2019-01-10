@@ -14,10 +14,22 @@ function* getInitalDataForIntake(action) {
     }
 }
 
+function* sendUpdatedDataToDB(action) {
+    console.log('SENDING DATA TO DB FOR THE INTAKE PAGE', action.payload)
+    try {
+        const response = yield call(axios.post, '/api/intake/', action.payload);
+        yield put({type: 'SET_INIT_VALUES', payload: response.data})
+    }
+    catch(error){
+        console.log(error)
+    }
+}
+
 
 
 function* intakeSaga() {
   yield takeLatest('GET_INITIAL_DATA_FOR_INTAKE', getInitalDataForIntake);
+  yield takeLatest('UPSERT_DATA_FOR_INTAKE', sendUpdatedDataToDB);
 }
 
 export default intakeSaga;
