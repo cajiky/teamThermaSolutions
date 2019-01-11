@@ -15,6 +15,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
+import moment from 'moment';
 
 const styles = theme => ({
     gridItem:{
@@ -127,6 +128,10 @@ class IntakePage extends Component {
         this.setInitialState();
     }
 
+    componentWillUnmount(){
+        this.updateEntriesInDB();
+    }
+
     render() {
         const { classes } = this.props;
         return(
@@ -136,12 +141,6 @@ class IntakePage extends Component {
             justify="space-evenly"
             alignItems="flex-start"
             >
-            <pre>
-                {JSON.stringify(this.state, null, 2)}
-            </pre>
-            <pre>
-                {JSON.stringify(this.props.intake, null, 2)}
-            </pre>
             {/* Start of the fist column on the page  */}
                 <Grid item xs={5}>
                     <Grid
@@ -477,13 +476,14 @@ class IntakePage extends Component {
                                     fullWidth="true"
                                     onChange={this.handleChange}
                                     name="date_scopy"
-                                    value={this.state.date_scopy}
+                                    value={moment(this.state.date_scopy).format('YYYY-MM-DD')}
                                     />
                                 </Grid>
                                 <Grid item xs={12} className={classes.gridItem} onClick={this.updateEntriesInDB}>
-                                <Button color="primary">
-                                    Save
-                                </Button>
+                                    <Button onClick={this.upsertEntriesInDB} className={classes.button}
+                                        variant="contained" color="primary">
+                                        Save
+                                    </Button>
                             </Grid>
                             </Grid>
                         </Grid>

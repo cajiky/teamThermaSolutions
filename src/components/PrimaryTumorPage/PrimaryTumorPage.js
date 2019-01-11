@@ -13,6 +13,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
+import moment from 'moment';
 
 const styles = theme => ({
     gridItem:{
@@ -31,30 +32,31 @@ const styles = theme => ({
 
 class PrimaryTumorPage extends Component {
     state = {
-            // adj_chemotherapy: this.props.reduxState.primaryTumorReducer.adj_chemotherapy,
-            // adj_chemotherapy_type: this.props.reduxState.primaryTumorReducer.adj_chemotherapy_type,
-            // biological: this.props.reduxState.primaryTumorReducer.biological,
-            // chemo_type_1: this.props.reduxState.primaryTumorReducer.chemo_type_1,
-            // chemo_type_2: this.props.reduxState.primaryTumorReducer.chemo_type_2,
-            // date_primary_diagnosis: this.props.reduxState.primaryTumorReducer.date_primary_diagnosis,
-            // date_prime_surgery: this.props.reduxState.primaryTumorReducer.date_prime_surgery,
-            // differentiation: this.props.reduxState.primaryTumorReducer.differentiation,
-            // id: this.props.reduxState.primaryTumorReducer.id,
-            // intervention_type: this.props.reduxState.primaryTumorReducer.intervention_type,
-            // m: this.props.reduxState.primaryTumorReducer.m,
-            // m_location: this.props.reduxState.primaryTumorReducer.m_location,
-            // mucinous: this.props.reduxState.primaryTumorReducer.mucinous,
-            // n: this.props.reduxState.primaryTumorReducer.n,
-            // notes: this.props.reduxState.primaryTumorReducer.notes,
-            // patient_id: this.props.reduxState.primaryTumorReducer.patient_id,
-            // primary_location: this.props.reduxState.primaryTumorReducer.primary_location,
-            // prime_tumor_surgery: this.props.reduxState.primaryTumorReducer.prime_tumor_surgery,
-            // reason_acute: this.props.reduxState.primaryTumorReducer.reason_acute,
-            // t: this.props.reduxState.primaryTumorReducer.t,
+            adj_chemotherapy: '',
+            adj_chemotherapy_type: '',
+            biological: '',
+            chemo_type_1: '',
+            chemo_type_2: '',
+            date_primary_diagnosis: '',
+            date_prime_surgery: '',
+            differentiation: '',
+            id: '',
+            intervention_type: '',
+            m: '',
+            m_location: '',
+            mucinous: '',
+            n: '',
+            notes: '',
+            patient_id: '',
+            primary_location: '',
+            prime_tumor_surgery: '',
+            reason_acute: '',
+            t: '',
     };
 
     setValuesForPatient = () => {
         this.setState({
+            ...this.state,
             adj_chemotherapy: this.props.primaryTumorReducer.adj_chemotherapy,
             adj_chemotherapy_type: this.props.primaryTumorReducer.adj_chemotherapy_type,
             biological: this.props.primaryTumorReducer.biological,
@@ -118,12 +120,6 @@ class PrimaryTumorPage extends Component {
         const { classes } = this.props;
         return(
             <>
-            <pre>
-                {JSON.stringify(this.props.patient.id, null, 2)}
-            </pre>
-            <pre>
-                {/* {JSON.stringify(this.props.primaryTumorReducer, null, 2)} */}
-            </pre>
             <Grid
             container
             direction="row"
@@ -156,7 +152,7 @@ class PrimaryTumorPage extends Component {
                                 fullWidth="true"
                                 onChange={this.handleChange}
                                 name="date_primary_diagnosis"
-                                value={this.state.date_primary_diagnosis}
+                                value={moment(this.state.date_primary_diagnosis).format('YYYY-MM-DD')}
                                 />
                             </Grid>
                             <Grid item xs={6} className={classes.gridItem}>
@@ -380,7 +376,7 @@ class PrimaryTumorPage extends Component {
                                 fullWidth="true"
                                 onChange={this.handleChange}
                                 name="date_prime_surgery"
-                                value={this.state.date_prime_surgery}
+                                value={moment(this.state.date_prime_surgery).format('YYYY-MM-DD')}
                                 />
                             </Grid >
                             <Grid item xs={6} className={classes.gridItem}>
@@ -469,14 +465,14 @@ class PrimaryTumorPage extends Component {
                                 <FormLabel component="legend">Adj Chemotherapy</FormLabel>
                                     <RadioGroup
                                         aria-label="adj"
-                                        name="adj"
+                                        name="adj_chemotherapy"
                                         className={classes.group}
-                                        value={this.state.adj}
+                                        value={this.state.adj_chemotherapy}
                                         onChange={this.handleChange}
                                     >
-                                        <FormControlLabel value='true' control={<Radio />} label="Yes" />
-                                        <FormControlLabel value='false' control={<Radio />} label="No" />
-                                        <FormControlLabel value='null' control={<Radio />} label="Unknown" />
+                                        <FormControlLabel value='1' control={<Radio />} label="Yes" />
+                                        <FormControlLabel value='2' control={<Radio />} label="No" />
+                                        <FormControlLabel value='3' control={<Radio />} label="Unknown" />
 
                                     </RadioGroup>
                                 </FormControl>
@@ -494,12 +490,12 @@ class PrimaryTumorPage extends Component {
                             <Grid item xs={6} className={classes.gridItem} align="center">
                                 <FormControl variant="outlined" style={{width: 200}}>
                                     <Select
-                                        value={this.state.type}
+                                        value={this.state.adj_chemotherapy_type}
                                         onChange={this.handleChange}
                                         input={
                                         <OutlinedInput
-                                            value={this.state.type}
-                                            name="type"
+                                            value={this.state.adj_chemotherapy_type}
+                                            name="adj_chemotherapy_type"
                                             id="type"
                                         />
                                         }
@@ -547,9 +543,10 @@ class PrimaryTumorPage extends Component {
                                     variant="outlined"
                                     label="Notes"
                                 />
-                            </Grid>
+                            </Grid> 
                             <Grid item xs={12} className={classes.gridItem} onClick={this.updateEntriesInDB}>
-                                <Button color="primary">
+                                <Button onClick={this.upsertEntriesInDB} className={classes.button}
+                                    variant="contained" color="primary">
                                     Save
                                 </Button>
                             </Grid>

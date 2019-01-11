@@ -8,23 +8,13 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import MenuItem from '@material-ui/core/MenuItem';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import Grid from '@material-ui/core/Grid';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Switch from '@material-ui/core/Switch';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
+import moment from 'moment';
 
 
 
@@ -391,7 +381,7 @@ class PSDSSPage extends Component {
                         fullWidth="true"
                         onChange={this.handleChange}
                         name="date_treatment"
-                        value={this.state.date_treatment}
+                        value={moment(this.state.date_treatment).format('YYYY-MM-DD')}
                         />
                     </Grid>
                     <Grid item xs={12} className={classes.gridItem}>
