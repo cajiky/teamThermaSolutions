@@ -94,10 +94,9 @@ class PrimaryTumorPage extends Component {
     // getDropDownOptions = () => {
     //     this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'})
     // }
-    updateReduxState = () => {
-        this.props.dispatch({type: 'UPDATE_INIT_FIELDS', payload: this.state})
-    }
-
+    // updateReduxState = () => {
+    //     this.props.dispatch({type: 'UPDATE_INIT_FIELDS', payload: this.state})
+    // }
 
     handleChange = (event) => {
         this.setState ({
@@ -112,7 +111,6 @@ class PrimaryTumorPage extends Component {
     componentDidMount() {
         // this.getDropDownOptions();
         // this.getInitialValues();
-
         console.log('Inside compDidMount to check reducer status',this.props.primaryTumorReducer)
         this.setValuesForPatient();
     }
