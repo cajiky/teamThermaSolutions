@@ -15,6 +15,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
+import moment from 'moment';
 
 const styles = theme => ({
     gridItem:{
@@ -33,34 +34,68 @@ const styles = theme => ({
 
 class IntakePage extends Component {
     state = {
-        bmi_auto: '(auto)',
-        length_m: this.props.patient.weight_kg,
-        weight_kg: this.props.patient.length_m,
-        id: this.props.patient.id,
-        patient_id: this.props.patient.patient_id,
-        crp: this.props.patient.crp,
-        ca125: this.props.patient.ca125,
-        leucocyte: this.props.patient.leucocyte,
-        smoking: this.props.patient.smoking,
-        diabetes: this.props.patient.diabetes,
-        insulin_dependant: this.props.patient.insulin_dependant,
-        cardiovascular: this.props.patient.cardiovascular,
-        hypertension: this.props.patient.hypertension,
-        stoma_pre_hipec: this.props.patient.stoma_pre_hipec,
-        stoma_type: this.props.patient.stoma_type,
-        neo_adjuvant_chemo: this.props.patient.neo_adjuvant_chemo,
-        neo_adjuvant_chemo_type: this.props.patient.neo_adjuvant_chemo_type,
-        biological: this.props.patient.biological,
-        notes: this.props.patient.notes,
-        diagnostic_scopy: this.props.patient.diagnostic_scopy,
-        date_scopy: this.props.patient.date_scopy,
-        scopy_conclusion: this.props.patient.scopy_conclusion,
-        scopy_notes: this.props.patient.scopy_notes,
-        syn_metachronous: this.props.patient.syn_metachronous,
-        date_diagnosis_pc: this.props.patient.date_diagnosis_pc,
-        assessment_of_pss: this.props.patient.assessment_of_pss,
-        asa_score_date_time_stamp: this.props.patient.asa_score_date_time_stamp,
-        date: this.props.patient.date,
+        bmi_auto: '',
+        length_m: '',
+        weight_kg: '',
+        id: '',
+        patient_id: '',
+        crp: '',
+        ca125: '',
+        leucocyte: '',
+        smoking: '',
+        diabetes: '',
+        insulin_dependant: '',
+        cardiovascular: '',
+        hypertension: '',
+        stoma_pre_hipec: '',
+        stoma_type: '',
+        neo_adjuvant_chemo: '',
+        neo_adjuvant_chemo_type: '',
+        biological: '',
+        notes: '',
+        diagnostic_scopy: '',
+        date_scopy: '',
+        scopy_conclusion: '',
+        scopy_notes: '',
+        syn_metachronous: '',
+        date_diagnosis_pc: '',
+        assessment_of_pss: '',
+        asa_score_date_time_stamp: '',
+        date: '',
+    }
+
+    setInitialState = () => {
+        this.setState ({
+            ...this.state,
+            bmi_auto: this.props.intake.bmi_auto,
+            length_m: this.props.intake.length_m,
+            weight_kg: this.props.intake.weight_kg,
+            id: this.props.intake.id,
+            patient_id: this.props.intake.patient_id,
+            crp: this.props.intake.crp,
+            ca125: this.props.intake.ca125,
+            leucocyte: this.props.intake.leucocyte,
+            smoking: this.props.intake.smoking,
+            diabetes: this.props.intake.diabetes,
+            insulin_dependant: this.props.intake.insulin_dependant,
+            cardiovascular: this.props.intake.cardiovascular,
+            hypertension: this.props.intake.hypertension,
+            stoma_pre_hipec: this.props.intake.stoma_pre_hipec,
+            stoma_type: this.props.intake.stoma_type,
+            neo_adjuvant_chemo: this.props.intake.neo_adjuvant_chemo,
+            neo_adjuvant_chemo_type: this.props.intake.neo_adjuvant_chemo_type,
+            biological: this.props.intake.biological,
+            notes: this.props.intake.notes,
+            diagnostic_scopy: this.props.intake.diagnostic_scopy,
+            date_scopy: this.props.intake.date_scopy,
+            scopy_conclusion: this.props.intake.scopy_conclusion,
+            scopy_notes: this.props.intake.scopy_notes,
+            syn_metachronous: this.props.intake.syn_metachronous,
+            date_diagnosis_pc: this.props.intake.date_diagnosis_pc,
+            assessment_of_pss: this.props.intake.assessment_of_pss,
+            asa_score_date_time_stamp: this.props.intake.asa_score_date_time_stamp,
+            date: this.props.intake.date,
+        }) 
     }
 
     //Function to calculate the bmi for the patient.
@@ -85,18 +120,17 @@ class IntakePage extends Component {
         // console.log(this.state);
     }
     
-    // getInitialState = () => {
-    //     let patientId = document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-    //     console.log(patientId);
-    //     this.props.dispatch({type:'GET_INITIAL_DATA_FOR_INTAKE', payload: patientId.id });
-    // }
     updateEntriesInDB = () => {
         this.props.dispatch({type: 'UPSERT_DATA_FOR_INTAKE', payload: {state: this.state, id: this.props.patient.patient.id}})
         console.log('RUNNING UPDATEENTRIESINDB Function')
     }
 
     componentDidMount(){
+        this.setInitialState();
+    }
 
+    componentWillUnmount(){
+        this.updateEntriesInDB();
     }
 
     render() {
@@ -180,8 +214,8 @@ class IntakePage extends Component {
                                     style={{width:150}}
                                     onChange={this.handleChange}
                                     name="crp"
-                                    vlaue={this.state.crp}
-                                    id="copInput"
+                                    value={this.state.crp}
+                                    id="leucocyte"
                                 />
                             </Grid>
                             <Grid item xs={4} className={classes.gridItem}>
@@ -443,13 +477,14 @@ class IntakePage extends Component {
                                     fullWidth="true"
                                     onChange={this.handleChange}
                                     name="date_scopy"
-                                    value={this.state.date_scopy}
+                                    value={moment(this.state.date_scopy).format('YYYY-MM-DD')}
                                     />
                                 </Grid>
                                 <Grid item xs={12} className={classes.gridItem} onClick={this.updateEntriesInDB}>
-                                <Button color="primary">
-                                    Save
-                                </Button>
+                                    <Button onClick={this.upsertEntriesInDB} className={classes.button}
+                                        variant="contained" color="primary">
+                                        Save
+                                    </Button>
                             </Grid>
                             </Grid>
                         </Grid>
@@ -462,6 +497,7 @@ class IntakePage extends Component {
 };
 
 const mapStateToProps = reduxState => ({
+    intake: reduxState.intakeReducer,
     patient: reduxState.patientReducer,
     dropdownOptions: reduxState.dropdownOptions,
 });

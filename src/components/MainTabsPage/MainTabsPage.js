@@ -59,6 +59,7 @@ state = {
     // this.props.dispatch({type: 'TEST_PATIENT'});
     this.props.dispatch({ type: 'GET_PCI_TOTAL', payload: patientId });
     this.props.dispatch({type: 'GET_INITIAL_DATA_FOR_INTAKE', payload: patientId});
+    this.props.dispatch({type: 'GET_INITIAL_DATA_FOR_PSDSS', payload: patientId});
     // console.log('patient id:', patientId);
     // this.props.dispatch({type: 'TEST_PATIENT'});
   }

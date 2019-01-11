@@ -6,8 +6,9 @@ function* getInitalDataForIntake(action) {
     console.log('Getting init values for intake page', action.payload);
     
     try {
-        const response = yield call(axios.post, `/api/intake/getDataFor`, {id: 1});
-        yield put({ type: 'SET_INIT_VALUES', payload: response.data } )
+        console.log(action.payload, 'this is our action.payload for our get init data on the intake saga')
+        const response = yield axios.get( `/api/intake/${action.payload}`);
+        yield put({ type: 'SET_INITAL_DATA_FOR_INTAKE', payload: response.data } )
 
     } catch (error) {
         console.log(error);
@@ -18,7 +19,8 @@ function* sendUpdatedDataToDB(action) {
     console.log('SENDING DATA TO DB FOR THE INTAKE PAGE', action.payload)
     try {
         const response = yield call(axios.post, '/api/intake/', action.payload);
-        yield put({type: 'SET_INIT_VALUES', payload: response.data})
+        yield put({type: 'SET_INITAL_DATA_FOR_INTAKE', payload: response.data})
+        console.log(response.data);
     }
     catch(error){
         console.log(error)
