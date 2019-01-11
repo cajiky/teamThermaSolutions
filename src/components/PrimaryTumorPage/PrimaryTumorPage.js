@@ -85,9 +85,9 @@ class PrimaryTumorPage extends Component {
         console.log('RUNNING UPDATEENTRIESINDB Function')
     }
 
-    getInitialValues = (id) => {
-        this.props.dispatch({type: 'GET_INITIAL_VALUES', payload: id})
-    }
+    // getInitialValues = (id) => {
+    //     this.props.dispatch({type: 'GET_INITIAL_VALUES', payload: id})
+    // }
 
     // getDropDownOptions = () => {
     //     this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'})
@@ -101,14 +101,15 @@ class PrimaryTumorPage extends Component {
         this.setState ({
             ...this.state,
             [event.target.name]: event.target.value,
-        },this.setValuesForPatient())
+        }
+        // this.setValuesForPatient()
+        )
         console.log(this.state);
-        
     }
 
     componentDidMount() {
         // this.getDropDownOptions();
-        this.getInitialValues();
+        // this.getInitialValues();
 
         console.log('Inside compDidMount to check reducer status',this.props.primaryTumorReducer)
         this.setValuesForPatient();

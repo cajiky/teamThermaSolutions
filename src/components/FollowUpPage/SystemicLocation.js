@@ -17,7 +17,7 @@ class SystemicLocation extends Component {
 
   renderOptions() {
     // 
-    return this.props.reduxState.dropdownOptions.systemicLocationOptions.map((option, i) => {
+    return this.props.systemicLocationOptions.map((option, i) => {
       return (
         <MenuItem
           key={i}
@@ -54,7 +54,7 @@ class SystemicLocation extends Component {
 } // end class SystemicLocation
 
 const mapReduxStateToProps = (reduxState) => ({
-  reduxState
+  systemicLocationOptions: reduxState.dropdownOptions.systemicLocationOptions
 });
 
 export default connect(mapReduxStateToProps)(withStyles(styles)(SystemicLocation));

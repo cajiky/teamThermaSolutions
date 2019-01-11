@@ -46,7 +46,7 @@ class AdjuvantChemotherapy extends Component {
   render(){
     const { classes } = this.props;
     const myValue = this.props.adjuvant_chemo + '';
-    console.log('chemo?', myValue);
+    // console.log('chemo?', myValue);
     return (
 
       <FormControl component="fieldset" className={classes.formControl}>
@@ -67,8 +67,9 @@ class AdjuvantChemotherapy extends Component {
   } // end return
 } // end class TagSelector
 
-const mapReduxStateToProps = (reduxState) => ({
-  reduxState
-});
+// const mapReduxStateToProps = (reduxState) => ({
+//   reduxState
+// });
 
-export default connect(mapReduxStateToProps)(withStyles(styles)(AdjuvantChemotherapy));
+// export default connect(mapReduxStateToProps)(withStyles(styles)(AdjuvantChemotherapy));
+export default (withStyles(styles)(AdjuvantChemotherapy));

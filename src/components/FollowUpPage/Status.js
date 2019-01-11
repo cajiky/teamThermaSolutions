@@ -17,7 +17,7 @@ class Status extends Component {
 
   renderOptions() {
     // 
-    return this.props.reduxState.dropdownOptions.currentStatusOptions.map((option, i) => {
+    return this.props.currentStatusOptions.map((option, i) => {
       return (
         <MenuItem
           key={i}
@@ -54,7 +54,7 @@ class Status extends Component {
 } // end class Location
 
 const mapReduxStateToProps = (reduxState) => ({
-  reduxState
+  currentStatusOptions: reduxState.dropdownOptions.currentStatusOptions
 });
 
 export default connect(mapReduxStateToProps)(withStyles(styles)(Status));

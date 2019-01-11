@@ -20,7 +20,7 @@ class ChemotherapyType extends Component {
 
   renderOptions() {
     // 
-    return this.props.reduxState.dropdownOptions.adjChemoTypeOptions.map((option, i) => {
+    return this.props.adjChemoTypeOptions.map((option, i) => {
       return (
         <MenuItem
           key={i}
@@ -57,7 +57,7 @@ class ChemotherapyType extends Component {
 } // end class TagSelector
 
 const mapReduxStateToProps = (reduxState) => ({
-  reduxState
+  adjChemoTypeOptions: reduxState.dropdownOptions.adjChemoTypeOptions
 });
 
 export default connect(mapReduxStateToProps)(withStyles(styles)(ChemotherapyType));

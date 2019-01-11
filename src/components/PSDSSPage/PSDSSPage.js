@@ -71,20 +71,22 @@ class PSDSSPage extends Component {
     handleChange = (event) => {
         this.setState ({
             [event.target.name]: event.target.value,
-        }, this.calculatePSDSS)
+        }
+        // , this.calculatePSDSS
+        )
         console.log(this.state);
     }
 
     //function in charge of calculating PSDSS Score
-    calculatePSDSS = () => {
-        const clin = Number(this.state.clinicalScore);
-        const pci = Number(this.state.pciScore);
-        const hist = Number(this.state.histologyScore);
-        const calculatedNum = clin + pci + hist;
-            this.setState({
-                psdssScore: calculatedNum,
-            })
-    }
+    // calculatePSDSS = () => {
+    //     const clin = Number(this.state.clinicalScore);
+    //     const pci = Number(this.state.pciScore);
+    //     const hist = Number(this.state.histologyScore);
+    //     const calculatedNum = clin + pci + hist;
+    //         this.setState({
+    //             psdssScore: calculatedNum,
+    //         })
+    // }
     
     //Function in charge of toggling switches from true to false and viceverse
     toggleSwitch = (event) => {
@@ -340,7 +342,7 @@ class PSDSSPage extends Component {
                                     <MenuItem value="">
                                         <em>None</em>
                                     </MenuItem>
-                                    {this.props.reduxState.dropdownOptions.timingTreamentOptions.map(time => (
+                                    {this.props.timingTreamentOptions.map(time => (
                                         <MenuItem key={time.id} value={time.id}>{time.status}</MenuItem> 
                                     ))} 
                             </Select>
@@ -381,7 +383,7 @@ class PSDSSPage extends Component {
                                     <MenuItem value="">
                                         <em>None</em>
                                     </MenuItem>
-                                    {this.props.reduxState.dropdownOptions.treamentTypeOptions.map(type => (
+                                    {this.props.treamentTypeOptions.map(type => (
                                         <MenuItem key={type.id} value={type.id}>{type.status}</MenuItem> 
                                     ))} 
                             </Select>
@@ -404,16 +406,13 @@ class PSDSSPage extends Component {
                 </Grid>
             </Grid>
             </Grid>
-
-
         )
     }
-  
 };
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+    timingTreamentOptions: reduxState.dropdownOptions.timingTreamentOptions,
+    treamentTypeOptions: reduxState.dropdownOptions.treamentTypeOptions
 });
-
 
 export default connect(mapStateToProps) (withStyles(styles)(PSDSSPage))

@@ -111,7 +111,7 @@ const styles = theme => ({
                                         />
                                         }
                                     >
-                                        {this.props.reduxState.dropdownOptions.stomaTypeOptions.map( option => {
+                                        {this.props.stomaTypeOptions.map( option => {
                                             return(
                                                 <MenuItem key={option.index} value={option.id}>{option.status}</MenuItem>
                                             )
@@ -171,7 +171,7 @@ const styles = theme => ({
                                         }
                                     >
 
-                                        {this.props.reduxState.dropdownOptions.hipecRegimentOptions.map( option => {
+                                        {this.props.hipecRegimentOptions.map( option => {
                                             return(
                                                 <MenuItem key={option.index} value={option.id}>{option.status}</MenuItem>
                                             )
@@ -199,7 +199,7 @@ const styles = theme => ({
                                         }
                                     >
 
-                                        {this.props.reduxState.dropdownOptions.duration.map( option => {
+                                        {this.props.duration.map( option => {
                                             return(
                                                 <MenuItem key={option.index} value={option.value}>{option.status}</MenuItem>
                                             )
@@ -255,7 +255,7 @@ const styles = theme => ({
                                         }
                                     >
 
-                                        {this.props.reduxState.dropdownOptions.rScoreOptions.map( option => {
+                                        {this.props.rScoreOptions.map( option => {
                                             return(
                                                 <MenuItem key={option.index} value={option.id}>{option.status}</MenuItem>
                                             )
@@ -278,7 +278,10 @@ const styles = theme => ({
   };
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+    stomaTypeOptions: reduxState.dropdownOptions.stomaTypeOptions,
+    hipecRegimentOptions: reduxState.dropdownOptions.hipecRegimentOptions,
+    rScoreOptions: reduxState.dropdownOptions.rScoreOptions,
+    duration: reduxState.dropdownOptions.duration,
 });
 
 

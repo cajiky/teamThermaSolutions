@@ -16,6 +16,7 @@ router.get(`/:key`, (req, res) => {
                     WHERE patients.patient_no = $1;`;
     pool.query(sqlText, [patientId])
         .then( rows => {
+            console.log('This is the result rows from get::',rows.rows[0]);
             patientSearch = rows.rows[0];
             result = {patientSearch: patientSearch};
             console.log('This is the result patient search',result.patientSearch);
@@ -39,9 +40,9 @@ router.get(`/:key`, (req, res) => {
 router.get((req, res) => {
     const sqlText = `SELECT * FROM patients ORDER BY id DESC LIMIT 1;`;
     pool.query(sqlText).then( rows => {
-        newPatientId = rows.rows[0].id
+        newPatientId = rows.rows[0].id;
         console.log(newPatientId);
-        result = {newPatientId}
+        result = {newPatientId};
         res.send(result);
 })
 .catch((error) => {
@@ -53,9 +54,10 @@ router.get((req, res) => {
 /**
  * POST route template
  */
-router.post('/', async(req, res) => {
+// router.post('/', async(req, res) => {
+router.post('/', (req, res) => {
     let newPatientObj = req.body;
-    console.log(newPatientObj);
+    console.log('Inside post to database', newPatientObj);
     const sqlText = `INSERT INTO patients (toc_id, patient_no, dob, gender, referral_date, hipec_date, diagnosis_date, sensor, hospital_telephone, referring_doctor, notes, current_status, interval_prime_surgery, survival_hipec_last_contact, survival_hipec_death, interval_diagnosis_pc_hipec) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING id`;
     pool.query(sqlText, [newPatientObj.toc, newPatientObj.patient_no, newPatientObj.dob, newPatientObj.gender, newPatientObj.dateOfReferral, newPatientObj.dateOfHipec, newPatientObj.diagnosisDate, newPatientObj.sensor, newPatientObj.hospitalTel, newPatientObj.refDoc, newPatientObj.notes, newPatientObj.currentStatus, newPatientObj.ipshipec, newPatientObj.survivalhipeclastcontact, newPatientObj.survivalhipecdeath, newPatientObj.intervalDiagnosisPcHipec])
       .then((response) => {

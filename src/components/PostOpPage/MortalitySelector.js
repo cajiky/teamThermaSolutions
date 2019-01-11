@@ -79,8 +79,4 @@ class MortalitySelector extends Component {
   } // end return
 } // end class TagSelector
 
-const mapReduxStateToProps = (reduxState) => ({
-  reduxState
-});
-
-export default connect(mapReduxStateToProps)(withStyles(styles)(MortalitySelector));
+export default (withStyles(styles)(MortalitySelector));

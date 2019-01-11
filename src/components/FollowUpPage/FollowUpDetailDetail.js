@@ -219,5 +219,4 @@ const mapStateToProps = reduxState => ({
     followUpHistory: reduxState.followUpHistory
 });
 
-
 export default connect(mapStateToProps) (withStyles(styles)(FollowUpDetailDetail));

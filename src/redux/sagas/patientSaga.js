@@ -28,11 +28,8 @@ function* addNewPatient(action) {
     yield call(axios.post, '/api/add-a-patient', action.payload.patientObject);
     console.log('Payload from add-a-patient', action.payload);
     // yield put({ type: 'SET_PATIENT', payload: action.payload.patientObject });
-    document.cookie = `patientID=${action.payload.patientObject.patient_no}`;
-    // console.log('IN ADD PATIENT', document.cookie);
-    // debugger;
-    action.payload.history.push(`/MainTabsPage`);
-    // action.payload.history.push('/info');
+    // document.cookie = `patientID=${action.payload.patientObject.patient_no}`;
+    // action.payload.history.push(`/MainTabsPage`);
     }
     catch (error) {
         console.log('there was an error with your POST', error);
@@ -40,11 +37,12 @@ function* addNewPatient(action) {
 }
 
 function* setPatientFromCookie(action) {
-    try{
+    try {
+        console.log('CALL TO FIND-A-PATIENT', action.payload);
         const response = yield call(axios.get,`/api/find-a-patient/${action.payload}`);
         yield put({type: 'SET_PATIENT_RESULT', payload: response.data.patientSearch});
     }
-    catch{
+    catch {
         console.log('error in our setPatientFromCookie SAGA');
     }
 }

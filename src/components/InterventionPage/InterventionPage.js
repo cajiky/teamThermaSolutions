@@ -129,70 +129,70 @@ const styles = theme => ({
     }
 
     componentDidMount(){
-        {this.props.reduxState.pciReducer[0] !== undefined ? 
+        {this.props.intervention !== undefined ? 
         (
             this.setState({
                 changesMade: false,
-                central: this.props.reduxState.pciReducer[0].pci_0,
-                rightUpper: this.props.reduxState.pciReducer[0].pci_1,
-                Epigastrium: this.props.reduxState.pciReducer[0].pci_2,
-                leftUpper: this.props.reduxState.pciReducer[0].pci_3,
-                leftFlank: this.props.reduxState.pciReducer[0].pci_4,
-                leftLower: this.props.reduxState.pciReducer[0].pci_5,
-                pelvisPCI: this.props.reduxState.pciReducer[0].pci_6,
-                rightLower: this.props.reduxState.pciReducer[0].pci_7,
-                rightFlank: this.props.reduxState.pciReducer[0].pci_8,
-                upperJejunum: this.props.reduxState.pciReducer[0].pci_9,
-                lowerJejunum: this.props.reduxState.pciReducer[0].pci_10,
-                upperIlium: this.props.reduxState.pciReducer[0].pci_11,
-                lowerIlium: this.props.reduxState.pciReducer[0].pci_12,
-                PCITotal: this.props.reduxState.pciReducer[0].pci_score,
-                surgeonOne: this.props.reduxState.pciReducer[0].surgeon_1,
-                surgeonTwo:this.props.reduxState.pciReducer[0].surgeon_2,
-                surgeonThree: this.props.reduxState.pciReducer[0].surgeon_3,
-                nrHipec: this.props.reduxState.pciReducer[0].nrhipec,
-                hipecType: this.props.reduxState.pciReducer[0].hipec_type,
-                reasonOC:this.props.reduxState.pciReducer[0].reason_oc,
-                anastomosis: this.props.reduxState.pciReducer[0].anastomosis ,
-                AnastomosisNumber: this.props.reduxState.pciReducer[0].anastomosis_number , 
-                revisionStoma: this.props.reduxState.pciReducer[0].revision_stoma ,
-                stomaType: this.props.reduxState.pciReducer[0].stoma_post_hipec_type ,
-                bloodLoss: this.props.reduxState.pciReducer[0].bloodloss ,
-                volume: this.props.reduxState.pciReducer[0].volume ,
-                hipecRegiment: this.props.reduxState.pciReducer[0].hipec_regiment ,
-                bloodLossTime: this.props.reduxState.pciReducer[0].time,
-                concentration: this.props.reduxState.pciReducer[0].concentration,
-                rScore: this.props.reduxState.pciReducer[0].r_score,
-                duration: this.props.reduxState.pciReducer[0].duration,
-                stomaPostHIPEC: this.props.reduxState.pciReducer[0].stoma_post_hipec, 
-                // checked: this.props.reduxState.pciReducer[0][status],
+                central: this.props.intervention.pci_0,
+                rightUpper: this.props.intervention.pci_1,
+                Epigastrium: this.props.intervention.pci_2,
+                leftUpper: this.props.intervention.pci_3,
+                leftFlank: this.props.intervention.pci_4,
+                leftLower: this.props.intervention.pci_5,
+                pelvisPCI: this.props.intervention.pci_6,
+                rightLower: this.props.intervention.pci_7,
+                rightFlank: this.props.intervention.pci_8,
+                upperJejunum: this.props.intervention.pci_9,
+                lowerJejunum: this.props.intervention.pci_10,
+                upperIlium: this.props.intervention.pci_11,
+                lowerIlium: this.props.intervention.pci_12,
+                PCITotal: this.props.intervention.pci_score,
+                surgeonOne: this.props.intervention.surgeon_1,
+                surgeonTwo:this.props.intervention.surgeon_2,
+                surgeonThree: this.props.intervention.surgeon_3,
+                nrHipec: this.props.intervention.nrhipec,
+                hipecType: this.props.intervention.hipec_type,
+                reasonOC:this.props.intervention.reason_oc,
+                anastomosis: this.props.intervention.anastomosis ,
+                AnastomosisNumber: this.props.intervention.anastomosis_number , 
+                revisionStoma: this.props.intervention.revision_stoma ,
+                stomaType: this.props.intervention.stoma_post_hipec_type ,
+                bloodLoss: this.props.intervention.bloodloss ,
+                volume: this.props.intervention.volume ,
+                hipecRegiment: this.props.intervention.hipec_regiment ,
+                bloodLossTime: this.props.intervention.time,
+                concentration: this.props.intervention.concentration,
+                rScore: this.props.intervention.r_score,
+                duration: this.props.intervention.duration,
+                stomaPostHIPEC: this.props.intervention.stoma_post_hipec, 
+                // checked: this.props.intervention[status],
                 // StomaPostHIPECType: '',
-                ovaries: this.props.reduxState.pciReducer[0].ovaries,
-                uterus: this.props.reduxState.pciReducer[0].uterus,
-                omentum:this.props.reduxState.pciReducer[0].omentum,
-                rectum:this.props.reduxState.pciReducer[0].rectum ,
-                sigmoid:this.props.reduxState.pciReducer[0].sigmoid,
-                left_colon:this.props.reduxState.pciReducer[0].left_colon,
-                transverse_colon:this.props.reduxState.pciReducer[0].transverse_colon,
-                right_colon:this.props.reduxState.pciReducer[0].right_colon,
-                ileocaecal: this.props.reduxState.pciReducer[0].ileocaecal,
-                appendix:this.props.reduxState.pciReducer[0].appendix,
-                duodenum:this.props.reduxState.pciReducer[0].duodenum,
-                jejunum: this.props.reduxState.pciReducer[0].jejunum,
-                ileum:this.props.reduxState.pciReducer[0].ileum,
-                gallbladder: this.props.reduxState.pciReducer[0].gallbladder,
-                stomach: this.props.reduxState.pciReducer[0].stomach,
-                spleen:this.props.reduxState.pciReducer[0].spleen,
-                diagphram_l:this.props.reduxState.pciReducer[0].diagphram_l,
-                diagphram_r:this.props.reduxState.pciReducer[0].diagphram_r,
-                pancreas:this.props.reduxState.pciReducer[0].pancreas,
-                bladder:this.props.reduxState.pciReducer[0].bladder,
-                urether:this.props.reduxState.pciReducer[0].urether,
-                lymphnodes:this.props.reduxState.pciReducer[0].lymphnodes,
-                left_peritoneum:this.props.reduxState.pciReducer[0].left_peritoneum,
-                right_peritoneum:this.props.reduxState.pciReducer[0].right_peritoneum,
-                peritoneum:this.props.reduxState.pciReducer[0].peritoneum,
-                pelvis:this.props.reduxState.pciReducer[0].pelvis,
+                ovaries: this.props.intervention.ovaries,
+                uterus: this.props.intervention.uterus,
+                omentum:this.props.intervention.omentum,
+                rectum:this.props.intervention.rectum ,
+                sigmoid:this.props.intervention.sigmoid,
+                left_colon:this.props.intervention.left_colon,
+                transverse_colon:this.props.intervention.transverse_colon,
+                right_colon:this.props.intervention.right_colon,
+                ileocaecal: this.props.intervention.ileocaecal,
+                appendix:this.props.intervention.appendix,
+                duodenum:this.props.intervention.duodenum,
+                jejunum: this.props.intervention.jejunum,
+                ileum:this.props.intervention.ileum,
+                gallbladder: this.props.intervention.gallbladder,
+                stomach: this.props.intervention.stomach,
+                spleen:this.props.intervention.spleen,
+                diagphram_l:this.props.intervention.diagphram_l,
+                diagphram_r:this.props.intervention.diagphram_r,
+                pancreas:this.props.intervention.pancreas,
+                bladder:this.props.intervention.bladder,
+                urether:this.props.intervention.urether,
+                lymphnodes:this.props.intervention.lymphnodes,
+                left_peritoneum:this.props.intervention.left_peritoneum,
+                right_peritoneum:this.props.intervention.right_peritoneum,
+                peritoneum:this.props.intervention.peritoneum,
+                pelvis:this.props.intervention.pelvis,
               
             })
         ):(
@@ -345,7 +345,7 @@ const styles = theme => ({
               onClick: () => this.props.dispatch({ type: 'POST_INTERVENTION_PAGE', 
               payload: {
                   interventionState: this.state,
-                  userId: this.props.reduxState.patientReducer.patient.id
+                  userId: this.props.patient.patient.id
               }
                })
             },
@@ -846,7 +846,7 @@ const styles = theme => ({
                                             />
                                             }
                                         >
-                                            {this.props.reduxState.dropdownOptions.hipecTypeOptions.map( option => {
+                                            {this.props.hipecTypeOptions.map( option => {
                                                 return(
                                                     <MenuItem key={option.index} value={option.id}>{option.status}</MenuItem>
                                                 )
@@ -876,7 +876,7 @@ const styles = theme => ({
                                             />
                                             }
                                         >
-                                        {this.props.reduxState.dropdownOptions.reasonOpenCloseOption.map( option => {
+                                        {this.props.reasonOpenCloseOption.map( option => {
                                                 return(
                                                     <MenuItem key={option.index} value={option.id}>{option.status}</MenuItem>
                                                 )
@@ -905,7 +905,10 @@ const styles = theme => ({
   };
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+    intervention: reduxState.pciReducer[0],
+    patient: reduxState.patientReducer,
+    hipecTypeOptions: reduxState.dropdownOptions.hipecTypeOptions,
+    reasonOpenCloseOption: reduxState.dropdownOptions.reasonOpenCloseOption,
 });
 
 

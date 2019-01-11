@@ -18,7 +18,7 @@ class Modality extends Component {
   renderOptions() {
     // 
     console.log('this.props.recurrence', this.props.recurrence)
-    return this.props.reduxState.dropdownOptions.recModalityOptions.map((option, i) => {
+    return this.props.recModalityOptions.map((option, i) => {
       return (
         <MenuItem
           key={i}
@@ -55,7 +55,7 @@ class Modality extends Component {
 } // end class Modality
 
 const mapReduxStateToProps = (reduxState) => ({
-  reduxState
+  recModalityOptions: reduxState.dropdownOptions.recModalityOptions
 });
 
 export default connect(mapReduxStateToProps)(withStyles(styles)(Modality));
