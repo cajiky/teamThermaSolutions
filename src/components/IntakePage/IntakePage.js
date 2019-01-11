@@ -118,11 +118,6 @@ class IntakePage extends Component {
         console.log(this.state);
     }
     
-    // getInitialState = () => {
-    //     let patientId = document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-    //     console.log(patientId);
-    //     this.props.dispatch({type:'GET_INITIAL_DATA_FOR_INTAKE', payload: patientId.id });
-    // }
     updateEntriesInDB = () => {
         this.props.dispatch({type: 'UPSERT_DATA_FOR_INTAKE', payload: {state: this.state, id: this.props.patient.patient.id}})
         console.log('RUNNING UPDATEENTRIESINDB Function')
@@ -141,12 +136,12 @@ class IntakePage extends Component {
             justify="space-evenly"
             alignItems="flex-start"
             >
-            {/* <pre>
+            <pre>
                 {JSON.stringify(this.state, null, 2)}
             </pre>
             <pre>
                 {JSON.stringify(this.props.intake, null, 2)}
-            </pre> */}
+            </pre>
             {/* Start of the fist column on the page  */}
                 <Grid item xs={5}>
                     <Grid
@@ -219,8 +214,8 @@ class IntakePage extends Component {
                                     style={{width:150}}
                                     onChange={this.handleChange}
                                     name="crp"
-                                    vlaue={this.state.crp}
-                                    id="copInput"
+                                    value={this.state.crp}
+                                    id="leucocyte"
                                 />
                             </Grid>
                             <Grid item xs={4} className={classes.gridItem}>
