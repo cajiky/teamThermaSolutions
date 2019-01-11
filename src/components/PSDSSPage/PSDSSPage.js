@@ -24,6 +24,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Switch from '@material-ui/core/Switch';
 import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button';
 
 
 
@@ -60,11 +61,32 @@ const styles = theme => ({
 
 class PSDSSPage extends Component {
     state = {
-        clinicalScore: '',
-        pciScore: '',
-        histologyScore: '',
-        psdssScore: '(Auto)',
-        slm: false,
+        clinical: '',
+        pci: '',
+        histology: '',
+        synchronous_liver_treatment: false,
+        timing: '',
+        date_treatment: '',
+        treatment_type: '',
+        notes: '',
+        total: '(auto)',
+    }
+
+    //Function to set the state of the component equal to the redux state
+    setInitialState = () => {
+        this.setState({
+            ...this.state,
+            patient_id: this.props.psdss.patient_id,
+            clinical: this.props.psdss.clinical,
+            pci: this.props.psdss.pci,
+            histology: this.props.psdss.histology,
+            synchronous_liver_treatment: this.props.psdss.synchronous_liver_treatment,
+            timing: this.props.psdss.timing,
+            date_treatment: this.props.psdss.date_treatment,
+            treatment_type: this.props.psdss.treatment_type,
+            notes: this.props.psdss.notes,
+            total: this.props.psdss.total,
+        })
     }
 
     //Function to handle the changes in our inputs and selectors.
@@ -77,12 +99,12 @@ class PSDSSPage extends Component {
 
     //function in charge of calculating PSDSS Score
     calculatePSDSS = () => {
-        const clin = Number(this.state.clinicalScore);
-        const pci = Number(this.state.pciScore);
-        const hist = Number(this.state.histologyScore);
+        const clin = Number(this.state.clinical);
+        const pci = Number(this.state.pci);
+        const hist = Number(this.state.histology);
         const calculatedNum = clin + pci + hist;
             this.setState({
-                psdssScore: calculatedNum,
+                total: calculatedNum,
             })
     }
     
@@ -92,6 +114,19 @@ class PSDSSPage extends Component {
             [event.target.name]: event.target.checked
         })
         console.log(this.state);
+    }
+
+    //Function to update or set a new row.
+    upsertEntriesInDB = () => {
+        this.props.dispatch({type: 'UPSERT_DATA_FOR_PSDSS', payload: {state: this.state, id: this.props.patient.patient.id}})
+    }
+
+    componentDidMount(){
+        this.setInitialState();
+    }
+
+    componentWillUnmount(){
+        this.upsertEntriesInDB();
     }
 
     render() {
@@ -209,9 +244,6 @@ class PSDSSPage extends Component {
                                 <Grid item xs={12} className={classes.gridItem} align="center">
                                     <Divider variant="fullWidth"></Divider>
                                 </Grid>
-                                <Grid item xs={12} className={classes.gridItem} align="center">
-                                    <Divider variant="fullWidth"></Divider>
-                                </Grid>
                                 <Grid item xs={4} className={classes.gridItem} align="center">
                                     <Typography variant="overline">
                                         Severe Symptoms
@@ -250,8 +282,8 @@ class PSDSSPage extends Component {
                                     label="Clinical"
                                     style={{width: 130, marginBottom: 10,}}
                                     onChange={this.handleChange}
-                                    name="clinicalScore"
-                                    value={this.state.clinicalScore}
+                                    name="clinical"
+                                    value={this.state.clinical}
                                     id="patientWeightInput"
                                     className={classNames(classes.margin, classes.textField)}
                                     />
@@ -266,8 +298,8 @@ class PSDSSPage extends Component {
                                         label="PCI Score"
                                         style={{width: 130, marginBottom: 10,}}
                                         onChange={this.handleChange}
-                                        name="pciScore"
-                                        value={this.state.pciScore}
+                                        name="pci"
+                                        value={this.state.pci}
                                         id="patientWeightInput"
                                         className={classNames(classes.margin, classes.textField)}
                                     />
@@ -282,8 +314,8 @@ class PSDSSPage extends Component {
                                         label="Hist Score"
                                         style={{width: 130, marginBottom: 10,}}
                                         onChange={this.handleChange}
-                                        name="histologyScore"
-                                        value={this.state.histologyScore}
+                                        name="histology"
+                                        value={this.state.histology}
                                         id="histologyScore"
                                         className={classNames(classes.margin, classes.textField)}
                                     />
@@ -292,7 +324,7 @@ class PSDSSPage extends Component {
                         </Paper>
                         <Grid item xs={12} className={classes.gridItem}></Grid>
                         <Grid item xs={12} className={classes.gridItem}>
-                            <Typography variant="h5" align="right">Total: {this.state.psdssScore}</Typography>
+                            <Typography variant="h5" align="right">Total: {this.state.total}</Typography>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -315,22 +347,22 @@ class PSDSSPage extends Component {
                     </Grid>
                     <Grid item xs={6} className={classes.gridItem}>
                         <Switch
-                        checked={this.state.slm}
-                        name="slm"
+                        checked={this.state.synchronous_liver_treatment}
+                        name="synchronous_liver_treatment"
                         onChange={this.toggleSwitch}
-                        value={this.state.slm}
+                        value={this.state.synchronous_liver_treatment}
                         />
                     </Grid>
                     <Grid item xs={12} className={classes.gridItem} align="center">
                         <FormControl variant="outlined" fullWidth="true">
-                        {this.state.slm ? <InputLabel htmlFor="timing">Timing</InputLabel> : <InputLabel htmlFor="timing">Timing (Disabled)</InputLabel>}
+                        {this.state.synchronous_liver_treatment ? <InputLabel htmlFor="timing">Timing</InputLabel> : <InputLabel htmlFor="timing">Timing (Disabled)</InputLabel>}
                             <Select
                                 align="center"
                                 value={this.state.timing}
                                 onChange={this.handleChange}
                                 input={
                                     <OutlinedInput
-                                    disabled={!this.state.slm}
+                                    disabled={!this.state.synchronous_liver_treatment}
                                     value={this.state.timing}
                                     name="timing"
                                     id="timing"
@@ -340,7 +372,7 @@ class PSDSSPage extends Component {
                                     <MenuItem value="">
                                         <em>None</em>
                                     </MenuItem>
-                                    {this.props.reduxState.dropdownOptions.timingTreamentOptions.map(time => (
+                                    {this.props.dropdownOptions.timingTreamentOptions.map(time => (
                                         <MenuItem key={time.id} value={time.id}>{time.status}</MenuItem> 
                                     ))} 
                             </Select>
@@ -353,27 +385,27 @@ class PSDSSPage extends Component {
                     </Grid>
                     <Grid item xs={6} className={classes.gridItem}>
                         <TextField 
-                        disabled={!this.state.slm}
+                        disabled={!this.state.synchronous_liver_treatment}
                         variant="outlined"
                         type="date"
                         fullWidth="true"
                         onChange={this.handleChange}
-                        name="dateSLM"
-                        value={this.state.dateSLM}
+                        name="date_treatment"
+                        value={this.state.date_treatment}
                         />
                     </Grid>
                     <Grid item xs={12} className={classes.gridItem}>
                         <FormControl variant="outlined" fullWidth="true">
-                            {this.state.slm ? <InputLabel htmlFor="timing">Type</InputLabel> : <InputLabel htmlFor="timing">Type (Disabled)</InputLabel>}
+                            {this.state.synchronous_liver_treatment ? <InputLabel htmlFor="timing">Type</InputLabel> : <InputLabel htmlFor="timing">Type (Disabled)</InputLabel>}
                             <Select
                                 align="center"
-                                value={this.state.typeSLM}
+                                value={this.state.treatment_type}
                                 onChange={this.handleChange}
                                 input={
                                     <OutlinedInput
-                                    disabled={!this.state.slm}
-                                    value={this.state.typeSLM}
-                                    name="typeSLM"
+                                    disabled={!this.state.synchronous_liver_treatment}
+                                    value={this.state.treatment_type}
+                                    name="treatment_type"
                                     id="typeSLM"
                                     />
                                     }
@@ -381,7 +413,7 @@ class PSDSSPage extends Component {
                                     <MenuItem value="">
                                         <em>None</em>
                                     </MenuItem>
-                                    {this.props.reduxState.dropdownOptions.treamentTypeOptions.map(type => (
+                                    {this.props.dropdownOptions.treamentTypeOptions.map(type => (
                                         <MenuItem key={type.id} value={type.id}>{type.status}</MenuItem> 
                                     ))} 
                             </Select>
@@ -389,19 +421,23 @@ class PSDSSPage extends Component {
                     </Grid>
                     <Grid item xs={12} className={classes.gridItem}>
                         <TextField
-                            disabled={!this.state.slm}
+                            disabled={!this.state.synchronous_liver_treatment}
                             fullWidth="true"
                             className={classes.treatmentPrimeTumorNotes}
                             onChange={this.handleChange}
-                            value={this.state.treatmentPrimeTumorNotes}
-                            name='treatmentPrimeTumorNotes'
+                            value={this.state.notes}
+                            name='notes'
                             multiline
                             rows="5"
                             variant="outlined"
-                            label={this.state.slm ? "Notes" : "Notes (Disabled)"}
+                            label={this.state.synchronous_liver_treatment ? "Notes" : "Notes (Disabled)"}
                         />
                     </Grid>
                 </Grid>
+                <Button onClick={this.upsertEntriesInDB} className={classes.button}
+                variant="contained" color="primary">
+                Save
+                </Button>
             </Grid>
             </Grid>
 
@@ -412,7 +448,9 @@ class PSDSSPage extends Component {
 };
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+    psdss: reduxState.psdssReducer,
+    dropdownOptions: reduxState.dropdownOptions,
+    patient: reduxState.patientReducer,
 });
 
 

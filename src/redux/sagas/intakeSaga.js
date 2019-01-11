@@ -7,7 +7,7 @@ function* getInitalDataForIntake(action) {
     
     try {
         console.log(action.payload, 'this is our action.payload for our get init data on the intake saga')
-        const response = yield call(axios.post, `/api/intake/getDataFor`, action.payload);
+        const response = yield axios.get( `/api/intake/${action.payload}`);
         yield put({ type: 'SET_INITAL_DATA_FOR_INTAKE', payload: response.data } )
 
     } catch (error) {

@@ -25,6 +25,7 @@ const operativeHistoryRouter = require('./routes/operativeNotes.router');
 const pciRouter = require('./routes/pciTotal.router');
 const primaryTumorRouter = require('./routes/primaryTumorRouter');
 const intakeRouter = require('./routes/intake.router');
+const psdssRouter = require('./routes/psdss.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -60,7 +61,7 @@ app.use('/getOperativeHistory', operativeHistoryRouter);
 app.use('/pciTotal', pciRouter);
 app.use('/api/primaryTumor', primaryTumorRouter);
 app.use('/api/intake', intakeRouter);
-
+app.use('/api/psdss', psdssRouter);
 // Serve static files
 app.use(express.static('build'));
 

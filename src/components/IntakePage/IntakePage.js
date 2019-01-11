@@ -33,34 +33,68 @@ const styles = theme => ({
 
 class IntakePage extends Component {
     state = {
-        bmi_auto: '(auto)',
-        length_m: this.props.patient.weight_kg,
-        weight_kg: this.props.patient.length_m,
-        id: this.props.patient.id,
-        patient_id: this.props.patient.patient_id,
-        crp: this.props.patient.crp,
-        ca125: this.props.patient.ca125,
-        leucocyte: this.props.patient.leucocyte,
-        smoking: this.props.patient.smoking,
-        diabetes: this.props.patient.diabetes,
-        insulin_dependant: this.props.patient.insulin_dependant,
-        cardiovascular: this.props.patient.cardiovascular,
-        hypertension: this.props.patient.hypertension,
-        stoma_pre_hipec: this.props.patient.stoma_pre_hipec,
-        stoma_type: this.props.patient.stoma_type,
-        neo_adjuvant_chemo: this.props.patient.neo_adjuvant_chemo,
-        neo_adjuvant_chemo_type: this.props.patient.neo_adjuvant_chemo_type,
-        biological: this.props.patient.biological,
-        notes: this.props.patient.notes,
-        diagnostic_scopy: this.props.patient.diagnostic_scopy,
-        date_scopy: this.props.patient.date_scopy,
-        scopy_conclusion: this.props.patient.scopy_conclusion,
-        scopy_notes: this.props.patient.scopy_notes,
-        syn_metachronous: this.props.patient.syn_metachronous,
-        date_diagnosis_pc: this.props.patient.date_diagnosis_pc,
-        assessment_of_pss: this.props.patient.assessment_of_pss,
-        asa_score_date_time_stamp: this.props.patient.asa_score_date_time_stamp,
-        date: this.props.patient.date,
+        bmi_auto: '',
+        length_m: '',
+        weight_kg: '',
+        id: '',
+        patient_id: '',
+        crp: '',
+        ca125: '',
+        leucocyte: '',
+        smoking: '',
+        diabetes: '',
+        insulin_dependant: '',
+        cardiovascular: '',
+        hypertension: '',
+        stoma_pre_hipec: '',
+        stoma_type: '',
+        neo_adjuvant_chemo: '',
+        neo_adjuvant_chemo_type: '',
+        biological: '',
+        notes: '',
+        diagnostic_scopy: '',
+        date_scopy: '',
+        scopy_conclusion: '',
+        scopy_notes: '',
+        syn_metachronous: '',
+        date_diagnosis_pc: '',
+        assessment_of_pss: '',
+        asa_score_date_time_stamp: '',
+        date: '',
+    }
+
+    setInitialState = () => {
+        this.setState ({
+            ...this.state,
+            bmi_auto: this.props.intake.bmi_auto,
+            length_m: this.props.intake.length_m,
+            weight_kg: this.props.intake.weight_kg,
+            id: this.props.intake.id,
+            patient_id: this.props.intake.patient_id,
+            crp: this.props.intake.crp,
+            ca125: this.props.intake.ca125,
+            leucocyte: this.props.intake.leucocyte,
+            smoking: this.props.intake.smoking,
+            diabetes: this.props.intake.diabetes,
+            insulin_dependant: this.props.intake.insulin_dependant,
+            cardiovascular: this.props.intake.cardiovascular,
+            hypertension: this.props.intake.hypertension,
+            stoma_pre_hipec: this.props.intake.stoma_pre_hipec,
+            stoma_type: this.props.intake.stoma_type,
+            neo_adjuvant_chemo: this.props.intake.neo_adjuvant_chemo,
+            neo_adjuvant_chemo_type: this.props.intake.neo_adjuvant_chemo_type,
+            biological: this.props.intake.biological,
+            notes: this.props.intake.notes,
+            diagnostic_scopy: this.props.intake.diagnostic_scopy,
+            date_scopy: this.props.intake.date_scopy,
+            scopy_conclusion: this.props.intake.scopy_conclusion,
+            scopy_notes: this.props.intake.scopy_notes,
+            syn_metachronous: this.props.intake.syn_metachronous,
+            date_diagnosis_pc: this.props.intake.date_diagnosis_pc,
+            assessment_of_pss: this.props.intake.assessment_of_pss,
+            asa_score_date_time_stamp: this.props.intake.asa_score_date_time_stamp,
+            date: this.props.intake.date,
+        }) 
     }
 
     //Function to calculate the bmi for the patient.
@@ -95,7 +129,7 @@ class IntakePage extends Component {
     }
 
     componentDidMount(){
-
+        this.setInitialState();
     }
 
     render() {
@@ -107,6 +141,12 @@ class IntakePage extends Component {
             justify="space-evenly"
             alignItems="flex-start"
             >
+            {/* <pre>
+                {JSON.stringify(this.state, null, 2)}
+            </pre>
+            <pre>
+                {JSON.stringify(this.props.intake, null, 2)}
+            </pre> */}
             {/* Start of the fist column on the page  */}
                 <Grid item xs={5}>
                     <Grid
@@ -461,6 +501,7 @@ class IntakePage extends Component {
 };
 
 const mapStateToProps = reduxState => ({
+    intake: reduxState.intakeReducer,
     patient: reduxState.patientReducer,
     dropdownOptions: reduxState.dropdownOptions,
 });
