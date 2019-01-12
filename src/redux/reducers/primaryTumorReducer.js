@@ -1,5 +1,5 @@
 const primaryTumorReducer = (state = [], action) => {
-    console.log('inside primaryTumorReducer');
+    // console.log('inside primaryTumorReducer');
     switch (action.type) {
       case 'SET_INIT_VALUES':
         return action.payload;

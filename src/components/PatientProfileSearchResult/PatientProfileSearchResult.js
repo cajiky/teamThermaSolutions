@@ -54,7 +54,7 @@ class PatientProfileSearchResult extends Component {
         return (
             <div>
                 <Button onClick={this.clearState} className={classes.button} variant="contained" color="primary">X</Button>
-                {/* {JSON.stringify(this.props.patientSearch)} */}
+                {JSON.stringify(this.props.patientSearch)}
                 {this.props.patientSearch !== "patient not found" ?
                 (<>
                 <Typography><>
