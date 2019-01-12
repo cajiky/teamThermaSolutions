@@ -85,7 +85,6 @@ class PatientProfileSearchPage extends Component {
         console.log(age);
       };
       
-
       handleSearchChange = (name) => (event) => {
         this.setState({ [name]: (event.target.value) });
         console.log(this.state.patientSearch);
@@ -110,8 +109,8 @@ class PatientProfileSearchPage extends Component {
         console.log('in add patient after');
         this.setState({ variables: {open: false}});
         //   document.cookie = `patientID=${this.props.newPatientId}`
-          document.cookie = `patientID=${this.state.patient.patient_no}`;
-          console.log('IN ADD PATIENT', document.cookie);
+        //   document.cookie = `patientID=${this.state.patient.patient_no}`;
+        //   console.log('IN ADD PATIENT', document.cookie);
           this.props.history.push(`/MainTabsPage`);
       }
 

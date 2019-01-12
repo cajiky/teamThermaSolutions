@@ -72,7 +72,7 @@ class PrimaryTumorPage extends Component {
             mucinous: this.props.primaryTumorReducer.mucinous,
             n: this.props.primaryTumorReducer.n,
             notes: this.props.primaryTumorReducer.notes,
-            patient_id: this.props.patient.id,
+            patient_id: this.props.patientReducer.patient.id,
             primary_location: this.props.primaryTumorReducer.primary_location,
             prime_tumor_surgery: this.props.primaryTumorReducer.prime_tumor_surgery,
             reason_acute: this.props.primaryTumorReducer.reason_acute,
@@ -83,7 +83,7 @@ class PrimaryTumorPage extends Component {
     }
 
     updateEntriesInDB = () => {
-        this.props.dispatch({type: 'UPSERT_DATA_FOR_PRIMARY_TUMOR', payload: {state: this.state, id: this.props.patient.patient.id}})
+        this.props.dispatch({type: 'UPSERT_DATA_FOR_PRIMARY_TUMOR', payload: {state: this.state, id: this.props.patientReducer.patient.id}})
         console.log('RUNNING UPDATEENTRIESINDB Function')
     }
 
@@ -105,7 +105,7 @@ class PrimaryTumorPage extends Component {
         }
         // this.setValuesForPatient()
         )
-        console.log(this.state);
+        // console.log(this.state);
     }
 
     componentDidMount() {
@@ -167,12 +167,12 @@ class PrimaryTumorPage extends Component {
                                     <Select
                                         value={this.state.primary_location}
                                         onChange={this.handleChange}
-                                        name="primary_location"
+                                        // name="primary_location"
                                         input={
                                         <OutlinedInput
                                             value={this.state.primary_location}
                                             name="primary_location"
-                                            id="primary_location"
+                                            // id="primary_location"
                                         />
                                         }
                                     >
@@ -567,9 +567,7 @@ class PrimaryTumorPage extends Component {
 const mapStateToProps = reduxState => ({
     dropdownOptions: reduxState.dropdownOptions,
     primaryTumorReducer: reduxState.primaryTumorReducer,
-    patient: reduxState.patientReducer,
+    patientReducer: reduxState.patientReducer,
 });
-
-
 
 export default connect(mapStateToProps) (withStyles(styles)(PrimaryTumorPage))

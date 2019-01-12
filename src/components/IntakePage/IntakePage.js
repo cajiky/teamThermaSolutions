@@ -115,9 +115,9 @@ class IntakePage extends Component {
     handleChange = (event) => {
         this.setState ({
             [event.target.name]: event.target.value,
-        })
-        // , this.calculateBMI)
-        // console.log(this.state);
+        }
+        , this.calculateBMI)
+        console.log(this.state);
     }
     
     updateEntriesInDB = () => {

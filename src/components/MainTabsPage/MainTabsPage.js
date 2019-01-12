@@ -47,10 +47,11 @@ state = {
   componentDidMount () {    
     console.log('in main tabs page for patient#', this.props.patient);
     // this.getPatientIDFromCookie(patientId)
-    let patientId = document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-    this.props.dispatch({type:'GET_PATIENT_ID_FROM_COOKIE', payload: patientId});
-    this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'});
-    this.props.dispatch({type: 'GET_INITIAL_VALUES', payload: patientId})
+    // let patientId = document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    let patientId = this.props.patient.id;
+    // this.props.dispatch({type:'GET_PATIENT_ID_FROM_COOKIE', payload: patientId});
+    // this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'});
+    this.props.dispatch({type: 'GET_INITIAL_VALUES', payload: patientId});
     this.props.dispatch({type: 'GET_INITIAL_DATA_FOR_INTAKE', payload: patientId});
     this.props.dispatch({type: 'GET_INITIAL_DATA_FOR_PSDSS', payload: patientId});
     this.props.dispatch({ type: 'GET_PCI_TOTAL', payload: patientId });
