@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 const myOptions = [
   {id: 1, val: true, status: 'Yes'},
@@ -39,18 +40,19 @@ class ReoperationSelector extends Component {
     const { classes } = this.props;
 
     return (
-      <FormControl fullWidth={true}>
+      <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl}>
           <InputLabel shrink htmlFor="reoperation_id">Reoperation</InputLabel>
           <Select fullWidth={true}
-            // variant="outlined" 
+            variant="outlined" 
             // name="reoperation"
             // value={this.props.reoperation}
             input={
-              <Input
+              <OutlinedInput
                   // labelWidth=100
                   value={this.props.reoperation}
                   name="reoperation"
                   id="reoperation"
+                  variant="outlined" 
               />
               }
             onChange={this.props.handleChange}

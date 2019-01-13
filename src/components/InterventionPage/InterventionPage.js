@@ -355,7 +355,10 @@ const styles = theme => ({
             }
           ]
         })
-    }
+        }
+        this.setState({
+            changesMade: false,
+        })
     }
     
     handleChangeCheckbox = (event) => {

@@ -161,15 +161,17 @@ class IntakePage extends Component {
                                     Weight:
                                 </Typography>
                                 <TextField
+                                    variant="outlined"
                                     style={{width: 150}}
                                     onChange={this.handleChange}
                                     name="weight_kg"
                                     value={this.state.weight_kg}
                                     id="patientWeightInput"
+                                    label="Kilograms"
                                     className={classNames(classes.margin, classes.textField)}
-                                    InputProps={{
-                                        startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
-                                    }}
+                                    // InputProps={{
+                                    //     startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
+                                    // }}
                                 />
                             </Grid>
                             <Grid item xs={4} className={classes.gridItem}>
@@ -177,27 +179,30 @@ class IntakePage extends Component {
                                     Length:
                                 </Typography>
                                 <TextField
+                                    variant="outlined"
                                     style={{width: 150}}
                                     onChange={this.handleChange}
                                     name="length_m"
                                     value={this.state.length_m}
                                     id="lengthInput"
-                                    InputProps={{
-                                        startAdornment: <InputAdornment position="start">M</InputAdornment>,
-                                    }}
+                                    label="Meters"
+                                    // InputProps={{
+                                    //     startAdornment: <InputAdornment position="start">M</InputAdornment>,
+                                    // }}
                                 />
                             </Grid>
                             <Grid item xs={4} className={classes.gridItem}>
                                 <Typography variant="overline">
                                     BMI:
                                 </Typography>
-                                <Typography variant="h4">{this.state.bmi_auto}</Typography>
+                                <Typography variant="outlined"><h4>{this.state.bmi_auto}</h4></Typography>
                             </Grid>
                             <Grid item xs={4} className={classes.gridItem}>
                                 <Typography variant="overline">
                                     CEA:
                                 </Typography>
                                 <TextField
+                                    variant="outlined"
                                     style={{width: 150}}
                                     onChange={this.handleChange}
                                     name="ca125"
@@ -210,6 +215,7 @@ class IntakePage extends Component {
                                     CRP:
                                 </Typography>
                                 <TextField
+                                    variant="outlined"
                                     style={{width:150}}
                                     onChange={this.handleChange}
                                     name="crp"
@@ -222,6 +228,7 @@ class IntakePage extends Component {
                                     Leucocyte:
                                 </Typography>
                                 <TextField
+                                    variant="outlined"
                                     style={{width:150}}
                                     onChange={this.handleChange}
                                     name="leucocyte"
@@ -313,7 +320,13 @@ class IntakePage extends Component {
 
                                     </RadioGroup>
                                 </FormControl>
-                            </Grid>           
+                            </Grid> 
+                            <Grid item xs={12} className={classes.gridItem} onClick={this.updateEntriesInDB}>
+                                    <Button onClick={this.upsertEntriesInDB} className={classes.button}
+                                        variant="contained" color="primary">
+                                        Save
+                                    </Button>
+                            </Grid>          
                     </Grid>
                 </Grid>
                 <Grid item xs={5}>
@@ -479,12 +492,12 @@ class IntakePage extends Component {
                                     value={moment(this.state.date_scopy).format('YYYY-MM-DD')}
                                     />
                                 </Grid>
-                                <Grid item xs={12} className={classes.gridItem} onClick={this.updateEntriesInDB}>
+                                {/* <Grid item xs={12} className={classes.gridItem} onClick={this.updateEntriesInDB}>
                                     <Button onClick={this.upsertEntriesInDB} className={classes.button}
                                         variant="contained" color="primary">
                                         Save
                                     </Button>
-                            </Grid>
+                            </Grid> */}
                             </Grid>
                         </Grid>
                     </Grid>

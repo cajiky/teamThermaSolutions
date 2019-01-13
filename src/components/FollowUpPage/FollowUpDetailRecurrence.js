@@ -48,13 +48,14 @@ class FollowUpDetailRecurrence extends Component {
             </Grid>
             <Grid item xs={3}>
               <TextField 
-                // variant="outlined"
                 label="Date of Recurrence"
-                InputLabelProps={{
-                  shrink: true,
-                }}
+                // InputLabelProps={{
+                //   shrink: true,
+                // }}
                 type="date"
                 fullWidth="true"
+                variant="outlined"
+                margin="dense"
                 onChange={this.props.handleChange}
                 name="date"
                 value={moment(this.props.recurrence.date).format('YYYY-MM-DD')}
@@ -66,13 +67,13 @@ class FollowUpDetailRecurrence extends Component {
                 label="CEA"
                 className={classes.textField}
                 value={this.props.recurrence.cea}
-                // fullWidth
+                fullWidth
                 onChange={this.props.handleChange}
-                margin="normal"
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                // variant="outlined"
+                margin="dense"
+                // InputLabelProps={{
+                //     shrink: true,
+                // }}
+                variant="outlined"
                 />
             </Grid>
             <Grid item xs={3}>
@@ -85,11 +86,12 @@ class FollowUpDetailRecurrence extends Component {
             </Grid>
             <Grid item xs={3}>
               <TextField 
+                  margin="dense"
                   label="Treatment Date"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  // variant="outlined"
+                  // InputLabelProps={{
+                  //   shrink: true,
+                  // }}
+                  variant="outlined"
                   type="date"
                   fullWidth="true"
                   onChange={this.props.handleChange}
@@ -117,21 +119,21 @@ class FollowUpDetailRecurrence extends Component {
                             handleChange={this.props.handleChange}
                             handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={9}>
                 <TextField
                 name="treatment_notes"
                 label="Notes"
                 className={classes.textField}
                 value={this.props.recurrence.treatment_notes}
                 multiline
-                rows="2"
+                rows="4"
                 fullWidth
-                InputLabelProps={{
-                    shrink: true,
-                }}
+                // InputLabelProps={{
+                //     shrink: true,
+                // }}
                 onChange={this.props.handleChange}
-                margin="normal"
-                // variant="outlined"
+                margin="dense"
+                variant="outlined"
                 />
             </Grid>
           </Grid>

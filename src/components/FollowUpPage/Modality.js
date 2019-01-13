@@ -5,7 +5,8 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
+import PropTypes from 'prop-types';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 const styles = theme => ({
   formControl: {
@@ -33,13 +34,16 @@ class Modality extends Component {
     const { classes } = this.props;
 
     return (
-      <FormControl fullWidth="true">
-          <InputLabel shrink htmlFor="modality">Modality</InputLabel>
-          <Select fullWidth={true}
-            // variant="outlined" 
+      <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl}>
+          <InputLabel 
+          ref={ref => {
+            this.InputLabelRef = ref;
+          }}
+          shrink htmlFor="rec_modality">Modality</InputLabel>
+          <Select  
             value={this.props.recurrence.rec_modality}
             input={
-              <Input
+              <OutlinedInput
                   value={this.props.recurrence.rec_modality}
                   name="rec_modality"
                   id="rec_modality"
@@ -53,6 +57,11 @@ class Modality extends Component {
     )
   } // end return
 } // end class Modality
+
+Modality.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
 
 const mapReduxStateToProps = (reduxState) => ({
   reduxState

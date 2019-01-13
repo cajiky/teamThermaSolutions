@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 const styles = theme => ({
   formControl: {
@@ -32,13 +33,12 @@ class Location extends Component {
     const { classes } = this.props;
 
     return (
-      <FormControl fullWidth="true">
+      <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl}>
           <InputLabel shrink htmlFor="location">Location</InputLabel>
-          <Select fullWidth={true}
-            // variant="outlined" 
+          <Select  
             value={this.props.recurrence.location}
             input={
-              <Input
+              <OutlinedInput
                   value={this.props.recurrence.location}
                   name="location"
                   id="location"

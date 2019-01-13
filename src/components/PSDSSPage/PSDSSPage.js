@@ -143,7 +143,7 @@ class PSDSSPage extends Component {
                     </Grid>
                     <Grid item xs={12} className={classes.gridItem} align="center">
                     {/* This is the table that will hold the legend for the surgens to refference while they enter in scores. */}
-                        <Paper elevation={12} className={classes.containerPaper}>
+                        {/* <Paper elevation={12} className={classes.containerPaper}> */}
                             <Grid
                             container
                             direction="row"
@@ -269,6 +269,7 @@ class PSDSSPage extends Component {
                                 </Grid>
                                 <Grid item xs={2} className={classes.gridItem} align="center">
                                     <TextField
+                                    variant="outlined"
                                     label="Clinical"
                                     style={{width: 130, marginBottom: 10,}}
                                     onChange={this.handleChange}
@@ -285,6 +286,7 @@ class PSDSSPage extends Component {
                                 </Grid>
                                 <Grid item xs={2} className={classes.gridItem} align="center">
                                     <TextField
+                                        variant="outlined"
                                         label="PCI Score"
                                         style={{width: 130, marginBottom: 10,}}
                                         onChange={this.handleChange}
@@ -301,6 +303,7 @@ class PSDSSPage extends Component {
                                 </Grid>
                                 <Grid item xs={2} className={classes.gridItem}>
                                     <TextField
+                                        variant="outlined"
                                         label="Hist Score"
                                         style={{width: 130, marginBottom: 10,}}
                                         onChange={this.handleChange}
@@ -311,13 +314,17 @@ class PSDSSPage extends Component {
                                     />
                                 </Grid>
                             </Grid>
-                        </Paper>
+                        {/* </Paper> */}
                         <Grid item xs={12} className={classes.gridItem}></Grid>
                         <Grid item xs={12} className={classes.gridItem}>
                             <Typography variant="h5" align="right">Total: {this.state.total}</Typography>
                         </Grid>
                     </Grid>
                 </Grid>
+                <Button onClick={this.upsertEntriesInDB} className={classes.button}
+                    variant="contained" color="primary">
+                    Save
+                </Button>
             </Grid>
             {/* Start of the second column of the page. this will hold the "Sync liver metistasis" */}
             <Grid item xs={5} className={classes.gridItem}>
@@ -424,10 +431,10 @@ class PSDSSPage extends Component {
                         />
                     </Grid>
                 </Grid>
-                <Button onClick={this.upsertEntriesInDB} className={classes.button}
+                {/* <Button onClick={this.upsertEntriesInDB} className={classes.button}
                 variant="contained" color="primary">
                 Save
-                </Button>
+                </Button> */}
             </Grid>
             </Grid>
 

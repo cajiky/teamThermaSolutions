@@ -164,6 +164,7 @@ class PostOpPage extends Component {
             <Grid container spacing={24}>
                 <Grid item xs={3}>
                 <TextField
+                variant="outlined"
                 name="icu_stays"
                 label="ICU Stay (days)"
                 className={classes.textField}
@@ -173,17 +174,18 @@ class PostOpPage extends Component {
                     shrink: true,
                 }}
                 onChange={this.handleChange}
-                margin="normal"
+                margin="dense"
                 // variant="outlined"
                 />
                 <TextField
+                variant="outlined"
                 name="hospital_stays"
                 label="Hospital Stay (days)"
                 className={classes.textField}
                 value={this.state.hospital_stays}
                 fullWidth
                 onChange={this.handleChange}
-                margin="normal"
+                margin="dense"
                 InputLabelProps={{
                     shrink: true,
                 }}
@@ -192,15 +194,16 @@ class PostOpPage extends Component {
                 </Grid>
                 <Grid item xs>
                 <TextField
+                variant="outlined"
                 name="notes"
                 label="Notes"
                 className={classes.textField}
                 value={this.state.notes}
                 multiline
-                rows="5"
+                rows="4"
                 fullWidth
                 onChange={this.handleChange}
-                margin="normal"
+                margin="dense"
                 InputLabelProps={{
                     shrink: true,
                 }}
@@ -261,15 +264,16 @@ class PostOpPage extends Component {
                 </Grid>                
                 <Grid item xs>
                 <TextField
+                variant="outlined"
                 name="discharge_notes"
                 label="Discharge Notes"
                 className={classes.textField}
                 value={this.state.discharge_notes}
                 multiline
-                rows="2"
+                rows="4"
                 fullWidth
                 onChange={this.handleChange}
-                margin="normal"
+                margin="dense"
                 InputLabelProps={{
                     shrink: true,
                 }}
