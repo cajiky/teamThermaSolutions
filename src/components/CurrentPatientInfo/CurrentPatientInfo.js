@@ -42,7 +42,7 @@ const styles = theme => ({
         backgroundColor: '#FFFFFF',
         border: 'none',
         boxShadow: 'none',
-    }
+    },
   });
 
 class CurrentPatientInfo extends Component {
