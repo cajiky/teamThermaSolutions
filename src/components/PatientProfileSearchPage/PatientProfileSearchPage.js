@@ -70,7 +70,7 @@ class PatientProfileSearchPage extends Component {
         
       };
 
-      componentDidMount(){
+        componentDidMount(){
         this.props.dispatch({type: 'LAST_PATIENT_ID_PLUS_ONE'});
       }
     
@@ -83,8 +83,9 @@ class PatientProfileSearchPage extends Component {
         let age = Math.floor((new Date() - new Date(event.target.value).getTime()) / 3.15576e+10);
         this.setState({patient: {...this.state.patient, age: age} });
         console.log(age);
-      };
+        };
       
+
       handleSearchChange = (name) => (event) => {
         this.setState({ [name]: (event.target.value) });
         console.log(this.state.patientSearch);
@@ -100,22 +101,22 @@ class PatientProfileSearchPage extends Component {
       };
 
       addPatient = () => {
-        this.props.dispatch({type: 'ADD_PATIENT', 
+          this.props.dispatch({type: 'ADD_PATIENT', 
             payload: {
                 patientObject: this.state.patient,
                 history: this.props.history,
             }
         });
-        console.log('in add patient after');
+        console.log('in add patient after')
         this.setState({ variables: {open: false}});
         //   document.cookie = `patientID=${this.props.newPatientId}`
-        //   document.cookie = `patientID=${this.state.patient.patient_no}`;
-        //   console.log('IN ADD PATIENT', document.cookie);
-          this.props.history.push(`/MainTabsPage`);
+        //   document.cookie = `patientID=${this.state.patient.patient_no}`
+        //   console.log('IN ADD PATIENT', document.cookie, this.state.patient);
+          //this.props.history.push(`/MainTabsPage`);
       }
 
       searchPatient = () => {
-          if (this.state.patientSearch){
+          if(this.state.patientSearch){
           this.setState({ patientSearch: '' });
           this.props.dispatch({type: 'FIND_PATIENT', payload: this.state.patientSearch});} else {
               alert('Please enter a Patient ID Number!');

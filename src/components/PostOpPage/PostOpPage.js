@@ -70,7 +70,7 @@ class PostOpPage extends Component {
             ...this.state,
             changesMade: false,
             id: this.props.postOp.id,
-            patient_id: this.props.patientReducer.patient.id,
+            patient_id: this.props.postOp.patient_id,
             icu_stays: this.props.postOp.icu_stays,
             mcu_stays: this.props.postOp.mcu_stays,
             hospital_stays: this.props.postOp.hospital_stays,

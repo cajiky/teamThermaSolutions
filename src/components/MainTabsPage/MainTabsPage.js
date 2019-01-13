@@ -45,7 +45,7 @@ state = {
   };
 
   componentDidMount () {    
-    console.log('in main tabs page for patient#', this.props.patient);
+    // console.log('in main tabs page for patient#', this.props.patient);
     // this.getPatientIDFromCookie(patientId)
     // let patientId;
     // if (this.props.patient.id == undefined) {

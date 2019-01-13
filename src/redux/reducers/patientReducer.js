@@ -6,6 +6,7 @@ const patientReducer = (state = {}, action) => {
         return {patientSearch: ''};
       case 'SET_PATIENT_RESULT':
         console.log('after set patient id from cookie', action.payload);
+        document.cookie = `patientID=${action.payload}`;
         return {patient: action.payload};
       case 'ADD_PATIENT':
         return {patient: action.payload};

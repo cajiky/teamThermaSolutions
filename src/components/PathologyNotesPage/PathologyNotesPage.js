@@ -120,5 +120,4 @@ const mapStateToProps = reduxState => ({
     user: reduxState.user,
 });
 
-
 export default connect(mapStateToProps) (withStyles(styles)(PathologyNotesPage))

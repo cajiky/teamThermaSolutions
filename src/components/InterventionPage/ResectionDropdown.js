@@ -86,8 +86,6 @@ const styles = theme => ({
     )};
   }
   
-
-
   ResectionDropdown.propTypes = {
     classes: PropTypes.object.isRequired,
   };

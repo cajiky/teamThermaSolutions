@@ -72,7 +72,7 @@ class PrimaryTumorPage extends Component {
             mucinous: this.props.primaryTumorReducer.mucinous,
             n: this.props.primaryTumorReducer.n,
             notes: this.props.primaryTumorReducer.notes,
-            patient_id: this.props.patientReducer.patient.id,
+            patient_id: this.props.primaryTumorReducer.patient_id,
             primary_location: this.props.primaryTumorReducer.primary_location,
             prime_tumor_surgery: this.props.primaryTumorReducer.prime_tumor_surgery,
             reason_acute: this.props.primaryTumorReducer.reason_acute,

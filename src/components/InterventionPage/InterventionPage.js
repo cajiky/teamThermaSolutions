@@ -897,8 +897,6 @@ const styles = theme => ({
       </div>
     )};
   }
-  
-
 
   InterventionPage.propTypes = {
     classes: PropTypes.object.isRequired,
