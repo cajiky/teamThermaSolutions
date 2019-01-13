@@ -45,7 +45,7 @@ class PatientProfileSearchResult extends Component {
 
     selectPatient = () => {
     this.props.dispatch({type: 'SET_PATIENT_RESULT', payload: this.props.patientSearch});
-    // document.cookie = `patientID=${this.props.patientSearch.patient_no}`
+    document.cookie = `patientID=${this.props.patientSearch.patient_no}`
     this.props.history.push(`/MainTabsPage`);
     }
 
@@ -54,7 +54,7 @@ class PatientProfileSearchResult extends Component {
         return (
             <div>
                 <Button onClick={this.clearState} className={classes.button} variant="contained" color="primary">X</Button>
-                {JSON.stringify(this.props.patientSearch)}
+                {/* {JSON.stringify(this.props.patientSearch)} */}
                 {this.props.patientSearch !== "patient not found" ?
                 (<>
                 <Typography><>

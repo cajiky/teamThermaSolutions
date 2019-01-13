@@ -52,9 +52,9 @@ state = {
     //   patientId = document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     //   this.props.dispatch({type:'GET_PATIENT_ID_FROM_COOKIE', payload: patientId});
     // } else {
-    let patientId = this.props.patient.id;
+    // let patientId = this.props.patient.id;
     // }
-    // let patientId = document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    let patientId = document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     // let patientId = this.props.patient.id;
     // this.props.dispatch({type:'GET_PATIENT_ID_FROM_COOKIE', payload: patientId});
     // this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'});
