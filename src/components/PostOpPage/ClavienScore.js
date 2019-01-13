@@ -5,8 +5,6 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-// import OutlinedInput from '@material-ui/core/OutlinedInput';
-import Input from '@material-ui/core/Input';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Grid from '@material-ui/core/Grid';
 import GridItem from '@material-ui/core/Grid';
@@ -51,12 +49,12 @@ class ClavienScore extends Component {
                 input={
                   <OutlinedInput
                     
-                      value={this.props.clavianScore}
+                      value={this.props.clavienScore}
                       name={this.props.id}
                       id={this.props.id}
                   />
                   }
-                onChange={this.props.handleChangeClavianScore}
+                onChange={this.props.handleChangeClavienScore}
               >
                 {this.renderOptions()}
               </Select> 
