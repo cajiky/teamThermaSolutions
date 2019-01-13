@@ -349,7 +349,12 @@ class PrimaryTumorPage extends Component {
                                 </FormControl>
                             </Grid>
                         </Grid>
+                        
                     </Grid>
+                        <Button onClick={this.upsertEntriesInDB} className={classes.button}
+                                    variant="contained" color="primary">
+                                    Save
+                        </Button>
                 </Grid>
                 <Grid item xs={5}>
                     <Grid
@@ -549,10 +554,10 @@ class PrimaryTumorPage extends Component {
                                 />
                             </Grid> 
                             <Grid item xs={12} className={classes.gridItem} onClick={this.updateEntriesInDB}>
-                                <Button onClick={this.upsertEntriesInDB} className={classes.button}
+                                {/* <Button onClick={this.upsertEntriesInDB} className={classes.button}
                                     variant="contained" color="primary">
                                     Save
-                                </Button>
+                                </Button> */}
                             </Grid>
                         </Grid>
                     </Grid>

@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 const myOptions = [
   {id: 1, status: 'Death of Disease'},
@@ -40,16 +41,17 @@ class DischargeStatus extends Component {
     const { classes } = this.props;
 
     return (
-      <FormControl fullWidth="true" >
+      <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl}>
           <InputLabel shrink htmlFor="status_at_discharge">Discharge Status</InputLabel>
           <Select fullWidth={true}
-            variant="outlined" 
+            label="Discharge Status"
             value={this.props.status_at_discharge}
             input={
-              <Input
+              <OutlinedInput
                   value={this.props.status_at_discharge}
                   name="status_at_discharge"
                   id="status_at_discharge"
+                  
               />
               }
             onChange={this.props.handleChange}

@@ -7,6 +7,9 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 // import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Input from '@material-ui/core/Input';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Grid from '@material-ui/core/Grid';
+import GridItem from '@material-ui/core/Grid';
 
 
 const styles = theme => ({
@@ -35,24 +38,32 @@ class ClavienScore extends Component {
     const { classes } = this.props;
     // console.log('in clavian:', this.props.id)
     return (
-      <FormControl>
-          {/* <InputLabel htmlFor="clavien_score">Clavien</InputLabel> */}
-          <Select
-            // value={this.props.clavianScore}
-            disabled={!this.props.checked}
-            id={this.props.id}
-            input={
-              <Input
-                  value={this.props.clavienScore}
-                  name={this.props.id}
-                  id={this.props.id}
-              />
-              }
-            onChange={this.props.handleChangeClavienScore}
-          >
-            {this.renderOptions()}
-          </Select> 
-      </FormControl>
+      <Grid container spacing={12}>
+        <GridItem item xs={12}>
+          <FormControl  variant="outlined" margin="dense" className={classes.formControl}>
+              {/* <InputLabel htmlFor="clavien_score">Clavien</InputLabel> */}
+              {/* <GridItem item xs={6} > */}
+              <Select
+                // value={this.props.clavianScore}
+                disabled={!this.props.checked}
+                id={this.props.id}
+                
+                input={
+                  <OutlinedInput
+                    
+                      value={this.props.clavianScore}
+                      name={this.props.id}
+                      id={this.props.id}
+                  />
+                  }
+                onChange={this.props.handleChangeClavianScore}
+              >
+                {this.renderOptions()}
+              </Select> 
+              {/* </GridItem> */}
+          </FormControl>
+        </GridItem>
+      </Grid>
     )
   } // end return
 } // end class TagSelector

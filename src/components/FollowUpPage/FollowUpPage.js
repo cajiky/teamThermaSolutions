@@ -100,7 +100,7 @@ class FollowUpPage extends Component {
             <div>
                 <h3>Follow Up Treatment Plan</h3>
                 <Grid container spacing={24} className={classes.section}>
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
                     <AdjuvantChemotherapy adjuvant_chemo={this.state.adjuvant_chemo} handleChange={this.handleChange} />
                     </Grid>
                     <Grid item xs={4}>

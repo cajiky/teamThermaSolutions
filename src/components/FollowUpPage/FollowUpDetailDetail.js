@@ -146,8 +146,8 @@ class FollowUpDetailDetail extends Component {
                         }}
                         type="date"
                         onChange={this.handleChange}
-                        margin="normal"
-                        // variant="outlined"
+                        margin="dense"
+                        variant="outlined"
                     />
                     </Grid>
 
@@ -181,17 +181,19 @@ class FollowUpDetailDetail extends Component {
                     </Grid>
                     <Grid item xs={6}>
                         <TextField
+                        variant="outlined"
                         name="follow_up_notes"
                         label="Notes"
                         className={classes.textField}
                         value={this.state.follow_up_notes}
-                        rows={4}
+                        rows={8}
+                        multiline
                         fullWidth
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
+                        // InputLabelProps={{
+                        //     shrink: true,
+                        // }}
                         onChange={this.handleChange}
-                        margin="normal"
+                        margin="dense"
                         // variant="outlined"
                         />
                     </Grid>

@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 const myOptions = [
   {id: 1, val: true, status: 'Yes'},
@@ -27,6 +28,7 @@ class MortalitySelector extends Component {
     return myOptions.map((option, i) => {
       return (
         <MenuItem
+          
           key={i}
           value={option.val}>
           {option.status}
@@ -39,13 +41,16 @@ class MortalitySelector extends Component {
     const { classes } = this.props;
 
     return (
-      <FormControl fullWidth="true">
+      <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl} 
+     
+      >
           <InputLabel shrink htmlFor="hospital_mortality">Hospital Mortality</InputLabel>
           <Select fullWidth={true}
-            // variant="outlined" 
+            variant="outlined" 
             value={this.props.hospital_mortality}
+            
             input={
-              <Input
+              <OutlinedInput
                   value={this.props.hospital_mortality}
                   name="hospital_mortality"
                   id="hospital_mortality"
