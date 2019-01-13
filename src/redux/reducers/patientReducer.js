@@ -1,12 +1,10 @@
-const patientReducer = (state = {}, action) => {
+const patientReducer = (state = [], action) => {
     switch (action.type) {
       case 'FIND_PATIENT':
         return {patientSearch: action.payload};
       case 'DROP_PATIENT_RESULT':
         return {patientSearch: ''};
       case 'SET_PATIENT_RESULT':
-        console.log('after set patient id from cookie', action.payload);
-        document.cookie = `patientID=${action.payload}`;
         return {patient: action.payload};
       case 'ADD_PATIENT':
         return {patient: action.payload};

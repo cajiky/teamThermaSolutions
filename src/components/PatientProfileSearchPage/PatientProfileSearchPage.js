@@ -110,9 +110,9 @@ class PatientProfileSearchPage extends Component {
         console.log('in add patient after')
         this.setState({ variables: {open: false}});
         //   document.cookie = `patientID=${this.props.newPatientId}`
-          document.cookie = `patientID=${this.state.patient.patient_no}`
+        document.cookie = `patientID=${this.state.patient.patient_no}`
         //   console.log('IN ADD PATIENT', document.cookie, this.state.patient);
-          this.props.history.push(`/MainTabsPage`);
+        this.props.history.push(`/MainTabsPage`);
       }
 
       searchPatient = () => {

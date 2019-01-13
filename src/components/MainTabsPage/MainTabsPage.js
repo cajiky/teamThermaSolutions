@@ -56,8 +56,8 @@ state = {
     // }
     let patientId = document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     // let patientId = this.props.patient.id;
-    // this.props.dispatch({type:'GET_PATIENT_ID_FROM_COOKIE', payload: patientId});
-    // this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'});
+    this.props.dispatch({type:'GET_PATIENT_ID_FROM_COOKIE', payload: patientId});
+    this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'});
     this.props.dispatch({type: 'GET_INITIAL_VALUES', payload: patientId});
     this.props.dispatch({type: 'GET_INITIAL_DATA_FOR_INTAKE', payload: patientId});
     this.props.dispatch({type: 'GET_INITIAL_DATA_FOR_PSDSS', payload: patientId});
