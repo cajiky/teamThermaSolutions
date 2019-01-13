@@ -62,8 +62,9 @@ class ReoperationSelector extends Component {
   } // end return
 } // end class TagSelector
 
-const mapReduxStateToProps = (reduxState) => ({
-  reduxState
-});
+// const mapReduxStateToProps = (reduxState) => ({
+//   reduxState
+// });
 
-export default connect(mapReduxStateToProps)(withStyles(styles)(ReoperationSelector));
+// export default connect(mapReduxStateToProps)(withStyles(styles)(ReoperationSelector));
+export default (withStyles(styles)(ReoperationSelector));

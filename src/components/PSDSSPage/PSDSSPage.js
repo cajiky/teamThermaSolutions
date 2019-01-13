@@ -83,7 +83,9 @@ class PSDSSPage extends Component {
     handleChange = (event) => {
         this.setState ({
             [event.target.name]: event.target.value,
-        }, this.calculatePSDSS)
+        }
+        // , this.calculatePSDSS
+        )
         console.log(this.state);
     }
 
@@ -362,7 +364,7 @@ class PSDSSPage extends Component {
                                     <MenuItem value="">
                                         <em>None</em>
                                     </MenuItem>
-                                    {this.props.dropdownOptions.timingTreamentOptions.map(time => (
+                                    {this.props.timingTreamentOptions.map(time => (
                                         <MenuItem key={time.id} value={time.id}>{time.status}</MenuItem> 
                                     ))} 
                             </Select>
@@ -403,7 +405,7 @@ class PSDSSPage extends Component {
                                     <MenuItem value="">
                                         <em>None</em>
                                     </MenuItem>
-                                    {this.props.dropdownOptions.treamentTypeOptions.map(type => (
+                                    {this.props.treamentTypeOptions.map(type => (
                                         <MenuItem key={type.id} value={type.id}>{type.status}</MenuItem> 
                                     ))} 
                             </Select>
@@ -430,18 +432,16 @@ class PSDSSPage extends Component {
                 </Button>
             </Grid>
             </Grid>
-
-
         )
     }
-  
 };
 
 const mapStateToProps = reduxState => ({
+    timingTreamentOptions: reduxState.dropdownOptions.timingTreamentOptions,
+    treamentTypeOptions: reduxState.dropdownOptions.treamentTypeOptions,
     psdss: reduxState.psdssReducer,
-    dropdownOptions: reduxState.dropdownOptions,
+    // dropdownOptions: reduxState.dropdownOptions,
     patient: reduxState.patientReducer,
 });
-
 
 export default connect(mapStateToProps) (withStyles(styles)(PSDSSPage))

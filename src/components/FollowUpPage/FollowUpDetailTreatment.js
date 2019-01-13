@@ -17,7 +17,7 @@ class RecurrenceTreatment extends Component {
 
   renderOptions() {
     // 
-    return this.props.reduxState.dropdownOptions.recTreatmentOptions.map((option, i) => {
+    return this.props.recTreatmentOptions.map((option, i) => {
       return (
         <MenuItem
           key={i}
@@ -54,7 +54,7 @@ class RecurrenceTreatment extends Component {
 } // end class RecurrenceTreatment
 
 const mapReduxStateToProps = (reduxState) => ({
-  reduxState
+  recTreatmentOptions: reduxState.dropdownOptions.recTreatmentOptions
 });
 
 export default connect(mapReduxStateToProps)(withStyles(styles)(RecurrenceTreatment));

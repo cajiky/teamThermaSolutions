@@ -61,8 +61,8 @@ class DischargeStatus extends Component {
   } // end return
 } // end class TagSelector
 
-const mapReduxStateToProps = (reduxState) => ({
-  dropdownOptions:reduxState
-});
+// const mapReduxStateToProps = (reduxState) => ({
+//   dropdownOptions:reduxState
+// });
 
-export default connect(mapReduxStateToProps)(withStyles(styles)(DischargeStatus));
+export default (withStyles(styles)(DischargeStatus));

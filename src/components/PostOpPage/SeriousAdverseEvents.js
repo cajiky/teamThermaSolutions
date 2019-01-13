@@ -38,8 +38,8 @@ class SeriousAdverseEvent extends Component {
               }
               label={event.name}
               />
-              <ClavienScore checked={event.checked} clavianScore={event.clavien_score} id={event.id}
-                handleChangeClavianScore={this.props.handleChangeClavianScore}/>
+              <ClavienScore checked={event.checked} clavienScore={event.clavien_score} id={event.id}
+                handleChangeClavienScore={this.props.handleChangeClavienScore}/>
               </Grid>
           ))
         }
@@ -48,8 +48,8 @@ class SeriousAdverseEvent extends Component {
   } // end return
 } // end class SeriousAdverseEvent
 
-const mapReduxStateToProps = (reduxState) => ({
-  reduxState
-});
+// const mapReduxStateToProps = (reduxState) => ({
+//   reduxState
+// });
 
-export default connect(mapReduxStateToProps)(withStyles(styles)(SeriousAdverseEvent));
+export default (withStyles(styles)(SeriousAdverseEvent));

@@ -17,7 +17,7 @@ class Location extends Component {
 
   renderOptions() {
     // 
-    return this.props.reduxState.dropdownOptions.recLocationOptions.map((option, i) => {
+    return this.props.recLocationOptions.map((option, i) => {
       return (
         <MenuItem
           key={i}
@@ -54,7 +54,7 @@ class Location extends Component {
 } // end class Location
 
 const mapReduxStateToProps = (reduxState) => ({
-  reduxState
+  recLocationOptions: reduxState.dropdownOptions.recLocationOptions
 });
 
 export default connect(mapReduxStateToProps)(withStyles(styles)(Location));

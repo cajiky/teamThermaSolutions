@@ -58,10 +58,10 @@ class OperativeNotesPage extends Component {
         this.props.dispatch({ type: 'UPDATE_OPERATIVE_NOTE', 
         payload: {
             operativeNotes: this.state.operativeNotes,
-            userId: this.props.reduxState.patientReducer.patient.id,
-            title: this.props.reduxState.user.title,
-            firstName: this.props.reduxState.user.first_name,
-            lastName: this.props.reduxState.user.last_name,
+            userId: this.props.patientReducer.patient.id,
+            title: this.props.user.title,
+            firstName: this.props.user.first_name,
+            lastName: this.props.user.last_name,
         }
          })
          this.setState ({
@@ -112,7 +112,8 @@ OperativeNotesPage.propTypes = {
   };
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+    patientReducer: reduxState.patientReducer,
+    user: reduxState.user,
 });
 
 

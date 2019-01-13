@@ -41,7 +41,7 @@ const styles = theme => ({
 
     render() {
     const { classes } = this.props;
-    const myOptions = this.props.reduxState.dropdownOptions.resections;
+    const myOptions = this.props.resections;
 
     return (
       <div className={classes.root}>
@@ -86,15 +86,12 @@ const styles = theme => ({
     )};
   }
   
-
-
   ResectionDropdown.propTypes = {
     classes: PropTypes.object.isRequired,
   };
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+  resections: reduxState.dropdownOptions.resections,
 });
-
 
 export default connect(mapStateToProps) (withStyles(styles)(ResectionDropdown))

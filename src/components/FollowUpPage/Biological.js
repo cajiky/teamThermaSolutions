@@ -19,7 +19,7 @@ class Biological extends Component {
 
   renderOptions() {
     // 
-    return this.props.reduxState.dropdownOptions.biologicalOptions.map((option, i) => {
+    return this.props.biologicalOptions.map((option, i) => {
       return (
         <MenuItem
           key={i}
@@ -56,7 +56,7 @@ class Biological extends Component {
 } // end class TagSelector
 
 const mapReduxStateToProps = (reduxState) => ({
-  reduxState
+  biologicalOptions: reduxState.dropdownOptions.biologicalOptions
 });
 
 export default connect(mapReduxStateToProps)(withStyles(styles)(Biological));

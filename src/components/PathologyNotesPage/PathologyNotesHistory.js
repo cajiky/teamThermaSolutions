@@ -45,7 +45,7 @@ const styles = theme => ({
 class PathologyNotesHistory extends React.Component {
 
     componentDidMount(){
-        this.props.dispatch({ type: 'GET_PATHOLOGY_HISTORY', payload: this.props.reduxState.patientReducer.patient.id })
+        this.props.dispatch({ type: 'GET_PATHOLOGY_HISTORY', payload: this.props.patientReducer.patient.id })
         this.setState ({ pathologyNotes: '',})
       }
 
@@ -64,7 +64,7 @@ class PathologyNotesHistory extends React.Component {
             </TableHead>
             <TableBody>
                 
-                {this.props.reduxState.pathologyHistoryReducer.map( note => {
+                {this.props.pathologyHistoryReducer.map( note => {
                     return(
                     <TableRow>
                         <TableCell>{note.title} {note.last_name}, {note.first_name}</TableCell>
@@ -82,7 +82,8 @@ class PathologyNotesHistory extends React.Component {
 
 
 const mapStateToProps = reduxState => ({
-    reduxState,
+    pathologyHistoryReducer: reduxState.pathologyHistoryReducer,
+    patientReducer: reduxState.patientReducer,
 });
 
 export default connect(mapStateToProps) (withStyles(styles)(PathologyNotesHistory))

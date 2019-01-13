@@ -70,7 +70,7 @@ class PostOpPage extends Component {
             ...this.state,
             changesMade: false,
             id: this.props.postOp.id,
-            patient_id: this.props.patientReducer.patient.id,
+            patient_id: this.props.postOp.patient_id,
             icu_stays: this.props.postOp.icu_stays,
             mcu_stays: this.props.postOp.mcu_stays,
             hospital_stays: this.props.postOp.hospital_stays,
@@ -117,7 +117,7 @@ class PostOpPage extends Component {
         let item = {...adverse_events[event.target.value - 1]};
         // 3. Replace the property you're intested in
         item.checked = !item.checked;
-        // if checked off then remove the clavian score
+        // if checked off then remove the clavien score
         if (item.checked == false) {
             item.clavien_score = null;
         }
@@ -131,7 +131,7 @@ class PostOpPage extends Component {
         });
     }
 
-    handleChangeClavianScore = (event) => {
+    handleChangeClavienScore = (event) => {
         // 1. Make a shallow copy of the items
         let adverse_events = [...this.state.adverse_events];
         // 2. Make a shallow copy of the item you want to mutate
@@ -245,7 +245,7 @@ class PostOpPage extends Component {
                     <Grid container spacing={24}>
                         <SeriousAdverseEvents adverse_events={this.state.adverse_events} 
                             handleChangeAdverseEvent={this.handleChangeAdverseEvent}
-                            handleChangeClavianScore={this.handleChangeClavianScore}/>
+                            handleChangeClavienScore={this.handleChangeClavienScore}/>
                     </Grid>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
@@ -298,6 +298,5 @@ const mapStateToProps = reduxState => ({
     adverseEvents: reduxState.adverseEvents,
     patientReducer: reduxState.patientReducer,
 });
-
 
 export default connect(mapStateToProps) (withStyles(styles)(PostOpPage));

@@ -20,7 +20,7 @@ class ClavienScore extends Component {
 
   renderOptions() {
     // 
-    return this.props.reduxState.dropdownOptions.clavienScore.map((option, i) => {
+    return this.props.clavienScoreOptions.map((option, i) => {
       return (
         <MenuItem
           key={i}
@@ -43,12 +43,12 @@ class ClavienScore extends Component {
             id={this.props.id}
             input={
               <Input
-                  value={this.props.clavianScore}
+                  value={this.props.clavienScore}
                   name={this.props.id}
                   id={this.props.id}
               />
               }
-            onChange={this.props.handleChangeClavianScore}
+            onChange={this.props.handleChangeClavienScore}
           >
             {this.renderOptions()}
           </Select> 
@@ -58,7 +58,7 @@ class ClavienScore extends Component {
 } // end class TagSelector
 
 const mapReduxStateToProps = (reduxState) => ({
-  reduxState
+  clavienScoreOptions: reduxState.dropdownOptions.clavienScore
 });
 
 export default connect(mapReduxStateToProps)(withStyles(styles)(ClavienScore));
