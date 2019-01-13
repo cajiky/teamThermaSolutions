@@ -21,6 +21,9 @@ const appTheme = createMuiTheme({
     useNextVariants: true,
     fontSize: 16,
   },
+  body: {
+    margin: 0,
+  },
 });
 
 export default appTheme;
