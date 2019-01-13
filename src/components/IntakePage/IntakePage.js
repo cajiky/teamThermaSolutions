@@ -44,7 +44,7 @@ class IntakePage extends Component {
         leucocyte: '',
         smoking: '',
         diabetes: '',
-        insulin_dependant: '',
+        insulin_dependent: '',
         cardiovascular: '',
         hypertension: '',
         stoma_pre_hipec: '',
@@ -77,7 +77,7 @@ class IntakePage extends Component {
             leucocyte: this.props.intake.leucocyte,
             smoking: this.props.intake.smoking,
             diabetes: this.props.intake.diabetes,
-            insulin_dependant: this.props.intake.insulin_dependant,
+            insulin_dependent: this.props.intake.insulin_dependent,
             cardiovascular: this.props.intake.cardiovascular,
             hypertension: this.props.intake.hypertension,
             stoma_pre_hipec: this.props.intake.stoma_pre_hipec,
@@ -266,12 +266,12 @@ class IntakePage extends Component {
                             </Grid>
                             <Grid item xs={4} className={classes.gridItem}>
                                 <FormControl component="fieldset" className={classes.formControl}>
-                                    <FormLabel component="legend">Insulin Dependant</FormLabel>
+                                    <FormLabel component="legend">Insulin Dependent</FormLabel>
                                     <RadioGroup
                                         aria-label="insulinDep"
-                                        name="insulin_dependant"
+                                        name="insulin_dependent"
                                         className={classes.group}
-                                        value={this.state.insulin_dependant}
+                                        value={this.state.insulin_dependent}
                                         onChange={this.handleChange}
                                     >
                                         <FormControlLabel value='1' control={<Radio />} label="Yes" />
