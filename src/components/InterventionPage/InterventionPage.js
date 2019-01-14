@@ -26,6 +26,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import ReactDOM from 'react-dom';
 
 const styles = theme => ({
     root: {
@@ -125,7 +126,7 @@ const styles = theme => ({
         right_peritoneum:false,
         peritoneum:false,
         pelvis:false,
-
+        labelWidth: 0,
     }
 
     componentDidMount(){
@@ -193,6 +194,7 @@ const styles = theme => ({
                 right_peritoneum:this.props.intervention.right_peritoneum,
                 peritoneum:this.props.intervention.peritoneum,
                 pelvis:this.props.intervention.pelvis,
+                labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
               
             })
         ):(
@@ -263,6 +265,7 @@ const styles = theme => ({
             right_peritoneum:false,
             peritoneum:false,
             pelvis:false,   
+            labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
             })
         )}
     }
@@ -275,7 +278,7 @@ const styles = theme => ({
         let PCI4 = Number(this.state.leftUpper);
         let PCI5 = Number(this.state.leftFlank);
         let PCI6 = Number(this.state.leftLower);
-        let PCI7 = Number(this.state.pelvis);
+        let PCI7 = Number(this.state.pelvisPCI);
         let PCI8 = Number(this.state.rightLower);
         let PCI9 = Number(this.state.rightFlank);
         let PCI10 = Number(this.state.upperJejunum);
@@ -834,7 +837,10 @@ const styles = theme => ({
                             <DialogContent >
                                 <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl}>
                                         <InputLabel
-                                            htmlFor="outlined-age-native-simple"
+                                            htmlFor="hipecType"
+                                            ref={ref => {
+                                                this.InputLabelRef = ref;
+                                              }}
                                         >
                                             HIPEC Type
                                         </InputLabel>
@@ -846,6 +852,7 @@ const styles = theme => ({
                                                 value={this.state.hipecType}
                                                 name="hipecType"
                                                 id="hipecType"
+                                                labelWidth={this.state.labelWidth}
                                             />
                                             }
                                         >
@@ -864,7 +871,10 @@ const styles = theme => ({
                                 <DialogContent >
                                     <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl}>
                                         <InputLabel
-                                            htmlFor="outlined-age-native-simple"
+                                            htmlFor="reasonOC"
+                                            ref={ref => {
+                                                this.InputLabelRef = ref;
+                                              }}
                                         >
                                             Reason O/C
                                         </InputLabel>
@@ -876,6 +886,7 @@ const styles = theme => ({
                                                 name="reasonOC"
                                                 fullWidth
                                                 id="reasonOC"
+                                                labelWidth={this.state.labelWidth}
                                             />
                                             }
                                         >

@@ -5,7 +5,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
+import ReactDOM from 'react-dom';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 const myOptions = [
@@ -22,6 +22,16 @@ const styles = theme => ({
 });
 
 class MortalitySelector extends Component {
+
+  state = {
+    labelWidth: 0,
+}
+
+componentDidMount() {
+    this.setState({
+        labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+    });
+}
 
   renderOptions() {
     // 
@@ -44,7 +54,11 @@ class MortalitySelector extends Component {
       <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl} 
      
       >
-          <InputLabel shrink htmlFor="hospital_mortality">Hospital Mortality</InputLabel>
+          <InputLabel 
+                ref={ref => {
+                    this.InputLabelRef = ref;
+                  }} 
+                  shrink htmlFor="hospital_mortality">Hospital Mortality</InputLabel>
           <Select fullWidth={true}
             variant="outlined" 
             value={this.props.hospital_mortality}
@@ -54,6 +68,7 @@ class MortalitySelector extends Component {
                   value={this.props.hospital_mortality}
                   name="hospital_mortality"
                   id="hospital_mortality"
+                  labelWidth={this.state.labelWidth}
               />
               }
             onChange={this.props.handleChange}

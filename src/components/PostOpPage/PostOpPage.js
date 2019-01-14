@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -63,6 +64,8 @@ class PostOpPage extends Component {
         status_at_discharge: null,
         discharge_notes: null,
         adverse_events: [],
+        reoperation: null,
+        labelWidth: 0,
     };
 
     componentDidMount () {
@@ -82,6 +85,8 @@ class PostOpPage extends Component {
             status_at_discharge: this.props.postOp.status_at_discharge,
             discharge_notes: this.props.postOp.discharge_notes,
             adverse_events: this.props.adverseEvents,
+            // labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+            
         })
     }
 
@@ -254,13 +259,13 @@ class PostOpPage extends Component {
             </ExpansionPanel>
             <Grid container spacing={24}>
                 <Grid item xs={2}>
-                    <ReOperation reoperation={this.state.reoperation} handleChange={this.handleChange}/>
+                    <ReOperation labelWidth={this.state.labelWidth} reoperation={this.state.reoperation} handleChange={this.handleChange}/>
                 </Grid>
                 <Grid item xs={2}>
-                    <Mortality hospital_mortality={this.state.hospital_mortality} handleChange={this.handleChange}/>
+                    <Mortality labelWidth={this.state.labelWidth} hospital_mortality={this.state.hospital_mortality} handleChange={this.handleChange}/>
                 </Grid>
                 <Grid item xs={2}>
-                    <DischargeStatus status_at_discharge={this.state.status_at_discharge} handleChange={this.handleChange}/>
+                    <DischargeStatus labelWidth={this.state.labelWidth} status_at_discharge={this.state.status_at_discharge} handleChange={this.handleChange}/>
                 </Grid>                
                 <Grid item xs>
                 <TextField

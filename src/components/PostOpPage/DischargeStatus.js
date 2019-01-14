@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Select from '@material-ui/core/Select';
@@ -24,6 +25,16 @@ const styles = theme => ({
 
 class DischargeStatus extends Component {
 
+  state = {
+    labelWidth: 0,
+}
+
+componentDidMount() {
+    this.setState({
+        labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+    });
+}
+
   renderOptions() {
     // 
     return myOptions.map((option, i) => {
@@ -42,7 +53,11 @@ class DischargeStatus extends Component {
 
     return (
       <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl}>
-          <InputLabel shrink htmlFor="status_at_discharge">Discharge Status</InputLabel>
+          <InputLabel 
+           ref={ref => {
+            this.InputLabelRef = ref;
+          }}
+          shrink htmlFor="status_at_discharge">Discharge Status</InputLabel>
           <Select fullWidth={true}
             label="Discharge Status"
             value={this.props.status_at_discharge}
@@ -51,7 +66,7 @@ class DischargeStatus extends Component {
                   value={this.props.status_at_discharge}
                   name="status_at_discharge"
                   id="status_at_discharge"
-                  
+                  labelWidth={this.state.labelWidth}
               />
               }
             onChange={this.props.handleChange}
@@ -63,8 +78,9 @@ class DischargeStatus extends Component {
   } // end return
 } // end class TagSelector
 
-// const mapReduxStateToProps = (reduxState) => ({
-//   dropdownOptions:reduxState
-// });
+const mapReduxStateToProps = (reduxState) => ({
+  dropdownOptions:reduxState
+});
 
-export default (withStyles(styles)(DischargeStatus));
+export default connect(mapReduxStateToProps) (withStyles(styles)(DischargeStatus))
+// export default (withStyles(styles)(DischargeStatus));
