@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
@@ -12,6 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import PropTypes from 'prop-types';
 // import FormLabel from '@material-ui/core/FormLabel';
 // import Button from '@material-ui/core/Button';
 import moment from 'moment';
@@ -34,7 +36,14 @@ const styles = theme => ({
 
 class PrimaryTumorTreatment extends Component {
 
+    state = {
+        labelWidth: 0,
+    }
+
     componentDidMount() {
+        this.setState({
+            labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+        });
     }
 
     render() {
@@ -45,6 +54,7 @@ class PrimaryTumorTreatment extends Component {
           <Grid item xs={2} className={classes.gridItem}>
               <TextField 
               variant="outlined"
+              margin="dense"
               label="Primary Surgery Date"
               type="date"
               fullWidth="true"
@@ -54,9 +64,12 @@ class PrimaryTumorTreatment extends Component {
               />
           </Grid >
           <Grid item xs={3} className={classes.gridItem}>
-              <FormControl variant="outlined" fullWidth="true">
-                  <InputLabel shrink
+              <FormControl variant="outlined" fullWidth="true" margin="dense" >
+                  <InputLabel 
                               htmlFor="intervention_type"
+                              ref={ref => {
+                                this.InputLabelRef = ref;
+                              }}
                           >
                               Intervention Type
                   </InputLabel>                  
@@ -68,6 +81,7 @@ class PrimaryTumorTreatment extends Component {
                           value={this.props.primary_tumor.intervention_type}
                           name="intervention_type"
                           id="interventionType"
+                          labelWidth={this.state.labelWidth}
                       />
                       }
                   >
@@ -81,9 +95,12 @@ class PrimaryTumorTreatment extends Component {
               </FormControl>
             </Grid>
             <Grid item xs={3} className={classes.gridItem}>
-                                <FormControl variant="outlined" fullWidth="true">
-                                <InputLabel shrink
+                        <FormControl variant="outlined" margin="dense" fullWidth>
+                            <InputLabel 
                               htmlFor="setting"
+                              ref={ref => {
+                                this.InputLabelRef = ref;
+                              }}
                           >
                               Setting
                              </InputLabel>                  
@@ -95,6 +112,7 @@ class PrimaryTumorTreatment extends Component {
                                             value={this.props.primary_tumor.setting}
                                             name="setting"
                                             id="setting"
+                                            labelWidth={this.state.labelWidth}
                                         />
                                         }
                                     >
@@ -108,9 +126,12 @@ class PrimaryTumorTreatment extends Component {
                                 </FormControl>
                             </Grid>
           <Grid item xs={3} className={classes.gridItem}>
-              <FormControl variant="outlined" fullWidth="true">
-              <InputLabel shrink
+              <FormControl variant="outlined" fullWidth="true" margin="dense">
+              <InputLabel 
                   htmlFor="prime_tumor_surgery"
+                  ref={ref => {
+                    this.InputLabelRef = ref;
+                  }}
               >
                   Prime Tumor Surgery
                   </InputLabel>
@@ -122,6 +143,7 @@ class PrimaryTumorTreatment extends Component {
                           value={this.props.primary_tumor.prime_tumor_surgery}
                           name="prime_tumor_surgery"
                           id="prime_tumor_surgery"
+                          labelWidth={this.state.labelWidth}
                       />
                       }
                   >
@@ -135,10 +157,13 @@ class PrimaryTumorTreatment extends Component {
               </FormControl>
           </Grid>
           <Grid item xs={4} className={classes.gridItem}>
-              <FormControl row component="fieldset" margin="dense" fullWidth className={classes.formControl}>
+              <FormControl row component="fieldset" margin="dense" fullWidth >
               {/* <FormLabel component="legend">Adjuvant Chemotherapy</FormLabel> */}
               <InputLabel shrink
                   htmlFor="adj_chemotherapy_type"
+                //   ref={ref => {
+                //     this.InputLabelRef = ref;
+                //   }}
               >
                   Adjuvant Chemotherapy
                   </InputLabel>
@@ -158,8 +183,11 @@ class PrimaryTumorTreatment extends Component {
           </Grid>
           <Grid item xs={3} className={classes.gridItem}>
               <FormControl variant="outlined" margin="dense" fullWidth>
-              <InputLabel shrink
+              <InputLabel 
                   htmlFor="adj_chemotherapy_type"
+                  ref={ref => {
+                    this.InputLabelRef = ref;
+                  }}
               >
                   Chemotherapy Type
                   </InputLabel>
@@ -171,6 +199,7 @@ class PrimaryTumorTreatment extends Component {
                           value={this.props.primary_tumor.adj_chemotherapy_type}
                           name="adj_chemotherapy_type"
                           id="type"
+                          labelWidth={this.state.labelWidth}
                       />
                       }
                   >
@@ -185,8 +214,11 @@ class PrimaryTumorTreatment extends Component {
           </Grid>
           <Grid item xs={3} className={classes.gridItem}>
               <FormControl variant="outlined" margin="dense" fullWidth >
-              <InputLabel shrink
+              <InputLabel 
                   htmlFor="biological"
+                  ref={ref => {
+                    this.InputLabelRef = ref;
+                  }}
               >
                   Biological
                   </InputLabel>
@@ -195,10 +227,10 @@ class PrimaryTumorTreatment extends Component {
                       onChange={this.props.handleChange}
                       input={
                       <OutlinedInput
-                          notched="true"
                           value={this.props.primary_tumor.biological}
                           name="biological"
                           id="biological"
+                          labelWidth={this.state.labelWidth}
                       />
                       }
                   >
@@ -214,9 +246,9 @@ class PrimaryTumorTreatment extends Component {
           <Grid item xs={12} className={classes.gridItem}>
               <TextField
                   fullWidth="true"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
+                //   InputLabelProps={{
+                //     shrink: true,
+                //   }}
                   className={classes.treatmentPrimeTumorNotes}
                   onChange={this.props.handleChange}
                   value={this.props.primary_tumor.notes}
@@ -233,6 +265,10 @@ class PrimaryTumorTreatment extends Component {
     }
   
 };
+
+PrimaryTumorTreatment.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
 
 const mapStateToProps = reduxState => ({
     dropdownOptions: reduxState.dropdownOptions,

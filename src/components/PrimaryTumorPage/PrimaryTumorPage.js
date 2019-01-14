@@ -54,6 +54,7 @@ class PrimaryTumorPage extends Component {
             primary_location: '',
             prime_tumor_surgery: '',
             reason_acute: '',
+            setting:'',
             t: '',
     };
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
@@ -15,7 +16,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 // import Button from '@material-ui/core/Button';
 import moment from 'moment';
-
 const styles = theme => ({
     gridItem:{
         marginBottom: 30,
@@ -30,12 +30,15 @@ const styles = theme => ({
         margin: `${theme.spacing.unit}px 0`,
       },
 });
-
 class PrimaryTumorDetails extends Component {
-
-    componentDidMount() {
+    state = {
+        labelWidth: 0,
     }
-
+    componentDidMount() {
+        this.setState({
+            labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+        });
+    }
     render() {
         const { classes } = this.props;
         return(
@@ -55,12 +58,16 @@ class PrimaryTumorDetails extends Component {
                 </Grid>
                 <Grid item xs={3}>
                   <FormControl variant="outlined" margin="dense" fullWidth>
-                      <InputLabel shrink
+                      <InputLabel 
                               htmlFor="primary_location"
+                              ref={ref => {
+                                this.InputLabelRef = ref;
+                              }}
                           >
                               Primary Location
                           </InputLabel>
                           <Select
+                            //   native
                               value={this.props.primary_tumor.primary_location}
                               onChange={this.props.handleChange}
                               // name="primary_location"
@@ -69,6 +76,7 @@ class PrimaryTumorDetails extends Component {
                                   value={this.props.primary_tumor.primary_location}
                                   name="primary_location"
                                   id="primary_location"
+                                  labelWidth={this.state.labelWidth}
                               />
                               }
                           >
@@ -79,14 +87,16 @@ class PrimaryTumorDetails extends Component {
                                   <MenuItem key={location.id} value={location.id}>{location.status}</MenuItem> 
                               ))} 
                           </Select>
-
                   </FormControl>
                 </Grid>
                 {/* <Grid item xs> */}
-
                 <Grid item xs={2} >
                     <FormControl variant="outlined" margin="dense" fullWidth>
-                    <InputLabel shrink
+                    <InputLabel
+                            htmlFor="primary_location"
+                            ref={ref => {
+                              this.InputLabelRef = ref;
+                            }}
                               htmlFor="t"
                           >
                               Tumor
@@ -99,6 +109,7 @@ class PrimaryTumorDetails extends Component {
                             value={this.props.primary_tumor.t}
                             name="t"
                             id="t"
+                            labelWidth={this.state.labelWidth}
                         />
                         }
                     >
@@ -111,20 +122,24 @@ class PrimaryTumorDetails extends Component {
                 <Grid item xs={2}>
                 <FormControl variant="outlined" margin="dense" fullWidth>
                 {/* <InputLabel ref={ref => {this.InputLabelRef = ref;}} htmlFor="m-input">Input Required</InputLabel> */}
-                      <InputLabel shrink
+                      <InputLabel 
                               htmlFor="n-input"
+                              ref={ref => {
+                                this.InputLabelRef = ref;
+                              }}
                           >
                               Node
                           </InputLabel>
                     <Select
                         value={this.props.primary_tumor.n}
                         onChange={this.props.handleChange}
-                        labelWidth={this.props.primary_tumor.labelWidth}
+                        // labelWidth={this.props.primary_tumor.labelWidth}
                         input={
                         <OutlinedInput
                             value={this.props.primary_tumor.n}
                             name="n"
                             id="n-input"
+                            labelWidth={this.state.labelWidth}
                         />
                         }
                     >
@@ -137,8 +152,11 @@ class PrimaryTumorDetails extends Component {
                 <Grid item xs={3}>
                 <FormControl variant="outlined" margin="dense" fullWidth>
                 {/* <InputLabel ref={ref => {this.InputLabelRef = ref;}} htmlFor="primary-location">Input Required</InputLabel> */}
-                    <InputLabel shrink
+                    <InputLabel 
                               htmlFor="m"
+                              ref={ref => {
+                                this.InputLabelRef = ref;
+                              }}
                           >
                               Metastasis
                           </InputLabel>
@@ -151,6 +169,7 @@ class PrimaryTumorDetails extends Component {
                             labelWidth={this.props.primary_tumor.labelWidth}
                             name="m"
                             id="m-input"
+                            labelWidth={this.state.labelWidth}
                         />
                         }
                     >
@@ -164,8 +183,11 @@ class PrimaryTumorDetails extends Component {
             <Grid container spacing={24}>
             <Grid item xs={4}>
                 <FormControl variant="outlined" margin="dense" fullWidth>
-                    <InputLabel shrink
+                    <InputLabel 
                               htmlFor="m_location"
+                              ref={ref => {
+                                this.InputLabelRef = ref;
+                              }}
                           >
                               Metastasis Location
                           </InputLabel>
@@ -177,6 +199,7 @@ class PrimaryTumorDetails extends Component {
                                   value={this.props.primary_tumor.m_location}
                                   name="m_location"
                                   id="primary-location"
+                                  labelWidth={this.state.labelWidth}
                               />
                               }
                           >
@@ -190,12 +213,16 @@ class PrimaryTumorDetails extends Component {
                     </FormControl>
             </Grid>
             <Grid item xs={4} className={classes.gridItem}>
-                        <FormControl variant="outlined" fullWidth="true" margin="dense" required>
-                        <InputLabel shrink
+                        <FormControl variant="outlined" fullWidth="true" margin="dense" >
+                        <InputLabel 
                               htmlFor="differentiation"
+                              ref={ref => {
+                                this.InputLabelRef = ref;
+                              }}
                           >
                               Differentiation
-                          </InputLabel>                            <Select
+                          </InputLabel>                            
+                            <Select
                                 value={this.props.primary_tumor.differentiation}
                                 onChange={this.props.handleChange}
                                 input={
@@ -203,6 +230,7 @@ class PrimaryTumorDetails extends Component {
                                     value={this.props.primary_tumor.differentiation}
                                     name="differentiation"
                                     id="differentiation"
+                                    labelWidth={this.state.labelWidth}
                                 />
                                 }
                             >
@@ -228,7 +256,6 @@ class PrimaryTumorDetails extends Component {
                                 <FormControlLabel value="1" control={<Radio />} label="Yes" />
                                 <FormControlLabel value="2" control={<Radio />} label="No" />
                                 <FormControlLabel value="3" control={<Radio />} label="Unknown" />
-
                             </RadioGroup>
                         </FormControl>
                     </Grid>
@@ -238,11 +265,9 @@ class PrimaryTumorDetails extends Component {
     }
   
 };
-
 const mapStateToProps = reduxState => ({
     dropdownOptions: reduxState.dropdownOptions,
     // primaryTumorReducer: reduxState.primaryTumorReducer,
     // patientReducer: reduxState.patientReducer,
 });
-
 export default connect(mapStateToProps) (withStyles(styles)(PrimaryTumorDetails))

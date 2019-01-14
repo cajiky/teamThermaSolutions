@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import ResectionDropdown from '../InterventionPage/ResectionDropdown';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import GridItem from '@material-ui/core/Grid';
@@ -15,6 +14,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 
 const styles = theme => ({
     root: {
@@ -39,6 +40,16 @@ const styles = theme => ({
   });
 
   class AdditionalPageInfo extends Component {
+
+    state = {
+        labelWidth: 0,
+    }
+
+    componentDidMount() {
+        this.setState({
+            labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+        });
+    }
 
     render() {
     const { classes } = this.props;
@@ -97,7 +108,10 @@ const styles = theme => ({
                         <DialogContent >
                             <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl}>
                                     <InputLabel
-                                        htmlFor="outlined-age-native-simple"
+                                        htmlFor="stomaType"
+                                        ref={ref => {
+                                            this.InputLabelRef = ref;
+                                          }}
                                     >
                                         Stoma Type
                                     </InputLabel>
@@ -107,7 +121,8 @@ const styles = theme => ({
                                         input={
                                         <OutlinedInput
                                             name="stomaType"
-                                            id="outlined-age-native-simple"
+                                            id="stomaType"
+                                            labelWidth={this.state.labelWidth}
                                         />
                                         }
                                     >
@@ -156,7 +171,10 @@ const styles = theme => ({
                         <DialogContent >
                             <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl}>
                                     <InputLabel
-                                        htmlFor="outlined-age-native-simple"
+                                        htmlFor="hipecRegiment"
+                                        ref={ref => {
+                                            this.InputLabelRef = ref;
+                                          }}
                                     >
                                         HIPEC Regiment
                                     </InputLabel>
@@ -166,7 +184,8 @@ const styles = theme => ({
                                         input={
                                         <OutlinedInput
                                             name="hipecRegiment"
-                                            id="outlined-age-native-simple"
+                                            id="hipecRegiment"
+                                            labelWidth={this.state.labelWidth}
                                         />
                                         }
                                     >
@@ -184,7 +203,10 @@ const styles = theme => ({
                             <DialogContent >
                             <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl}>
                                     <InputLabel
-                                        htmlFor="outlined-age-native-simple"
+                                        htmlFor="duration"
+                                        ref={ref => {
+                                            this.InputLabelRef = ref;
+                                          }}
                                     >
                                         Duration
                                     </InputLabel>
@@ -195,6 +217,7 @@ const styles = theme => ({
                                         <OutlinedInput
                                             name="duration"
                                             id="duration"
+                                            labelWidth={this.state.labelWidth}
                                         />
                                         }
                                     >
@@ -241,6 +264,9 @@ const styles = theme => ({
                             <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl}>
                                     <InputLabel
                                         htmlFor="outlined-age-native-simple"
+                                        ref={ref => {
+                                            this.InputLabelRef = ref;
+                                          }}
                                     >
                                         R-Score
                                     </InputLabel>
@@ -251,6 +277,7 @@ const styles = theme => ({
                                         <OutlinedInput
                                             name="rScore"
                                             id="rScore"
+                                            labelWidth={this.state.labelWidth}
                                         />
                                         }
                                     >
