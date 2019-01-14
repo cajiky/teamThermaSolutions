@@ -83,7 +83,7 @@ class CurrentPatientInfo extends Component {
                   {this.props.patient.alive_on_date ? (<Grid item xs={2.5}><span className={classes.redBold}>Alive on Date: </span>{moment(this.props.patient.alive_on_date).format('MM-DD-YYYY')}</Grid>) : (<></>)}
                   {this.props.patient.sensor ? (<Grid item xs={2.5}><span className={classes.redBold}>Sensor: </span>YES</Grid>) : (<></>)}
                   {this.props.patient.hospital_telephone ? (<Grid item xs={2.5}><span className={classes.redBold}>Hospital Telephone: </span>{this.props.patient.hospital_telephone}</Grid>) : (<></>)}
-                  {this.props.patient.refering_doctor ? (<Grid item xs={2.5}><span className={classes.redBold}>Referring Doctor: </span>{this.props.patient.refering_doctor}</Grid>) : (<></>)}
+                  {this.props.patient.referring_doctor ? (<Grid item xs={2.5}><span className={classes.redBold}>Referring Doctor: </span>{this.props.patient.referring_doctor}</Grid>) : (<></>)}
                   {this.props.patient.current_status ? (<Grid item xs={2.5}><span className={classes.redBold}>Current Status: </span>{this.props.patient.current_status}</Grid>) : (<></>)}
                   {this.props.patient.interval_prime_surgery ? (<Grid item xs={2.5}><span className={classes.redBold}>Interval Prime Surgery - HIPEC: </span>{this.props.patient.interval_prime_surgery}</Grid>) : (<></>)}
                   {this.props.patient.survival_hipec_death ? (<Grid item xs={2.5}><span className={classes.redBold}>Survival (HIPEC Death): </span>{this.props.patient.survival_hipec_death}</Grid>) : (<></>)}
