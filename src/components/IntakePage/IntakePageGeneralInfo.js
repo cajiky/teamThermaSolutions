@@ -241,7 +241,7 @@ class IntakePageGeneral extends Component {
                             name="smoking"
                             className={classes.group}
                             value={this.props.intake.smoking}
-                            onChange={this.handleChange}
+                            onChange={this.props.handleChange}
                             // margin="dense"
                         >
                             <FormControlLabel margin='dense' value='1' control={<Radio />} label="Yes" />
@@ -259,7 +259,7 @@ class IntakePageGeneral extends Component {
                             name="diabetes"
                             className={classes.group}
                             value={this.props.intake.diabetes}
-                            onChange={this.handleChange}
+                            onChange={this.props.handleChange}
                         >
                             <FormControlLabel value='1' control={<Radio />} label="Yes" />
                             <FormControlLabel value='2' control={<Radio />} label="No" />
@@ -276,7 +276,7 @@ class IntakePageGeneral extends Component {
                             name="insulin_dependent"
                             className={classes.group}
                             value={this.props.intake.insulin_dependent}
-                            onChange={this.handleChange}
+                            onChange={this.props.handleChange}
                         >
                             <FormControlLabel value='1' control={<Radio />} label="Yes" />
                             <FormControlLabel value='2' control={<Radio />} label="No" />
@@ -293,7 +293,7 @@ class IntakePageGeneral extends Component {
                             name="cardiovascular"
                             className={classes.group}
                             value={this.props.intake.cardiovascular}
-                            onChange={this.handleChange}
+                            onChange={this.props.handleChange}
                         >
                             <FormControlLabel value='1' control={<Radio />} label="Yes" />
                             <FormControlLabel value='2' control={<Radio />} label="No" />
@@ -310,7 +310,7 @@ class IntakePageGeneral extends Component {
                             name="hypertension"
                             className={classes.group}
                             value={this.props.intake.hypertension}
-                            onChange={this.handleChange}
+                            onChange={this.props.handleChange}
                         >
                             <FormControlLabel value='1' control={<Radio />} label="Yes" />
                             <FormControlLabel value='2' control={<Radio />} label="No" />

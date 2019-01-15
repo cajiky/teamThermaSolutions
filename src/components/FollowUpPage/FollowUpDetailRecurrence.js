@@ -120,9 +120,9 @@ class FollowUpDetailRecurrence extends Component {
                             handleChangeCheckbox={this.props.handleChangeCheckbox}/>
             </Grid>
             <Grid item xs={9}>
-                <TextField
+                <TextField shrink
                 name="treatment_notes"
-                label="Notes"
+                // label="Notes"
                 className={classes.textField}
                 value={this.props.recurrence.treatment_notes}
                 multiline

@@ -51,7 +51,7 @@ class IntakePageDiagnostic extends Component {
                         name="diagnostic_scopy"
                         className={classes.group}
                         value={this.props.intake.diagnostic_scopy}
-                        onChange={this.handleChange}
+                        onChange={this.props.handleChange}
                     >
                         <FormControlLabel value='1' control={<Radio />} label="Yes" />
                         <FormControlLabel value='2' control={<Radio />} label="No" />
@@ -68,7 +68,7 @@ class IntakePageDiagnostic extends Component {
                         name="scopy_conclusion"
                         className={classes.group}
                         value={this.props.intake.scopy_conclusion}
-                        onChange={this.handleChange}
+                        onChange={this.props.handleChange}
                     >
                         <FormControlLabel value='1' control={<Radio />} label="Amenable" />
                         <FormControlLabel value='2' control={<Radio />} label="Benefit of Doubt" />
@@ -85,7 +85,7 @@ class IntakePageDiagnostic extends Component {
                     variant="outlined"
                     type="date"
                     fullWidth="true"
-                    onChange={this.handleChange}
+                    onChange={this.props.handleChange}
                     name="date_scopy"
                     label="Date of Diagnostic Scopy"
                     value={moment(this.props.intake.date_scopy).format('YYYY-MM-DD')}

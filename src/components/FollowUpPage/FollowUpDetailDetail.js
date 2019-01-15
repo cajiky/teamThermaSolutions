@@ -183,7 +183,7 @@ class FollowUpDetailDetail extends Component {
                         <TextField
                         variant="outlined"
                         name="follow_up_notes"
-                        label="Notes"
+                        // label="Notes"
                         className={classes.textField}
                         value={this.state.follow_up_notes}
                         rows={8}
