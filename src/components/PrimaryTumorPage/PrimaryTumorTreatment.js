@@ -12,7 +12,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import FormLabel from '@material-ui/core/FormLabel';
+import FormLabel from '@material-ui/core/FormLabel';
 // import Button from '@material-ui/core/Button';
 import moment from 'moment';
 // import PrimaryTumorDetails from './PrimaryTumorDetails';
@@ -136,12 +136,12 @@ class PrimaryTumorTreatment extends Component {
           </Grid>
           <Grid item xs={4} className={classes.gridItem}>
               <FormControl row component="fieldset" margin="dense" fullWidth className={classes.formControl}>
-              {/* <FormLabel component="legend">Adjuvant Chemotherapy</FormLabel> */}
-              <InputLabel shrink
+              <FormLabel component="legend">Adjuvant Chemotherapy</FormLabel>
+              {/* <InputLabel shrink
                   htmlFor="adj_chemotherapy_type"
               >
                   Adjuvant Chemotherapy
-                  </InputLabel>
+                  </InputLabel> */}
                   <RadioGroup row
                       aria-label="adj"
                       name="adj_chemotherapy"
@@ -217,7 +217,7 @@ class PrimaryTumorTreatment extends Component {
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  className={classes.treatmentPrimeTumorNotes}
+                //   className={classes.treatmentPrimeTumorNotes}
                   onChange={this.props.handleChange}
                   value={this.props.primary_tumor.notes}
                   name='notes'

@@ -15,8 +15,7 @@ import Switch from '@material-ui/core/Switch';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import moment from 'moment';
-
-
+import PSDSSPageData from './PSDSSPageData';
 
 const styles = theme => ({
     root: {
@@ -25,7 +24,7 @@ const styles = theme => ({
         overflowX: 'auto',
       },
     gridItem:{
-        marginBottom: 30,
+        marginBottom: 10,
     },
     dropDown:{
         fullWidth: true,
@@ -89,6 +88,15 @@ class PSDSSPage extends Component {
         console.log(this.state);
     }
 
+    handleChangeCheckbox = (event) => {
+        this.setState({
+            ...this.state,
+            changesMade: true,
+            [event.target.name]: event.target.checked,
+        });
+        // console.log('checkbox state', this.state);
+    }
+
     //function in charge of calculating PSDSS Score
     calculatePSDSS = () => {
         const clin = Number(this.state.clinical);
@@ -124,6 +132,7 @@ class PSDSSPage extends Component {
     render() {
         const {classes} = this.props;
         return(
+            <div>
             <Grid
             container
             direction="row"
@@ -131,18 +140,70 @@ class PSDSSPage extends Component {
             alignItems="flex-start"
             >
             {/* Start of the first column of the page. this will hold the "legend" for the user to use to fill out the form */}
-            <Grid item xs={6} className={classes.gridItem}>
+            <Grid item xs={12} className={classes.gridItem}>
                 <Grid
                 container
                 direction="row"
                 justify="flex-start"
-                alignItems="center"
+                // alignItems="center"
                 >
-                     <Grid item xs={12} className={classes.gridItem} align="center">
-                        <Typography variant="h4">
-                            Peritonial Surface Disease Severity Scale
-                        </Typography>
+                     <Grid item xs={12} className={classes.gridItem} align="left">
+                        {/* <Typography variant="h5"> */}
+                            <h4>Peritonial Surface Disease Severity Scale</h4>
+                        {/* </Typography> */}
                     </Grid>
+                    <Grid item xs={12} className={classes.gridItem}></Grid>
+                        <Grid item xs={1}>
+                            {/* <Typography variant="overline">
+                                +
+                            </Typography> */}
+                        </Grid>
+                        <Grid item xs={2} className={classes.gridItem}>
+                            <TextField dense
+                            variant="outlined"
+                            label="Clinical"
+                            // style={{width: 130, marginBottom: 10,}}
+                            onChange={this.handleChange}
+                            name="clinical"
+                            value={this.state.clinical}
+                            id="patientWeightInput"
+                            className={classNames(classes.margin, classes.textField)}
+                            />
+                        </Grid>
+                        <Grid item xs={2}>
+                            {/* <Typography variant="overline">
+                                +
+                            </Typography> */}
+                        </Grid>
+                        <Grid item xs={2} className={classes.gridItem}>
+                            <TextField dense
+                                variant="outlined"
+                                label="PCI"
+                                // style={{width: 130, marginBottom: 10,}}
+                                onChange={this.handleChange}
+                                name="pci"
+                                value={this.state.pci}
+                                id="pci"
+                                className={classNames(classes.margin, classes.textField)}
+                            />
+                        </Grid>
+                        <Grid item xs={2}>
+                            {/* <Typography variant="overline">
+                                +
+                            </Typography> */}
+                        </Grid>
+                        <Grid item xs={2} className={classes.gridItem}>
+                            <TextField dense
+                                variant="outlined"
+                                label="Histology Score"
+                                // style={{width: 130, marginBottom: 10,}}
+                                onChange={this.handleChange}
+                                name="histology"
+                                value={this.state.histology}
+                                id="histologyScore"
+                                className={classNames(classes.margin, classes.textField)}
+                            />
+                        </Grid>
                     <Grid item xs={12} className={classes.gridItem} align="center">
                     {/* This is the table that will hold the legend for the surgens to refference while they enter in scores. */}
                         {/* <Paper elevation={12} className={classes.containerPaper}> */}
@@ -153,18 +214,21 @@ class PSDSSPage extends Component {
                             alignItems="center"
                             >
                                 <Grid item xs={4} className={classes.headingElements} align="center">
-                                    <Typography variant="h4">
-                                        Clinical
+                                    <Typography variant="h7">
+                                        Clinical Evaluation<br />
+                                        Enter a value from 0 to 6
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={4} className={classes.headingElements} align="center">
-                                    <Typography variant="h4">
-                                        PCI
+                                    <Typography variant="h7">
+                                        PCI (Peritonial Cancer Index)<br />
+                                        Enter a value from 1 to 7
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={4} className={classes.headingElements} align="center">
-                                    <Typography variant="h4">
-                                        Histology
+                                    <Typography variant="h7">
+                                        Histology<br />
+                                        Enter a value from 1 to 9
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={12} className={classes.gridItem} align="center">
@@ -182,12 +246,12 @@ class PSDSSPage extends Component {
                                 </Grid>
                                 <Grid item xs={4} className={classes.gridItem} align="center">
                                     <Typography variant="overline">
-                                        Good/Moderate NO
+                                        Good/Moderate N0
                                     </Typography>
                                 </Grid>
                                 <Grid itme xs={4} className={classes.gridItem} align="center">
                                     <Typography variant="subheading">
-                                        1
+                                        0
                                     </Typography>
                                 </Grid>
                                 <Grid itme xs={4} className={classes.gridItem} align="center">
@@ -269,176 +333,27 @@ class PSDSSPage extends Component {
                                 <Grid item xs={12} className={classes.gridItem} align="center">
                                     <Divider variant="fullWidth"></Divider>
                                 </Grid>
-                                <Grid item xs={2} className={classes.gridItem} align="center">
-                                    <TextField
-                                    variant="outlined"
-                                    label="Clinical"
-                                    style={{width: 130, marginBottom: 10,}}
-                                    onChange={this.handleChange}
-                                    name="clinical"
-                                    value={this.state.clinical}
-                                    id="patientWeightInput"
-                                    className={classNames(classes.margin, classes.textField)}
-                                    />
-                                </Grid>
-                                <Grid itme xs={2}>
-                                    <Typography variant="overline">
-                                        +
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={2} className={classes.gridItem} align="center">
-                                    <TextField
-                                        variant="outlined"
-                                        label="PCI Score"
-                                        style={{width: 130, marginBottom: 10,}}
-                                        onChange={this.handleChange}
-                                        name="pci"
-                                        value={this.state.pci}
-                                        id="patientWeightInput"
-                                        className={classNames(classes.margin, classes.textField)}
-                                    />
-                                </Grid>
-                                <Grid itme xs={2}>
-                                    <Typography variant="overline">
-                                        +
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={2} className={classes.gridItem}>
-                                    <TextField
-                                        variant="outlined"
-                                        label="Hist Score"
-                                        style={{width: 130, marginBottom: 10,}}
-                                        onChange={this.handleChange}
-                                        name="histology"
-                                        value={this.state.histology}
-                                        id="histologyScore"
-                                        className={classNames(classes.margin, classes.textField)}
-                                    />
-                                </Grid>
+
                             </Grid>
-                        {/* </Paper> */}
-                        <Grid item xs={12} className={classes.gridItem}></Grid>
-                        <Grid item xs={12} className={classes.gridItem}>
-                            <Typography variant="h5" align="right">Total: {this.state.total}</Typography>
-                        </Grid>
+                            <Grid item xs={12} className={classes.gridItem}>
+                            <Typography variant="h5" align="center">PSDSS Score: {this.state.total}</Typography>
+                            </Grid>
+                            <Grid item xs={12} className={classes.gridItem}>
+                            <Typography variant="h7" align="center">2 to 3 (Stage I) - 4 to 7 (Stage II) - 8 to 10 (Stage III) - 11+ (Stage IV) </Typography>
+                            </Grid>
+
+
                     </Grid>
+                 </Grid>
                 </Grid>
+            </Grid>
+            <h4>Additional Information</h4>
+                <PSDSSPageData psdss={this.state} toggleSwitch={this.toggleSwitch} handleChange={this.handleChange}/>
                 <Button onClick={this.upsertEntriesInDB} className={classes.button}
-                    variant="contained" color="primary">
-                    Save
+                        variant="contained" color="primary">
+                        Save
                 </Button>
-            </Grid>
-            {/* Start of the second column of the page. this will hold the "Sync liver metistasis" */}
-            <Grid item xs={5} className={classes.gridItem}>
-                <Grid
-                container
-                direction="row"
-                justify="flex-start"
-                alignItems="center"
-                >
-                    <Grid item xs={12} className={classes.gridItem} align="center">
-                        <Typography variant="h4">
-                            Additional Data
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={6} className={classes.gridItem}>
-                        <Typography variant="overline">Synchronous Liver Metastases:</Typography>
-                    </Grid>
-                    <Grid item xs={6} className={classes.gridItem}>
-                        <Switch
-                        checked={this.state.synchronous_liver_treatment}
-                        name="synchronous_liver_treatment"
-                        onChange={this.toggleSwitch}
-                        value={this.state.synchronous_liver_treatment}
-                        />
-                    </Grid>
-                    <Grid item xs={12} className={classes.gridItem} align="center">
-                        <FormControl variant="outlined" fullWidth="true">
-                        {this.state.synchronous_liver_treatment ? <InputLabel htmlFor="timing">Timing</InputLabel> : <InputLabel htmlFor="timing">Timing (Disabled)</InputLabel>}
-                            <Select
-                                align="center"
-                                value={this.state.timing}
-                                onChange={this.handleChange}
-                                input={
-                                    <OutlinedInput
-                                    disabled={!this.state.synchronous_liver_treatment}
-                                    value={this.state.timing}
-                                    name="timing"
-                                    id="timing"
-                                    />
-                                    }
-                                    >
-                                    <MenuItem value="">
-                                        <em>None</em>
-                                    </MenuItem>
-                                    {this.props.timingTreamentOptions.map(time => (
-                                        <MenuItem key={time.id} value={time.id}>{time.status}</MenuItem> 
-                                    ))} 
-                            </Select>
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={6} className={classes.gridItem} align="center">
-                        <Typography variant="overline">
-                            Date:
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={6} className={classes.gridItem}>
-                        <TextField 
-                        disabled={!this.state.synchronous_liver_treatment}
-                        variant="outlined"
-                        type="date"
-                        fullWidth="true"
-                        onChange={this.handleChange}
-                        name="date_treatment"
-                        value={moment(this.state.date_treatment).format('YYYY-MM-DD')}
-                        />
-                    </Grid>
-                    <Grid item xs={12} className={classes.gridItem}>
-                        <FormControl variant="outlined" fullWidth="true">
-                            {this.state.synchronous_liver_treatment ? <InputLabel htmlFor="timing">Type</InputLabel> : <InputLabel htmlFor="timing">Type (Disabled)</InputLabel>}
-                            <Select
-                                align="center"
-                                value={this.state.treatment_type}
-                                onChange={this.handleChange}
-                                input={
-                                    <OutlinedInput
-                                    disabled={!this.state.synchronous_liver_treatment}
-                                    value={this.state.treatment_type}
-                                    name="treatment_type"
-                                    id="typeSLM"
-                                    />
-                                    }
-                                    >
-                                    <MenuItem value="">
-                                        <em>None</em>
-                                    </MenuItem>
-                                    {this.props.treamentTypeOptions.map(type => (
-                                        <MenuItem key={type.id} value={type.id}>{type.status}</MenuItem> 
-                                    ))} 
-                            </Select>
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={12} className={classes.gridItem}>
-                        <TextField
-                            disabled={!this.state.synchronous_liver_treatment}
-                            fullWidth="true"
-                            className={classes.treatmentPrimeTumorNotes}
-                            onChange={this.handleChange}
-                            value={this.state.notes}
-                            name='notes'
-                            multiline
-                            rows="5"
-                            variant="outlined"
-                            label={this.state.synchronous_liver_treatment ? "Notes" : "Notes (Disabled)"}
-                        />
-                    </Grid>
-                </Grid>
-                {/* <Button onClick={this.upsertEntriesInDB} className={classes.button}
-                variant="contained" color="primary">
-                Save
-                </Button> */}
-            </Grid>
-            </Grid>
+            </div>
         )
     }
 };

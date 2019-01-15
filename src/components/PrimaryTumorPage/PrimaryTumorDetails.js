@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
@@ -33,7 +34,14 @@ const styles = theme => ({
 
 class PrimaryTumorDetails extends Component {
 
+    state = {
+        labelWidth: 0,
+    }
+
     componentDidMount() {
+        this.setState({
+            labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+        });
     }
 
     render() {
@@ -55,12 +63,16 @@ class PrimaryTumorDetails extends Component {
                 </Grid>
                 <Grid item xs={3}>
                   <FormControl variant="outlined" margin="dense" fullWidth>
-                      <InputLabel shrink
+                      <InputLabel 
                               htmlFor="primary_location"
+                              ref={ref => {
+                                this.InputLabelRef = ref;
+                              }}
                           >
                               Primary Location
                           </InputLabel>
                           <Select
+                            //   native
                               value={this.props.primary_tumor.primary_location}
                               onChange={this.props.handleChange}
                               // name="primary_location"
@@ -69,6 +81,7 @@ class PrimaryTumorDetails extends Component {
                                   value={this.props.primary_tumor.primary_location}
                                   name="primary_location"
                                   id="primary_location"
+                                  labelWidth={this.state.labelWidth}
                               />
                               }
                           >
