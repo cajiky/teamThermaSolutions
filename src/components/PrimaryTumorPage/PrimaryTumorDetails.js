@@ -31,9 +31,11 @@ const styles = theme => ({
       },
 });
 class PrimaryTumorDetails extends Component {
+
     state = {
         labelWidth: 0,
     }
+
     componentDidMount() {
         this.setState({
             labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,

@@ -64,7 +64,7 @@ const styles = theme => ({
                             name="anastomosis"
                             checked={this.props.state.anastomosis}
                             onChange={this.props.handleChangeCheckbox}
-                            value={this.props.state.status}
+                            value={this.props.state.anastomosis}
                             />
                         }
                         label="Anastomosis"
