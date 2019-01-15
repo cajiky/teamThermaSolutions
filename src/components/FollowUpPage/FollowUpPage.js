@@ -98,7 +98,7 @@ class FollowUpPage extends Component {
         console.log('in render follow up page:', this.state, this.props.followUpHistory);
         return(
             <div>
-                <h3>Follow Up Treatment Plan</h3>
+                <h4>Follow Up Treatment Plan</h4>
                 <Grid container spacing={24} className={classes.section}>
                     <Grid item xs={3}>
                     <AdjuvantChemotherapy adjuvant_chemo={this.state.adjuvant_chemo} handleChange={this.handleChange} />
@@ -118,7 +118,7 @@ class FollowUpPage extends Component {
                     }
                 <Divider variant="middle" />
                 {/* <pre>{JSON.stringify(this.props.followUpHistory)}</pre> */}
-                <h3>Follow Up History</h3>
+                <h4>Follow Up History</h4>
                 <FollowUpDetail />
                 {/* {
                     this.props.followUpHistory.map((history, index) => (

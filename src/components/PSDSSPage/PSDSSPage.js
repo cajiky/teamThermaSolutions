@@ -83,7 +83,7 @@ class PSDSSPage extends Component {
         this.setState ({
             [event.target.name]: event.target.value,
         }
-        // , this.calculatePSDSS
+        , this.calculatePSDSS
         )
         console.log(this.state);
     }
@@ -348,7 +348,7 @@ class PSDSSPage extends Component {
                 </Grid>
             </Grid>
             <h4>Additional Information</h4>
-                <PSDSSPageData psdss={this.state} toggleSwitch={this.toggleSwitch} handleChange={this.handleChange}/>
+                <PSDSSPageData psdssInfo={this.state} toggleSwitch={this.toggleSwitch} handleChange={this.handleChange}/>
                 <Button onClick={this.upsertEntriesInDB} className={classes.button}
                         variant="contained" color="primary">
                         Save

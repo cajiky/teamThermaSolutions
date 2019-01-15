@@ -78,7 +78,7 @@ class OperativeNotesPage extends Component {
         const { classes } = this.props;
         return(
             <div>
-                <h1>Operative Notes </h1>
+                <h4>Operative Notes </h4>
                 <Grid container spacing={24} >
                     <GridItem item xs={12}>
                             <DialogContent >
@@ -88,7 +88,7 @@ class OperativeNotesPage extends Component {
                                     name="operativeNotes"
                                     margin="dense"
                                     id="operativeNotes"
-                                    label="Operative Notes"
+                                    label="Notes"
                                     type="text"
                                     fullWidth={true}
                                     multiline

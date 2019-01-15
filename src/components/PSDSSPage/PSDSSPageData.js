@@ -19,8 +19,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 // import Button from '@material-ui/core/Button';
 import moment from 'moment';
 
-
-
 const styles = theme => ({
     root: {
         width: '100%',
@@ -68,9 +66,9 @@ class PSDSSPage extends Component {
                 control={
                     <Checkbox
                     name="synchronous_liver_treatment"
-                    checked={this.props.psdss.synchronous_liver_treatment}
+                    checked={this.props.psdssInfo.synchronous_liver_treatment}
                     onChange={this.props.handleChangeCheckbox}
-                    value={this.props.psdss.synchronous_liver_treatment}
+                    value={this.props.psdssInfo.synchronous_liver_treatment}
                     />
                 }
                 label="Synchronous Liver Metastases Treatment"
@@ -86,14 +84,14 @@ class PSDSSPage extends Component {
             <Grid item xs={3} className={classes.gridItem}>
                 <TextField 
                 label="Treatment Date"
-                disabled={!this.props.psdss.synchronous_liver_treatment}
+                disabled={!this.props.psdssInfo.synchronous_liver_treatment}
                 variant="outlined"
                 type="date"
                 dense="true"
                 // fullWidth="true"
                 onChange={this.props.handleChange}
                 name="date_treatment"
-                value={moment(this.props.psdss.date_treatment).format('YYYY-MM-DD')}
+                value={moment(this.props.psdssInfo.date_treatment).format('YYYY-MM-DD')}
                 />
             </Grid>
             <Grid item xs={3} className={classes.gridItem}>
@@ -101,12 +99,12 @@ class PSDSSPage extends Component {
                 {this.props.psdss.synchronous_liver_treatment ? <InputLabel htmlFor="timing">Timing</InputLabel> : <InputLabel htmlFor="timing">Timing (Disabled)</InputLabel>}
                     <Select
                         // align="center"
-                        value={this.props.psdss.timing}
+                        value={this.props.psdssInfo.timing}
                         onChange={this.props.handleChange}
                         input={
                             <OutlinedInput
-                            disabled={!this.props.psdss.synchronous_liver_treatment}
-                            value={this.props.psdss.timing}
+                            disabled={!this.props.psdssInfo.synchronous_liver_treatment}
+                            value={this.props.psdssInfo.timing}
                             name="timing"
                             id="timing"
                             />
@@ -131,12 +129,12 @@ class PSDSSPage extends Component {
                     {this.props.psdss.synchronous_liver_treatment ? <InputLabel htmlFor="timing">Type</InputLabel> : <InputLabel htmlFor="timing">Type (Disabled)</InputLabel>}
                     <Select
                         // align="center"
-                        value={this.props.psdss.treatment_type}
+                        value={this.props.psdssInfo.treatment_type}
                         onChange={this.props.handleChange}
                         input={
                             <OutlinedInput
-                            disabled={!this.props.psdss.synchronous_liver_treatment}
-                            value={this.props.psdss.treatment_type}
+                            disabled={!this.props.psdssInfo.synchronous_liver_treatment}
+                            value={this.props.psdssInfo.treatment_type}
                             name="treatment_type"
                             id="typeSLM"
                             />
@@ -156,16 +154,16 @@ class PSDSSPage extends Component {
             </Grid>
             <Grid item xs={12} className={classes.gridItem}>
                 <TextField
-                    disabled={!this.props.psdss.synchronous_liver_treatment}
+                    disabled={!this.props.psdssInfo.synchronous_liver_treatment}
                     fullWidth="true"
                     className={classes.treatmentPrimeTumorNotes}
                     onChange={this.props.handleChange}
-                    value={this.props.psdss.notes}
+                    value={this.props.psdssInfo.notes}
                     name='notes'
                     multiline
                     rows="5"
                     variant="outlined"
-                    label={this.props.psdss.synchronous_liver_treatment ? "Notes" : "Notes (Disabled)"}
+                    label={this.props.psdssInfo.synchronous_liver_treatment ? "Notes" : "Notes (Disabled)"}
                 />
             </Grid>
         </Grid>
