@@ -65,6 +65,7 @@ class OperativeNotesPage extends Component {
         }
          })
          this.setState ({
+            changesMade: false,
             operativeNotes: '',
         })
         }

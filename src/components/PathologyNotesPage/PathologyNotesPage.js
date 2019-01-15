@@ -66,6 +66,7 @@ class PathologyNotesPage extends Component {
         }
          })
          this.setState ({
+            changesMade: false,
             pathologyNotes: '',
         })
         }
