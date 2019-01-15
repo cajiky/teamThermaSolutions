@@ -110,9 +110,15 @@ class IntakePage extends Component {
         let squaredHeight = height * height;
         // console.log(`SquaredHeight: ${squaredHeight}, Weight: ${weight}`)
         bmi = weight/squaredHeight;
-        this.setState({
-            bmi_auto: String(parseFloat(bmi).toFixed(2)),
-        })
+        if (this.state.length_m != '' && this.state.weight_kg != '') {
+            this.setState({
+                bmi_auto: String(parseFloat(bmi).toFixed(2)),
+            })
+        } else {
+            this.setState({
+                bmi_auto: '',
+            })
+        }
     }
 
     //Function to handle the changes in our inputs and selectors.
