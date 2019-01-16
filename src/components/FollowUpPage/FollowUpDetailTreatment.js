@@ -16,7 +16,6 @@ const styles = theme => ({
 class RecurrenceTreatment extends Component {
 
   renderOptions() {
-    // 
     return this.props.recTreatmentOptions.map((option, i) => {
       return (
         <MenuItem

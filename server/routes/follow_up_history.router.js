@@ -6,7 +6,6 @@ const router = express.Router();
 
 // GET ROUTER TO RETRIEVE FOLLOW UP HISTORY FOR PATIENT
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-  // console.log('query.id', req.query.id);
   const queryText = `SELECT * FROM follow_up_history 
                     WHERE patient_id=$1
                     ORDER BY id desc`;
@@ -18,14 +17,11 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
       });
 });
 
-// POST ROUTER TO ADD NEW FOLLOW UP HISTORY
+// POST ROUTER TO ADD NEW FOLLOW UP HISTORY FOR PATIENT
 router.post('/', rejectUnauthenticated, (req, res) => {
-
-  const queryText = `INSERT INTO follow_up_history 
+  const queryText = `INSERT INTO follow_up_history
                     ("patient_id", "date") VALUES ($1, $2)`;
   const queryValues = [req.body.patient_id, req.body.date];
-
-  // console.log('sql query for new items for new user', queryText);
   pool.query(queryText, queryValues)
     .then(() => { res.sendStatus(201); })
     .catch((err) => {
@@ -36,7 +32,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 // POST ROUTER TO UPDATE FOLLOW UP HISTORY
 router.put('/', rejectUnauthenticated, (req, res) => {
-    console.log('in put:', req.body);
 
     const id = req.body.id;
     const follow_up_date = req.body.date;
@@ -68,17 +63,5 @@ router.put('/', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
       });            
 });
-// DELETE ROUTER FOR ITEM
-// router.delete('/', rejectUnauthenticated, (req, res) => {
-//   // console.log('in delete on server', req.query.id);
-//   const queryText = 'DELETE FROM item WHERE id=$1';
-//   pool.query(queryText, [req.query.id])
-//     .then(() => { res.sendStatus(200); })
-//     .catch((err) => {
-//       console.log('Error completing DELETE item query', err);
-//       res.sendStatus(500);
-//     });
-// });
-
 
 module.exports = router;
