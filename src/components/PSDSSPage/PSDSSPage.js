@@ -86,7 +86,6 @@ class PSDSSPage extends Component {
             changesMade: true,
             [event.target.name]: event.target.checked,
         });
-        // console.log('checkbox state', this.state);
     }
 
     //function in charge of calculating PSDSS Score
@@ -131,7 +130,6 @@ class PSDSSPage extends Component {
             justify="space-evenly"
             alignItems="flex-start"
             >
-            {/* Start of the first column of the page. this will hold the "legend" for the user to use to fill out the form */}
             <Grid item xs={12} className={classes.gridItem}>
                 <Grid
                 container
@@ -140,21 +138,15 @@ class PSDSSPage extends Component {
                 // alignItems="center"
                 >
                      <Grid item xs={12} className={classes.gridItem} align="left">
-                        {/* <Typography variant="h5"> */}
                             <h4>Peritonial Surface Disease Severity Scale</h4>
-                        {/* </Typography> */}
                     </Grid>
                     <Grid item xs={12} className={classes.gridItem}></Grid>
                         <Grid item xs={1}>
-                            {/* <Typography variant="overline">
-                                +
-                            </Typography> */}
                         </Grid>
                         <Grid item xs={2} className={classes.gridItem}>
                             <TextField dense
                             variant="outlined"
                             label="Clinical"
-                            // style={{width: 130, marginBottom: 10,}}
                             onChange={this.handleChange}
                             name="clinical"
                             value={this.state.clinical}
@@ -163,15 +155,11 @@ class PSDSSPage extends Component {
                             />
                         </Grid>
                         <Grid item xs={2}>
-                            {/* <Typography variant="overline">
-                                +
-                            </Typography> */}
                         </Grid>
                         <Grid item xs={2} className={classes.gridItem}>
                             <TextField dense
                                 variant="outlined"
                                 label="PCI"
-                                // style={{width: 130, marginBottom: 10,}}
                                 onChange={this.handleChange}
                                 name="pci"
                                 value={this.state.pci}
@@ -180,15 +168,11 @@ class PSDSSPage extends Component {
                             />
                         </Grid>
                         <Grid item xs={2}>
-                            {/* <Typography variant="overline">
-                                +
-                            </Typography> */}
                         </Grid>
                         <Grid item xs={2} className={classes.gridItem}>
                             <TextField dense
                                 variant="outlined"
                                 label="Histology Score"
-                                // style={{width: 130, marginBottom: 10,}}
                                 onChange={this.handleChange}
                                 name="histology"
                                 value={this.state.histology}
@@ -197,8 +181,6 @@ class PSDSSPage extends Component {
                             />
                         </Grid>
                     <Grid item xs={12} className={classes.gridItem} align="center">
-                    {/* This is the table that will hold the legend for the surgens to refference while they enter in scores. */}
-                        {/* <Paper elevation={12} className={classes.containerPaper}> */}
                             <Grid
                             container
                             direction="row"
@@ -354,7 +336,6 @@ const mapStateToProps = reduxState => ({
     timingTreamentOptions: reduxState.dropdownOptions.timingTreamentOptions,
     treamentTypeOptions: reduxState.dropdownOptions.treamentTypeOptions,
     psdss: reduxState.psdssReducer,
-    // dropdownOptions: reduxState.dropdownOptions,
     patient: reduxState.patientReducer,
 });
 
