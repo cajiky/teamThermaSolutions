@@ -85,8 +85,6 @@ class PostOpPage extends Component {
             status_at_discharge: this.props.postOp.status_at_discharge,
             discharge_notes: this.props.postOp.discharge_notes,
             adverse_events: this.props.adverseEvents,
-            // labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
-            
         })
     }
 
@@ -96,7 +94,6 @@ class PostOpPage extends Component {
 
     // Called when the input field changes
     handleChange = (event) => {
-        // this.state.changesMade = true;
         this.setState({
             ...this.state,
             changesMade: true,
@@ -106,8 +103,6 @@ class PostOpPage extends Component {
 
     // Called when the input field changes
     handleChangeCheckbox = (event) => {
-        // console.log('in checkbox', this.state.serious_adverse_event);
-        // this.state.changesMade = true;
         this.setState({
             ...this.state,
             changesMade: true,
@@ -181,7 +176,6 @@ class PostOpPage extends Component {
                 }}
                 onChange={this.handleChange}
                 margin="dense"
-                // variant="outlined"
                 />
                 <TextField
                 variant="outlined"
@@ -195,7 +189,6 @@ class PostOpPage extends Component {
                 InputLabelProps={{
                     shrink: true,
                 }}
-                // variant="outlined"
                 />  
                 </Grid>
                 <Grid item xs>
@@ -213,7 +206,6 @@ class PostOpPage extends Component {
                 InputLabelProps={{
                     shrink: true,
                 }}
-                // variant="outlined"
                 />
                 </Grid>
             </Grid>
@@ -224,7 +216,6 @@ class PostOpPage extends Component {
                     name="serious_adverse_event"
                     checked={this.state.serious_adverse_event}
                     onChange={this.handleChangeCheckbox}
-                    // value={this.state.serious_adverse_event}
                     />
                 }
                 label="Serious Adverse Event"
@@ -283,14 +274,10 @@ class PostOpPage extends Component {
                 InputLabelProps={{
                     shrink: true,
                 }}
-                // variant="outlined"
                 />      
                 
             </Grid>
             </Grid>
-                {/* <h1>PostOp Page</h1>
-                <h3>This is the PostOpPage and includes the following inputs and drowdowns</h3>
-                <h3>ICU Stays, Hospital Stays, MCU Stay, Stay Notes, Serious Adverse Event, ReOperation, Hospital Mortality, Status as Discharge, Notes</h3> */}
             <Button onClick={this.savePostOp} className={classes.button}
                 variant="contained" color="primary">
                 Save

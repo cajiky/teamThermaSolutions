@@ -81,5 +81,4 @@ const mapReduxStateToProps = (reduxState) => ({
   dropdownOptions:reduxState
 });
 
-export default connect(mapReduxStateToProps) (withStyles(styles)(DischargeStatus))
-// export default (withStyles(styles)(DischargeStatus));
+export default connect(mapReduxStateToProps) (withStyles(styles)(DischargeStatus));

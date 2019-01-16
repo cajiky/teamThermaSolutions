@@ -12,7 +12,6 @@ import GridItem from '@material-ui/core/Grid';
 const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit,
-    // fullWidth: true,
   },
 });
 
@@ -33,13 +32,10 @@ class ClavienScore extends Component {
 
   render(){
     const { classes } = this.props;
-    // console.log('in clavian:', this.props.id)
     return (
       <Grid container spacing={12}>
         <GridItem item xs={12}>
           <FormControl  variant="outlined" margin="dense" className={classes.formControl}>
-              {/* <InputLabel htmlFor="clavien_score">Clavien</InputLabel> */}
-              {/* <GridItem item xs={6} > */}
               <Select
                 // value={this.props.clavianScore}
                 disabled={!this.props.checked}
@@ -57,7 +53,6 @@ class ClavienScore extends Component {
               >
                 {this.renderOptions()}
               </Select> 
-              {/* </GridItem> */}
           </FormControl>
         </GridItem>
       </Grid>
