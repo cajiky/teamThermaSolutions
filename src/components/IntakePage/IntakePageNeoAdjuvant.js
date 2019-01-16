@@ -29,11 +29,6 @@ const styles = theme => ({
 });
 
 class IntakePageNeoAdjuvant extends Component {
-
-    componentDidMount(){
-        // this.setInitialState();
-    }
-
     render() {
         const { classes } = this.props;
         return(

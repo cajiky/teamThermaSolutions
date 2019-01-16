@@ -26,7 +26,6 @@ const styles = theme => ({
 });
 
 class IntakePageGeneral extends Component {
-
     render() {
         const { classes } = this.props;
         return(
@@ -36,7 +35,6 @@ class IntakePageGeneral extends Component {
                     <TextField
                         variant="outlined"
                         margin="dense"
-                        // style={{width: 150}}
                         onChange={this.props.handleChange}
                         name="weight_kg"
                         value={this.props.intake.weight_kg}
@@ -44,24 +42,17 @@ class IntakePageGeneral extends Component {
                         label="Weight/Kilograms"
                         notched="true"
                         className={classNames(classes.margin, classes.textField, classes.InputLabelProps)}
-                        // InputProps={{
-                        //     startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
-                        // }}
                     />
                 </Grid>
                 <Grid item xs={2}>
                     <TextField
                         variant="outlined"
                         margin="dense"
-                        // style={{width: 150}}
                         onChange={this.props.handleChange}
                         name="length_m"
                         value={this.props.intake.length_m}
                         id="lengthInput"
                         label="Height/Meters"
-                        // InputProps={{
-                        //     startAdornment: <InputAdornment position="start">M</InputAdornment>,
-                        // }}
                     />
                 </Grid>
                 <Grid item xs={2}>
@@ -69,22 +60,17 @@ class IntakePageGeneral extends Component {
                         variant="outlined"
                         margin="dense"
                         disabled
-                        // style={{width: 150}}
                         onChange={this.props.handleChange}
                         name="bmi"
                         value={this.props.intake.bmi_auto}
                         id="bmi"
                         label="BMI (Body Mass Index)"
-                        // InputProps={{
-                        //     startAdornment: <InputAdornment position="start">M</InputAdornment>,
-                        // }}
                     />
                 </Grid>
                 <Grid item xs={2}>
                     <TextField
                         variant="outlined"
                         margin="dense"
-                        // style={{width: 150}}
                         onChange={this.props.handleChange}
                         name="ca125"
                         value={this.props.intake.ca125}
@@ -99,30 +85,22 @@ class IntakePageGeneral extends Component {
                     <TextField
                         variant="outlined"
                         margin="dense"
-                        // style={{width: 150}}
                         onChange={this.props.handleChange}
                         name="crp"
                         value={this.props.intake.crp}
                         id="crp"
                         label="CRP"
-                        // InputProps={{
-                        //     startAdornment: <InputAdornment position="start">M</InputAdornment>,
-                        // }}
                     />
                 </Grid>
                 <Grid item xs={2}>
                     <TextField
                         variant="outlined"
                         margin="dense"
-                        // style={{width: 150}}
                         onChange={this.props.handleChange}
                         name="length_m"
                         value={this.props.intake.leucocyte}
                         id="leucocyte"
                         label="Leucocyte"
-                        // InputProps={{
-                        //     startAdornment: <InputAdornment position="start">M</InputAdornment>,
-                        // }}
                     />
                 </Grid>
             </Grid>
@@ -136,7 +114,6 @@ class IntakePageGeneral extends Component {
                             className={classes.group}
                             value={this.props.intake.smoking}
                             onChange={this.props.handleChange}
-                            // margin="dense"
                         >
                             <FormControlLabel margin='dense' value='1' control={<Radio />} label="Yes" />
                             <FormControlLabel value='2' control={<Radio />} label="No" />
@@ -221,8 +198,6 @@ class IntakePageGeneral extends Component {
 };
 
 const mapStateToProps = reduxState => ({
-    // intake: reduxState.intakeReducer,
-    // patient: reduxState.patientReducer,
     dropdownOptions: reduxState.dropdownOptions,
 });
 
