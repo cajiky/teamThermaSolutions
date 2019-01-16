@@ -49,8 +49,11 @@ class PatientProfileSearchResult extends Component {
       }
 
     selectPatient = () => {
+        console.log('patientSearch', this.props.patientSearch);
+        
     this.props.dispatch({type: 'SET_PATIENT_RESULT', payload: this.props.patientSearch});
     document.cookie = `patientID=${this.props.patientSearch.patient_no}`
+    // document.cookie = `patientTOC=${this.props.patientSearch.toc_id}`
     this.props.history.push(`/MainTabsPage`);
     }
 
