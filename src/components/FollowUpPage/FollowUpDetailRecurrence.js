@@ -49,9 +49,6 @@ class FollowUpDetailRecurrence extends Component {
             <Grid item xs={3}>
               <TextField 
                 label="Date of Recurrence"
-                // InputLabelProps={{
-                //   shrink: true,
-                // }}
                 type="date"
                 fullWidth="true"
                 variant="outlined"
@@ -70,9 +67,6 @@ class FollowUpDetailRecurrence extends Component {
                 fullWidth
                 onChange={this.props.handleChange}
                 margin="dense"
-                // InputLabelProps={{
-                //     shrink: true,
-                // }}
                 variant="outlined"
                 />
             </Grid>
@@ -88,9 +82,6 @@ class FollowUpDetailRecurrence extends Component {
               <TextField 
                   margin="dense"
                   label="Treatment Date"
-                  // InputLabelProps={{
-                  //   shrink: true,
-                  // }}
                   variant="outlined"
                   type="date"
                   fullWidth="true"
@@ -122,15 +113,11 @@ class FollowUpDetailRecurrence extends Component {
             <Grid item xs={9}>
                 <TextField shrink
                 name="treatment_notes"
-                // label="Notes"
                 className={classes.textField}
                 value={this.props.recurrence.treatment_notes}
                 multiline
                 rows="4"
                 fullWidth
-                // InputLabelProps={{
-                //     shrink: true,
-                // }}
                 onChange={this.props.handleChange}
                 margin="dense"
                 variant="outlined"
@@ -142,8 +129,4 @@ class FollowUpDetailRecurrence extends Component {
   
 };
 
-const mapStateToProps = reduxState => ({
-    followUpHistory: reduxState.followUpHistory,
-});
-
-export default connect(mapStateToProps) (withStyles(styles)(FollowUpDetailRecurrence));
+export default connect() (withStyles(styles)(FollowUpDetailRecurrence));

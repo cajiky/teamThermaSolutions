@@ -116,9 +116,7 @@ class FollowUpDetailDetail extends Component {
     };
 
     updateFollowUpHistory = () => {
-        // alert('Update followup history');
         this.props.dispatch({type: 'UPDATE_FOLLOW_UP_HISTORY', payload: this.state});
-        // this.props.dispatch({type: 'FETCH_FOLLOW_UP_HISTORY', payload: this.state.patient_id});
     };
     
     render() {
@@ -127,8 +125,6 @@ class FollowUpDetailDetail extends Component {
         
         return(
             <div>
-                {/* <pre>{JSON.stringify(this.state)}</pre>
-                <pre>{JSON.stringify(this.props)}</pre> */}
                 <ExpansionPanelDetails>
                 <Grid container spacing={24}>
                     <Grid item xs={3}>
@@ -180,18 +176,13 @@ class FollowUpDetailDetail extends Component {
                         <TextField
                         variant="outlined"
                         name="follow_up_notes"
-                        // label="Notes"
                         className={classes.textField}
                         value={this.state.follow_up_notes}
                         rows={8}
                         multiline
                         fullWidth
-                        // InputLabelProps={{
-                        //     shrink: true,
-                        // }}
                         onChange={this.handleChange}
                         margin="dense"
-                        // variant="outlined"
                         />
                     </Grid>
                     <Divider variant="middle" />
@@ -214,8 +205,4 @@ class FollowUpDetailDetail extends Component {
     }
 };
 
-const mapStateToProps = reduxState => ({
-    followUpHistory: reduxState.followUpHistory
-});
-
-export default connect(mapStateToProps) (withStyles(styles)(FollowUpDetailDetail));
+export default connect() (withStyles(styles)(FollowUpDetailDetail));

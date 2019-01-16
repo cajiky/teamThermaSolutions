@@ -53,7 +53,6 @@ class FollowUpPage extends Component {
         evidence_of_disease: false,
         last_contact: null,
         date_of_death: null,
-        // follow_up_history: []
     };
 
     componentDidMount () {
@@ -66,19 +65,15 @@ class FollowUpPage extends Component {
             evidence_of_disease: this.props.followUp.evidence_of_disease,
             last_contact: this.props.followUp.last_contact,
             date_of_death: this.props.followUp.date_of_death,
-            // follow_up_history: this.props.followUpHistory,
         })
     };
     
     updateFollowUp = () => {
-        // alert('Add new followup');
-        // console.log('before dispatch update followup', this.state);
         this.props.dispatch({ type: 'UPDATE_FOLLOW_UP', payload: this.state});
     };
 
     // Called when the input field changes
     handleChange = (event) => {
-        // console.log('in on change', event.target.name, event.target.value)
         this.setState({
             ...this.state,
             [event.target.name]: event.target.value,
@@ -117,15 +112,8 @@ class FollowUpPage extends Component {
                     {this.props.followUp.id ? (<AddFollowUpDialog />) : ''
                     }
                 <Divider variant="middle" />
-                {/* <pre>{JSON.stringify(this.props.followUpHistory)}</pre> */}
                 <h4>Follow Up History</h4>
                 <FollowUpDetail />
-                {/* {
-                    this.props.followUpHistory.map((history, index) => (
-                        // <pre>{JSON.stringify(history)}</pre>
-                        <FollowUpDetail key={index} history={history} />
-                    ))
-                } */}
             </div>
         )
     }
