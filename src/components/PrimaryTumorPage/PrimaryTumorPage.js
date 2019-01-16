@@ -2,19 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
-// import Typography from '@material-ui/core/Typography';
-// import TextField from '@material-ui/core/TextField';
-// import FormControl from '@material-ui/core/FormControl';
-// import InputLabel from '@material-ui/core/InputLabel';
-// import Select from '@material-ui/core/Select';
-// import OutlinedInput from '@material-ui/core/OutlinedInput';
-// import MenuItem from '@material-ui/core/MenuItem';
-// import Radio from '@material-ui/core/Radio';
-// import RadioGroup from '@material-ui/core/RadioGroup';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
-// import moment from 'moment';
 import PrimaryTumorDetails from './PrimaryTumorDetails';
 import PrimaryTumorTreatment from './PrimaryTumorTreatment';
 
@@ -91,31 +79,14 @@ class PrimaryTumorPage extends Component {
         console.log('RUNNING UPDATEENTRIESINDB Function')
     }
 
-    // getInitialValues = (id) => {
-    //     this.props.dispatch({type: 'GET_INITIAL_VALUES', payload: id})
-    // }
-
-    // getDropDownOptions = () => {
-    //     this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'})
-    // }
-    // updateReduxState = () => {
-    //     this.props.dispatch({type: 'UPDATE_INIT_FIELDS', payload: this.state})
-    // }
-
     handleChange = (event) => {
         this.setState ({
             ...this.state,
             [event.target.name]: event.target.value,
-        }
-        // this.setValuesForPatient()
-        )
-        // console.log(this.state);
+        })
     }
 
     componentDidMount() {
-        // this.getDropDownOptions();
-        // this.getInitialValues();
-        console.log('Inside compDidMount to check reducer status',this.props.primaryTumorReducer)
         this.setValuesForPatient();
     }
 
@@ -123,7 +94,6 @@ class PrimaryTumorPage extends Component {
         const { classes } = this.props;
         return(
             <>
-            {/* <pre>{JSON.stringify(this.state)}</pre> */}
             <h4>Primary Tumor Information</h4>
             <PrimaryTumorDetails primary_tumor={this.state} 
                 handleChange={this.handleChange}/>

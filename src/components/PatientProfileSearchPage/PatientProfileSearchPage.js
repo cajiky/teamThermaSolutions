@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -22,18 +21,16 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import PropTypes from 'prop-types';
 import PatientProfileSearchResult from '../PatientProfileSearchResult/PatientProfileSearchResult';
 import InputBase from '@material-ui/core/InputBase';
-// import ReactPhoneInput from 'material-ui-phone-number';
-
 
 const styles = theme => ({
     root: {
-      display: 'flex',
-      flexWrap: 'wrap',
+        display: 'flex',
+        flexWrap: 'wrap',
     },
     formControl: {
-      margin: theme.spacing.unit,
-      minWidth: 500,
-      verticalAlign: 'unset',
+        margin: theme.spacing.unit,
+        minWidth: 500,
+        verticalAlign: 'unset',
     },
     formControlSub: {
         minWidth: 100,
@@ -41,7 +38,7 @@ const styles = theme => ({
         marginTop: theme.spacing.unit * 2,
     },
     selectEmpty: {
-      marginTop: theme.spacing.unit * 2,
+        marginTop: theme.spacing.unit * 2,
     },
     radio: {
         display: 'inline-block',
@@ -60,67 +57,57 @@ class PatientProfileSearchPage extends Component {
         variables: {
         open: false,
         labelWidth: 0,
-        name: 'nah',
+        name: '',
         },
         patient: {
             currentStatus: 0,
-            gender: ''
-            
+            gender: '',
         },
-        
       };
 
-        componentDidMount(){
+    componentDidMount(){
         this.props.dispatch({type: 'LAST_PATIENT_ID_PLUS_ONE'});
-      }
+    }
     
-      handleNewPatientChange = (name) => (event) => {
+    handleNewPatientChange = (name) => (event) => {
         this.setState({patient: {...this.state.patient, [name]: (event.target.value)} });
-        console.log(this.state);
-      };
+    };
 
-      calculateAge = (dob) => (event) => {
+    calculateAge = (dob) => (event) => {
         let age = Math.floor((new Date() - new Date(event.target.value).getTime()) / 3.15576e+10);
         this.setState({patient: {...this.state.patient, age: age} });
-        console.log(age);
-        };
+    };
       
-
-      handleSearchChange = (name) => (event) => {
+    handleSearchChange = (name) => (event) => {
         this.setState({ [name]: (event.target.value) });
-        console.log(this.state.patientSearch);
-      };
+    };
     
-      handleClickOpen = () => {
+    handleClickOpen = () => {
         this.setState({ variables: {open: true}, patient: {patient_no: this.props.newPatientId} });
-        // this.props.dispatch({type: 'DROP_PATIENT_RESULT'});
-      };
+    };
     
-      handleClose = () => {
+    handleClose = () => {
         this.setState({ variables: {open: false}, patient: {} });
-      };
+    };
 
-      addPatient = () => {
-          this.props.dispatch({type: 'ADD_PATIENT', 
+    addPatient = () => {
+        this.props.dispatch({type: 'ADD_PATIENT', 
             payload: {
                 patientObject: this.state.patient,
                 history: this.props.history,
             }
-        });
-        console.log('in add patient after')
+    });
         this.setState({ variables: {open: false}});
-        //   document.cookie = `patientID=${this.props.newPatientId}`
         document.cookie = `patientID=${this.state.patient.patient_no}`
-        //   console.log('IN ADD PATIENT', document.cookie, this.state.patient);
         this.props.history.push(`/MainTabsPage`);
-      }
+    }
 
-      searchPatient = () => {
-          if(this.state.patientSearch){
-          this.setState({ patientSearch: '' });
-          this.props.dispatch({type: 'FIND_PATIENT', payload: this.state.patientSearch});} else {
-              alert('Please enter a Patient ID Number!');
-          }
+    searchPatient = () => {
+        if(this.state.patientSearch){
+        this.setState({ patientSearch: '' });
+        this.props.dispatch({type: 'FIND_PATIENT', payload: this.state.patientSearch});} else {
+            alert('Please enter a Patient ID Number!');
+        }
     }
 
     render() {
@@ -128,13 +115,13 @@ class PatientProfileSearchPage extends Component {
         return(
             <div>
                 <Grid container spacing={24}
-                        direction="column"
-                        alignItems="center"
-                        justify="center"
-                        style={{ minHeight: '100vh' }}>
-                    <Grid item xs={3}>
-                    </Grid>
+                direction="column"
+                alignItems="center"
+                justify="center"
+                style={{ minHeight: '100vh' }}>
+                    <Grid item xs={3}></Grid>
                     <Grid item xs={6}>
+                    {/* Patient Profile Search Field */}
                         <TextField
                         className={classes.formControl}
                         required
@@ -146,33 +133,34 @@ class PatientProfileSearchPage extends Component {
                         value={this.state.patientSearch}
                         onChange={this.handleSearchChange('patientSearch')}
                         />
-                        <Button  onClick={this.searchPatient} className={classes.button} variant="contained" color="primary">
-                        Search <SearchIcon/>
-                        </Button>
+                        {/* Patient Profile Search Button */}
+                            <Button  onClick={this.searchPatient} className={classes.button} variant="contained" color="primary">
+                            Search <SearchIcon/>
+                            </Button>
                     </Grid>
-                    <Grid item xs={3}>
-                    </Grid>
-                    
+                    <Grid item xs={3}></Grid>
                     <Grid item xs={12}>
+                    {/* Patient Profile Search Result */}
                         {this.props.patientSearch ? (<PatientProfileSearchResult/>) : (<></>)}
                     </Grid>
-                    
                     <Grid item xs={3}>
                     </Grid>
                     <Grid item xs={6}>
+                    {/* Add New Patient Button */}
                         <Button className={classes.formControl} onClick={this.handleClickOpen} variant="contained" color="primary">
                         Add New Patient<AddIcon/>
                         </Button>
                     </Grid>
                     <Grid item xs={3}>
                     </Grid>
+                    {/* Add New Patient Pop Up Form */}
                         <Dialog
                             fullWidth
                             disableBackdropClick
                             open={this.state.variables.open}
                             onClose={this.handleClose}>
                             <DialogContent>
-            {/* Patient ID Input */}
+                        {/* Patient ID [auto-generated based on last patient in database] Input */}
                         <FormControl className={classes.formControl}>
                             <InputBase disabled value="New Patient ID: ">{"New Patient ID: " + this.props.newPatientId}</InputBase>
                             <InputBase
@@ -188,12 +176,12 @@ class PatientProfileSearchPage extends Component {
                             placeholder={"New Patient ID: " + this.props.newPatientId}
                             value={this.props.newPatientId}
                             margin="normal"
-                            // variant="outlined"
                             fullWidth={true}
                             type="number"
                             onChange={this.handleNewPatientChange('patientId', 'value')}
                             />
                         </FormControl>
+                        {/* Date of Birth Input */}
                         <FormControl className={classes.formControl}>
                         <TextField
                         required
@@ -209,9 +197,9 @@ class PatientProfileSearchPage extends Component {
                         onChange={this.handleNewPatientChange('dob')}
                         onBlur={this.calculateAge('age', this.state.patient.dob)}
                         /></FormControl>
+                        {/* Age Input [auto-calculated via Date of Birth Input] */}
                         <FormControl className={classes.formControlAge}>
                         <TextField
-                        // disabled
                         id="outlined-required"
                         label="Age"
                         InputLabelProps={{
@@ -221,11 +209,10 @@ class PatientProfileSearchPage extends Component {
                             readOnly: true,
                           }}
                           value={this.state.patient.age}
-                        //   placeholder={this.state.patient.age}
                         margin="normal"
-                        // type="number"
                         variant="outlined"
                         /></FormControl>
+                        {/* Gender Input */}
                         <FormControl  className={classes.formControl}>
                             <InputLabel shrink
                                 htmlFor="gender-label-placeholder"                                
@@ -244,6 +231,7 @@ class PatientProfileSearchPage extends Component {
                                 <MenuItem value='Other'>Other</MenuItem>
                             </Select>
                         </FormControl>
+                        {/* Type of Cancer Input */}
                         <FormControl className={classes.formControl} variant="outlined">
                             <InputLabel shrink
                                 htmlFor="outlined-toc-simple"                                
@@ -268,6 +256,7 @@ class PatientProfileSearchPage extends Component {
                                 <MenuItem value={5}>Other</MenuItem>
                             </Select>
                         </FormControl>
+                        {/* HIPEC Input */}
                         <FormControl component="fieldset" className={classes.formControlSub}>
                             <FormLabel component="legend" style={{display: 'inline-block'}}>HIPEC</FormLabel>
                             <RadioGroup
@@ -281,6 +270,7 @@ class PatientProfileSearchPage extends Component {
                                 <FormControlLabel value="no" control={<Radio className={classes.radio}/>} label="No" />
                             </RadioGroup>
                         </FormControl>
+                        {/* If HIPEC is yes, show additional inputs */}
                         {this.state.patient.hipec === 'yes' ? (<><FormControl className={classes.formControl}>
                         <TextField
                         required
@@ -294,6 +284,7 @@ class PatientProfileSearchPage extends Component {
                         variant="outlined"
                         onChange={this.handleNewPatientChange('dateOfHipec', 'value')}
                         /></FormControl>
+                        {/* HIPEC Date of Referral Input */}
                         <FormControl className={classes.formControl}>
                         <TextField
                         required
@@ -307,6 +298,7 @@ class PatientProfileSearchPage extends Component {
                         variant="outlined"
                         onChange={this.handleNewPatientChange('dateOfReferral', 'value')}
                         /></FormControl>
+                        {/* HIPEC Date of Diagnosis Input */}
                         <FormControl className={classes.formControl}>
                         <TextField
                         required
@@ -321,8 +313,8 @@ class PatientProfileSearchPage extends Component {
                         onChange={this.handleNewPatientChange('diagnosisDate', 'value')}
                         /></FormControl>
                         </>
-                        ) : (<></>)}
-                {/* Alive on Date Input */}
+                        ) : (<></>)} {/* <-- Render nothing if no HIPEC */}
+                        {/* Alive on Date Input */}
                         <FormControl className={classes.formControl}>
                             <TextField
                             required
@@ -337,7 +329,7 @@ class PatientProfileSearchPage extends Component {
                             onChange={this.handleNewPatientChange('aliveOnDate', 'value')}
                             />
                         </FormControl>
-                {/* Sensor */}
+                        {/* Sensor */}
                         <FormControl component="fieldset" className={classes.formControlSub}>
                             <FormLabel component="legend" style={{display: 'inline-block'}}>Sensor</FormLabel>
                             <RadioGroup
@@ -351,7 +343,7 @@ class PatientProfileSearchPage extends Component {
                                 <FormControlLabel value="no" control={<Radio className={classes.radio}/>} label="No" />
                             </RadioGroup>
                         </FormControl>
-                {/* Hospital Tel Input */}
+                        {/* Hospital Tel Input */}
                         <FormControl className={classes.formControl}>
                             <TextField
                             required
@@ -368,8 +360,8 @@ class PatientProfileSearchPage extends Component {
                             onChange={this.handleNewPatientChange('hospitalTel', 'value')}
                             />
                         </FormControl>
-                {/* Referring Doctor Input */}
-                <FormControl className={classes.formControl}>
+                        {/* Referring Doctor Input */}
+                        <FormControl className={classes.formControl}>
                             <TextField
                             required
                             id="outlined-required"
@@ -385,99 +377,97 @@ class PatientProfileSearchPage extends Component {
                             onChange={this.handleNewPatientChange('refDoc', 'value')}
                             />
                         </FormControl>
+                        {/* HIPEC Current Status Input */}
                         <FormControl variant="outlined" className={classes.formControl}>
-                                    <InputLabel shrink
-                                        htmlFor="outlined-age-native-simple"
-                                    >
-                                        Current Status
-                                    </InputLabel>
-                                    <Select
-                                        
-                                        value={this.state.patient.currentStatus}
-                                        onChange={this.handleNewPatientChange('currentStatus', 'value')}
-                                        input={
-                                        <OutlinedInput
-                                            name="title"
-                                            fullWidth
-                                            id="outlined-age-native-simple"
-                                        />
-                                        }
-                                    >
-                                    {this.props.dropdownOptions.map( option => {
-                                            return(
-                                                <MenuItem key={option.id} value={option.id}>{option.status}</MenuItem>
-                                            )
-                                            
-                                        })}
-
-                                        
-                                    </Select>
-                                </FormControl>
-                                <FormControl className={classes.formControl}>
-                        <TextField
-                        required
-                        id="outlined-required"
-                        label="Interval Prime Surgery - HIPEC"
-                        InputLabelProps={{
-                            shrink: true,
-                          }}
-                          value={this.state.patient.ipshipec}
-                        margin="normal"
-                        variant="outlined"
-                                                    fullWidth={true}
+                            <InputLabel shrink
+                                htmlFor="outlined-age-native-simple"
+                            >
+                                Current Status
+                            </InputLabel>
+                            <Select
+                                value={this.state.patient.currentStatus}
+                                onChange={this.handleNewPatientChange('currentStatus', 'value')}
+                                input={<OutlinedInput
+                                    name="title"
+                                    fullWidth
+                                    id="outlined-age-native-simple"
+                                    />}
+                            >
+                            {this.props.dropdownOptions.map( option => {
+                                return(
+                                    <MenuItem key={option.id} value={option.id}>{option.status}</MenuItem>
+                                )
+                            })}
+                            </Select>
+                        </FormControl>
+                        {/* Interval Prime Surgery - HIPEC Input */}
+                        <FormControl className={classes.formControl}>
+                            <TextField
+                            required
+                            id="outlined-required"
+                            label="Interval Prime Surgery - HIPEC"
+                            InputLabelProps={{shrink: true,}}
+                            value={this.state.patient.ipshipec}
+                            margin="normal"
+                            variant="outlined"
+                            fullWidth={true}
                             type="string"
                             onChange={this.handleNewPatientChange('ipshipec', 'value')}
-                        /></FormControl>
+                            /></FormControl>
+                        {/* Survival (HIPEC Death) Input */}
                         <FormControl className={classes.formControl}>
-                        <TextField
-                        required
-                        id="outlined-required"
-                        label="Survival (HIPEC Death)"
-                        InputLabelProps={{
-                            shrink: true,
-                          }}
-                          value={this.state.patient.survivalhipecdeath}
-                        margin="normal"
-                        variant="outlined"
-                                                    fullWidth={true}
+                            <TextField
+                            required
+                            id="outlined-required"
+                            label="Survival (HIPEC Death)"
+                            InputLabelProps={{shrink: true,}}
+                            value={this.state.patient.survivalhipecdeath}
+                            margin="normal"
+                            variant="outlined"
+                            fullWidth={true}
                             type="string"
                             onChange={this.handleNewPatientChange('survivalhipecdeath', 'value')}
-                        /></FormControl>
+                            />
+                        </FormControl>
+                        {/* Survival (HIPEC Last Contact) Input */}
                         <FormControl className={classes.formControl}>
-                        <TextField
-                        required
-                        id="outlined-required"
-                        label="Survival (HIPEC Last Contact)"
-                        InputLabelProps={{
-                            shrink: true,
-                          }}
-                          value={this.state.patient.survivalhipeclastcontact}
-                        margin="normal"
-                        variant="outlined"
-                                                    fullWidth={true}
-                            type="string"
-                            onChange={this.handleNewPatientChange('survivalhipeclastcontact', 'value')}
-                        /></FormControl>
+                            <TextField
+                            required
+                            id="outlined-required"
+                            label="Survival (HIPEC Last Contact)"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            value={this.state.patient.survivalhipeclastcontact}
+                            margin="normal"
+                            variant="outlined"
+                                                        fullWidth={true}
+                                type="string"
+                                onChange={this.handleNewPatientChange('survivalhipeclastcontact', 'value')}
+                            />
+                        </FormControl>
+                        {/* Interval Diagnosis PC-HIPEC Input */}
                         <FormControl className={classes.formControl}>
-                        <TextField
-                        required
-                        id="outlined-required"
-                        label="Interval Diagnosis PC-HIPEC"
-                        InputLabelProps={{
-                            shrink: true,
-                          }}
-                          value={this.state.patient.intervalDiagnosisPcHipec}
-                        margin="normal"
-                        variant="outlined"
-                                                    fullWidth={true}
+                            <TextField
+                            required
+                            id="outlined-required"
+                            label="Interval Diagnosis PC-HIPEC"
+                            InputLabelProps={{shrink: true,}}
+                            value={this.state.patient.intervalDiagnosisPcHipec}
+                            margin="normal"
+                            variant="outlined"
+                            fullWidth={true}
                             type="string"
                             onChange={this.handleNewPatientChange('intervalDiagnosisPcHipec', 'value')}
-                        /></FormControl>
+                            />
+                        </FormControl>
                     </DialogContent>
-                                            <DialogActions>
+                            <DialogActions>
+                                {/* Cancel Add New Patient Button */}
                                 <Button onClick={this.handleClose} color="primary">
                                 Cancel
                                 </Button>
+                                {/* Finish Add New Patient Button */}
                                 <Button onClick={this.addPatient} color="primary">
                                 Add Patient
                                 </Button>
@@ -485,10 +475,8 @@ class PatientProfileSearchPage extends Component {
                         </Dialog>
                 </Grid>
             </div>
-
         )
     }
-  
 };
 
 PatientProfileSearchPage.propTypes = {
@@ -500,6 +488,5 @@ const mapStateToProps = reduxState => ({
     newPatientId: reduxState.patientReducer.newPatientId,
     dropdownOptions: reduxState.dropdownOptions.currentStatusOptions,
 });
-
 
 export default withStyles(styles)(connect(mapStateToProps)(PatientProfileSearchPage));

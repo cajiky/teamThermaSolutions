@@ -34,7 +34,6 @@ const styles = theme => ({
         diaplay: 'none',
     },
     button: {
-        // verticalAlign: 'bottom',
         marginBottom: `${theme.spacing.unit * 3}px`,
         marginTop: `${theme.spacing.unit * 3}px`,
     },
@@ -60,7 +59,6 @@ class PatientProfileSearchResult extends Component {
         return (
             <div>
                 <Grid container spacing={24}>
-                {/* {JSON.stringify(this.props.patientSearch)} */}
                 {this.props.patientSearch !== "patient not found" ?
                 (<>
                 <Grid container xs={3}></Grid>
