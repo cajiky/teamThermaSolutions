@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -52,9 +51,5 @@ class SeriousAdverseEvent extends Component {
     )
   } // end return
 } // end class SeriousAdverseEvent
-
-// const mapReduxStateToProps = (reduxState) => ({
-//   reduxState
-// });
 
 export default (withStyles(styles)(SeriousAdverseEvent));

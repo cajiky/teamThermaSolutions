@@ -17,7 +17,6 @@ const myOptions = [
 const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit,
-    // minWidth: 120,
   },
 });
 
@@ -33,7 +32,6 @@ componentDidMount() {
         labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
     });
 }
-
 
   renderOptions() {
     // 
@@ -64,7 +62,6 @@ componentDidMount() {
             value={this.props.reoperation}
             input={
               <OutlinedInput
-                  // labelWidth=100
                   value={this.props.reoperation}
                   name="reoperation"
                   id="reoperation"
@@ -80,9 +77,4 @@ componentDidMount() {
   } // end return
 } // end class TagSelector
 
-const mapReduxStateToProps = (reduxState) => ({
-  reduxState
-});
-
-export default connect(mapReduxStateToProps)(withStyles(styles)(ReoperationSelector));
-// export default (withStyles(styles)(ReoperationSelector));
+export default connect()(withStyles(styles)(ReoperationSelector));
