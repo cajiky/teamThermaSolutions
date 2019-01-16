@@ -29,11 +29,6 @@ const styles = theme => ({
 });
 
 class IntakePageNeoAdjuvant extends Component {
-
-    componentDidMount(){
-        // this.setInitialState();
-    }
-
     render() {
         const { classes } = this.props;
         return(
@@ -134,8 +129,6 @@ class IntakePageNeoAdjuvant extends Component {
 };
 
 const mapStateToProps = reduxState => ({
-    // intake: reduxState.intakeReducer,
-    // patient: reduxState.patientReducer,
     dropdownOptions: reduxState.dropdownOptions,
 });
 
