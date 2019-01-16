@@ -17,15 +17,31 @@ function* addPostOp(action) {
 
 // worker Saga: will be fired on "FETCH_POST_OP" actions
 function* fetchPostOp(action) {
+  // action payload is id
   console.log('in fetch post op Saga', action.payload);
+  // let patientId = action.payload;
   try {
-    const response = yield axios.get('api/post_op/1');
-    console.log('response from post op:', response);
-    
+    console.log('IN FETCH POST OP BEFORE GOING TO SERVER')
+    const response = yield axios.get(`api/post_op/${action.payload}`);
+    console.log('response from post op call :', response);
     // set state
     yield put({ type: 'SET_POST_OP', payload: response.data });
+    // console.log('after SET POST OP:', response.data);
   } catch (error) {
     console.log('Post op get request failed', error);
+  }
+}
+
+function* updatePostOp(action) {
+  // action payload
+  console.log('in update post op Saga', action.payload);
+  try {
+      yield call(axios.put, `/api/post_op`, action.payload);
+      // let patientId = this.props.reduxState.patientReducer.patient.id;
+      yield put( { type: 'FETCH_POST_OP' , payload: action.payload.patient_id} );
+  } catch (error) {
+      console.log(error);
+      alert('Unable to update post op');
   }
 }
 
@@ -43,10 +59,11 @@ function* fetchPostOp(action) {
 //   } 
 // }
 
-function* itemSaga() {
+function* postOpSaga() {
   yield takeLatest('ADD_POST_OP', addPostOp);
   yield takeLatest('FETCH_POST_OP', fetchPostOp);
+  yield takeLatest('UPDATE_POST_OP', updatePostOp);
   // yield takeLatest('DELETE_ITEM', deleteItem);
 }
 
-export default itemSaga;
+export default postOpSaga;

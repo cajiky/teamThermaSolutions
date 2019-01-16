@@ -139,6 +139,35 @@ reasonOpenCloseOption: [
   {id: 5, status: 'No PC'},
 ],
 
+resections: [
+  {id: 1, name: 'Ovaries', stateName: "ovaries", status: false},
+  {id: 2, name: 'Uterus', stateName: "uterus", status: false},
+  {id: 3, name: 'Omentum', stateName: "omentum", status: false},
+  {id: 4, name: 'Rectum', stateName: "rectum", status: false},
+  {id: 5, name: 'Sigmoid', stateName: "sigmoid", status: false},
+  {id: 6, name: 'Left Colon', stateName: "left_colon", status: false},
+  {id: 7, name: 'Transverse Colon', stateName: "transverse_colon", status: false},
+  {id: 8, name: 'Right Colon', stateName: "right_colon", status: false},
+  {id: 9, name: 'Ileocaecal', stateName: "ileocaecal", status: false},
+  {id: 10, name: 'Appendix', stateName: "appendix", status: false},
+  {id: 11, name: 'Duodenum', stateName: "duodenum", status: false},
+  {id: 12, name: 'Jejunum', stateName: "jejunum", status: false},
+  {id: 13, name: 'Ileum', stateName: "ileum", status: false},
+  {id: 14, name: 'Gallbladder', stateName: "gallbladder", status: false},
+  {id: 15, name: 'Stomach', stateName: "stomach", status: false},
+  {id: 16, name: 'Spleen', stateName: "spleen", status: false},
+  {id: 17, name: 'Diagphram L', stateName: "diagphram_l", status: false},
+  {id: 18, name: 'Diagphram R', stateName: "diagphram_r", status: false},
+  {id: 19, name: 'Pancreas', stateName: "pancreas", status: false},
+  {id: 20, name: 'Bladder', stateName: "bladder", status: false},
+  {id: 21, name: 'Urether', stateName: "urether", status: false},
+  {id: 22, name: 'Lymphnodes', stateName: "lymphnodes", status: false},
+  {id: 23, name: 'Left Peritoneum', stateName: "left_peritoneum", status: false},
+  {id: 24, name: 'Right Peritoneum', stateName: "right_peritoneum", status: false},
+  {id: 25, name: 'Peritoneum', stateName: "peritoneum", status: false},
+  {id: 26, name: 'Pelvis', stateName: "pelvis", status: false},
+],
+
 stomaTypeOptions: [
   {id: 1, status: 'Double Barrel Ileostomy'},
   {id: 2, status: 'Ileostomy'},
@@ -152,6 +181,13 @@ hipecRegimentOptions: [
   {id: 3, status: 'Cisplatin'},
   {id: 4, status: 'Other'},
 ],
+
+duration: [
+  {id: 1, status: "30 Minutes", value: 30},
+  {id: 1, status: "60 Minutes", value: 60},
+  {id: 1, status: "90 Minutes", value: 90},
+  {id: 1, status: "120 Minutes", value: 120},
+ ],
 
 rScoreOptions: [
   {id: 1, status: 'R1 - No Macroscopic Tumor'},
@@ -200,7 +236,7 @@ t: [
 
 ],
 
-m: [
+n: [
   {id: 1, status: 0, name: 'x'},
   {id: 2, status: 1, name: '0'},
   {id: 3, status: 2, name: '1'},
@@ -209,7 +245,7 @@ m: [
 
 ],
 
-n: [
+m: [
   {id: 1, status: 0, name: 'x'},
   {id: 2, status: 1, name: '0'},
   {id: 3, status: 2, name: '1'},
@@ -236,6 +272,7 @@ seriousAdverseEvents: [
   {id: 16, sae_type: 'Wound Infection'},
   {id: 17, sae_type: 'Other Event'},
 ],
+
 clavienScore: [
   {id: 1, score: '1'},
   {id: 2, score: '2'},

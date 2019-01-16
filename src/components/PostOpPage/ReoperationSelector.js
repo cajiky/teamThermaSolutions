@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
+import ReactDOM from 'react-dom';
 
 const myOptions = [
   {id: 1, val: true, status: 'Yes'},
@@ -21,6 +22,18 @@ const styles = theme => ({
 });
 
 class ReoperationSelector extends Component {
+
+  state = {
+    labelWidth: 0,
+    reoperation: null,
+}
+
+componentDidMount() {
+    this.setState({
+        labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+    });
+}
+
 
   renderOptions() {
     // 
@@ -39,10 +52,15 @@ class ReoperationSelector extends Component {
     const { classes } = this.props;
 
     return (
-      <FormControl fullWidth={true} variant="outlined">
-          <InputLabel htmlFor="reoperation_id">Reoperation</InputLabel>
-          <Select fullWidth={true}
-            variant="outlined" 
+      <FormControl fullWidth={true} variant="outlined" margin="dense" className={classes.formControl}>
+          <InputLabel  
+          ref={ref => {
+            this.InputLabelRef = ref;
+          }}
+          shrink htmlFor="reoperation">Reoperation</InputLabel>
+          <Select 
+             
+            name="reoperation"
             value={this.props.reoperation}
             input={
               <OutlinedInput
@@ -50,6 +68,7 @@ class ReoperationSelector extends Component {
                   value={this.props.reoperation}
                   name="reoperation"
                   id="reoperation"
+                  labelWidth={this.state.labelWidth}
               />
               }
             onChange={this.props.handleChange}
@@ -66,3 +85,4 @@ const mapReduxStateToProps = (reduxState) => ({
 });
 
 export default connect(mapReduxStateToProps)(withStyles(styles)(ReoperationSelector));
+// export default (withStyles(styles)(ReoperationSelector));
