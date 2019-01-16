@@ -26,11 +26,6 @@ const styles = theme => ({
 });
 
 class IntakePageDiagnostic extends Component {
-
-    componentDidMount(){
-        // this.setInitialState();
-    }
-
     render() {
         const { classes } = this.props;
         return(
@@ -92,8 +87,6 @@ class IntakePageDiagnostic extends Component {
 };
 
 const mapStateToProps = reduxState => ({
-    // intake: reduxState.intakeReducer,
-    // patient: reduxState.patientReducer,
     dropdownOptions: reduxState.dropdownOptions,
 });
 

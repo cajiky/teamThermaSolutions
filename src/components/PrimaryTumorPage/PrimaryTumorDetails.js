@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
-// import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -14,7 +13,6 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
-// import Button from '@material-ui/core/Button';
 import moment from 'moment';
 const styles = theme => ({
     gridItem:{
@@ -23,9 +21,6 @@ const styles = theme => ({
     dropDown:{
         fullWidth: true,
     },
-    formControl: {
-        // margin: theme.spacing.unit * 3,
-      },
       group: {
         margin: `${theme.spacing.unit}px 0`,
       },
@@ -45,7 +40,6 @@ class PrimaryTumorDetails extends Component {
         const { classes } = this.props;
         return(
             <div>
-              {/* <pre>{JSON.stringify(this.props.primary_tumor)}</pre> */}
             <Grid container spacing={24}>
                 <Grid item xs={2}>
                   <TextField
@@ -69,10 +63,8 @@ class PrimaryTumorDetails extends Component {
                               Primary Location
                           </InputLabel>
                           <Select
-                            //   native
                               value={this.props.primary_tumor.primary_location}
                               onChange={this.props.handleChange}
-                              // name="primary_location"
                               input={
                               <OutlinedInput
                                   value={this.props.primary_tumor.primary_location}
@@ -91,7 +83,6 @@ class PrimaryTumorDetails extends Component {
                           </Select>
                   </FormControl>
                 </Grid>
-                {/* <Grid item xs> */}
                 <Grid item xs={2} >
                     <FormControl variant="outlined" margin="dense" fullWidth>
                     <InputLabel
@@ -122,7 +113,6 @@ class PrimaryTumorDetails extends Component {
                 </Grid>
                 <Grid item xs={2}>
                 <FormControl variant="outlined" margin="dense" fullWidth>
-                {/* <InputLabel ref={ref => {this.InputLabelRef = ref;}} htmlFor="m-input">Input Required</InputLabel> */}
                       <InputLabel 
                               htmlFor="n-input"
                               ref={ref => {
@@ -134,7 +124,6 @@ class PrimaryTumorDetails extends Component {
                     <Select
                         value={this.props.primary_tumor.n}
                         onChange={this.props.handleChange}
-                        // labelWidth={this.props.primary_tumor.labelWidth}
                         input={
                         <OutlinedInput
                             value={this.props.primary_tumor.n}
@@ -152,7 +141,6 @@ class PrimaryTumorDetails extends Component {
                 </Grid>
                 <Grid item xs={3}>
                 <FormControl variant="outlined" margin="dense" fullWidth>
-                {/* <InputLabel ref={ref => {this.InputLabelRef = ref;}} htmlFor="primary-location">Input Required</InputLabel> */}
                     <InputLabel 
                               htmlFor="m"
                               ref={ref => {
@@ -267,7 +255,5 @@ class PrimaryTumorDetails extends Component {
 };
 const mapStateToProps = reduxState => ({
     dropdownOptions: reduxState.dropdownOptions,
-    // primaryTumorReducer: reduxState.primaryTumorReducer,
-    // patientReducer: reduxState.patientReducer,
 });
 export default connect(mapStateToProps) (withStyles(styles)(PrimaryTumorDetails))

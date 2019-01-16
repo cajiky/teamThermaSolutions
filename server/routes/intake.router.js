@@ -1,11 +1,11 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-/**
- * Post route template
- */
-router.get(`/:id`, (req, res) => {
+
+
+router.get(`/:id`, rejectUnauthenticated, (req, res) => {
     const patientID = req.params.id
     const sqlText = `SELECT * FROM intake WHERE patient_id = $1`
     pool.query(sqlText,[patientID])
@@ -19,10 +19,7 @@ router.get(`/:id`, (req, res) => {
     })
 });
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     console.log(req.body);
     const patientId = req.body.id;
     const userInfo = req.body.state;
