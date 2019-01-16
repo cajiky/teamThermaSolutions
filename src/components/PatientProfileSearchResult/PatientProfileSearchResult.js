@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
@@ -35,7 +34,6 @@ const styles = theme => ({
         diaplay: 'none',
     },
     button: {
-        // verticalAlign: 'bottom',
         marginBottom: `${theme.spacing.unit * 3}px`,
         marginTop: `${theme.spacing.unit * 3}px`,
     },
@@ -61,7 +59,6 @@ class PatientProfileSearchResult extends Component {
         return (
             <div>
                 <Grid container spacing={24}>
-                {/* {JSON.stringify(this.props.patientSearch)} */}
                 {this.props.patientSearch !== "patient not found" ?
                 (<>
                 <Grid container xs={3}></Grid>
