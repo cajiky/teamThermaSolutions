@@ -93,7 +93,6 @@ class IntakePage extends Component {
         let height = Number(this.state.length_m);
         let weight = Number(this.state.weight_kg);
         let squaredHeight = height * height;
-        // console.log(`SquaredHeight: ${squaredHeight}, Weight: ${weight}`)
         bmi = weight/squaredHeight;
         if (this.state.length_m !== '' && this.state.weight_kg !== '') {
             this.setState({
