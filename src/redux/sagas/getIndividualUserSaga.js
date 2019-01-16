@@ -3,8 +3,6 @@ import axios from 'axios';
 
 
 function* selectProfile(action) {
-    console.log('select Profile action', action.payload.userID);
-    
     try {
         const response = yield call(axios.get, `/getIndividualProfile/${action.payload.userID}`)
         yield put({ type: 'GET_INDIVIDUAL_USER', payload: response.data })
@@ -12,7 +10,7 @@ function* selectProfile(action) {
         
       }
       catch (error) {
-        console.log('error with getting reques', error);
+        console.log('error with getting request', error);
         
       }
 }

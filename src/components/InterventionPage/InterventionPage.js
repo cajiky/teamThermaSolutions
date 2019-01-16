@@ -166,8 +166,6 @@ const styles = theme => ({
                 rScore: this.props.intervention.r_score,
                 duration: this.props.intervention.duration,
                 stomaPostHIPEC: this.props.intervention.stoma_post_hipec, 
-                // checked: this.props.intervention[status],
-                // StomaPostHIPECType: '',
                 ovaries: this.props.intervention.ovaries,
                 uterus: this.props.intervention.uterus,
                 omentum:this.props.intervention.omentum,
@@ -287,8 +285,6 @@ const styles = theme => ({
         let PCI13 = Number(this.state.lowerIlium);
         PCI = PCI1 + PCI2 + PCI3 + PCI4 + PCI5 + PCI6 + PCI7 + PCI8 + PCI9 + PCI10 + PCI11 + PCI12 + PCI13
 
-        console.log('PCI Total', PCI);
-        
         this.setState({
             changesMade: true,
             PCITotal: PCI
@@ -302,8 +298,6 @@ const styles = theme => ({
             [event.target.name]: event.target.value,
         },
         this.calculatePCI);
-        console.log('intervention state', this.state);
-        
       }
 
     handleChange = (event) => {
@@ -325,17 +319,6 @@ const styles = theme => ({
             expanded2: !true
         })
     }
-
-    // saveForm = () => {
-    //     console.log('Save Intervention State', this.state);
-    //     this.props.dispatch({ type: 'POST_INTERVENTION_PAGE', 
-    //     payload: {
-    //         interventionState: this.state,
-    //         userId: this.props.reduxState.patientReducer.patient.id
-    //     }
-    //      })
-         
-    // }
 
     saveForm = () => {
         if (this.state.changesMade){ 
@@ -370,8 +353,6 @@ const styles = theme => ({
             changesMade: true,
             [event.target.name]: event.target.checked,
         });
-        console.log('checkbox state', this.state);
-        
       }
 
     componentWillUnmount () {
@@ -417,7 +398,8 @@ const styles = theme => ({
                                                 Central
                                             </TableCell>
                                             <TableCell>
-                                                <Select fullWidth={true}
+                                                <Select 
+                                                    fullWidth={true}
                                                     value={this.state.central}
                                                     onChange={this.handlePCIChange}
                                                     input={
@@ -445,7 +427,8 @@ const styles = theme => ({
                                             Right Upper
                                             </TableCell>
                                             <TableCell>
-                                                <Select fullWidth={true}
+                                                <Select 
+                                                    fullWidth={true}
                                                     value={this.state.rightUpper}
                                                     onChange={this.handlePCIChange}
                                                     input={
@@ -473,7 +456,8 @@ const styles = theme => ({
                                             Epigastrium
                                             </TableCell>
                                             <TableCell>
-                                                <Select fullWidth={true}
+                                                <Select 
+                                                    fullWidth={true}
                                                     value={this.state.Epigastrium}
                                                     onChange={this.handlePCIChange}
                                                     input={
@@ -501,7 +485,8 @@ const styles = theme => ({
                                             Left Upper
                                             </TableCell>
                                             <TableCell>
-                                                <Select fullWidth={true}
+                                                <Select 
+                                                    fullWidth={true}
                                                     value={this.state.leftUpper}
                                                     onChange={this.handlePCIChange}
                                                     input={
@@ -529,7 +514,8 @@ const styles = theme => ({
                                             Left Flank
                                             </TableCell>
                                             <TableCell>
-                                                <Select fullWidth={true}
+                                                <Select 
+                                                    fullWidth={true}
                                                     value={this.state.leftFlank}
                                                     onChange={this.handlePCIChange}
                                                     input={
@@ -557,7 +543,8 @@ const styles = theme => ({
                                             Left Lower
                                             </TableCell>
                                             <TableCell>
-                                                <Select fullWidth={true}
+                                                <Select 
+                                                    fullWidth={true}
                                                     value={this.state.leftLower}
                                                     onChange={this.handlePCIChange}
                                                     input={
@@ -584,7 +571,8 @@ const styles = theme => ({
                                             Pelvis
                                             </TableCell>
                                             <TableCell>
-                                                <Select fullWidth={true}
+                                                <Select 
+                                                    fullWidth={true}
                                                     value={this.state.pelvisPCI}
                                                     onChange={this.handlePCIChange}
                                                     input={
@@ -612,7 +600,8 @@ const styles = theme => ({
                                             Right Lower
                                             </TableCell>
                                             <TableCell>
-                                                <Select fullWidth={true}
+                                                <Select 
+                                                    fullWidth={true}
                                                     value={this.state.rightLower}
                                                     onChange={this.handlePCIChange}
                                                     input={
@@ -640,7 +629,8 @@ const styles = theme => ({
                                             Right Flank
                                             </TableCell>
                                             <TableCell>
-                                                <Select fullWidth={true}
+                                                <Select 
+                                                    fullWidth={true}
                                                     value={this.state.rightFlank}
                                                     onChange={this.handlePCIChange}
                                                     input={
@@ -668,7 +658,8 @@ const styles = theme => ({
                                             Upper Jejunum
                                             </TableCell>
                                             <TableCell>
-                                                <Select fullWidth={true}
+                                                <Select 
+                                                    fullWidth={true}
                                                     value={this.state.upperJejunum}
                                                     onChange={this.handlePCIChange}
                                                     input={
@@ -696,7 +687,8 @@ const styles = theme => ({
                                             Lower Jejunum
                                             </TableCell>
                                             <TableCell>
-                                                <Select fullWidth={true}
+                                                <Select 
+                                                    fullWidth={true}
                                                     value={this.state.lowerJejunum}
                                                     onChange={this.handlePCIChange}
                                                     input={
@@ -724,7 +716,8 @@ const styles = theme => ({
                                             Upper Ilium
                                             </TableCell>
                                             <TableCell>
-                                                <Select fullWidth={true}
+                                                <Select 
+                                                    fullWidth={true}
                                                     value={this.state.upperIlium}
                                                     onChange={this.handlePCIChange}
                                                     input={
@@ -752,7 +745,8 @@ const styles = theme => ({
                                             Lower Ilium
                                             </TableCell>
                                             <TableCell>
-                                                <Select fullWidth={true}
+                                                <Select 
+                                                    fullWidth={true}
                                                     value={this.state.lowerIlium}
                                                     onChange={this.handlePCIChange}
                                                     input={
@@ -776,7 +770,7 @@ const styles = theme => ({
                         </Table>
                 </Grid>
                 <Grid  container spacing={24}>
-                        <img height="650" width="750" src="images/bodyImage.png"/>
+                        <img alt="bodyImage" height="650" width="750" src="images/bodyImage.png"/>
                         <GridItem item xs={4} sm={4}>
                                 <DialogContent >
                                     <TextField
@@ -844,7 +838,7 @@ const styles = theme => ({
                                         >
                                             HIPEC Type
                                         </InputLabel>
-                                    <Select
+                                        <Select
                                             value={this.state.hipecType}
                                             onChange={this.handleChange}
                                             input={

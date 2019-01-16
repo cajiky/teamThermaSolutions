@@ -2,13 +2,10 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const encryptLib = require('../modules/encryption');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-/**
- * GET route template
- */
-router.get('/', (req, res) => {
-    console.log('GET req.params.id', req.params.id);
-    
+/// GET route from the DataBase, to obtain all user information
+router.get('/', rejectUnauthenticated, (req, res) => {
     let reqId = req.params.id;
     const queryText = `SELECT * FROM person`;
     pool.query(queryText)
@@ -19,9 +16,9 @@ router.get('/', (req, res) => {
       });
   });
 
-  router.get('/:id', (req, res) => {
-    console.log('GET req.params.id', req.params.id);
-    
+/// GET route from the Database, to obtain specific User Information (used on search by ID functionality). 
+///This query works but could use some further development to allow mulitple search parameters.
+  router.get('/:id', rejectUnauthenticated, (req, res) => {
     let reqId = req.params.id;
     const queryText = `SELECT * FROM person WHERE id=${reqId}`;
     pool.query(queryText)
@@ -32,9 +29,8 @@ router.get('/', (req, res) => {
       });
   });
 
-
-router.post('/', (req, res, next) => {  
-    console.log('New User POST req.body', req.body);
+///POST new user information to the DataBase
+router.post('/', rejectUnauthenticated, (req, res, next) => { console.log('New User POST req.body', req.body);
     const title = req.body.title;
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
@@ -48,9 +44,8 @@ router.post('/', (req, res, next) => {
       .catch((err) => { next(err); });
   });
 
-  router.put('/:id', (req, res) => {
-      console.log('PUT req.body', req.body);
-      
+///UPDATE user profile information
+  router.put('/:id', rejectUnauthenticated, (req, res) => {
     const reqId = req.body.userId
     const title = req.body.title
     const newFirstName = req.body.firstName;
