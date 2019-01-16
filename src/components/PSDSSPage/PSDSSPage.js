@@ -322,7 +322,7 @@ class PSDSSPage extends Component {
                 </Grid>
             </Grid>
             <h4>Additional Information</h4>
-                <PSDSSPageData psdssInfo={this.state} toggleSwitch={this.toggleSwitch} handleChange={this.handleChange}/>
+                <PSDSSPageData psdssInfo={this.state} toggleSwitch={this.toggleSwitch} handleChangeCheckbox={this.handleChangeCheckbox}/>
                 <Button onClick={this.upsertEntriesInDB} className={classes.button}
                         variant="contained" color="primary">
                         Save

@@ -59,7 +59,7 @@ class PSDSSPage extends Component {
                     name="synchronous_liver_treatment"
                     checked={this.props.psdssInfo.synchronous_liver_treatment}
                     onChange={this.props.handleChangeCheckbox}
-                    value={this.props.psdssInfo.synchronous_liver_treatment}
+                    // value={this.props.psdssInfo.synchronous_liver_treatment}
                     />
                 }
                 label="Synchronous Liver Metastases Treatment"

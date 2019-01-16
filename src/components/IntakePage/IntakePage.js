@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import IntakePageGeneralInfo from './IntakePageGeneralInfo';
 import IntakePageNeoAdjuvant from './IntakePageNeoAdjuvant';
 import IntakePageDiagnostic from './IntakePageDiagnostic';
@@ -23,6 +24,7 @@ const styles = theme => ({
 
 class IntakePage extends Component {
     state = {
+        changesMade: false,
         bmi_auto: '',
         length_m: '',
         weight_kg: '',
@@ -56,6 +58,7 @@ class IntakePage extends Component {
     setInitialState = () => {
         this.setState ({
             ...this.state,
+            changesMade: false,
             bmi_auto: this.props.intake.bmi_auto,
             length_m: this.props.intake.length_m,
             weight_kg: this.props.intake.weight_kg,
@@ -109,6 +112,7 @@ class IntakePage extends Component {
     handleChange = (event) => {
         this.setState ({
             [event.target.name]: event.target.value,
+            changesMade: true,
         }
         , this.calculateBMI)
         console.log(this.state);
@@ -116,7 +120,6 @@ class IntakePage extends Component {
     
     updateEntriesInDB = () => {
         this.props.dispatch({type: 'UPSERT_DATA_FOR_INTAKE', payload: {state: this.state, id: this.props.patient.patient.id}})
-        console.log('RUNNING UPDATEENTRIESINDB Function')
     }
 
     componentDidMount(){
@@ -138,6 +141,7 @@ class IntakePage extends Component {
             <IntakePageNeoAdjuvant intake={this.state} handleChange={this.handleChange} />
             <h4>Diagnostic Laparoscopy</h4>
             <IntakePageDiagnostic intake={this.state} handleChange={this.handleChange}/>
+            <Button variant="contained" color="primary" onClick={this.updateEntriesInDB}>Save</Button>
             </>
         )
     }

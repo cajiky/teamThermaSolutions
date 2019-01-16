@@ -54,7 +54,7 @@ class IntakePageNeoAdjuvant extends Component {
                 <Grid item xs={3} className={classes.gridItem}>
               <FormControl variant="outlined" margin="dense" fullWidth>
               <InputLabel
-                  htmlFor="adj_chemotherapy_type"
+                  htmlFor="neo_adjuvant_chemo_type"
               >
                   Chemotherapy Type
                   </InputLabel>
@@ -64,8 +64,8 @@ class IntakePageNeoAdjuvant extends Component {
                       input={
                       <OutlinedInput
                           value={this.props.intake.neo_adjuvant_chemo_type}
-                          name="adj_chemotherapy_type"
-                          id="type"
+                          name="neo_adjuvant_chemo_type"
+                          id="neo_adjuvant_chemo_type"
                       />
                       }
                   >

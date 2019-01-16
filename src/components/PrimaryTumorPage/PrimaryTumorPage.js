@@ -23,6 +23,7 @@ const styles = theme => ({
 
 class PrimaryTumorPage extends Component {
     state = {
+            changesMade: false,
             adj_chemotherapy: '',
             adj_chemotherapy_type: '',
             biological: '',
@@ -49,6 +50,7 @@ class PrimaryTumorPage extends Component {
     setValuesForPatient = () => {
         this.setState({
             ...this.state,
+            changesMade: false,
             adj_chemotherapy: this.props.primaryTumorReducer.adj_chemotherapy,
             adj_chemotherapy_type: this.props.primaryTumorReducer.adj_chemotherapy_type,
             biological: this.props.primaryTumorReducer.biological,
@@ -74,20 +76,26 @@ class PrimaryTumorPage extends Component {
         });
     }
 
-    updateEntriesInDB = () => {
-        this.props.dispatch({type: 'UPSERT_DATA_FOR_PRIMARY_TUMOR', payload: {state: this.state, id: this.props.patientReducer.patient.id}})
-        console.log('RUNNING UPDATEENTRIESINDB Function')
+    upsertEntriesInDB = () => {
+        if (this.state.changesMade) {        
+            this.props.dispatch({type: 'UPSERT_DATA_FOR_PRIMARY_TUMOR', payload: {state: this.state, id: this.props.patientReducer.patient.id}});
+        }
     }
 
     handleChange = (event) => {
         this.setState ({
             ...this.state,
+            changesMade: true,
             [event.target.name]: event.target.value,
         })
     }
 
     componentDidMount() {
         this.setValuesForPatient();
+    }
+
+    componentWillUnmount () {
+        this.upsertEntriesInDB();
     }
 
     render() {
@@ -100,7 +108,7 @@ class PrimaryTumorPage extends Component {
             <h4>Treatment Information</h4>
             <PrimaryTumorTreatment primary_tumor={this.state} 
                 handleChange={this.handleChange}/>
-            <Grid item xs={12} className={classes.gridItem} onClick={this.updateEntriesInDB}>
+            <Grid item xs={12} className={classes.gridItem} >
               <Button onClick={this.upsertEntriesInDB} className={classes.button}
                   variant="contained" color="primary">
                   Save
