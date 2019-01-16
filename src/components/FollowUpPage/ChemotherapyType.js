@@ -6,9 +6,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-import Input from '@material-ui/core/Input';
-
-// const myOptions = {this.props.reduxState.adjChemoTypeOptions}
 
 const styles = theme => ({
   formControl: {
@@ -19,7 +16,6 @@ const styles = theme => ({
 class ChemotherapyType extends Component {
 
   renderOptions() {
-    // 
     return this.props.adjChemoTypeOptions.map((option, i) => {
       return (
         <MenuItem

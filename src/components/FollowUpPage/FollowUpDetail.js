@@ -1,20 +1,10 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FollowUpDetailDetail from './FollowUpDetailDetail';
-import FollowUpDetailRecurrence from './FollowUpDetailRecurrence';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import moment from 'moment';
 
 const styles = theme => ({
@@ -49,25 +39,6 @@ const styles = theme => ({
 
 
 class FollowUpDetail extends Component {
-
-    // state = {
-    //     id: 0,
-    //     patient_id: 0,
-    //     follow_up_id: null,
-    //     date: null,
-    //     evidence_of_disease: false,
-    //     follow_up_notes: null,
-    //     recurrence: false,
-    //     cea: null,
-    //     rec_modality: null,
-    //     syst_location: false,
-    //     last_contact: null,
-    //     treatment: null,
-    //     date_treatment: null,
-    //     status: null,
-    //     treatment_notes: null,
-    //     location: null
-    // };
 
     componentDidMount () {
         console.log('in component mount follow up detail', this.props.history);
