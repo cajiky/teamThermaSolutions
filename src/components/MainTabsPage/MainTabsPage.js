@@ -82,34 +82,37 @@ state = {
   };
 
   
-  CancerTheme = (toc) => {
-    console.log('toc', toc);
   
-    // if (toc.toc_id === 1) {
-    //    return {ColorectalTheme}
-    //  }
-    // else if (toc.toc_id === 2){
-    //   return {AppendixTheme}
-    // }
-    // else if (toc.toc_id === 3){
-    //   return {GastricTheme}
-    // }
-    // else if (toc.toc_id === 4){
-    //   return {OvarianTheme}
-    // }
-    // else if (toc.toc_id === 5){
-    //  return {MesotheliomaTheme}
-    // }
-    // else if (toc.toc_id === 6){
-    //    return {PseudomyxomaTheme}
-    // }
-    // else (toc.toc_id === 7){
-    //    return {OtherTheme}
-    // }
-    // else {
-    //    return {appTheme}
-    // }
-  }
+  // CancerTheme = () => {
+  //   console.log('toc', patientTOC);
+  //   let patientTOC = document.cookie.replace(/(?:(?:^|.*;\s*)patientTOC\s*\=\s*([^;]*).*$)|^.*$/, "$1")
+  //   let theme;
+  //   if (patientTOC === 1) {
+  //      theme={ColorectalTheme}
+  //    }
+  //   else if (patientTOC === 2){
+  //     theme={AppendixTheme}
+  //   }
+  //   else if (patientTOC === 3){
+  //     theme={GastricTheme}
+  //   }
+  //   else if (patientTOC === 4){
+  //     theme={OvarianTheme}
+  //   }
+  //   else if (patientTOC === 5){
+  //    theme={MesotheliomaTheme}
+  //   }
+  //   else if (patientTOC === 6){
+  //      theme={PseudomyxomaTheme}
+  //   }
+  //   else if (patientTOC === 7){
+  //      theme={OtherTheme}
+  //   }
+  //   else {
+  //      theme={appTheme}
+  //   }
+  //   return theme
+  // }
 
     render() {
         const { classes } = this.props;
@@ -124,9 +127,8 @@ state = {
         // let themeOption = this.CancerTheme(this.props.patient.toc_id)
         return(
             <div className={classes.root}>
-            <pre>{JSON.stringify(this.props.patient)}</pre>
             {this.props.patient !== null ? (
-              <MuiThemeProvider theme={this.CancerTheme(this.props.patient)}>
+              <MuiThemeProvider theme={appTheme}>
 
                 {this.props.patient ? (<CurrentPatientInfo/>) : (<></>)}
                 <AppBar position="static" color="default">
