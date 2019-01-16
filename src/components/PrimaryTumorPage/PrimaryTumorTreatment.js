@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
-// import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -14,11 +13,8 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import PropTypes from 'prop-types';
-// import FormLabel from '@material-ui/core/FormLabel';
 import FormLabel from '@material-ui/core/FormLabel';
-// import Button from '@material-ui/core/Button';
 import moment from 'moment';
-// import PrimaryTumorDetails from './PrimaryTumorDetails';
 
 const styles = theme => ({
     gridItem:{
@@ -27,9 +23,6 @@ const styles = theme => ({
     dropDown:{
         fullWidth: true,
     },
-    formControl: {
-        // margin: theme.spacing.unit * 3,
-      },
       group: {
         margin: `${theme.spacing.unit}px 0`,
       },
@@ -160,14 +153,6 @@ class PrimaryTumorTreatment extends Component {
           <Grid item xs={4} className={classes.gridItem}>
               <FormControl row component="fieldset" margin="dense" fullWidth className={classes.formControl}>
               <FormLabel component="legend">Adjuvant Chemotherapy</FormLabel>
-              {/* <InputLabel shrink
-                  htmlFor="adj_chemotherapy_type"
-                //   ref={ref => {
-                //     this.InputLabelRef = ref;
-                //   }}
-              >
-                  Adjuvant Chemotherapy
-                  </InputLabel> */}
                   <RadioGroup row
                       aria-label="adj"
                       name="adj_chemotherapy"
@@ -250,7 +235,6 @@ class PrimaryTumorTreatment extends Component {
                   InputLabelProps={{
                     shrink: true,
                   }}
-                //   className={classes.treatmentPrimeTumorNotes}
                   onChange={this.props.handleChange}
                   value={this.props.primary_tumor.notes}
                   name='notes'

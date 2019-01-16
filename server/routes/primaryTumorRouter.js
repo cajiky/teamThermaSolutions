@@ -1,18 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-/**
- * GET route template
- */
-router.get('/', (req, res) => {
-    
-});
 
-/**
- * POST route template
- */
-router.put('/', (req,res) => {
+router.put('/', rejectUnauthenticated, (req,res) => {
     const patientId = req.body.userInfo.id;
     const userInfo = req.body.userInfo.state;
     const queryTextUpsert = `INSERT INTO primary_tumor (patient_id, date_primary_diagnosis, primary_location, t, n, m, m_location, differentiation, mucinous, date_prime_surgery, intervention_type, setting,
@@ -45,7 +37,7 @@ router.put('/', (req,res) => {
         })
 })
 
-router.post('/getDataFor', (req, res) => {
+router.post('/getDataFor', rejectUnauthenticated, (req, res) => {
     const sqlText = `SELECT * FROM primary_tumor WHERE patient_id = $1`
     pool.query(sqlText, [req.body.id])
     .then((result) => {

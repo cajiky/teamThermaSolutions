@@ -1,11 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-/**
- * GET route template
- */
-router.get('/:id', (req, res) => {
+
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     pool.query(`SELECT * FROM psdss WHERE patient_id=${req.params.id}`)
     .then((response) => {
         res.send(response.rows[0]);
@@ -16,10 +15,8 @@ router.get('/:id', (req, res) => {
     })
 });
 
-/**
- * PUT route template
- */
-router.put('/', (req, res) => {
+
+router.put('/', rejectUnauthenticated, (req, res) => {
     const patientId = req.body.id;
     const userInfo = req.body.state;
     const queryTextUpsert = `INSERT INTO psdss(patient_id, clinical, pci, histology, synchronous_liver_treatment, timing,
