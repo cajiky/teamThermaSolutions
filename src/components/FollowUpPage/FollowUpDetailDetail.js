@@ -66,7 +66,6 @@ class FollowUpDetailDetail extends Component {
     };
 
     componentDidMount () {
-        console.log('in component mount follow up detail', this.props.history);
         let followUpDate = null;
         if (this.props.history.date != null) {
             followUpDate = moment(this.props.history.date).format('YYYY-MM-DD')
