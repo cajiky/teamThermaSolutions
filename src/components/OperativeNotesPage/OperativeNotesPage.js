@@ -8,8 +8,6 @@ import GridItem from '@material-ui/core/Grid';
 import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
 import OperativeNotesHistory from './OperativeNotesHistory';
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const styles = theme => ({
     root: {
@@ -49,11 +47,9 @@ class OperativeNotesPage extends Component {
             changesMade: true,
             [event.target.name]: event.target.value,
         })
-        console.log(this.state);
     }
 
     saveOperativeNotes = () => {
-        console.log('Operative Notes State', this.state);
         if (this.state.changesMade){ 
         this.props.dispatch({ type: 'UPDATE_OPERATIVE_NOTE', 
         payload: {
@@ -65,6 +61,7 @@ class OperativeNotesPage extends Component {
         }
          })
          this.setState ({
+            changesMade: false,
             operativeNotes: '',
         })
         }
@@ -75,7 +72,6 @@ class OperativeNotesPage extends Component {
     }
 
     render() {
-        const { classes } = this.props;
         return(
             <div>
                 <h4>Operative Notes </h4>
@@ -101,10 +97,8 @@ class OperativeNotesPage extends Component {
                 <Button variant="contained" color="primary" onClick={this.saveOperativeNotes}>Save</Button>
             <OperativeNotesHistory/>
             </div>
-
         )
     }
-  
 };
 
 OperativeNotesPage.propTypes = {
@@ -115,6 +109,5 @@ const mapStateToProps = reduxState => ({
     patientReducer: reduxState.patientReducer,
     user: reduxState.user,
 });
-
 
 export default connect(mapStateToProps) (withStyles(styles)(OperativeNotesPage))

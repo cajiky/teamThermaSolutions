@@ -3,8 +3,6 @@ import axios from 'axios';
 
 
 function* pathologyHistory(action) {
-    console.log('Pathology History action', action.payload);
-    
     try {
         const response = yield call(axios.get, `/getPathologyHistory/${action.payload}`)
         yield put({ type: 'GET_INDIVIDUAL_PATHOLOGY_HISTORY', payload: response.data })

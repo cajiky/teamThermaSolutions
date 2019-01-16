@@ -3,8 +3,6 @@ import axios from 'axios';
 
 
 function* operativeNotes(action) { 
-    console.log('add operative notes action.payload', action.payload);
-    
     try {
         yield call(axios.post, `/operativeNotes`, action.payload);
         yield put({ type: 'GET_OPERATIVE_HISTORY', payload: action.payload.userId } )

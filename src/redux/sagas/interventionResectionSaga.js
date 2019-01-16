@@ -3,15 +3,13 @@ import axios from 'axios';
 
 
 function* interventionResection(action) { 
-    console.log(' interventionResection action.payload', action.payload);
-    
     try {
         yield call(axios.put, `/interventionResection/${action.payload.userId}`, action.payload);
         yield put({ type: 'GET_PCI_TOTAL', payload: action.payload.userId } )
 
     } catch (error) {
         console.log(error);
-        alert('Unable to add project');
+        alert('Unable to add project, Please make sure all fields have been filled out!');
     }
 }
 

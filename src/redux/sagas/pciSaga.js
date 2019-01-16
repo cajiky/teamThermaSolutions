@@ -3,8 +3,6 @@ import axios from 'axios';
 
 
 function* pciTotal(action) {
-    console.log('PCI TOTAL action', action.payload);
-    
     try {
         const response = yield call(axios.get, `/pciTotal/${action.payload}`)
         yield put({ type: 'GET_PCI', payload: response.data })
@@ -16,8 +14,6 @@ function* pciTotal(action) {
         
       }
 }
-
-
 
 function* pciTotalSaga() {
     console.log('in PCI Total Saga');

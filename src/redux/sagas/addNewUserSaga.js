@@ -3,8 +3,6 @@ import axios from 'axios';
 
 // worker Saga: will be fired on "LOGIN" actions
 function* addNewUser(action) {
-    console.log('addNewUser action', action.payload);
-    
     try {
         yield call(axios.post, '/addNewUser', action.payload)
         yield put({ type: 'RENDER_ALL_USERS', payload: action.payload.profileUserId })

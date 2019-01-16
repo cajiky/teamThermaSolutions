@@ -2,12 +2,10 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const encryptLib = require('../modules/encryption');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-
-
-
-router.put('/:id', (req, res, next) => {  
-    console.log('Intervention PUT req.body', req.body);
+/// UPSERT into database from INTERVENTION tab
+router.put('/:id', rejectUnauthenticated, (req, res, next) => {  
     const central = req.body.interventionState.central;
     const rightUpper = req.body.interventionState.rightUpper;
     const Epigastrium = req.body.interventionState.Epigastrium;
@@ -68,8 +66,6 @@ router.put('/:id', (req, res, next) => {
     const peritoneum = req.body.interventionState.peritoneum;
     const pelvisResection = req.body.interventionState.pelvis;
 
-
-
     const queryText = `INSERT INTO intervention 
     (patient_id, pci_0, pci_1, pci_2, pci_3, pci_4, pci_5, pci_6, pci_7, pci_8, pci_9, pci_10, pci_11, pci_12, pci_score, surgeon_1, surgeon_2, surgeon_3, nrhipec, hipec_type, reason_oc, anastomosis, anastomosis_number, revision_stoma, stoma_post_hipec_type, bloodloss, volume, hipec_regiment, time, concentration, r_score, duration, stoma_post_hipec)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33) 
@@ -77,7 +73,6 @@ router.put('/:id', (req, res, next) => {
     DO UPDATE SET (pci_0, pci_1, pci_2, pci_3, pci_4, pci_5, pci_6, pci_7, pci_8, pci_9, pci_10, pci_11, pci_12, pci_score, surgeon_1, surgeon_2, surgeon_3, nrhipec, hipec_type, reason_oc, anastomosis, anastomosis_number, revision_stoma, stoma_post_hipec_type, bloodloss, volume, hipec_regiment, time, concentration, r_score, duration, stoma_post_hipec) = 
     ($2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33)
     WHERE intervention.patient_id=$1 RETURNING id;`;
-
 
     pool.query(queryText, [patientId, central, rightUpper, Epigastrium, leftUpper, leftFlank, leftLower, pelvis, rightLower, rightFlank, upperJejunum, lowerJejunum, upperIlium, lowerIlium, PCITotal, surgeonOne, surgeonTwo, surgeonThree, nrHipec, hipecType, reasonOC, anastomosis, AnastomosisNumber, revisionStoma, stomaType, bloodLoss, volume, hipecRegiment, bloodLossTime, concentration, rScore, duration, stomaPostHIPEC])
       .then((results) => { 
@@ -105,7 +100,5 @@ router.put('/:id', (req, res, next) => {
         res.sendStatus(500);
     });
   });
-
-
 
 module.exports = router;
