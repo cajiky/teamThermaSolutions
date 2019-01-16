@@ -16,7 +16,7 @@ const patientReducer = (state = [], action) => {
       default:
         return state;
     }
-    return state;
+    // return state;
   };
   
   // user will be on the redux state at:

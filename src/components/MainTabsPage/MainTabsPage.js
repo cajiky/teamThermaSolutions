@@ -103,7 +103,7 @@ state = {
     // else if (toc.toc_id === 6){
     //    return {PseudomyxomaTheme}
     // }
-    // else if (toc.toc_id === 7){
+    // else (toc.toc_id === 7){
     //    return {OtherTheme}
     // }
     // else {
@@ -124,7 +124,7 @@ state = {
         // let themeOption = this.CancerTheme(this.props.patient.toc_id)
         return(
             <div className={classes.root}>
-            {/* <pre>{JSON.stringify(this.props.patient)}</pre> */}
+            <pre>{JSON.stringify(this.props.patient)}</pre>
             {this.props.patient !== null ? (
               <MuiThemeProvider theme={this.CancerTheme(this.props.patient)}>
 
