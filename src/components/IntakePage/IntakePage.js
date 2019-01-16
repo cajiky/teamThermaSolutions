@@ -94,7 +94,7 @@ class IntakePage extends Component {
         let weight = Number(this.state.weight_kg);
         let squaredHeight = height * height;
         bmi = weight/squaredHeight;
-        if (this.state.length_m != '' && this.state.weight_kg != '') {
+        if (this.state.length_m !== '' && this.state.weight_kg !== '') {
             this.setState({
                 bmi_auto: String(parseFloat(bmi).toFixed(2)),
             })

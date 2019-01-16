@@ -4,8 +4,8 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 const router = express.Router();
 
-
-router.get('/:id', (req, res) => {
+//GET request to DataBase for all PCI information
+router.get('/:id', rejectUnauthenticated, (req, res) => {
   console.log('GET req.params.id', req.params.id);
   
   let reqId = req.params.id;

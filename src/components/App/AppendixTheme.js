@@ -4,12 +4,12 @@ const appTheme = createMuiTheme({
   palette: {
     primary: {
       // light: will be calculated from palette.primary.main,
-      main: '#f0bec1',
+      main: '#18c675',
       // dark: will be calculated from palette.primary.main,
       // contrastText: will be calculated to contrast with palette.primary.main
     },
     secondary: {
-      main: '#ffffff',
+      main: '#70eeb3',
     },
     background: {
       paper: "#fff",

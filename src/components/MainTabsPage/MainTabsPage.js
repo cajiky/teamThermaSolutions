@@ -19,6 +19,15 @@ import PostOpPage from '../PostOpPage/PostOpPage';
 import FollowUpPage from '../FollowUpPage/FollowUpPage';
 // import ManageUsersPage from '../ManageUsersPage/ManageUsersPage';
 import CurrentPatientInfo from '../CurrentPatientInfo/CurrentPatientInfo';
+import ColorectalTheme from '../App/ColorectalTheme';
+import AppendixTheme from '../App/AppendixTheme';
+import GastricTheme from '../App/GastricTheme';
+import MesotheliomaTheme from '../App/MesotheliomaTheme';
+import OtherTheme from '../App/OtherTheme';
+import OvarianTheme from '../App/OvarianTheme';
+import PseudomyxomaTheme from '../App/PseudomyxomaTheme';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import appTheme from '../App/AppTheme';
 
 function TabContainer(props) {
     return (
@@ -56,12 +65,12 @@ state = {
     // }
     let patientId = document.cookie.replace(/(?:(?:^|.*;\s*)patientID\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     // let patientId = this.props.patient.id;
-    this.props.dispatch({type:'GET_PATIENT_ID_FROM_COOKIE', payload: patientId});
+    this.props.dispatch({type: 'GET_PATIENT_ID_FROM_COOKIE', payload: patientId});
     this.props.dispatch({type: 'GET_DROPDOWN_OPTIONS'});
     this.props.dispatch({type: 'GET_INITIAL_VALUES', payload: patientId});
     this.props.dispatch({type: 'GET_INITIAL_DATA_FOR_INTAKE', payload: patientId});
     this.props.dispatch({type: 'GET_INITIAL_DATA_FOR_PSDSS', payload: patientId});
-    this.props.dispatch({ type: 'GET_PCI_TOTAL', payload: patientId });
+    this.props.dispatch({type: 'GET_PCI_TOTAL', payload: patientId });
     this.props.dispatch({type: 'FETCH_POST_OP', payload: patientId});
     this.props.dispatch({type: 'FETCH_ADVERSE_EVENT', payload: patientId});
     this.props.dispatch({type: 'FETCH_FOLLOW_UP', payload: patientId});
@@ -72,14 +81,53 @@ state = {
     this.setState({ value });
   };
 
+  
+  CancerTheme = (toc) => {
+    console.log('toc', toc);
+  
+    // if (toc.toc_id === 1) {
+    //    return {ColorectalTheme}
+    //  }
+    // else if (toc.toc_id === 2){
+    //   return {AppendixTheme}
+    // }
+    // else if (toc.toc_id === 3){
+    //   return {GastricTheme}
+    // }
+    // else if (toc.toc_id === 4){
+    //   return {OvarianTheme}
+    // }
+    // else if (toc.toc_id === 5){
+    //  return {MesotheliomaTheme}
+    // }
+    // else if (toc.toc_id === 6){
+    //    return {PseudomyxomaTheme}
+    // }
+    // else if (toc.toc_id === 7){
+    //    return {OtherTheme}
+    // }
+    // else {
+    //    return {appTheme}
+    // }
+  }
+
     render() {
         const { classes } = this.props;
         const { value } = this.state;
+        // const cancerThemes = {
+        //   1: ColorectalTheme,
+        //   2: AppendixTheme,
+        // };
 
+        // const themeTest = cancerThemes[this.props.patient.toc_id] || appTheme;
+
+        // let themeOption = this.CancerTheme(this.props.patient.toc_id)
         return(
             <div className={classes.root}>
-                {/* <h1>Main Tabs Page</h1>
-                <h3>This Page houses all the Tab Components</h3> */}
+            {/* <pre>{JSON.stringify(this.props.patient)}</pre> */}
+            {this.props.patient !== null ? (
+              <MuiThemeProvider theme={this.CancerTheme(this.props.patient)}>
+
                 {this.props.patient ? (<CurrentPatientInfo/>) : (<></>)}
                 <AppBar position="static" color="default">
                     <Tabs
@@ -108,10 +156,41 @@ state = {
                 {value === 5 && <TabContainer><OperativeNotesPage /></TabContainer>}
                 {value === 6 && <TabContainer><PostOpPage /></TabContainer>}
                 {value === 7 && <TabContainer><FollowUpPage /></TabContainer>}
-
-                {/* <PatientProfileSearchPage />
-                <TreatmentFormPatientData /> */}
-                {/* <ManageUsersPage /> */}
+                
+                </MuiThemeProvider>
+                ):(<MuiThemeProvider theme={appTheme}>
+                  {this.props.patient ? (<CurrentPatientInfo/>) : (<></>)}
+                <AppBar position="static" color="default">
+                    <Tabs
+                    value={value}
+                    onChange={this.handleTabChange}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    scrollable
+                    scrollButtons="auto"
+                    >
+                    <Tab label="Primary Tumor" />
+                    <Tab label="Intake" />
+                    <Tab label="PSDSS" />
+                    <Tab label="Intervention" />
+                    <Tab label="Pathology Notes" />
+                    <Tab label="Operative Notes" />
+                    <Tab label="Post-Op" />
+                    <Tab label="Follow Up" />
+                    </Tabs>
+                </AppBar>
+                  {value === 0 && <TabContainer><PrimaryTumorPage /></TabContainer>}
+                  {value === 1 && <TabContainer><IntakePage /></TabContainer>}
+                  {value === 2 && <TabContainer><PSDSSPage /></TabContainer>}
+                  {value === 3 && <TabContainer><InterventionPage /></TabContainer>}
+                  {value === 4 && <TabContainer><PathologyNotesPage /></TabContainer>}
+                  {value === 5 && <TabContainer><OperativeNotesPage /></TabContainer>}
+                  {value === 6 && <TabContainer><PostOpPage /></TabContainer>}
+                  {value === 7 && <TabContainer><FollowUpPage /></TabContainer>}
+                
+                </MuiThemeProvider>
+                  
+                  )}
             </div>
 
         )
@@ -119,9 +198,6 @@ state = {
   
 };
 
-// ScrollableTabsButtonAuto.propTypes = {
-//     classes: PropTypes.object.isRequired,
-//   };
 
 const mapStateToProps = reduxState => ({
     patient: reduxState.patientReducer.patient,

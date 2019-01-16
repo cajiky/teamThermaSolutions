@@ -8,8 +8,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import PathologyNotesHistory from './PathologyNotesHistory';
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const styles = theme => ({
     root: {
@@ -50,11 +48,9 @@ class PathologyNotesPage extends Component {
             changesMade: true,
             [event.target.name]: event.target.value,
         })
-        console.log(this.state);
     }
 
     savePathologyNotes = () => {
-        console.log('Pathology Notes State', this.state);
         if (this.state.changesMade){ 
         this.props.dispatch({ type: 'UPDATE_PATHOLOGY_NOTE', 
         payload: {
@@ -78,7 +74,6 @@ class PathologyNotesPage extends Component {
     
 
     render() {
-        const { classes } = this.props;
         return(
             <div>
                 <h4>Pathology Notes </h4>
@@ -104,12 +99,9 @@ class PathologyNotesPage extends Component {
                 <Button variant="contained" color="primary" onClick={this.savePathologyNotes}>Save</Button>
                 <br/>
                 <PathologyNotesHistory pathState={this.state}/>
-
             </div>
-
         )
     }
-  
 };
 
 PathologyNotesPage.propTypes = {
