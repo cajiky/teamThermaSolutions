@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import ResectionDropdown from '../InterventionPage/ResectionDropdown';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import GridItem from '@material-ui/core/Grid';
@@ -40,7 +39,6 @@ const styles = theme => ({
   });
 
   class AdditionalPageInfo extends Component {
-
     state = {
         labelWidth: 0,
     }
@@ -59,13 +57,13 @@ const styles = theme => ({
                 <Grid container spacing={24} >
                     <GridItem item xs={4} >
                         <FormControlLabel
-                        control={
-                            <Checkbox
-                            name="anastomosis"
-                            checked={this.props.state.anastomosis}
-                            onChange={this.props.handleChangeCheckbox}
-                            value={this.props.state.anastomosis}
-                            />
+                            control={
+                                <Checkbox
+                                name="anastomosis"
+                                checked={this.props.state.anastomosis}
+                                onChange={this.props.handleChangeCheckbox}
+                                value={this.props.state.anastomosis}
+                                />
                         }
                         label="Anastomosis"
                         />
@@ -84,24 +82,24 @@ const styles = theme => ({
                 </GridItem>
                 <GridItem item xs={4} >
                         <FormControlLabel
-                        control={
-                            <Checkbox
-                            name="revisionStoma"
-                            checked={this.props.state.revisionStoma}
-                            onChange={this.props.handleChangeCheckbox}
-                            value={this.props.state.status}
-                            />
+                            control={
+                                <Checkbox
+                                name="revisionStoma"
+                                checked={this.props.state.revisionStoma}
+                                onChange={this.props.handleChangeCheckbox}
+                                value={this.props.state.status}
+                                />
                         }
                         label="Revision Stoma"
                         />
                         <FormControlLabel
-                        control={
-                            <Checkbox
-                            name="stomaPostHIPEC"
-                            checked={this.props.state.stomaPostHIPEC}
-                            onChange={this.props.handleChangeCheckbox}
-                            value={this.props.state.status}
-                            />
+                            control={
+                                <Checkbox
+                                name="stomaPostHIPEC"
+                                checked={this.props.state.stomaPostHIPEC}
+                                onChange={this.props.handleChangeCheckbox}
+                                value={this.props.state.status}
+                                />
                         }
                         label="Stoma Post-HIPEC"
                         />

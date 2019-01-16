@@ -1,21 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import Grid from '@material-ui/core/Grid';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import MenuItem from '@material-ui/core/MenuItem';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Button from '@material-ui/core/Button';
-import moment from 'moment';
 import IntakePageGeneralInfo from './IntakePageGeneralInfo';
 import IntakePageNeoAdjuvant from './IntakePageNeoAdjuvant';
 import IntakePageDiagnostic from './IntakePageDiagnostic';
@@ -110,7 +95,7 @@ class IntakePage extends Component {
         let squaredHeight = height * height;
         // console.log(`SquaredHeight: ${squaredHeight}, Weight: ${weight}`)
         bmi = weight/squaredHeight;
-        if (this.state.length_m != '' && this.state.weight_kg != '') {
+        if (this.state.length_m !== '' && this.state.weight_kg !== '') {
             this.setState({
                 bmi_auto: String(parseFloat(bmi).toFixed(2)),
             })

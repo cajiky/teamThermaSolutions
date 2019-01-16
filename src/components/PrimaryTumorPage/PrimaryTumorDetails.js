@@ -95,11 +95,10 @@ class PrimaryTumorDetails extends Component {
                 <Grid item xs={2} >
                     <FormControl variant="outlined" margin="dense" fullWidth>
                     <InputLabel
-                            htmlFor="primary_location"
                             ref={ref => {
                               this.InputLabelRef = ref;
                             }}
-                              htmlFor="t"
+                             htmlFor="t"
                           >
                               Tumor
                           </InputLabel>
@@ -168,7 +167,6 @@ class PrimaryTumorDetails extends Component {
                         input={
                         <OutlinedInput
                             value={this.props.primary_tumor.m}
-                            labelWidth={this.props.primary_tumor.labelWidth}
                             name="m"
                             id="m-input"
                             labelWidth={this.state.labelWidth}

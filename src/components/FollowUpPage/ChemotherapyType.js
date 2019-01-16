@@ -6,7 +6,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-import Input from '@material-ui/core/Input';
 
 // const myOptions = {this.props.reduxState.adjChemoTypeOptions}
 

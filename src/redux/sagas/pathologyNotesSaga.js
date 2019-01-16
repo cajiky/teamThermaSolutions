@@ -2,9 +2,7 @@ import { takeLatest , call, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 
-function* pathologyNotes(action) { 
-    console.log('edit pathology notes action.payload', action.payload);
-    
+function* pathologyNotes(action) {
     try {
         yield call(axios.post, `/pathologyNotes`, action.payload);
         yield put({ type: 'GET_PATHOLOGY_HISTORY', payload: action.payload.userId } )

@@ -58,9 +58,7 @@ const styles = theme => ({
           <ExpansionPanelDetails>
             <FormGroup row>
               <Grid container spacing={24} >
-              {
-              myOptions.map((option, index) => (
-                
+              {myOptions.map((option, index) => (
                 <GridItem item xs={2} >
                     <FormControlLabel
                         control={

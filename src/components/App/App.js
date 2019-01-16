@@ -5,23 +5,18 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-
 import {connect} from 'react-redux';
-
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-
 import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import MainTabsPage from '../MainTabsPage/MainTabsPage';
 import appTheme from './AppTheme';
 import ManageUsersPage from '../ManageUsersPage/ManageUsersPage';
 import PatientProfileSearchPage from '../PatientProfileSearchPage/PatientProfileSearchPage';
-
+// import UserPage from '../UserPage/UserPage';
 // import './App.css';
 
 class App extends Component {
@@ -30,7 +25,10 @@ class App extends Component {
     this.props.dispatch({type:'GET_DROPDOWN_OPTIONS'})
   }
 
+  
+
   render() {
+    
     return (
       <Router>
         <div>
@@ -78,4 +76,8 @@ class App extends Component {
   )}
 }
 
-export default connect()(App);
+const mapStateToProps = reduxState => ({
+  reduxState,
+});
+
+export default connect(mapStateToProps)(App);
