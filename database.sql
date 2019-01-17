@@ -361,8 +361,6 @@ ALTER TABLE "follow_up_history" ADD CONSTRAINT "follow_up_history_id_fk0" FOREIG
 
 ALTER TABLE "adverse_events" ADD CONSTRAINT "adverse_events_fk0" FOREIGN KEY ("patient_id") REFERENCES "postop"("patient_id");
 
-ALTER TABLE "adverse_events" ADD CONSTRAINT "adverse_events_fk0" FOREIGN KEY ("patient_id") REFERENCES "postop"("patient_id");
-
 ALTER TABLE "pathology_op_notes" ADD CONSTRAINT "pathology_op_notes_fk0" FOREIGN KEY ("patient_id") REFERENCES "patients"("id");
 ALTER TABLE "operative_op_notes" ADD CONSTRAINT "operative_op_notes_fk0" FOREIGN KEY ("patient_id") REFERENCES "patients"("id");
 
