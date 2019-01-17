@@ -77,3 +77,4 @@ This code is also heavily commented. We recommend reading through the comments, 
   * RegisterPage/RegisterPage
   * LogOutButton/LogOutButton
   * ProtectedRoute/ProtectedRoute
+# HIPECapp
